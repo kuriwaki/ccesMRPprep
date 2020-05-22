@@ -17,6 +17,7 @@ Depends:
     R (>= 2.10),
 Imports:
     tibble,
+    dataverse,
 Remotes:
     IQSS/dataverse-client-r
 RoxygenNote: 7.1.0
