@@ -16,6 +16,10 @@
 #' @param name The name of the dataset as defined in \code{data(cces_dv_ids)}.
 #'
 #' @importFrom glue glue
+#' @importFrom stringr str_extract
+#' @importFrom haven read_dta read_sav
+#' @importFrom readr read_rds
+#' @importFrom dplyr filter
 #' @importFrom dataverse get_file
 #'
 #' @examples
