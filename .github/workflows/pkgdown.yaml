@@ -4,6 +4,8 @@ on:
 
 name: pkgdown
 
+runs-on: self-hosted
+
 jobs:
   pkgdown:
     runs-on: macOS-latest
