@@ -1,7 +1,7 @@
 CCES MRP preparation
 ================
 
-## `ccesMRPprep`: **Functions to Clean and Prepare CCES data for MRP**
+### `ccesMRPprep`: **Functions to Clean and Prepare CCES data for MRP**
 
 This provides data loading, processing, and formatting functions for a
 particular task: using CCES data for Multilevel Regression
@@ -17,7 +17,7 @@ library(tidyverse)
 
 ## Workflow
 
-’1. Loading CCES data
+*Step 1. Loading CCES data*
 
 All CCES data can be downloaded directly from dataverse, using the
 development version of the `dataverse` R package. Once you set your
@@ -52,7 +52,7 @@ ccc_samp
     ## #   marstat <int+lbl>, newsint <int+lbl>, vv_turnout_gvm <fct>,
     ## #   voted_pres_16 <fct>, economy_retro <int+lbl>
 
-’2. Cleaning CCES data
+*Step 2. Cleaning CCES data*
 
 The CCES cumulative dataset is already harmonized and cleaned, but
 values must be recoded so that they later match with the values of th
@@ -64,11 +64,11 @@ recodes.
 ccc_std <- ccc_std_demographics(ccc_samp)
 ```
 
-’3. Collapsing the CCES data
+*Step 3. Collapsing the CCES data*
 
-’4. Preparing the brms function
+*Step 4. Preparing the brms function*
 
-’5. Cleaning and preparing the ACS data
+*Step 5. Cleaning and preparing the ACS data*
 
 ### Related Packages
 

@@ -7,7 +7,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## `ccesMRPprep`: __Functions to Clean and Prepare CCES data for MRP__
+###  `ccesMRPprep`: __Functions to Clean and Prepare CCES data for MRP__
 
 This provides data loading, processing, and formatting functions for
    a particular task: using CCES data for Multilevel Regression Post-stratification.
@@ -25,7 +25,7 @@ library(tidyverse)
 
 ## Workflow
 
-'1. Loading CCES data
+_Step 1. Loading CCES data_
 
 All CCES data can be downloaded directly from dataverse, using the development version of the `dataverse` R package.  Once you set your dataverse API token, the function `get_cces_dv` will make this quick and simple. 
 
@@ -42,7 +42,7 @@ ccc_samp
 
 
 
-'2. Cleaning CCES data
+_Step 2. Cleaning CCES data_
 
 The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of th ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.
 
@@ -50,13 +50,14 @@ The CCES cumulative dataset is already harmonized and cleaned, but values must b
 ccc_std <- ccc_std_demographics(ccc_samp)
 ```
 
-'3. Collapsing the CCES data
+
+_Step 3. Collapsing the CCES data_
 
 
-'4. Preparing the brms function
+_Step 4. Preparing the brms function_
 
 
-'5. Cleaning and preparing the ACS data
+_Step 5. Cleaning and preparing the ACS data_
 
 
 
