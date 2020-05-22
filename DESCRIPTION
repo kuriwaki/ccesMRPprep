@@ -1,6 +1,6 @@
 Package: ccesMRPprep
 Type: Package
-Title: Functions to Clean and Prepare CCES data for MRP
+Title: Functions to Prepare CCES data for MRP
 Version: 0.1.0
 Authors@R: person(given = "Shiro",
              family = "Kuriwaki",

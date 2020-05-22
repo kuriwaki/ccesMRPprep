@@ -1,7 +1,7 @@
 CCES MRP preparation
 ================
 
-### `ccesMRPprep`: **Functions to Clean and Prepare CCES data for MRP**
+### `ccesMRPprep`: **Routines to Prepare CCES data for MRP**
 
 This provides data loading, processing, and formatting functions for a
 particular task: using CCES data for Multilevel Regression
