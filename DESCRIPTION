@@ -1,0 +1,18 @@
+Package: ccesMRPprep
+Type: Package
+Title: Functions to Clean and Prepare CCES data for MRP
+Version: 0.1.0
+Authors@R: person(given = "Shiro",
+             family = "Kuriwaki",
+             role = c("aut", "cre"),
+             email = "shirokuriwaki@gmail.com",
+             comment = c(ORCID = "0000-0002-5687-2647"))
+Description: This provides data loading, processing, and formatting functions for
+   a particular task: using CCES data for Multilevel Regression Post-stratification.
+   Model fitting and visualization of MRP itself is handled elsewhere. This package
+   is focused on the preparation to get there. 
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 2.10)
+RoxygenNote: 7.1.0
