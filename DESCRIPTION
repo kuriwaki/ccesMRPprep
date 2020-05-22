@@ -17,6 +17,12 @@ Depends:
     R (>= 2.10),
 Imports:
     tibble,
+    magrittr,
+    dplyr,
+    haven,
+    stringr,
+    readr,
+    glue,
     dataverse,
 Remotes:
     IQSS/dataverse-client-r
