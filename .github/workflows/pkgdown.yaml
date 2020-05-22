@@ -45,5 +45,6 @@ jobs:
         shell: Rscript {0}
         env:
           EMAIL: ${{ secrets.EMAIL }}
+          USER:  ${{ secrets.USER }}
           GH_TOKEN: ${{ secrets.PAT }}
-          BUILD_DIR: docs
+          BUILD_DIR: docs/
