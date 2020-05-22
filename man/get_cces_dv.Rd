@@ -23,6 +23,9 @@ To get a user key, you need to have your own dataverse account. Go to your accou
  \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
 }
 \examples{
+
+\dontrun{
  ccc <- get_cces_dv("cumulative")
+ }
 
 }

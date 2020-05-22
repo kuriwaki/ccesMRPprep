@@ -19,7 +19,10 @@
 #' @importFrom dataverse get_file
 #'
 #' @examples
+#'
+#' \dontrun{
 #'  ccc <- get_cces_dv("cumulative")
+#'  }
 #'
 #' @export
 #'
