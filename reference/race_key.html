@@ -40,8 +40,7 @@
 
 
 <meta property="og:title" content="CCES-ACS variable recode keys — race_key" />
-<meta property="og:description" content="These value-value tables are useful for recoding the values of
-from one dataset (CCES) so that they can be merged immediately with another (ACS)." />
+<meta property="og:description" content="CCES-ACS variable recode keys" />
 
 
 
@@ -110,8 +109,7 @@ from one dataset (CCES) so that they can be merged immediately with another (ACS
     </div>
 
     <div class="ref-description">
-    <p>These value-value tables are useful for recoding the values of
-from one dataset (CCES) so that they can be merged immediately with another (ACS).</p>
+    <p>CCES-ACS variable recode keys</p>
     </div>
 
     <pre class="usage"><span class='no'>race_key</span>
@@ -127,11 +125,13 @@ from one dataset (CCES) so that they can be merged immediately with another (ACS
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with one row per recoding value</p><dl>
- <dt>race</dt><dd><p>An labelled integer of class haven::labelled. Most compact form
- of all the data.</p></dd>
- <dt>race_chr, gender_chr, educ_chr</dt><dd><p>Labels, in characters</p></dd>
- <dt>race_cces, edu_cces</dt><dd><p>Corresponding labelled in the CCES cumulative common content</p></dd>
+    <p>A tibble with one row per recoding value</p><dl'>
+ <dt>race, educ, gender</dt><dd><p>An labelled integer of class haven::labelled.
+    Most compact form of both sources and the values both will get recoded
+    to in MRP.</p></dd>
+ <dt>race_chr, gender_chr, educ_chr</dt><dd><p>Labels for the first column, in characters</p></dd>
+ <dt>race_cces_chr, edu_cces_chr</dt><dd><p>Corresponding labelled in the CCES cumulative
+       common content</p></dd>
  <dt>race_acs</dt><dd><p>Corresponding character in the ACS data via the tidycensus package</p></dd>
  
 </dl>
@@ -140,7 +140,39 @@ from one dataset (CCES) so that they can be merged immediately with another (ACS
 <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 7 rows and 3 columns.</p>
 <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 5 rows and 2 columns.</p>
 <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 10 rows and 3 columns.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>These value-value tables are useful for recoding the values of
+from one dataset (CCES) so that they can be merged immediately with another
+(ACS). These get used internally in <a href='ccc_std_demographics.html'>ccc_std_demographics</a>, but they are
+available as built in datasets</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ccesMRPprep</span>)
+ <span class='no'>educ_key</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 3</span><span>
+#&gt;   educ_chr                                  educ_cces_chr                   educ
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Less than 9th grade                       No HS                1</span><span style='color: #555555;'> [HS or Less]</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span> 9th to 12th grade no diploma              No HS                1</span><span style='color: #555555;'> [HS or Less]</span><span> 
+#&gt; </span><span style='color: #555555;'>3</span><span> High school graduate (includes equivalen… High School Graduate 1</span><span style='color: #555555;'> [HS or Less]</span><span> 
+#&gt; </span><span style='color: #555555;'>4</span><span> Some college no degree                    Some College         2</span><span style='color: #555555;'> [Some Colleg…</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span> Associate's degree                        2-Year               2</span><span style='color: #555555;'> [Some Colleg…</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> Bachelor's degree                         4-Year               3</span><span style='color: #555555;'> [4-Year]</span><span>     
+#&gt; </span><span style='color: #555555;'>7</span><span> Graduate or professional degree           Post-Grad            4</span><span style='color: #555555;'> [Post-Grad]</span><span>  </div><div class='input'> <span class='no'>race_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 9 x 5</span><span>
+#&gt;   race_5 race_cces_chr   race_acs                           race_cces       race
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                              </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1 White           WHITE ALONE, NOT HISPANIC OR LA…  1</span><span style='color: #555555;'> [White]</span><span>  1</span><span style='color: #555555;'> [White]</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span>      2 Black           BLACK OR AFRICAN AMERICAN ALONE   2</span><span style='color: #555555;'> [Black]</span><span>  2</span><span style='color: #555555;'> [Black]</span><span> 
+#&gt; </span><span style='color: #555555;'>3</span><span>      3 Hispanic        HISPANIC OR LATINO                3</span><span style='color: #555555;'> [Hispan…</span><span> 3</span><span style='color: #555555;'> [Hispan…</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span>      4 Asian           ASIAN ALONE                       4</span><span style='color: #555555;'> [Asian]</span><span>  4</span><span style='color: #555555;'> [Asian]</span><span> 
+#&gt; </span><span style='color: #555555;'>5</span><span>      4 Asian           NATIVE HAWAIIAN AND OTHER PACIF…  4</span><span style='color: #555555;'> [Asian]</span><span>  4</span><span style='color: #555555;'> [Asian]</span><span> 
+#&gt; </span><span style='color: #555555;'>6</span><span>      5 Native American AMERICAN INDIAN AND ALASKA NATI… </span><span style='color: #BB0000;'>NA</span><span>          5</span><span style='color: #555555;'> [All Ot…</span><span>
+#&gt; </span><span style='color: #555555;'>7</span><span>      5 Mixed           TWO OR MORE RACES                </span><span style='color: #BB0000;'>NA</span><span>          5</span><span style='color: #555555;'> [All Ot…</span><span>
+#&gt; </span><span style='color: #555555;'>8</span><span>      5 Other           SOME OTHER RACE ALONE            </span><span style='color: #BB0000;'>NA</span><span>          5</span><span style='color: #555555;'> [All Ot…</span><span>
+#&gt; </span><span style='color: #555555;'>9</span><span>      5 Middle Eastern  </span><span style='color: #BB0000;'>NA</span><span>                               </span><span style='color: #BB0000;'>NA</span><span>          5</span><span style='color: #555555;'> [All Ot…</span><span></div><div class='input'>
+
+
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -156,7 +188,7 @@ from one dataset (CCES) so that they can be merged immediately with another (ACS
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

@@ -65,20 +65,55 @@
 <div id="cces-mrp-preparation" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#cces-mrp-preparation" class="anchor"></a>CCES MRP preparation</h1></div>
-<div id="functions-to-clean-and-prepare-cces-data-for-mrp" class="section level2">
-<h2 class="hasAnchor">
-<a href="#functions-to-clean-and-prepare-cces-data-for-mrp" class="anchor"></a>Functions to Clean and Prepare CCES data for MRP</h2>
+<div id="ccesmrpprep-functions-to-clean-and-prepare-cces-data-for-mrp" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ccesmrpprep-functions-to-clean-and-prepare-cces-data-for-mrp" class="anchor"></a><code>ccesMRPprep</code>: <strong>Functions to Clean and Prepare CCES data for MRP</strong>
+</h3>
 <p>This provides data loading, processing, and formatting functions for a particular task: using CCES data for Multilevel Regression Post-stratification. Model fitting and visualization of MRP itself is handled elsewhere. This package is focused on the preparation to get there.</p>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># remotes::install_github("kuriwaki/ccesMRPprep")</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ccesMRPprep</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)</pre></div>
 </div>
-<div id="related-packages" class="section level2">
+<div id="workflow" class="section level2">
 <h2 class="hasAnchor">
-<a href="#related-packages" class="anchor"></a>Related Packages</h2>
+<a href="#workflow" class="anchor"></a>Workflow</h2>
+<p><em>Step 1. Loading CCES data</em></p>
+<p>All CCES data can be downloaded directly from dataverse, using the development version of the <code>dataverse</code> R package. Once you set your dataverse API token, the function <code>get_cces_dv</code> will make this quick and simple.</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="no">ccc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_cces_dv.html">get_cces_dv</a></span>(<span class="st">"cumualtive"</span>)</pre></div>
+<p>We will use a built-in sample of 1,000 observations for illustration (see <code><a href="reference/ccc_samp.html">?ccc_samp</a></code>).</p>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">ccc_samp</span></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## # A tibble: 1,000 x 17</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">##     year case_id state st    cd    zipcode county_fips   age    race hispanic</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">##    &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;int+l&gt; &lt;int+lb&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">##  1  2006  439254 Neva… NV    NV-2  89703   32510          20 1 [Whi…       NA</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">##  2  2006  440689 Cali… CA    CA-2  96067   06093          71 1 [Whi…       NA</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">##  3  2006  445845 Colo… CO    CO-5  80922   08041          39 1 [Whi…       NA</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">##  4  2006  452572 Minn… MN    MN-5  55428   27053          74 1 [Whi…       NA</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">##  5  2006  498451 Iowa  IA    IA-2  50060   19185          53 1 [Whi…       NA</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">##  6  2006  502543 Tenn… TN    TN-5  37206   47037          50 1 [Whi…       NA</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">##  7  2006  523050 West… WV    WV-2  25312   54039          55 1 [Whi…       NA</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">##  8  2006  523861 Illi… IL    IL-3  60629   17031          51 1 [Whi…       NA</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">##  9  2006  532881 Minn… MN    MN-7  55396   27143          44 1 [Whi…       NA</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">## 10  2006  553375 Ohio  OH    OH-11 44112   39035          53 1 [Whi…       NA</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">## # … with 990 more rows, and 7 more variables: educ &lt;int+lbl&gt;, faminc &lt;fct&gt;,</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">## #   marstat &lt;int+lbl&gt;, newsint &lt;int+lbl&gt;, vv_turnout_gvm &lt;fct&gt;,</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">## #   voted_pres_16 &lt;fct&gt;, economy_retro &lt;int+lbl&gt;</span></span></code></pre></div>
+<p><em>Step 2. Cleaning CCES data</em></p>
+<p>The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of th ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.</p>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="no">ccc_std</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/ccc_std_demographics.html">ccc_std_demographics</a></span>(<span class="no">ccc_samp</span>)</pre></div>
+<p><em>Step 3. Collapsing the CCES data</em></p>
+<p><em>Step 4. Preparing the brms function</em></p>
+<p><em>Step 5. Cleaning and preparing the ACS data</em></p>
+<div id="related-packages" class="section level3">
+<h3 class="hasAnchor">
+<a href="#related-packages" class="anchor"></a>Related Packages</h3>
 <ul>
 <li>
 <a href="https://github.com/kuriwaki/rcces" class="uri">https://github.com/kuriwaki/rcces</a> has another set of CCES related functions, but these are either my own personal functions in development (not for production), or specific to non-MRP projects.</li>
 <li>
 <a href="https://github.com/kuriwaki/CCES_district-opinion" class="uri">https://github.com/kuriwaki/CCES_district-opinion</a> is a private package that uses (among others) this package to process large CCES data for MRP at scale.</li>
 </ul>
+</div>
 </div>
 </div>
   </div>
@@ -106,7 +141,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
