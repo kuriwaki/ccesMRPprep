@@ -11,5 +11,5 @@
 #'  }
 #'
 #' @importFrom tibble tibble
-#'
+#' @examples cces_dv_ids
 "cces_dv_ids"

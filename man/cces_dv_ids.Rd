@@ -21,4 +21,7 @@ cces_dv_ids
 \description{
 Identifiers for datasets in CCES dataverse
 }
+\examples{
+cces_dv_ids
+}
 \keyword{datasets}
