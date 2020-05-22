@@ -2,7 +2,7 @@
 % Please edit documentation in R/standardize_for-acs.R
 \name{ccc_std_demographics}
 \alias{ccc_std_demographics}
-\title{Recode CCES variable values so that they merge to ACS variables}
+\title{Recode CCES variables so that they merge to ACS variables}
 \usage{
 ccc_std_demographics(tbl, only_demog = FALSE)
 }
@@ -12,18 +12,31 @@ ccc_std_demographics(tbl, only_demog = FALSE)
 
 \item{only_demog}{Drop variables besides demographics? Defaults to FALSE}
 }
+\value{
+The output is of the same dimensions as the input (unless \code{only_demog = TRUE})
+but with the following exceptions. \code{age_bin} is coded to match up with the ACS
+bins and the recoding occurs in a separate function, \code{ccc_bin_age}.
+\code{educ} is recoded (coarsened and relabelled) to match up with the ACS.
+(the original version is left as \code{educ_cces_chr}), and the same goes for
+\code{race}. These recodings are governed by the key-value pairs \link{educ_key} and
+\link{race_key}.
+}
 \description{
-Recode CCES variable values so that they merge to ACS variables
+Recode CCES variables so that they merge to ACS variables
 }
 \examples{
+\dontrun{
  library(dataverse)
 
- # Load Cumulative dataset
- cumulative_rds <- get_file("cumulative_2006_2018.Rds", "doi:10.7910/DVN/II2DB6")
+ # Load Cumulative dataset (need your own Token)
+ cumulative_rds <- get_file(file = "cumulative_2006_2018.Rds",
+                            dataset = "doi:10.7910/DVN/II2DB6")
  tmp <- tempfile(fileext = ".Rds")
  writeBin(cumulative_rds, tmp)
  cumulative_rds <- readr::read_rds(tmp)
 
  cumulative_std <- ccc_std_demographics(cumulative_rds)
+
+ }
 
 }

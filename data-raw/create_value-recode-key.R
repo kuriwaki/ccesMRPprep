@@ -46,11 +46,11 @@ educ_lbl_clps <- setNames(1L:4L,
 
 
 ## CCES lumps the first two, and let's also lump the 2-year
-cces_edlbl <- tibble(educ_cces = names(educ_lbl)[2:7],
+cces_edlbl <- tibble(educ_cces_chr = names(educ_lbl)[2:7],
                      educ = labelled(c(1, 1, 2, 2, 3, 4), educ_lbl_clps))
 
 educ_key  <- tribble(
-  ~num, ~educ_chr, ~educ_cces,
+  ~num, ~educ_chr, ~educ_cces_chr,
   1L, "Less than 9th grade", "No HS",
   2L, "9th to 12th grade no diploma", "No HS",
   3L, "High school graduate (includes equivalency)", "High School Graduate",
@@ -59,7 +59,7 @@ educ_key  <- tribble(
   6L, "Bachelor's degree", "4-Year",
   7L, "Graduate or professional degree", "Post-Grad"
 ) %>%
-  left_join(cces_edlbl, by = "educ_cces") %>%
+  left_join(cces_edlbl, by = "educ_cces_chr") %>%
   select(-num)
 
 # Gender ----
