@@ -8,6 +8,10 @@ get_cces_dv(name = cces_dv_ids$cces_name, dataverse_paths = cces_dv_ids)
 }
 \arguments{
 \item{name}{The name of the dataset as defined in \code{data(cces_dv_ids)}.}
+
+\item{dataverse_paths}{A dataframe where one row represents metadata for one
+CCES dataset. Built-in data \code{cces_dv_ids} is used as a default and should
+not be changed.}
 }
 \description{
 You must download the development version of https://github.com/IQSS/dataverse-client-r

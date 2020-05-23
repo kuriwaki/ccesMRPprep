@@ -14,6 +14,9 @@
 #'
 #'
 #' @param name The name of the dataset as defined in \code{data(cces_dv_ids)}.
+#' @param dataverse_paths A dataframe where one row represents metadata for one
+#' CCES dataset. Built-in data \code{cces_dv_ids} is used as a default and should
+#' not be changed.
 #'
 #' @importFrom glue glue
 #' @importFrom stringr str_extract
