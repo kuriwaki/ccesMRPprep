@@ -17,6 +17,8 @@
 #' @importFrom glue glue
 #' @importFrom haven as_factor
 #' @importFrom magrittr `%>%`
+#' @importFrom rlang .data
+#' @importFrom utils data
 #'
 #' @examples
 #' \dontrun{
@@ -38,6 +40,9 @@
 #'
 ccc_std_demographics <- function(tbl, only_demog = FALSE) {
 
+  data("educ_key", envir = environment())
+  data("race_key", envir = environment())
+
 
   race_cces_to_acs <- race_key %>% distinct(race_cces_chr, race)
   educ_cces_to_acs <- educ_key %>% distinct(educ_cces_chr, educ)
@@ -45,7 +50,7 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
 
   tbl_modified <- tbl %>%
     # age
-    mutate(age_bin = ccc_bin_age(age)) %>%
+    mutate(age_bin = ccc_bin_age(.data$age)) %>%
     # race
     rename(race_cces_chr = race) %>%
     mutate(race_cces_chr = as.character(as_factor(race_cces_chr))) %>%
@@ -72,7 +77,7 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
            everything())
 
     if (only_demog)
-      tbl_out <- select(tbl_out, year:marstat, matches("vv"))
+      tbl_out <- select(tbl_out, .data$year:.data$marstat, matches("vv"))
 
     tbl_out %>%
       select_if(~any(!is.na(.x))) %>%
@@ -93,6 +98,7 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
 #'
 #' @importFrom tibble deframe
 #' @importFrom haven labelled
+#' @importFrom utils data
 #'
 #'
 #' @examples
@@ -101,6 +107,9 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
 #' @export
 ccc_bin_age <- function(agevec,
                         agelbl = deframe(age5_key)) {
+  data("age5_key", envir = environment())
+
+
   int_bin <- case_when(agevec %in% 18:24 ~ 1L,
                        agevec %in% 25:34 ~ 2L,
                        agevec %in% 35:44 ~ 3L,

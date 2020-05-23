@@ -18,6 +18,7 @@ Depends:
 Imports:
     tibble,
     magrittr,
+    rlang,
     dplyr,
     haven,
     stringr,

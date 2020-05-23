@@ -5,6 +5,7 @@
 \alias{race_key}
 \alias{gender_key}
 \alias{educ_key}
+\alias{educ_key2}
 \alias{age5_key}
 \alias{age10_key}
 \title{CCES-ACS variable recode keys}
@@ -24,6 +25,8 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 7 rows and 3 columns.
 
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 7 rows and 3 columns.
+
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 5 rows and 2 columns.
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10 rows and 3 columns.
@@ -34,6 +37,8 @@ race_key
 gender_key
 
 educ_key
+
+educ_key2
 
 age5_key
 

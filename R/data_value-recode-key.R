@@ -34,6 +34,9 @@
 "educ_key"
 
 #' @rdname  race_key
+"educ_key2"
+
+#' @rdname  race_key
 "age5_key"
 
 #' @rdname  race_key
