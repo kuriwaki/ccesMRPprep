@@ -25,11 +25,7 @@
 #'  library(dataverse)
 #'
 #'  # Load Cumulative dataset (need your own Token)
-#'  cumulative_rds <- get_file(file = "cumulative_2006_2018.Rds",
-#'                             dataset = "doi:10.7910/DVN/II2DB6")
-#'  tmp <- tempfile(fileext = ".Rds")
-#'  writeBin(cumulative_rds, tmp)
-#'  cumulative_rds <- readr::read_rds(tmp)
+#'  cumulative_rds <- get_cces_dv("cumulative")
 #'
 #'  cumulative_std <- ccc_std_demographics(cumulative_rds)
 #'
