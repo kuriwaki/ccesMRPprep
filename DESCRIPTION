@@ -20,11 +20,15 @@ Imports:
     magrittr,
     rlang,
     dplyr,
+    tidyr,
     haven,
     stringr,
     readr,
     glue,
     dataverse,
+    labelled,
+    tidycensus,
+    purrr
 Remotes:
     IQSS/dataverse-client-r
 RoxygenNote: 7.1.0
