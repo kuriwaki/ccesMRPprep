@@ -1,13 +1,22 @@
-CCES MRP preparation
+Portable Routines for Preparing CCES and ACS data for MRP
 ================
 
-### `ccesMRPprep`: **Routines to Prepare CCES data for MRP**
+Cite as:
 
-This provides data loading, processing, and formatting functions for a
-particular task: using CCES data for Multilevel Regression
-Post-stratification. Model fitting and visualization of MRP itself is
-handled elsewhere. This package is focused on the preparation to get
-there.
+> Shiro Kuriwaki (2020). ccesMRPprep: Functions to Prepare CCES data for
+> MRP. R package. <https://www.github.com/kuriwaki/ccesMRPprep>
+
+Multi-level Regression and Post-stratification is an increasingly
+popular method for analyzing surveys, and can be implemented on public
+datasets such as the [CCES](https://cces.gov.harvard.edu/) and ACS.
+However, there are considerable upfront costs in preparing the data,
+recoding values and generating post-stratification frames so data can be
+matched.
+
+This package provides data loading, processing, and formatting functions
+for a particular task: using *CCES data* for MRP. Model fitting and
+visualization of MRP itself is handled elsewhere. This package is
+focused on the preparation to get there.
 
 ``` r
 # remotes::install_github("kuriwaki/ccesMRPprep")
@@ -70,6 +79,24 @@ ccc_std <- ccc_std_demographics(ccc_samp)
 
 *Step 5. Cleaning and preparing the ACS data*
 
+We provide wrappers around the great
+[tidycensus](https://walker-data.com/tidycensus/) package that produces
+ACS data and post-stratification tables from the ACS. A considerable
+amount of lookup tables internally will pull out the apporpriate
+CD-level counts and label them so that they match up with CCES keys.
+
+``` r
+ fm_brm <- yes | responses(n_cell) ~  age + gender + educ + pct_trump + (1|cd)
+
+
+ acs_tab <- get_acs_cces(
+              varlist = acscodes_age_sex_educ,
+              varlab_df = acscodes_df,
+             .year = 2018)
+
+ poststrat <-  get_poststrat(acs_tab, cd_info_2018, fm_brm)
+```
+
 ### Related Packages
 
   - <https://github.com/kuriwaki/rcces> has another set of CCES related
@@ -78,3 +105,10 @@ ccc_std <- ccc_std_demographics(ccc_samp)
   - <https://github.com/kuriwaki/CCES_district-opinion> is a private
     package that uses (among others) this package to process large CCES
     data for MRP at scale.
+
+### Support
+
+This package is a part of the CCES MRP project, supported by NSF Grant
+1926424: [Bayesian analytical tools to improve survey estimates for
+subpopulations and small
+areas](https://nsf.gov/awardsearch/showAward?AWD_ID=1926424).
