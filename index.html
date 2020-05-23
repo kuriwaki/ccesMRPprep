@@ -69,18 +69,18 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="cces-mrp-preparation" class="section level1">
+<div id="portable-routines-for-preparing-cces-and-acs-data-for-mrp" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#cces-mrp-preparation" class="anchor"></a>CCES MRP preparation</h1></div>
-<div id="ccesmrpprep-routines-to-prepare-cces-data-for-mrp" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ccesmrpprep-routines-to-prepare-cces-data-for-mrp" class="anchor"></a><code>ccesMRPprep</code>: <strong>Routines to Prepare CCES data for MRP</strong>
-</h3>
-<p>This provides data loading, processing, and formatting functions for a particular task: using CCES data for Multilevel Regression Post-stratification. Model fitting and visualization of MRP itself is handled elsewhere. This package is focused on the preparation to get there.</p>
+<a href="#portable-routines-for-preparing-cces-and-acs-data-for-mrp" class="anchor"></a>Portable Routines for Preparing CCES and ACS data for MRP</h1></div>
+<p>Cite as:</p>
+<blockquote>
+<p>Shiro Kuriwaki (2020). ccesMRPprep: Functions to Prepare CCES data for MRP. R package. <a href="https://www.github.com/kuriwaki/ccesMRPprep" class="uri">https://www.github.com/kuriwaki/ccesMRPprep</a></p>
+</blockquote>
+<p>Multi-level Regression and Post-stratification is an increasingly popular method for analyzing surveys, and can be implemented on public datasets such as the <a href="https://cces.gov.harvard.edu/">CCES</a> and ACS. However, there are considerable upfront costs in preparing the data, recoding values and generating post-stratification frames so data can be matched.</p>
+<p>This package provides data loading, processing, and formatting functions for a particular task: using <em>CCES data</em> for MRP. Model fitting and visualization of MRP itself is handled elsewhere. This package is focused on the preparation to get there.</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co"># remotes::install_github("kuriwaki/ccesMRPprep")</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ccesMRPprep</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)</pre></div>
-</div>
 <div id="workflow" class="section level2">
 <h2 class="hasAnchor">
 <a href="#workflow" class="anchor"></a>Workflow</h2>
@@ -111,6 +111,16 @@
 <p><em>Step 3. Collapsing the CCES data</em></p>
 <p><em>Step 4. Preparing the brms function</em></p>
 <p><em>Step 5. Cleaning and preparing the ACS data</em></p>
+<p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the apporpriate CD-level counts and label them so that they match up with CCES keys.</p>
+<div class="sourceCode" id="cb6"><pre class="r"> <span class="no">fm_brm</span> <span class="kw">&lt;-</span> <span class="no">yes</span> <span class="kw">|</span> <span class="fu">responses</span>(<span class="no">n_cell</span>) ~  <span class="no">age</span> + <span class="no">gender</span> + <span class="no">educ</span> + <span class="no">pct_trump</span> + (<span class="fl">1</span><span class="kw">|</span><span class="no">cd</span>)
+
+
+ <span class="no">acs_tab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_acs_cces.html">get_acs_cces</a></span>(
+              <span class="kw">varlist</span> <span class="kw">=</span> <span class="no">acscodes_age_sex_educ</span>,
+              <span class="kw">varlab_df</span> <span class="kw">=</span> <span class="no">acscodes_df</span>,
+             <span class="kw">.year</span> <span class="kw">=</span> <span class="fl">2018</span>)
+
+ <span class="no">poststrat</span> <span class="kw">&lt;-</span>  <span class="fu"><a href="reference/get_poststrat.html">get_poststrat</a></span>(<span class="no">acs_tab</span>, <span class="no">cd_info_2018</span>, <span class="no">fm_brm</span>)</pre></div>
 <div id="related-packages" class="section level3">
 <h3 class="hasAnchor">
 <a href="#related-packages" class="anchor"></a>Related Packages</h3>
@@ -120,6 +130,11 @@
 <li>
 <a href="https://github.com/kuriwaki/CCES_district-opinion" class="uri">https://github.com/kuriwaki/CCES_district-opinion</a> is a private package that uses (among others) this package to process large CCES data for MRP at scale.</li>
 </ul>
+</div>
+<div id="support" class="section level3">
+<h3 class="hasAnchor">
+<a href="#support" class="anchor"></a>Support</h3>
+<p>This package is a part of the CCES MRP project, supported by NSF Grant 1926424: <a href="https://nsf.gov/awardsearch/showAward?AWD_ID=1926424">Bayesian analytical tools to improve survey estimates for subpopulations and small areas</a>.</p>
 </div>
 </div>
 </div>
