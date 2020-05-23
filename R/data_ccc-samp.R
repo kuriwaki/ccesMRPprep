@@ -28,7 +28,6 @@
 #'   \item{vv_turnout_gvm}{Validated turnout in general election}
 #'   \item{voted_pres_16}{Self-reported vote choice for 2016}
 #'   \item{economy_retro}{Opinion on retrospective economy}
-#'   ...
 #' }
 #' @source Kuriwaki, Shiro, 2018, "Cumulative CCES Common Content (2006-2018)",
 #' <https://doi.org/10.7910/DVN/II2DB6>, Harvard Dataverse

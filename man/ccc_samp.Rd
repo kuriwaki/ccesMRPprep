@@ -25,7 +25,6 @@ for more explanation of the variables
   \item{vv_turnout_gvm}{Validated turnout in general election}
   \item{voted_pres_16}{Self-reported vote choice for 2016}
   \item{economy_retro}{Opinion on retrospective economy}
-  ...
 }
 }
 \source{
