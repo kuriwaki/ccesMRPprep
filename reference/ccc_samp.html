@@ -42,7 +42,7 @@
 <meta property="og:title" content="Sample cumulative CCES data — ccc_samp" />
 <meta property="og:description" content="The cumulative CCES stacks CCES common content for all years and harmonizes
 the variables, which makes it ideal for using it for MRP.  This is a sample for
-illustration;see get_cces_dv to get the full data." />
+illustration; see get_cces_dv to get the full data." />
 
 
 
@@ -111,14 +111,14 @@ illustration;see get_cces_dv to get the full data." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sample cumulative CCES data</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/cces_cumulative-samp_doc.R'><code>R/cces_cumulative-samp_doc.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/data_ccc-samp.R'><code>R/data_ccc-samp.R</code></a></small>
     <div class="hidden name"><code>ccc_samp.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>The cumulative CCES stacks CCES common content for all years and harmonizes
 the variables, which makes it ideal for using it for MRP.  This is a sample for
-illustration;see <a href='get_cces_dv.html'>get_cces_dv</a> to get the full data.</p>
+illustration; see <a href='get_cces_dv.html'>get_cces_dv</a> to get the full data.</p>
     </div>
 
     <pre class="usage"><span class='no'>ccc_samp</span></pre>
@@ -127,14 +127,24 @@ illustration;see <a href='get_cces_dv.html'>get_cces_dv</a> to get the full data
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A data frame with 1000 observations. See the CCES cumulative codebook
-for more explanation of the varaibles</p><dl>
+for more explanation of the variables</p><dl>
   <dt>year</dt><dd><p>Year of the common content</p></dd>
   <dt>case_id</dt><dd><p>Respondent identifier (unique within each year)</p></dd>
-  <dt>cd</dt><dd><p>Congressional district</p></dd>
+  <dt>state</dt><dd><p>State (in the form of <code>state.name</code>)</p></dd>
+  <dt>st</dt><dd><p>State Abbreviation (in the form of <code>state.abb</code>)</p></dd>
+  <dt>cd</dt><dd><p>Congressional district at the time of the survey</p></dd>
+  <dt>zipcode</dt><dd><p>Zipcode (See codebook)</p></dd>
+  <dt>county_fips</dt><dd><p>County FIPS code (See codebook)</p></dd>
+  <dt>age</dt><dd><p>Age, in integers</p></dd>
+  <dt>race</dt><dd><p>Race and ethnicity</p></dd>
+  <dt>hispanic</dt><dd><p>Hispanic identifier</p></dd>
+  <dt>educ</dt><dd><p>Education level</p></dd>
+  <dt>faminc</dt><dd><p>Family Income</p></dd>
+  <dt>marstat</dt><dd><p>Martial status</p></dd>
+  <dt>newsint</dt><dd><p>Frequency of following the news</p></dd>
   <dt>vv_turnout_gvm</dt><dd><p>Validated turnout in general election</p></dd>
   <dt>voted_pres_16</dt><dd><p>Self-reported vote choice for 2016</p></dd>
   <dt>economy_retro</dt><dd><p>Opinion on retrospective economy</p></dd>
-  ...
 
 </dl>
 
@@ -142,6 +152,11 @@ for more explanation of the varaibles</p><dl>
 
     <p>Kuriwaki, Shiro, 2018, "Cumulative CCES Common Content (2006-2018)",
 &lt;https://doi.org/10.7910/DVN/II2DB6&gt;, Harvard Dataverse</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This is encoded as a RDS file with some variables stored in the Stata-based
+integer + labelled class instead of as factors. See the CCES cumulative guide
+for the difference between the two and how to go from one to another.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ccesMRPprep</span>)

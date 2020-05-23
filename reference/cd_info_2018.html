@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Recode CCES variables so that they merge to ACS variables — ccc_std_demographics • ccesMRPprep</title>
+<title>Sample district level data — cd_info_2018 • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Recode CCES variables so that they merge to ACS variables — ccc_std_demographics" />
-<meta property="og:description" content="Recode CCES variables so that they merge to ACS variables" />
+<meta property="og:title" content="Sample district level data — cd_info_2018" />
+<meta property="og:description" content="Some of the most consequential variables to include in MRP are at the
+district-level. We include one such data for congressional districts. All data
+is collected by Daily Kos." />
 
 
 
@@ -108,51 +110,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Recode CCES variables so that they merge to ACS variables</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/standardize_for-acs.R'><code>R/standardize_for-acs.R</code></a></small>
-    <div class="hidden name"><code>ccc_std_demographics.Rd</code></div>
+    <h1>Sample district level data</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/data_cd-info.R'><code>R/data_cd-info.R</code></a></small>
+    <div class="hidden name"><code>cd_info_2018.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Recode CCES variables so that they merge to ACS variables</p>
+    <p>Some of the most consequential variables to include in MRP are at the
+district-level. We include one such data for congressional districts. All data
+is collected by Daily Kos.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ccc_std_demographics</span>(<span class='no'>tbl</span>, <span class='kw'>only_demog</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='no'>cd_info_2018</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>tbl</th>
-      <td><p>A subset of the cumulative common content. Must include variables
-<code>age</code>, <code>race</code>, <code>educ</code>, and <code>gender</code>.</p></td>
-    </tr>
-    <tr>
-      <th>only_demog</th>
-      <td><p>Drop variables besides demographics? Defaults to FALSE</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>The output is of the same dimensions as the input (unless <code>only_demog = TRUE</code>)
-but with the following exceptions. <code>age_bin</code> is coded to match up with the ACS
-bins and the recoding occurs in a separate function, <code>ccc_bin_age</code>.
-<code>educ</code> is recoded (coarsened and relabelled) to match up with the ACS.
-(the original version is left as <code>educ_cces_chr</code>), and the same goes for
-<code>race</code>. These recodings are governed by the key-value pairs <a href='race_key.html'>educ_key</a> and
-<a href='race_key.html'>race_key</a>.</p>
+    <p>A dataframe with the 435 Congressional Districts, one row per cd.</p><dl>
+   <dt>cd_year</dt><dd><p>The year for the district line. A congressional district's
+   actual geography can change year to year, and significantly so in different
+   redistricting cylces. 2019 indicates the data about voteshare and placenames
+   corresponds to district lines as of 2019.</p></dd>
+   <dt>cd</dt><dd><p>District code. The formatting corresponds to the CCES cumulative
+   codeing of <code>cd</code>: a two-letter abbrevation for the state followed by
+   a dash, and the district number padded with zeros to the left to be of length
+   2. At-large districts like Delwaware are given a "-01" for the district number.</p></dd>
+   <dt>pct_trump, pct_romney, pct_mccain</dt><dd><p>The voteshare of presidential candidates
+   in that district for the given year. E.g. the pct_mccain data when <code>cd_year == 2018</code>
+   represents the percent of the vote by McCain in 2008 for that district _under 2018 lines._</p></dd>
+   <dt>dailykos_name</dt><dd><p>The unique descriptive name for the district given by Daily Kos.
+   See Source</p></dd>
+   <dt>largest_place</dt><dd><p>The largest place in the district. Multiple districts may
+   have the largest place.</p></dd>
+ 
+</dl>
+
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p>The Daily Kos Elections naming guide to the nation's congressional districts.
+  &lt;https://bit.ly/2XsFI5W&gt;</p>
+<p>Daily Kos, "2008, 2012, &amp; 2016 results for districts used in 2018."
+   &lt;https://bit.ly/3bXtAPB&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dataverse</span>)
-
- <span class='co'># Load Cumulative dataset (need your own Token)</span>
- <span class='no'>cumulative_rds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_cces_dv.html'>get_cces_dv</a></span>(<span class='st'>"cumulative"</span>)
-
- <span class='no'>cumulative_std</span> <span class='kw'>&lt;-</span> <span class='fu'>ccc_std_demographics</span>(<span class='no'>cumulative_rds</span>)
-
- }</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>cd_info_2018</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 7</span><span>
+#&gt;   cd_year cd    dailykos_name      largest_place pct_trump pct_romney pct_mccain
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>    </span><span style='text-decoration: underline;'>2</span><span>018 AK-01 All of Alaska      Anchorage         0.528      0.553      0.597
+#&gt; </span><span style='color: #555555;'>2</span><span>    </span><span style='text-decoration: underline;'>2</span><span>018 AL-01 Greater Mobile     Mobile            0.635      0.618      0.609
+#&gt; </span><span style='color: #555555;'>3</span><span>    </span><span style='text-decoration: underline;'>2</span><span>018 AL-02 Southeastern Alab… Montgomery        0.649      0.629      0.645
+#&gt; </span><span style='color: #555555;'>4</span><span>    </span><span style='text-decoration: underline;'>2</span><span>018 AL-03 Eastern Alabama    Auburn            0.653      0.623      0.626
+#&gt; </span><span style='color: #555555;'>5</span><span>    </span><span style='text-decoration: underline;'>2</span><span>018 AL-04 North-central Ala… Gadsden           0.804      0.748      0.733
+#&gt; </span><span style='color: #555555;'>6</span><span>    </span><span style='text-decoration: underline;'>2</span><span>018 AL-05 Northern Alabama   Huntsville        0.647      0.639      0.626</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
