@@ -25,6 +25,6 @@ these will be collapsed for MRP to form a common denominator with the CCES; see
 head(acscodes_age_sex_race)
 }
 \seealso{
-\link{acscodes_age_sex_edu}
+\link{acscodes_age_sex_educ}
 }
 \keyword{datasets}
