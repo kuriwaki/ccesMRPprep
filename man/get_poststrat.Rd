@@ -20,9 +20,7 @@ Only the RHS will be used but the LHS is necessary.}
 \description{
 Formats a post-strat table from ACS and district-level data
 }
-\seealso{
-\link{get_acs_cces}
-
+\examples{
 \dontrun{
  fm_brm <- yes | responses(n_cell) ~  age + gender + educ + pct_trump + (1|cd)
  acs_tab <- get_acs_cces(
@@ -41,4 +39,8 @@ head(poststrat)
 # 5 18 to 24 years Male   HS or Less     0.087 CA-12  6270
 # 6 18 to 24 years Male   HS or Less     0.092 IL-07 18734
 }
+
+}
+\seealso{
+\link{get_acs_cces}
 }

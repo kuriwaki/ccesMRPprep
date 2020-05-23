@@ -51,3 +51,6 @@ To run this, you need to have a API token to run \link[tidycensus]{get_acs}.
 }
 
 }
+\seealso{
+\link{get_acs_cces}
+}

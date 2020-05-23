@@ -16,6 +16,8 @@
 #' @details To run this, you need to have a API token to run \link[tidycensus]{get_acs}.
 #'  See \link[tidycensus]{census_api_key} for details.
 #'
+#' @seealso  \link{get_acs_cces}
+#'
 #' @importFrom tidycensus get_acs
 #' @importFrom stats as.formula
 #' @importFrom magrittr `%>%`
@@ -92,7 +94,8 @@ get_acs_cces <- function(varlist, varlab_df,
 #'
 #' @seealso \link{get_acs_cces}
 #'
-#'\dontrun{
+#' @examples
+#' \dontrun{
 #'  fm_brm <- yes | responses(n_cell) ~  age + gender + educ + pct_trump + (1|cd)
 #'  acs_tab <- get_acs_cces(
 #'               varlist = acscodes_age_sex_educ,
@@ -110,6 +113,7 @@ get_acs_cces <- function(varlist, varlab_df,
 #' # 5 18 to 24 years Male   HS or Less     0.087 CA-12  6270
 #' # 6 18 to 24 years Male   HS or Less     0.092 IL-07 18734
 #' }
+#'
 get_poststrat <- function(cleaned_acs, dist_data, model_ff) {
 
   xvars <- setdiff(all.vars(as.formula(model_ff))[-c(1:2)], "response")
@@ -139,7 +143,7 @@ get_poststrat <- function(cleaned_acs, dist_data, model_ff) {
 #' @importFrom glue glue
 #'
 #' @examples
-#' cd_from_acs("Congressional District 32 (115th Congress), California")
+#'  cd_from_acs("Congressional District 32 (115th Congress), California")
 #'
 #'
 #' @export

@@ -13,7 +13,7 @@ cd_from_acs(vec)
 Convert ACS' cd labels to the form "AK-01".
 }
 \examples{
-cd_from_acs("Congressional District 32 (115th Congress), California")
+ cd_from_acs("Congressional District 32 (115th Congress), California")
 
 
 }
