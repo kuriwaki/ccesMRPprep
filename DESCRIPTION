@@ -27,3 +27,6 @@ Imports:
 Remotes:
     IQSS/dataverse-client-r
 RoxygenNote: 7.1.0
+License: GPL (>= 3)
+URL: https://www.github.com/kuriwaki/ccesMRPprep
+BugReports: http://github.com/kuriwaki/ccesMRPprep/issues
