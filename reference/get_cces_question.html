@@ -169,7 +169,7 @@ which is still private.</p></td>
 <dt>qID</dt><dd><p>The question ID</p></dd>
 <dt>response</dt><dd><p>The outcome question, of class factor</p></dd>
 
-</dl><p>The objeet will also have an attribute called <code>question</code>, which will save
+</dl><p>The object will also have an attribute called <code>question</code>, which will save
 the question identifier <code>qID</code></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -179,24 +179,7 @@ there is some hard-coding of the recode in the question. In the future, this sho
 defined outside of the function in a taxanomy.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># need data/input/cces/cces_2018.rds to run this</span>
-<span class='fu'>get_cces_question</span>(<span class='kw'>qcode</span> <span class='kw'>=</span> <span class='st'>"CC18_326"</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='st'>"2018"</span>, <span class='kw'>qID</span> <span class='kw'>=</span> <span class='st'>"TCJA"</span>)
-
-<span class='co'># A tibble: 60,000 x 4</span>
-<span class='co'># year   case_id qID   response</span>
-<span class='co'># &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;fct&gt;</span>
-<span class='co'># 1  2018 123464282 TCJA  Support</span>
-<span class='co'># 2  2018 170169205 TCJA  Support</span>
-<span class='co'># 3  2018 175996005 TCJA  Support</span>
-<span class='co'># 4  2018 176818556 TCJA  Oppose</span>
-<span class='co'># 5  2018 202120533 TCJA  Oppose</span>
-<span class='co'># 6  2018 226449148 TCJA  Oppose</span>
-<span class='co'># 7  2018 238205342 TCJA  Oppose</span>
-<span class='co'># 8  2018 238806466 TCJA  Support</span>
-<span class='co'># 9  2018 267564481 TCJA  Support</span>
-<span class='co'># 10  2018 291997134 TCJA  Oppose</span>
-}</div></pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
