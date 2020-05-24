@@ -46,7 +46,7 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
 
   tbl_modified <- tbl %>%
     # age
-    mutate(age_bin = ccc_bin_age(.data$age)) %>%
+    mutate(age_bin = ccc_bin_age(age)) %>%
     # race
     rename(race_cces_chr = race) %>%
     mutate(race_cces_chr = as.character(as_factor(race_cces_chr))) %>%
