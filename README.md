@@ -54,22 +54,22 @@ We will use a built-in sample of 1,000 observations for illustration
 ccc_samp
 ```
 
-    ## # A tibble: 1,000 x 17
-    ##     year case_id state st    cd    zipcode county_fips   age    race hispanic
-    ##    <int>   <int> <chr> <chr> <chr> <chr>   <chr>       <int> <int+l> <int+lb>
-    ##  1  2006  439254 Neva… NV    NV-2  89703   32510          20 1 [Whi…       NA
-    ##  2  2006  440689 Cali… CA    CA-2  96067   06093          71 1 [Whi…       NA
-    ##  3  2006  445845 Colo… CO    CO-5  80922   08041          39 1 [Whi…       NA
-    ##  4  2006  452572 Minn… MN    MN-5  55428   27053          74 1 [Whi…       NA
-    ##  5  2006  498451 Iowa  IA    IA-2  50060   19185          53 1 [Whi…       NA
-    ##  6  2006  502543 Tenn… TN    TN-5  37206   47037          50 1 [Whi…       NA
-    ##  7  2006  523050 West… WV    WV-2  25312   54039          55 1 [Whi…       NA
-    ##  8  2006  523861 Illi… IL    IL-3  60629   17031          51 1 [Whi…       NA
-    ##  9  2006  532881 Minn… MN    MN-7  55396   27143          44 1 [Whi…       NA
-    ## 10  2006  553375 Ohio  OH    OH-11 44112   39035          53 1 [Whi…       NA
-    ## # … with 990 more rows, and 7 more variables: educ <int+lbl>, faminc <fct>,
-    ## #   marstat <int+lbl>, newsint <int+lbl>, vv_turnout_gvm <fct>,
-    ## #   voted_pres_16 <fct>, economy_retro <int+lbl>
+    ## # A tibble: 1,000 x 18
+    ##     year case_id state st    cd    zipcode county_fips  gender   age    race
+    ##    <int>   <int> <chr> <chr> <chr> <chr>   <chr>       <int+l> <int> <int+l>
+    ##  1  2006  439254 Neva… NV    NV-2  89703   32510       2 [Fem…    20 1 [Whi…
+    ##  2  2006  440689 Cali… CA    CA-2  96067   06093       2 [Fem…    71 1 [Whi…
+    ##  3  2006  445845 Colo… CO    CO-5  80922   08041       2 [Fem…    39 1 [Whi…
+    ##  4  2006  452572 Minn… MN    MN-5  55428   27053       1 [Mal…    74 1 [Whi…
+    ##  5  2006  498451 Iowa  IA    IA-2  50060   19185       2 [Fem…    53 1 [Whi…
+    ##  6  2006  502543 Tenn… TN    TN-5  37206   47037       2 [Fem…    50 1 [Whi…
+    ##  7  2006  523050 West… WV    WV-2  25312   54039       1 [Mal…    55 1 [Whi…
+    ##  8  2006  523861 Illi… IL    IL-3  60629   17031       2 [Fem…    51 1 [Whi…
+    ##  9  2006  532881 Minn… MN    MN-7  55396   27143       1 [Mal…    44 1 [Whi…
+    ## 10  2006  553375 Ohio  OH    OH-11 44112   39035       2 [Fem…    53 1 [Whi…
+    ## # … with 990 more rows, and 8 more variables: hispanic <int+lbl>,
+    ## #   educ <int+lbl>, faminc <fct>, marstat <int+lbl>, newsint <int+lbl>,
+    ## #   vv_turnout_gvm <fct>, voted_pres_16 <fct>, economy_retro <int+lbl>
 
 *Step 2. Cleaning CCES data*
 
@@ -85,7 +85,44 @@ ccc_std <- ccc_std_demographics(ccc_samp)
 
 *Step 3. Collapsing the CCES data*
 
+``` r
+# fake outcome data
+# must be called "response"
+
+ccc_samp_std <- ccc_samp %>% 
+   mutate(response = sample(c("For", "Against"), size = n(), replace = TRUE)) %>% 
+   ccc_std_demographics()
+
+ccc_samp_out <- build_counts(ccc_samp_std,
+                             "yes | trials(n_response) ~ age + gender + educ")
+
+ccc_samp_out
+```
+
+    ## # A tibble: 400 x 5
+    ##      age gender educ         n_response   yes
+    ##    <int> <fct>  <fct>             <int> <int>
+    ##  1    18 Male   HS or Less            3     2
+    ##  2    18 Female HS or Less            7     4
+    ##  3    18 Female Some College          1     0
+    ##  4    19 Male   HS or Less            1     1
+    ##  5    19 Female HS or Less            2     1
+    ##  6    19 Female Some College          2     2
+    ##  7    20 Male   HS or Less            1     1
+    ##  8    20 Male   Some College          5     3
+    ##  9    20 Female HS or Less            3     1
+    ## 10    20 Female Some College          5     2
+    ## # … with 390 more rows
+
 *Step 4. Preparing the brms function*
+
+We presume the formula will be used in brms. Currently we support binary
+outcomes. This can be modeled as a binomial, which in brms is of the
+form
+
+``` r
+fm_brm <- yes | trials(n_responses) ~  age + gender + educ + pct_trump + (1|cd)
+```
 
 *Step 5. Cleaning and preparing the ACS data*
 
@@ -96,10 +133,6 @@ amount of lookup tables internally will pull out the apporpriate
 CD-level counts and label them so that they match up with CCES keys.
 
 ``` r
- # brms binomial specification
- fm_brm <- yes | trials(n_cell) ~  age + gender + educ + pct_trump + (1|cd)
-
-
  acs_tab <- get_acs_cces(
               varlist = acscodes_age_sex_educ,
               varlab_df = acscodes_df,

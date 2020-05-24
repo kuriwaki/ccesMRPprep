@@ -31,4 +31,8 @@ reference:
   - ccc_bin_age
   - ccc_std_demographics
   - cd_from_acs
-
+  - yesno_to_binary
+- title: Data collapsing and reshaping
+  desc: Wrangling cleaned data for apporpriate modeling
+- contents:
+  - build_counts

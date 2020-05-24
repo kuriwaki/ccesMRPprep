@@ -58,8 +58,29 @@ ccc_std <- ccc_std_demographics(ccc_samp)
 
 _Step 3. Collapsing the CCES data_
 
+```{r}
+# fake outcome data
+# must be called "response"
+
+ccc_samp_std <- ccc_samp %>% 
+   mutate(response = sample(c("For", "Against"), size = n(), replace = TRUE)) %>% 
+   ccc_std_demographics()
+
+ccc_samp_out <- build_counts(ccc_samp_std,
+                             "yes | trials(n_response) ~ age + gender + educ")
+
+ccc_samp_out
+```
+
 
 _Step 4. Preparing the brms function_
+
+We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form
+
+```{r}
+fm_brm <- yes | trials(n_responses) ~  age + gender + educ + pct_trump + (1|cd)
+```
+
 
 
 _Step 5. Cleaning and preparing the ACS data_
@@ -70,9 +91,6 @@ lookup tables internally will pull out the apporpriate CD-level counts and label
 so that they match up with CCES keys.
 
 ```{r, eval = FALSE}
- # brms binomial specification
- fm_brm <- yes | trials(n_cell) ~  age + gender + educ + pct_trump + (1|cd)
-
 
  acs_tab <- get_acs_cces(
               varlist = acscodes_age_sex_educ,

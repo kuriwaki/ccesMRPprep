@@ -19,7 +19,7 @@ Imports:
     tibble,
     magrittr,
     rlang,
-    dplyr,
+    dplyr (>= 0.8.99),
     tidyr,
     haven,
     stringr,
@@ -31,6 +31,7 @@ Imports:
     purrr
 Remotes:
     IQSS/dataverse-client-r
+    tidyverse/dplyr
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 License: GPL (>= 3)
