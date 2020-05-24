@@ -1,9 +1,14 @@
 #' CCES-ACS variable key value pairs for recoding
 #'
-#' @details These value-value tables are useful for recoding the values of
+#' These value-value tables are useful for recoding the values of
 #' from one dataset (CCES) so that they can be merged immediately with another
-#' (ACS). These get used internally in \link{ccc_std_demographics}, but they are
-#' available as built in datasets
+#' (ACS).  These get used internally in \link{ccc_std_demographics}, but they are
+#' available as built in datasets.
+#'
+#' @details These tibbles themselves are not key-values pair in a strict sense because
+#' the dataframe tries to have two recodes CCES to common and ACS to common and so for
+#' a given recode, rows are not distinct. To avoid duplicating rows inadvertently,
+#' use the `dplyr::distinct` to reduce the key to two columns with unique rows.
 #'
 #' @name keyvalue
 #'
@@ -54,16 +59,6 @@ NULL
 #'  }
 "educ_key"
 
-#' @rdname  keyvalue
-#' @format  ### \code{educ_key2}
-#'  Education with slightly different ACS value encoding, used e.g. in building
-#'  \link{acscodes_age_sex_educ}:
-#'  \describe{
-#'  \item{educ_cces_chr}{Character to recode from, in CCES}
-#'  \item{educ_chr}{Character to recode from, in ACS. See \link{}}
-#'  \item{educ}{An labelled integer of class haven::labelled. Target variable}
-#'  }
-"educ_key2"
 
 #' @rdname  keyvalue
 #' @format ### \code{age5_key}

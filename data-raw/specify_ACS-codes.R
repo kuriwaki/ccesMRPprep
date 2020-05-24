@@ -22,6 +22,7 @@ ages  <- c("18 to 24 years",
 education <- c("Less than 9th grade",
                "9th to 12th grade,? no diploma",
                "High school graduate \\(includes equivalency\\)",
+               "High school graduate, GED, or alternative",
                "Some college,? no degree",
                "Some college or associate's degree",
                "Associate's degree",
@@ -83,7 +84,7 @@ acscodes_df <- vars %>%
   rename(gender_chr = gender, age_chr = age, educ_chr = educ, race_acs = race) %>%
   left_join(gender_key, by = "gender_chr") %>%
   left_join(age5_key, by = "age_chr") %>% # age 10 if using race interactions consider binding while keeping the label
-  left_join(educ_key2, by = "educ_chr") %>%
+  left_join(educ_key, by = "educ_chr") %>%
   left_join(filter(race_key, !is.na(race_acs)), by = "race_acs") %>%
   select(variable, gender, age, educ, race)
 
@@ -92,4 +93,3 @@ usethis::use_data(acscodes_age_sex_educ, overwrite = TRUE)
 usethis::use_data(acscodes_age_sex_race, overwrite = TRUE)
 usethis::use_data(acscodes_sex_educ_race, overwrite = TRUE)
 usethis::use_data(acscodes_df, overwrite = TRUE)
-

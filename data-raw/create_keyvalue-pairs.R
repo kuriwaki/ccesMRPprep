@@ -33,7 +33,7 @@ age10_key <- tibble(age_chr = ages10) %>%
   mutate(age = labelled(age_num, age5_lbl))
 
 # Education ----
-educ_lbl <- setNames(1L:7L,
+educ_cces_lbl <- setNames(1L:7L,
                      c("Less than 9",
                        "No HS",
                        "High School Graduate",
@@ -46,21 +46,23 @@ educ_lbl_clps <- setNames(1L:4L,
 
 
 ## CCES lumps the first two, and let's also lump the 2-year
-cces_edlbl <- tibble(educ_cces_chr = names(educ_lbl)[2:7],
+cces_edlbl <- tibble(educ_cces_chr = names(educ_cces_lbl)[2:7],
                      educ = labelled(c(1, 1, 2, 2, 3, 4), educ_lbl_clps))
 
 educ_key  <- tribble(
-  ~num, ~educ_chr, ~educ_cces_chr,
-  1L, "Less than 9th grade", "No HS",
-  2L, "9th to 12th grade no diploma", "No HS",
-  3L, "High school graduate (includes equivalency)", "High School Graduate",
-  4L, "Some college no degree", "Some College",
-  5L, "Associate's degree", "2-Year",
-  6L, "Bachelor's degree", "4-Year",
-  7L, "Graduate or professional degree", "Post-Grad"
+  ~educ_chr, ~educ_cces_chr,
+   "Less than 9th grade", "No HS",
+   "9th to 12th grade no diploma", "No HS",
+   "9th to 12th grade, no diploma", "No HS",
+   "High school graduate (includes equivalency)", "High School Graduate",
+   "High school graduate, GED, or alternative", "High School Graduate",
+   "Some college no degree", "Some College",
+   "Some college, no degree", "Some College",
+   "Associate's degree", "2-Year",
+   "Bachelor's degree", "4-Year",
+   "Graduate or professional degree", "Post-Grad"
 ) %>%
-  left_join(cces_edlbl, by = "educ_cces_chr") %>%
-  select(-num)
+  left_join(cces_edlbl, by = "educ_cces_chr")
 
 # Gender ----
 gender_key <- tibble(gender_chr = c("Male", "Female"),
@@ -98,12 +100,5 @@ race_key <- tribble(
   left_join(race_cces_key, by = "race_cces_chr") %>%
   mutate(race = labelled(race_5, my_racelbl))
 
-# ACS variant
-educ_key2 <- educ_key %>%
-  mutate(
-    educ_chr = replace(educ_chr, educ_chr == "9th to 12th grade no diploma", "9th to 12th grade, no diploma"),
-    educ_chr = replace(educ_chr, educ_chr == "Some college no degree", "Some college, no degree")
-  )
-
-usethis::use_data(age5_key, age10_key, gender_key, educ_key, educ_key2, race_key,
+usethis::use_data(age5_key, age10_key, gender_key, educ_key, race_key,
                   overwrite = TRUE)

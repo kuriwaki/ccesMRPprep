@@ -7,9 +7,9 @@
 #' renames some variables to later merge with CCES-based regression models.
 #'
 #' @param varlist a vector of variable codes to pull
+#' @param varlab_df a dataframe that appends the categories based on the varcode
 #' @param .year The year of the ACS to get. Because of data availabilities, this is
 #'  capped to 2010-2018.
-#' @param varlab_df a dataframe that appends the categories based on the varcode
 #' @param .geography the type of geography to pull. Currently only supports
 #'  \code{"congressional district"}.
 #'

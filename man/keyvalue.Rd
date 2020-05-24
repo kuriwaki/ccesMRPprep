@@ -6,7 +6,6 @@
 \alias{race_key}
 \alias{gender_key}
 \alias{educ_key}
-\alias{educ_key2}
 \alias{age5_key}
 \alias{age10_key}
 \title{CCES-ACS variable key value pairs for recoding}
@@ -45,17 +44,6 @@ For mapping ACS data values for education e.g. in \link{get_acs}:
 }
 }
 
-\subsection{\code{educ_key2}}{
-
-Education with slightly different ACS value encoding, used e.g. in building
-\link{acscodes_age_sex_educ}:
-\describe{
-\item{educ_cces_chr}{Character to recode from, in CCES}
-\item{educ_chr}{Character to recode from, in ACS. See \link{}}
-\item{educ}{An labelled integer of class haven::labelled. Target variable}
-}
-}
-
 \subsection{\code{age5_key}}{
 
 Age bins, 5-ways, used in \link{acscodes_age_sex_educ}. Use \link{ccc_bin_age}
@@ -79,20 +67,21 @@ gender_key
 
 educ_key
 
-educ_key2
-
 age5_key
 
 age10_key
 }
 \description{
-CCES-ACS variable key value pairs for recoding
-}
-\details{
 These value-value tables are useful for recoding the values of
 from one dataset (CCES) so that they can be merged immediately with another
-(ACS). These get used internally in \link{ccc_std_demographics}, but they are
-available as built in datasets
+(ACS).  These get used internally in \link{ccc_std_demographics}, but they are
+available as built in datasets.
+}
+\details{
+These tibbles themselves are not key-values pair in a strict sense because
+the dataframe tries to have two recodes CCES to common and ACS to common and so for
+a given recode, rows are not distinct. To avoid duplicating rows inadvertently,
+use the \code{dplyr::distinct} to reduce the key to two columns with unique rows.
 }
 \examples{
  library(ccesMRPprep)
