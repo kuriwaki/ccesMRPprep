@@ -24,6 +24,10 @@ library(ccesMRPprep)
 library(tidyverse)
 ```
 
+See the vignettes for more long-form documentation and explanation of
+the nature of the data. Otherwise, each function and built-in data
+provides documentation as well. An overview of the workflow is below.
+
 ## Workflow
 
 *Step 1. Loading CCES data*
@@ -34,7 +38,7 @@ dataverse API token, the function `get_cces_dv` will make this quick and
 simple.
 
 ``` r
-ccc <- get_cces_dv("cumualtive")
+ccc <- get_cces_dv("cumulative")
 ```
 
 We will use a built-in sample of 1,000 observations for illustration

@@ -21,7 +21,8 @@ This package provides data loading, processing, and formatting functions for a p
 library(ccesMRPprep)
 library(tidyverse)
 ```
-   
+
+See the vignettes for more long-form documentation and explanation of the nature of the data. Otherwise, each function and built-in data provides documentation as well. An overview of the workflow is below.
 
 
 ## Workflow
@@ -32,7 +33,7 @@ All CCES data can be downloaded directly from dataverse, using the development v
 
 
 ```{r, eval = FALSE}
-ccc <- get_cces_dv("cumualtive")
+ccc <- get_cces_dv("cumulative")
 ```
 
 We will use a built-in sample of 1,000 observations for illustration (see `?ccc_samp`).
