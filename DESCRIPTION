@@ -30,7 +30,7 @@ Imports:
     tidycensus,
     purrr
 Remotes:
-    IQSS/dataverse-client-r
+    IQSS/dataverse-client-r,
     tidyverse/dplyr
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
