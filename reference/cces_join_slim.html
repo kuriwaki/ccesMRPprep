@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ACS code lookup table — acscodes_df • ccesMRPprep</title>
+<title>Build CCES Data by Joining Component Pieces — cces_join_slim • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,10 @@
 
 
 
-<meta property="og:title" content="ACS code lookup table — acscodes_df" />
-<meta property="og:description" content="A tidy dataframe where each row is a ACS code. This is useful internal
-data to give meaning to variable codes e.g. acscodes_age_sex_educ" />
+<meta property="og:title" content="Build CCES Data by Joining Component Pieces — cces_join_slim" />
+<meta property="og:description" content="Produces a person-level dataset with question-level dataset. This will only
+use the variables necesary for the model, thus its name &quot;slim&quot;.  Therefore,
+is model dependent." />
 
 
 
@@ -121,52 +122,72 @@ data to give meaning to variable codes e.g. acscodes_age_sex_educ" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ACS code lookup table</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/datadoc_acscodes-key.R'><code>R/datadoc_acscodes-key.R</code></a></small>
-    <div class="hidden name"><code>acscodes_df.Rd</code></div>
+    <h1>Build CCES Data by Joining Component Pieces</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/cces_format.R'><code>R/cces_format.R</code></a></small>
+    <div class="hidden name"><code>cces_join_slim.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A tidy dataframe where each row is a ACS code. This is useful internal
-data to give meaning to variable codes e.g. <a href='acscodes_partitions.html'>acscodes_age_sex_educ</a></p>
+    <p>Produces a person-level dataset with question-level dataset. This will only
+use the variables necesary for the model, thus its name "slim".  Therefore,
+is model dependent.</p>
     </div>
 
-    <pre class="usage"><span class='no'>acscodes_df</span></pre>
+    <pre class="usage"><span class='fu'>cces_join_slim</span>(<span class='no'>ccq_df</span>, <span class='no'>ccc_df</span>, <span class='no'>cd_df</span>, <span class='no'>model_ff</span>, <span class='kw'>subset_dist</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>ccq_df</th>
+      <td><p>dataframe of outcomes, taken from <a href='get_cces_question.html'>get_cces_question</a>. We
+currently assume the name for the outcome is named "response".</p></td>
+    </tr>
+    <tr>
+      <th>ccc_df</th>
+      <td><p>dataframe of covariates, currently taken only from the cumulative
+common content. It should have passed <a href='ccc_std_demographics.html'>ccc_std_demographics</a> to be compatible
+with CAS.</p></td>
+    </tr>
+    <tr>
+      <th>cd_df</th>
+      <td><p>dataframe of district-level predictors, see <a href='cd_info_2018.html'>cd_info_2018</a> for a sample.</p></td>
+    </tr>
+    <tr>
+      <th>model_ff</th>
+      <td><p>the MRP model. Only the variables on the RHS will be kept.</p></td>
+    </tr>
+    <tr>
+      <th>subset_dist</th>
+      <td><p>a character for the geography of cd to subset</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A data frame where each row represents a column.</p><dl>
-<dt>variable</dt><dd><p>the ACS code (2018)</p></dd>
-<dt>gender</dt><dd><p>A labelled variable for gender. 1 is Male, 2 is Female. Use
-the <code>labelled</code> or <code>haven</code> package to see labels.</p></dd>
-<dt>age</dt><dd><p>A labelled variable specifying which age biin the variable specifies</p></dd>
-<dt>race</dt><dd><p>A labelled variable specifying which education bin the variable specifies</p></dd>
-<dt>educ</dt><dd><p>A labelled variable specifying which race binthe variable specifies</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>Modifications around tidycensus::load_variables</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The 5-yr ACS at 2018 is used,
-although codes should be fairly consistent across time. IF a demographic variable is NA,
-that means the variable collapses over the levels of that variable. In other
-wods, NA here can be thought of as meaning "all".</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>acscodes_df</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
-#&gt;   variable      gender       age      educ      race
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> B00001_001 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> B00002_001 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> B01001_001 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> B01001_002  1</span><span style='color: #555555;'> [Male]</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>5</span><span> B01001_003  1</span><span style='color: #555555;'> [Male]</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>6</span><span> B01001_004  1</span><span style='color: #555555;'> [Male]</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span></div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><div class='input'> <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+  <span class='co'># need data/input/cces/cces_2018.rds to run this</span>
+  <span class='no'>ccq_tcja</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_cces_question.html'>get_cces_question</a></span>(<span class='st'>"CC18_326"</span>, <span class='st'>"2018"</span>, <span class='st'>"TCJA"</span>)
+
+  <span class='fu'>cces_join_slim</span>(<span class='kw'>ccq_df</span> <span class='kw'>=</span> <span class='no'>ccq_tcja</span>,
+                 <span class='kw'>ccc_df</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>ccc_samp</span>, <span class='no'>year</span> <span class='kw'>==</span> <span class='fl'>2018</span>),
+                 <span class='kw'>cd_df</span> <span class='kw'>=</span> <span class='no'>cd_info_2018</span>,
+                 <span class='kw'>model_ff</span> <span class='kw'>=</span> <span class='st'>"yes | trials(n_response) ~ age + educ + (1|cd)"</span>)
+  <span class='co'># A tibble: 133 x 7</span>
+  <span class='co'>#    year  case_id qID   response   age             educ cd</span>
+  <span class='co'>#  &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;fct&gt;    &lt;int&gt;        &lt;int+lbl&gt; &lt;chr&gt;</span>
+  <span class='co'># 1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11</span>
+  <span class='co'># 2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-4</span>
+  <span class='co'># 3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-2</span>
+  <span class='co'># 4  2018 411717742 TCJA  Oppose      50 1 [No HS]        IL-3</span>
+  <span class='co'># 5  2018 412022838 TCJA  Oppose      66 5 [4-Year]       OH-8</span>
+  <span class='co'># 6  2018 412123052 TCJA  Oppose      35 3 [Some College] WA-4</span>
+  <span class='co'># 7  2018 412161131 TCJA  Support     32 3 [Some College] IN-3</span>
+  <span class='co'># 8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-1</span>
+  <span class='co'># 9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-2</span>
+  <span class='co'># 10  2018 412276349 TCJA  Support     85 6 [Post-Grad]    PA-7</span>
+
+ }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -124,7 +124,7 @@ loads it into a tibble with the appropriate file data type." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download a specifc CCES dataset from dataverse</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/dataverse-pull.R'><code>R/dataverse-pull.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/get_dataverse.R'><code>R/get_dataverse.R</code></a></small>
     <div class="hidden name"><code>get_cces_dv.Rd</code></div>
     </div>
 
@@ -135,7 +135,11 @@ the raw data, so this function writes the raw binary into a tempfile and
 loads it into a tibble with the appropriate file data type.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_cces_dv</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>cces_dv_ids</span>$<span class='no'>cces_name</span>, <span class='kw'>dataverse_paths</span> <span class='kw'>=</span> <span class='no'>cces_dv_ids</span>)</pre>
+    <pre class="usage"><span class='fu'>get_cces_dv</span>(
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"cumulative"</span>,
+  <span class='kw'>year_subset</span> <span class='kw'>=</span> <span class='fl'>2006</span>:<span class='fl'>2019</span>,
+  <span class='kw'>dataverse_paths</span> <span class='kw'>=</span> <span class='no'>cces_dv_ids</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,6 +147,13 @@ loads it into a tibble with the appropriate file data type.</p>
     <tr>
       <th>name</th>
       <td><p>The name of the dataset as defined in <code><a href='https://rdrr.io/r/utils/data.html'>data(cces_dv_ids)</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>year_subset</th>
+      <td><p>The year (or years, a vector) to subset too. If <code>name</code> is a year specific dataset, this
+argument is redundant, but if <code>name == "cumulative"</code>, then the output
+will be the cumulative dataset subsetted to that year. This is useful when
+using the cumulative dataset for its harmonized variables.</p></td>
     </tr>
     <tr>
       <th>dataverse_paths</th>
@@ -163,7 +174,7 @@ token by following <code><a href='https://rdrr.io/pkg/dataverse/man/get_user_key
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='no'>ccc</span> <span class='kw'>&lt;-</span> <span class='fu'>get_cces_dv</span>(<span class='st'>"cumulative"</span>)
+ <span class='no'>ccc</span> <span class='kw'>&lt;-</span> <span class='fu'>get_cces_dv</span>(<span class='st'>"cumulative"</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>)
  }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -121,7 +121,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Collapse CCES data to be analyzed in binomial model</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/collapse.R'><code>R/collapse.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/cces_collapse.R'><code>R/cces_collapse.R</code></a></small>
     <div class="hidden name"><code>build_counts.Rd</code></div>
     </div>
 
@@ -137,9 +137,9 @@
     <tr>
       <th>data</th>
       <td><p>A cleaned CCES dataset, e.g. from <a href='ccc_std_demographics.html'>ccc_std_demographics</a> which is
-then attached a outcome variable. Currently, it assumes the outcome is named
-<code>response</code>. This variable need not be numeric or binarized, but it will be
-binarized with <a href='yesno_to_binary.html'>yesno_to_binary</a></p></td>
+then combined with outcome and contextual data in <a href='cces_join_slim.html'>cces_join_slim</a>. Currently, it
+assumes the outcome is named <code>response</code>. This variable need not be numeric or
+binarized, but it will be binarized with <a href='yesno_to_binary.html'>yesno_to_binary</a>.</p></td>
     </tr>
     <tr>
       <th>model_ff</th>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ACS code lookup table — acscodes_df • ccesMRPprep</title>
+<title>Get one column of outcome questions for each model — get_cces_question • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="ACS code lookup table — acscodes_df" />
-<meta property="og:description" content="A tidy dataframe where each row is a ACS code. This is useful internal
-data to give meaning to variable codes e.g. acscodes_age_sex_educ" />
+<meta property="og:title" content="Get one column of outcome questions for each model — get_cces_question" />
+<meta property="og:description" content="Get one column of outcome questions for each model" />
 
 
 
@@ -121,52 +120,83 @@ data to give meaning to variable codes e.g. acscodes_age_sex_educ" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ACS code lookup table</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/datadoc_acscodes-key.R'><code>R/datadoc_acscodes-key.R</code></a></small>
-    <div class="hidden name"><code>acscodes_df.Rd</code></div>
+    <h1>Get one column of outcome questions for each model</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/get_outcome.R'><code>R/get_outcome.R</code></a></small>
+    <div class="hidden name"><code>get_cces_question.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A tidy dataframe where each row is a ACS code. This is useful internal
-data to give meaning to variable codes e.g. <a href='acscodes_partitions.html'>acscodes_age_sex_educ</a></p>
+    <p>Get one column of outcome questions for each model</p>
     </div>
 
-    <pre class="usage"><span class='no'>acscodes_df</span></pre>
+    <pre class="usage"><span class='fu'>get_cces_question</span>(<span class='no'>qcode</span>, <span class='no'>year</span>, <span class='no'>qID</span>, <span class='kw'>data_dir</span> <span class='kw'>=</span> <span class='st'>"data/input/cces"</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>qcode</th>
+      <td><p>A string, the variable name of the outcome variable of interest,
+exactly as it appears in the CCES dataset. Together with <code>year</code>, uniquely identifies
+the outcome question data</p></td>
+    </tr>
+    <tr>
+      <th>year</th>
+      <td><p>A string for the year the question was asked, which will correspond
+to the dataset. If using a dataset from the cumulative, set to <code>"cumulative"</code>.
+Together with <code>qcode</code>, uniquely identifies the outcome question data</p></td>
+    </tr>
+    <tr>
+      <th>qID</th>
+      <td><p>A string, the user's unique name for the question. For example, we use the
+syntax in our question table.</p></td>
+    </tr>
+    <tr>
+      <th>data_dir</th>
+      <td><p>A path for the directory where flat files for the CCES common content is
+stored.  Currently the data must be of the form <code>cces_{year}.rds</code>  in that directory
+to be read in. For a general script that uses <a href='get_cces_dv.html'>get_cces_dv</a>, see
+<a href='https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R'>https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R</a>
+which is still private.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame where each row represents a column.</p><dl>
-<dt>variable</dt><dd><p>the ACS code (2018)</p></dd>
-<dt>gender</dt><dd><p>A labelled variable for gender. 1 is Male, 2 is Female. Use
-the <code>labelled</code> or <code>haven</code> package to see labels.</p></dd>
-<dt>age</dt><dd><p>A labelled variable specifying which age biin the variable specifies</p></dd>
-<dt>race</dt><dd><p>A labelled variable specifying which education bin the variable specifies</p></dd>
-<dt>educ</dt><dd><p>A labelled variable specifying which race binthe variable specifies</p></dd>
+    <p>A three-column dataframe with the columns</p><dl>
+<dt>year</dt><dd><p>The year</p></dd>
+<dt>case_id</dt><dd><p>The respondent identifier within year</p></dd>
+<dt>qID</dt><dd><p>The question ID</p></dd>
+<dt>response</dt><dd><p>The outcome question, of class factor</p></dd>
 
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>Modifications around tidycensus::load_variables</p>
+</dl><p>The objeet will also have an attribute called <code>question</code>, which will save
+the question identifier <code>qID</code></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The 5-yr ACS at 2018 is used,
-although codes should be fairly consistent across time. IF a demographic variable is NA,
-that means the variable collapses over the levels of that variable. In other
-wods, NA here can be thought of as meaning "all".</p>
+    <p>This transformation currently only supports Yes/No questions. For some common
+ordinal questions that ca n be, with manual recodes, be set to a Yes/No question,
+there is some hard-coding of the recode in the question. In the future, this should be
+defined outside of the function in a taxanomy.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>acscodes_df</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
-#&gt;   variable      gender       age      educ      race
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> B00001_001 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> B00002_001 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> B01001_001 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> B01001_002  1</span><span style='color: #555555;'> [Male]</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>5</span><span> B01001_003  1</span><span style='color: #555555;'> [Male]</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>6</span><span> B01001_004  1</span><span style='color: #555555;'> [Male]</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span></div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># need data/input/cces/cces_2018.rds to run this</span>
+<span class='fu'>get_cces_question</span>(<span class='kw'>qcode</span> <span class='kw'>=</span> <span class='st'>"CC18_326"</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='st'>"2018"</span>, <span class='kw'>qID</span> <span class='kw'>=</span> <span class='st'>"TCJA"</span>)
+
+<span class='co'># A tibble: 60,000 x 4</span>
+<span class='co'># year   case_id qID   response</span>
+<span class='co'># &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;fct&gt;</span>
+<span class='co'># 1  2018 123464282 TCJA  Support</span>
+<span class='co'># 2  2018 170169205 TCJA  Support</span>
+<span class='co'># 3  2018 175996005 TCJA  Support</span>
+<span class='co'># 4  2018 176818556 TCJA  Oppose</span>
+<span class='co'># 5  2018 202120533 TCJA  Oppose</span>
+<span class='co'># 6  2018 226449148 TCJA  Oppose</span>
+<span class='co'># 7  2018 238205342 TCJA  Oppose</span>
+<span class='co'># 8  2018 238806466 TCJA  Support</span>
+<span class='co'># 9  2018 267564481 TCJA  Support</span>
+<span class='co'># 10  2018 291997134 TCJA  Oppose</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
