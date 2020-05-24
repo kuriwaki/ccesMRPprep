@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 ```{r setup, message = FALSE}
 library(ccesMRPprep)
 library(tidyverse)
+library(haven)
 ```
 
 ## **Step 1.** Loading CCES data
@@ -45,7 +46,6 @@ See `?get_cces_question` for how to get the _outcome_ data, which is a single co
 ```{r}
 ccc_std <- ccc_std_demographics(ccc_samp)
 ```
-
 
 
 ##  **Step 3.** Preparing the brms function
