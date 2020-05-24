@@ -13,7 +13,7 @@ ccc_samp <- ccc %>%
   sample_n(1000) %>%
   arrange(year, case_id) %>%
   select(year, case_id, state:cd, zipcode, county_fips,
-         age, race, hispanic, educ, faminc, marstat, newsint,
+         gender, age, race, hispanic, educ, faminc, marstat, newsint,
          vv_turnout_gvm, voted_pres_16, economy_retro)
 
 

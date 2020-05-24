@@ -15,6 +15,7 @@ for more explanation of the variables
 \item{cd}{Congressional district at the time of the survey}
 \item{zipcode}{Zipcode (See codebook)}
 \item{county_fips}{County FIPS code (See codebook)}
+\item{gender}{Gender (equivalent to sex in ACS for the purposes of this package)}
 \item{age}{Age, in integers}
 \item{race}{Race and ethnicity}
 \item{hispanic}{Hispanic identifier}
