@@ -3,8 +3,10 @@ Portable Routines for Preparing CCES and ACS data for MRP
 
 Cite as:
 
-> Shiro Kuriwaki (2020). ccesMRPprep: Functions to Prepare CCES data for
-> MRP. R package. <https://www.github.com/kuriwaki/ccesMRPprep>
+  - Shiro Kuriwaki (2020). ccesMRPprep: Functions to Prepare CCES data
+    for MRP. R package. <https://www.github.com/kuriwaki/ccesMRPprep>
+
+### Purpose and Contribution
 
 Multi-level Regression and Post-stratification is an increasingly
 popular method for analyzing surveys, and can be implemented on public
@@ -14,9 +16,13 @@ recoding values and generating post-stratification frames so data can be
 matched.
 
 This package provides data loading, processing, and formatting functions
-for a particular task: using *CCES data* for MRP. Model fitting and
-visualization of MRP itself is handled elsewhere. This package is
-focused on the preparation to get there.
+for a particular task: using *CCES data* for MRP. Its key contributions
+are functions that are calibrated to a consistent syntax, lookup tables
+and value-key pairs of data that are based upon a careful reading of
+data sources, and data loading functions that use APIs to reduce the
+dependency on downloading large files. Model fitting and visualization
+of MRP itself is handled elsewhere. This package is focused on the
+preparation to get there.
 
 ``` r
 # remotes::install_github("kuriwaki/ccesMRPprep")

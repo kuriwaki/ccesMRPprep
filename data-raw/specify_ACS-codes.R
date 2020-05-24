@@ -72,6 +72,16 @@ acscodes_age_sex_race <- vars %>%
   filter(!is.na(gender), !is.na(age), !is.na(race)) %>%
   pull(variable)
 
+
+vdf <- vars %>%
+  mutate(race = str_to_upper(race)) %>%
+  rename(gender_chr = gender, age_chr = age, educ_chr = educ, race_acs = race)
+
+vdf %>%
+  filter(!is.na(gender_chr), !is.na(race_acs), !is.na(educ_chr))
+
+
+
 # to labelled
 acscodes_df <- vars %>%
   mutate(race = str_to_upper(race)) %>%

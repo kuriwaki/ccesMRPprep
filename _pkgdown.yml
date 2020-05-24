@@ -1,0 +1,34 @@
+destination: docs
+
+template:
+  params:
+    bootswatch: spacelab
+
+authors:
+  Shiro Kuriwaki:
+    href: "https://www.shirokuriwaki.com"
+
+
+reference:
+- title: Lookup tables and variable metadata
+  desc: tibbles that obtain, link, collpase, and describe ACS and CCES values
+- contents:
+  - ends_with("_key")
+  - cces_dv_ids
+  - starts_with("acscodes")
+- title: Reading Data
+  desc: Functions that read in CCES and ACS data from an API
+- contents:
+  - starts_with("get_")
+- title: Sample datasets
+  desc: Samples of datasets one can get from the data loading functions
+- contents:
+  - ccc_samp
+  - cd_info_2018
+- title: Data recoding and cleaning
+  desc: Functions that standardize and clean variable names and formats
+- contents:
+  - ccc_bin_age
+  - ccc_std_demographics
+  - cd_from_acs
+
