@@ -87,7 +87,6 @@ use the \code{dplyr::distinct} to reduce the key to two columns with unique rows
  library(ccesMRPprep)
  race_key
  educ_key
- educ_key2
  gender_key
  age5_key
  age10_key
