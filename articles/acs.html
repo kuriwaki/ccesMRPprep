@@ -120,9 +120,12 @@
 <a href="#three-types-of-acs-tables" class="anchor"></a>Three types of ACS Tables</h3>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Age x Sex x Education</strong>. These variable codes are encoded in <code>acscodes_age_sex_edu</code>.</li>
+<strong>Age x Sex x Education</strong>. These variable codes are encoded in <code><a href="../reference/acscodes_partitions.html">?acscodes_age_sex_educ</a></code>.</li>
 <li>
-<strong>Age x Sex x Race</strong>. These variable codes are encoded in <code>acscodes_age_sex_race.</code>
+<strong>Age x Sex x Race</strong>. These variable codes are encoded in <code>?acscodes_age_sex_race.</code>
+</li>
+<li>
+<strong>Sex x Education x Race </strong>. These variable codes are encodd in <code><a href="../reference/acscodes_partitions.html">?acscodes_sex_educ_race</a></code>
 </li>
 </ol>
 <p>See their help pages (e.g. <code>?acscodes_age_sex_edu</code>) for more information. A detailed list of limitations to come.</p>
@@ -130,7 +133,7 @@
 <div id="collapsing-variable-codes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#collapsing-variable-codes" class="anchor"></a>Collapsing variable codes</h3>
-<p>The survey and the post-stratification must share discrete variables the level of which match 1:1. Therefore, if race is binned 9 ways in the ACS but there are only 5 response options in the CCES, then the finer group must be collapsed to coarser groupings of the 5 levels in the CCES. That also means, for example, that the recoding must be nested – i.e., it is hard to salvage two variable codings that are not many-to-one nested mappings to each other. These judgments must be made with careful attention to the question wording and are documented to some extent in <code><a href="../reference/keyvalue.html">?race_key</a></code>.</p>
+<p>The survey and the post-stratification must share discrete variables the level of which match 1:1. Therefore, if race is binned 9 ways in the ACS but there are only 5 response options in the CCES, then the finer group must be collapsed to coarser groupings of the 5 levels in the CCES. That also means, for example, that the recoding must be nested – i.e., it is hard to salvage two variable codings that are not many-to-one nested mappings to each other. These judgments must be made with careful attention to the question wording and are documented to some extent in <code><a href="../reference/keyvalue.html">?keyvalue</a></code>.</p>
 </div>
 <div id="thanks" class="section level3">
 <h3 class="hasAnchor">

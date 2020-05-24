@@ -126,10 +126,12 @@
 <p><em>Step 2. Cleaning CCES data</em></p>
 <p>The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of th ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.</p>
 <div class="sourceCode" id="cb5"><pre class="r"><span class="no">ccc_std</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/ccc_std_demographics.html">ccc_std_demographics</a></span>(<span class="no">ccc_samp</span>)</pre></div>
-<p><em>Step 3. Collapsing the CCES data</em></p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="co"># fake outcome data</span>
-<span class="co"># must be called "response"</span>
-
+<p><em>Step 3. Preparing the brms function</em></p>
+<p>We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form</p>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="no">fm_brm</span> <span class="kw">&lt;-</span> <span class="no">yes</span> <span class="kw">|</span> <span class="fu">trials</span>(<span class="no">n_responses</span>) ~  <span class="no">age</span> + <span class="no">gender</span> + <span class="no">educ</span> + <span class="no">pct_trump</span> + (<span class="fl">1</span><span class="kw">|</span><span class="no">cd</span>)</pre></div>
+<p><em>Step 4. Collapsing the CCES data</em></p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="co"># fake outcome data - must be called "response"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">02138</span>)
 <span class="no">ccc_samp_std</span> <span class="kw">&lt;-</span> <span class="no">ccc_samp</span> <span class="kw">%&gt;%</span>
    <span class="fu">mutate</span>(<span class="kw">response</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"For"</span>, <span class="st">"Against"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fu">n</span>(), <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) <span class="kw">%&gt;%</span>
    <span class="fu"><a href="reference/ccc_std_demographics.html">ccc_std_demographics</a></span>()
@@ -138,25 +140,22 @@
                              <span class="st">"yes | trials(n_response) ~ age + gender + educ"</span>)
 
 <span class="no">ccc_samp_out</span></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">## # A tibble: 400 x 5</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">##      age gender educ         n_response   yes</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">##    &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;             &lt;int&gt; &lt;int&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">##  1    18 Male   HS or Less            3     2</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">##  2    18 Female HS or Less            7     4</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">##  3    18 Female Some College          1     0</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">##  4    19 Male   HS or Less            1     1</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">##  5    19 Female HS or Less            2     1</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">##  6    19 Female Some College          2     2</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">##  7    20 Male   HS or Less            1     1</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">##  8    20 Male   Some College          5     3</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">##  9    20 Female HS or Less            3     1</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co">## 10    20 Female Some College          5     2</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">## # … with 390 more rows</span></span></code></pre></div>
-<p><em>Step 4. Preparing the brms function</em></p>
-<p>We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="no">fm_brm</span> <span class="kw">&lt;-</span> <span class="no">yes</span> <span class="kw">|</span> <span class="fu">trials</span>(<span class="no">n_responses</span>) ~  <span class="no">age</span> + <span class="no">gender</span> + <span class="no">educ</span> + <span class="no">pct_trump</span> + (<span class="fl">1</span><span class="kw">|</span><span class="no">cd</span>)</pre></div>
-<p><em>Step 5. Cleaning and preparing the ACS data</em></p>
-<p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the apporpriate CD-level counts and label them so that they match up with CCES keys.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## # A tibble: 400 x 5</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">##      age gender educ         n_response   yes</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">##    &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;             &lt;int&gt; &lt;int&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">##  1    18 Male   HS or Less            3     0</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">##  2    18 Female HS or Less            7     5</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">##  3    18 Female Some College          1     0</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">##  4    19 Male   HS or Less            1     1</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">##  5    19 Female HS or Less            2     1</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">##  6    19 Female Some College          2     1</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">##  7    20 Male   HS or Less            1     0</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">##  8    20 Male   Some College          5     3</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">##  9    20 Female HS or Less            3     2</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">## 10    20 Female Some College          5     4</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">## # … with 390 more rows</span></span></code></pre></div>
+<p><em>Step 5. Prepare a post-stratification table, after preparing ACS data</em></p>
+<p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the apporpriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/</p>
 <div class="sourceCode" id="cb9"><pre class="r"> <span class="no">acs_tab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_acs_cces.html">get_acs_cces</a></span>(
               <span class="kw">varlist</span> <span class="kw">=</span> <span class="no">acscodes_age_sex_educ</span>,
               <span class="kw">varlab_df</span> <span class="kw">=</span> <span class="no">acscodes_df</span>,
