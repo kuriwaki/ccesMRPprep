@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ACS codes for partitions — acscodes_partitions • ccesMRPprep</title>
+<title>Translate a Yes/No variable into 1/0 — yesno_to_binary • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,10 @@
 
 
 
-<meta property="og:title" content="ACS codes for partitions — acscodes_partitions" />
-<meta property="og:description" content="Each vector defines a partition, or at least an attempt at one. Each element of
-the vector is a code for a ACS variable, which can be used,
-for example in the variables argument of tidycensus::get_acs(). Some of
-these will be collapsed for MRP to form a common denominator with the CCES; see
-keyvalue" />
+<meta property="og:title" content="Translate a Yes/No variable into 1/0 — yesno_to_binary" />
+<meta property="og:description" content="Operationalizes outcomes of type yes/no to binary variables. It is internally
+given the values to count as a &quot;Yes&quot; by regular expression, e.g. not only &quot;Yes&quot;
+but also &quot;Support&quot; and &quot;For&quot;" />
 
 
 
@@ -124,58 +122,44 @@ keyvalue" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ACS codes for partitions</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/data_acscodes-key.R'><code>R/data_acscodes-key.R</code></a></small>
-    <div class="hidden name"><code>acscodes_partitions.Rd</code></div>
+    <h1>Translate a Yes/No variable into 1/0</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/recode_outcome.R'><code>R/recode_outcome.R</code></a></small>
+    <div class="hidden name"><code>yesno_to_binary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Each vector defines a partition, or at least an attempt at one. Each element of
-the vector is a code for a ACS variable, which can be used,
-for example in the <code>variables</code> argument of <code><a href='https://rdrr.io/pkg/tidycensus/man/get_acs.html'>tidycensus::get_acs()</a></code>. Some of
-these will be collapsed for MRP to form a common denominator with the CCES; see
-<a href='keyvalue.html'>keyvalue</a></p>
+    <p>Operationalizes outcomes of type yes/no to binary variables. It is internally
+given the values to count as a "Yes" by regular expression, e.g. not only "Yes"
+but also "Support" and "For"</p>
     </div>
 
-    <pre class="usage"><span class='no'>acscodes_age_sex_race</span>
+    <pre class="usage"><span class='fu'>yesno_to_binary</span>(<span class='no'>vec</span>)</pre>
 
-<span class='no'>acscodes_age_sex_educ</span>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>vec</th>
+      <td><p>A vector of CCES response values, in character</p></td>
+    </tr>
+    </table>
 
-<span class='no'>acscodes_sex_educ_race</span></pre>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    
-<h3>acscodes_age_sex_race</h3>
-
-
-<p>There are 160 codes in <code>acscodes_age_sex_rac</code> because they specify cells
-interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).</p>
-
-<h3>acscoes_age_sex_educ</h3>
-
-
-<p>There are 70 codes in <code>acscodes_age_sex_edu</code> because they specify cells
-interacting age (5 bins), sex (2 bins), and education (7 bins).</p>
-
-<h3>acscodes_sex_educ_race</h3>
-
-
-<p>There are 48 codes in <code>acscodes_sex_educ_race</code> because they specify cells
-interacting sex (2 bins), education (3 bins), and race (8 bins).</p>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><a href='acscodes_df.html'>acscodes_df</a> for a definition of all codes,
-and <a href='https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html'>https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html</a> for a Vignette
-on ACS value pairs</p></div>
+    <p>A vector of integers</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>acscodes_age_sex_race</span>)</div><div class='output co'>#&gt; [1] "B01001B_007" "B01001B_008" "B01001B_009" "B01001B_010" "B01001B_011"
-#&gt; [6] "B01001B_012"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>acscodes_age_sex_educ</span>)</div><div class='output co'>#&gt; [1] "B15001_004" "B15001_005" "B15001_006" "B15001_007" "B15001_008"
-#&gt; [6] "B15001_009"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>acscodes_sex_educ_race</span>)</div><div class='output co'>#&gt; [1] "C15002B_004" "C15002B_005" "C15002B_006" "C15002B_009" "C15002B_010"
-#&gt; [6] "C15002B_011"</div></pre>
+    <pre class="examples"><div class='input'> <span class='fu'>yesno_to_binary</span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Yes"</span>,
+    <span class='st'>"No"</span>,
+    <span class='st'>"Support"</span>,
+    <span class='st'>"Oppose"</span>,
+    <span class='st'>"Somewhat support"</span>,
+    <span class='st'>"Somewhat oppose"</span>,
+    <span class='st'>"For this bill"</span>,
+    <span class='st'>"Against this bill"</span>,
+    <span class='fl'>NA_character_</span>)
+)</div><div class='output co'>#&gt; [1]  1  0  1  0  0  0  1  0 NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

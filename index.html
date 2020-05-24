@@ -107,33 +107,57 @@
 <div class="sourceCode" id="cb2"><pre class="r"><span class="no">ccc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_cces_dv.html">get_cces_dv</a></span>(<span class="st">"cumulative"</span>)</pre></div>
 <p>We will use a built-in sample of 1,000 observations for illustration (see <code><a href="reference/ccc_samp.html">?ccc_samp</a></code>).</p>
 <div class="sourceCode" id="cb3"><pre class="r"><span class="no">ccc_samp</span></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## # A tibble: 1,000 x 17</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">##     year case_id state st    cd    zipcode county_fips   age    race hispanic</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">##    &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;int+l&gt; &lt;int+lb&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">##  1  2006  439254 Neva… NV    NV-2  89703   32510          20 1 [Whi…       NA</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">##  2  2006  440689 Cali… CA    CA-2  96067   06093          71 1 [Whi…       NA</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">##  3  2006  445845 Colo… CO    CO-5  80922   08041          39 1 [Whi…       NA</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">##  4  2006  452572 Minn… MN    MN-5  55428   27053          74 1 [Whi…       NA</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">##  5  2006  498451 Iowa  IA    IA-2  50060   19185          53 1 [Whi…       NA</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">##  6  2006  502543 Tenn… TN    TN-5  37206   47037          50 1 [Whi…       NA</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">##  7  2006  523050 West… WV    WV-2  25312   54039          55 1 [Whi…       NA</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">##  8  2006  523861 Illi… IL    IL-3  60629   17031          51 1 [Whi…       NA</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">##  9  2006  532881 Minn… MN    MN-7  55396   27143          44 1 [Whi…       NA</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">## 10  2006  553375 Ohio  OH    OH-11 44112   39035          53 1 [Whi…       NA</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">## # … with 990 more rows, and 7 more variables: educ &lt;int+lbl&gt;, faminc &lt;fct&gt;,</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">## #   marstat &lt;int+lbl&gt;, newsint &lt;int+lbl&gt;, vv_turnout_gvm &lt;fct&gt;,</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">## #   voted_pres_16 &lt;fct&gt;, economy_retro &lt;int+lbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## # A tibble: 1,000 x 18</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">##     year case_id state st    cd    zipcode county_fips  gender   age    race</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">##    &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;int+l&gt; &lt;int&gt; &lt;int+l&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">##  1  2006  439254 Neva… NV    NV-2  89703   32510       2 [Fem…    20 1 [Whi…</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">##  2  2006  440689 Cali… CA    CA-2  96067   06093       2 [Fem…    71 1 [Whi…</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">##  3  2006  445845 Colo… CO    CO-5  80922   08041       2 [Fem…    39 1 [Whi…</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">##  4  2006  452572 Minn… MN    MN-5  55428   27053       1 [Mal…    74 1 [Whi…</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">##  5  2006  498451 Iowa  IA    IA-2  50060   19185       2 [Fem…    53 1 [Whi…</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">##  6  2006  502543 Tenn… TN    TN-5  37206   47037       2 [Fem…    50 1 [Whi…</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">##  7  2006  523050 West… WV    WV-2  25312   54039       1 [Mal…    55 1 [Whi…</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">##  8  2006  523861 Illi… IL    IL-3  60629   17031       2 [Fem…    51 1 [Whi…</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">##  9  2006  532881 Minn… MN    MN-7  55396   27143       1 [Mal…    44 1 [Whi…</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">## 10  2006  553375 Ohio  OH    OH-11 44112   39035       2 [Fem…    53 1 [Whi…</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">## # … with 990 more rows, and 8 more variables: hispanic &lt;int+lbl&gt;,</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">## #   educ &lt;int+lbl&gt;, faminc &lt;fct&gt;, marstat &lt;int+lbl&gt;, newsint &lt;int+lbl&gt;,</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">## #   vv_turnout_gvm &lt;fct&gt;, voted_pres_16 &lt;fct&gt;, economy_retro &lt;int+lbl&gt;</span></span></code></pre></div>
 <p><em>Step 2. Cleaning CCES data</em></p>
 <p>The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of th ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.</p>
 <div class="sourceCode" id="cb5"><pre class="r"><span class="no">ccc_std</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/ccc_std_demographics.html">ccc_std_demographics</a></span>(<span class="no">ccc_samp</span>)</pre></div>
 <p><em>Step 3. Collapsing the CCES data</em></p>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="co"># fake outcome data</span>
+<span class="co"># must be called "response"</span>
+
+<span class="no">ccc_samp_std</span> <span class="kw">&lt;-</span> <span class="no">ccc_samp</span> <span class="kw">%&gt;%</span>
+   <span class="fu">mutate</span>(<span class="kw">response</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"For"</span>, <span class="st">"Against"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fu">n</span>(), <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) <span class="kw">%&gt;%</span>
+   <span class="fu"><a href="reference/ccc_std_demographics.html">ccc_std_demographics</a></span>()
+
+<span class="no">ccc_samp_out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/build_counts.html">build_counts</a></span>(<span class="no">ccc_samp_std</span>,
+                             <span class="st">"yes | trials(n_response) ~ age + gender + educ"</span>)
+
+<span class="no">ccc_samp_out</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">## # A tibble: 400 x 5</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">##      age gender educ         n_response   yes</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">##    &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;             &lt;int&gt; &lt;int&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">##  1    18 Male   HS or Less            3     2</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">##  2    18 Female HS or Less            7     4</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">##  3    18 Female Some College          1     0</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">##  4    19 Male   HS or Less            1     1</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">##  5    19 Female HS or Less            2     1</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">##  6    19 Female Some College          2     2</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">##  7    20 Male   HS or Less            1     1</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">##  8    20 Male   Some College          5     3</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">##  9    20 Female HS or Less            3     1</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">## 10    20 Female Some College          5     2</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">## # … with 390 more rows</span></span></code></pre></div>
 <p><em>Step 4. Preparing the brms function</em></p>
+<p>We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form</p>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="no">fm_brm</span> <span class="kw">&lt;-</span> <span class="no">yes</span> <span class="kw">|</span> <span class="fu">trials</span>(<span class="no">n_responses</span>) ~  <span class="no">age</span> + <span class="no">gender</span> + <span class="no">educ</span> + <span class="no">pct_trump</span> + (<span class="fl">1</span><span class="kw">|</span><span class="no">cd</span>)</pre></div>
 <p><em>Step 5. Cleaning and preparing the ACS data</em></p>
 <p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the apporpriate CD-level counts and label them so that they match up with CCES keys.</p>
-<div class="sourceCode" id="cb6"><pre class="r"> <span class="no">fm_brm</span> <span class="kw">&lt;-</span> <span class="no">yes</span> <span class="kw">|</span> <span class="fu">responses</span>(<span class="no">n_cell</span>) ~  <span class="no">age</span> + <span class="no">gender</span> + <span class="no">educ</span> + <span class="no">pct_trump</span> + (<span class="fl">1</span><span class="kw">|</span><span class="no">cd</span>)
-
-
- <span class="no">acs_tab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_acs_cces.html">get_acs_cces</a></span>(
+<div class="sourceCode" id="cb9"><pre class="r"> <span class="no">acs_tab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_acs_cces.html">get_acs_cces</a></span>(
               <span class="kw">varlist</span> <span class="kw">=</span> <span class="no">acscodes_age_sex_educ</span>,
               <span class="kw">varlab_df</span> <span class="kw">=</span> <span class="no">acscodes_df</span>,
              <span class="kw">.year</span> <span class="kw">=</span> <span class="fl">2018</span>)

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ACS codes for partitions — acscodes_partitions • ccesMRPprep</title>
+<title>Collapse CCES data to be analyzed in binomial model — build_counts • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,8 @@
 
 
 
-<meta property="og:title" content="ACS codes for partitions — acscodes_partitions" />
-<meta property="og:description" content="Each vector defines a partition, or at least an attempt at one. Each element of
-the vector is a code for a ACS variable, which can be used,
-for example in the variables argument of tidycensus::get_acs(). Some of
-these will be collapsed for MRP to form a common denominator with the CCES; see
-keyvalue" />
+<meta property="og:title" content="Collapse CCES data to be analyzed in binomial model — build_counts" />
+<meta property="og:description" content="Collapse CCES data to be analyzed in binomial model" />
 
 
 
@@ -124,58 +120,55 @@ keyvalue" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ACS codes for partitions</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/data_acscodes-key.R'><code>R/data_acscodes-key.R</code></a></small>
-    <div class="hidden name"><code>acscodes_partitions.Rd</code></div>
+    <h1>Collapse CCES data to be analyzed in binomial model</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/collapse.R'><code>R/collapse.R</code></a></small>
+    <div class="hidden name"><code>build_counts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Each vector defines a partition, or at least an attempt at one. Each element of
-the vector is a code for a ACS variable, which can be used,
-for example in the <code>variables</code> argument of <code><a href='https://rdrr.io/pkg/tidycensus/man/get_acs.html'>tidycensus::get_acs()</a></code>. Some of
-these will be collapsed for MRP to form a common denominator with the CCES; see
-<a href='keyvalue.html'>keyvalue</a></p>
+    <p>Collapse CCES data to be analyzed in binomial model</p>
     </div>
 
-    <pre class="usage"><span class='no'>acscodes_age_sex_race</span>
+    <pre class="usage"><span class='fu'>build_counts</span>(<span class='no'>data</span>, <span class='no'>model_ff</span>, <span class='kw'>multiple_qIDs</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
-<span class='no'>acscodes_age_sex_educ</span>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>A cleaned CCES dataset, e.g. from <a href='ccc_std_demographics.html'>ccc_std_demographics</a> which is
+then attached a outcome variable. Currently, it assumes the outcome is named
+<code>response</code>. This variable need not be numeric or binarized, but it will be
+binarized with <a href='yesno_to_binary.html'>yesno_to_binary</a></p></td>
+    </tr>
+    <tr>
+      <th>model_ff</th>
+      <td><p>the model formula used to fit the multilevel regression model.
+Currently only expects an binomial, of the brms form <code>y|trials(n) ~ x1 + x2 + (1|x3)</code>.
+Only the RHS will be used but the LHS is necessary.</p></td>
+    </tr>
+    <tr>
+      <th>multiple_qIDs</th>
+      <td><p>Does the data contain <em>multiple</em> outcomes in long form and
+therefore require the counts to be built for each outcome? Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    </table>
 
-<span class='no'>acscodes_sex_educ_race</span></pre>
-
-
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    
-<h3>acscodes_age_sex_race</h3>
-
-
-<p>There are 160 codes in <code>acscodes_age_sex_rac</code> because they specify cells
-interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).</p>
-
-<h3>acscoes_age_sex_educ</h3>
-
-
-<p>There are 70 codes in <code>acscodes_age_sex_edu</code> because they specify cells
-interacting age (5 bins), sex (2 bins), and education (7 bins).</p>
-
-<h3>acscodes_sex_educ_race</h3>
-
-
-<p>There are 48 codes in <code>acscodes_sex_educ_race</code> because they specify cells
-interacting sex (2 bins), education (3 bins), and race (8 bins).</p>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><a href='acscodes_df.html'>acscodes_df</a> for a definition of all codes,
-and <a href='https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html'>https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html</a> for a Vignette
-on ACS value pairs</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>acscodes_age_sex_race</span>)</div><div class='output co'>#&gt; [1] "B01001B_007" "B01001B_008" "B01001B_009" "B01001B_010" "B01001B_011"
-#&gt; [6] "B01001B_012"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>acscodes_age_sex_educ</span>)</div><div class='output co'>#&gt; [1] "B15001_004" "B15001_005" "B15001_006" "B15001_007" "B15001_008"
-#&gt; [6] "B15001_009"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>acscodes_sex_educ_race</span>)</div><div class='output co'>#&gt; [1] "C15002B_004" "C15002B_005" "C15002B_006" "C15002B_009" "C15002B_010"
-#&gt; [6] "C15002B_011"</div></pre>
+    <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'>
+<span class='no'>ccc_samp_std</span> <span class='kw'>&lt;-</span> <span class='no'>ccc_samp</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>response</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"For"</span>, <span class='st'>"Against"</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span>(), <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='ccc_std_demographics.html'>ccc_std_demographics</a></span>()
+
+<span class='no'>ccc_samp_out</span> <span class='kw'>&lt;-</span> <span class='fu'>build_counts</span>(<span class='no'>ccc_samp_std</span>,
+                             <span class='st'>"yes | trials(n_response) ~ age + gender + educ"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
