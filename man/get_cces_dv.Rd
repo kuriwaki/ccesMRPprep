@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_dataverse.R
 \name{get_cces_dv}
 \alias{get_cces_dv}
-\title{Download a specifc CCES dataset from dataverse}
+\title{Download a specific CCES dataset from dataverse}
 \usage{
 get_cces_dv(
   name = "cumulative",

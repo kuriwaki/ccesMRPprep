@@ -23,7 +23,7 @@ NULL
 #'
 #' @format ### acscodes_age_sex_race
 #'
-#' There are 160 codes in \code{acscodes_age_sex_race} because they specify cells
+#' There are `r length(acscodes_age_sex_race)` codes in \code{acscodes_age_sex_race} because they specify cells
 #' interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).
 #'
 "acscodes_age_sex_race"
@@ -32,9 +32,9 @@ NULL
 #' @rdname acscodes_partitions
 #'
 #'
-#' @format ### acscoes_age_sex_educ
+#' @format ### acscodes_age_sex_educ
 #'
-#' There are 70 codes in \code{acscodes_age_sex_educ} because they specify cells
+#' There are `r length(acscodes_age_sex_educ)` codes in \code{acscodes_age_sex_educ} because they specify cells
 #' interacting age (5 bins), sex (2 bins), and education (7 bins).
 #'
 "acscodes_age_sex_educ"
@@ -44,10 +44,10 @@ NULL
 #'
 #' @format ### acscodes_sex_educ_race
 #'
-#' There are 48 codes in \code{acscodes_sex_educ_race} because they specify cells
+#' There are `r length(acscodes_sex_educ_race)` codes in \code{acscodes_sex_educ_race} because they specify cells
 #' interacting sex (2 bins), education (3 bins), and race (8 bins). The entire partition
 #' is not actually exhaustive; it appears to only limit to 25 years and above
-#' and not incude postgraduate degrees. Cross-check with \link{acscodes_df} to verify.
+#' and not include postgraduate degrees. Cross-check with \link{acscodes_df} to verify.
 #'
 "acscodes_sex_educ_race"
 
@@ -57,20 +57,23 @@ NULL
 #' A tidy dataframe where each row is a ACS code. This is useful internal
 #' data to give meaning to variable codes e.g. \link{acscodes_age_sex_educ}
 #'
-#' @format A data frame where each row represents a column.
+#' @format A data frame with `r format(nrow(acscodes_df), big.mark = ',')` rows where
+#' each row represents a variable in the ACS for which there is a count (e.g.
+#' 18-24 year olds who identify as Hispanic).
+#'
 #' \describe{
 #'  \item{variable}{the ACS code (2018)}
 #'  \item{gender}{A labelled variable for gender. 1 is Male, 2 is Female. Use
 #'    the \code{labelled} or \code{haven} package to see labels.}
-#'  \item{age}{A labelled variable specifying which age biin the variable specifies}
+#'  \item{age}{A labelled variable specifying which age bin the variable specifies}
 #'  \item{race}{A labelled variable specifying which education bin the variable specifies}
-#'  \item{educ}{A labelled variable specifying which race binthe variable specifies}
+#'  \item{educ}{A labelled variable specifying which race bin the variable specifies}
 #'  }
 #'
 #' @details The 5-yr ACS at 2018 is used,
 #' although codes should be fairly consistent across time. IF a demographic variable is NA,
 #' that means the variable collapses over the levels of that variable. In other
-#' wods, NA here can be thought of as meaning "all".
+#' words, NA here can be thought of as meaning "all".
 #'
 #' @source Modifications around tidycensus::load_variables
 #'

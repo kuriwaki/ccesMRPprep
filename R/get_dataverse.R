@@ -1,4 +1,4 @@
-#' Download a specifc CCES dataset from dataverse
+#' Download a specific CCES dataset from dataverse
 #'
 #' You must download the development version of https://github.com/IQSS/dataverse-client-r
 #'  and get your own dataverse API Key. The current dataverse package downloads

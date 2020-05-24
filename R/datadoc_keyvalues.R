@@ -33,7 +33,7 @@ NULL
 #'     Most compact form of both sources and the values both will get recoded
 #'     to in MRP.}
 #'  \item{race_cces}{Labelled versions of the CCES race codings. These are of the
-#'    same class as the CCES cumualtive file.}
+#'    same class as the CCES cumulative file.}
 #'  \item{race_cces_chr}{Labels for the first column, in characters}
 #'  \item{race_acs}{Corresponding character in the ACS data via the tidycensus package}
 #'  \item{race_5}{A numeric value underlying the \code{race} label.}
@@ -62,7 +62,7 @@ NULL
 #' @rdname  keyvalue
 #' @format ### \code{age5_key}
 #'  Age bins, 5-ways, used in \link{acscodes_age_sex_educ}. Use \link{ccc_bin_age}
-#'  to recode CCES variabe
+#'  to recode CCES variable
 #'  \describe{
 #'  \item{age}{An labelled integer of class haven::labelled. Target variable.}
 #'  \item{age_chr}{Character to recode from, in ACS}

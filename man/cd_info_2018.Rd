@@ -9,12 +9,12 @@ A dataframe with the 435 Congressional Districts, one row per cd.
 \describe{
 \item{cd_year}{The year for the district line. A congressional district's
 actual geography can change year to year, and significantly so in different
-redistricting cylces. 2019 indicates the data about voteshare and placenames
+redistricting cycles. 2019 indicates the data about voteshare and place names
 corresponds to district lines as of 2019.}
 \item{cd}{District code. The formatting corresponds to the CCES cumulative
-codeing of \code{cd}: a two-letter abbrevation for the state followed by
+coding of \code{cd}: a two-letter abbreviation for the state followed by
 a dash, and the district number padded with zeros to the left to be of length
-2. At-large districts like Delwaware are given a "-01" for the district number.}
+2. At-large districts like Delaware are given a "-01" for the district number.}
 \item{pct_trump, pct_romney, pct_mccain}{The voteshare of presidential candidates
 in that district for the given year. E.g. the pct_mccain data when \code{cd_year == 2018}
 represents the percent of the vote by McCain in 2008 for that district \emph{under 2018 lines.}}

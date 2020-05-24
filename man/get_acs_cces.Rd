@@ -16,7 +16,7 @@ get_acs_cces(
 
 \item{varlab_df}{a dataframe that appends the categories based on the varcode}
 
-\item{.year}{The year of the ACS to get. Because of data availabilities, this is
+\item{.year}{The year of the ACS to get. Because of data availability limitations, this is
 capped to 2010-2018.}
 
 \item{.geography}{the type of geography to pull. Currently only supports

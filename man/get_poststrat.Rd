@@ -10,7 +10,7 @@ get_poststrat(cleaned_acs, dist_data, model_ff)
 \item{cleaned_acs}{An output of \link{get_acs_cces}. The count of people in
 each cell must be under the variable \code{count}}
 
-\item{dist_data}{Distrit-level (in this case congressional district-level) information
+\item{dist_data}{District-level (in this case congressional district-level) information
 to merge in}
 
 \item{model_ff}{the model formula used to fit the multilevel regression model.

@@ -38,9 +38,9 @@ ccc_samp
 
 ##  **Step 2.** Cleaning CCES data
 
-The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of th ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.
+The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of the ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.
 
-See `?get_cces_question` for how to get the _outcome_ data, which is a single column from another CCES dataset. This still relies on a flat file being pre-downloaded (via `?get_cces_dv`. 
+See `?get_cces_question` for how to get the _outcome_ data, which is a single column from another CCES dataset. This still relies on a flat file being pre-downloaded (via `?get_cces_dv`). 
 
 ```{r}
 ccc_std <- ccc_std_demographics(ccc_samp)
@@ -82,7 +82,7 @@ ccc_samp_out
 
 We provide wrappers around the great [tidycensus](https://walker-data.com/tidycensus/) package
 that produces ACS data and post-stratification tables from the ACS. A considerable amount of
-lookup tables internally will pull out the apporpriate CD-level counts and label them
+lookup tables internally will pull out the appropriate CD-level counts and label them
 so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/
 
 ```{r, eval = FALSE}

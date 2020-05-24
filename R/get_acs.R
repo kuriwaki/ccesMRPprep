@@ -8,7 +8,7 @@
 #'
 #' @param varlist a vector of variable codes to pull
 #' @param varlab_df a dataframe that appends the categories based on the varcode
-#' @param .year The year of the ACS to get. Because of data availabilities, this is
+#' @param .year The year of the ACS to get. Because of data availability limitations, this is
 #'  capped to 2010-2018.
 #' @param .geography the type of geography to pull. Currently only supports
 #'  \code{"congressional district"}.
@@ -76,7 +76,7 @@ get_acs_cces <- function(varlist, varlab_df,
 #'
 #' @param cleaned_acs An output of \link{get_acs_cces}. The count of people in
 #' each cell must be under the variable \code{count}
-#' @param dist_data Distrit-level (in this case congressional district-level) information
+#' @param dist_data District-level (in this case congressional district-level) information
 #' to merge in
 #' @param model_ff the model formula used to fit the multilevel regression model.
 #' Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
