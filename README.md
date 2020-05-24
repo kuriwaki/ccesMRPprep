@@ -121,4 +121,6 @@ CD-level counts and label them so that they match up with CCES keys.
 This package is a part of the CCES MRP project, supported by NSF Grant
 1926424: [Bayesian analytical tools to improve survey estimates for
 subpopulations and small
-areas](https://nsf.gov/awardsearch/showAward?AWD_ID=1926424).
+areas](https://nsf.gov/awardsearch/showAward?AWD_ID=1926424). The
+contents are based on collaborations and helpful discussions with Ben
+Bales, Lauren Kennedy, Mitzi Morris, and Soichiro Yamauchi.
