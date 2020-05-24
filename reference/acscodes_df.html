@@ -125,7 +125,7 @@ data to give meaning to variable codes e.g. acscodes_age_sex_educ" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>ACS code lookup table</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/datadoc_acscodes-key.R'><code>R/datadoc_acscodes-key.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/datadoc_acscodes.R'><code>R/datadoc_acscodes.R</code></a></small>
     <div class="hidden name"><code>acscodes_df.Rd</code></div>
     </div>
 
@@ -139,25 +139,28 @@ data to give meaning to variable codes e.g. <a href='acscodes_partitions.html'>a
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame where each row represents a column.</p><dl>
+    <p>A data frame with 26,271 rows where
+each row represents a variable in the ACS for which there is a count (e.g.
+18-24 year olds who identify as Hispanic).</p>
+<dl'>
 <dt>variable</dt><dd><p>the ACS code (2018)</p></dd>
 <dt>gender</dt><dd><p>A labelled variable for gender. 1 is Male, 2 is Female. Use
 the <code>labelled</code> or <code>haven</code> package to see labels.</p></dd>
-<dt>age</dt><dd><p>A labelled variable specifying which age biin the variable specifies</p></dd>
+<dt>age</dt><dd><p>A labelled variable specifying which age bin the variable specifies</p></dd>
 <dt>race</dt><dd><p>A labelled variable specifying which education bin the variable specifies</p></dd>
-<dt>educ</dt><dd><p>A labelled variable specifying which race binthe variable specifies</p></dd>
+<dt>educ</dt><dd><p>A labelled variable specifying which race bin the variable specifies</p></dd>
 
 </dl>
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>Modifications around tidycensus::load_variables</p>
+    <p>Modifications around <code><a href='https://rdrr.io/pkg/tidycensus/man/load_variables.html'>tidycensus::load_variables</a></code></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The 5-yr ACS at 2018 is used,
-although codes should be fairly consistent across time. IF a demographic variable is NA,
+although codes should be fairly consistent across time. IF a demographic variable is <code>NA</code>,
 that means the variable collapses over the levels of that variable. In other
-wods, NA here can be thought of as meaning "all".</p>
+words, <code>NA</code> here can be thought of as meaning "all".</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>acscodes_df</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
@@ -185,7 +188,7 @@ wods, NA here can be thought of as meaning "all".</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
