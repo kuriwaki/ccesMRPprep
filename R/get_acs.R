@@ -79,7 +79,7 @@ get_acs_cces <- function(varlist, varlab_df,
 #' @param dist_data Distrit-level (in this case congressional district-level) information
 #' to merge in
 #' @param model_ff the model formula used to fit the multilevel regression model.
-#' Currently only expects an binomial, of the form \code{y|responses(n) ~ x1 + x2 + (1|x3)}.
+#' Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
 #' Only the RHS will be used but the LHS is necessary.
 #'
 #'

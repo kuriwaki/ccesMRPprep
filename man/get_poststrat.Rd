@@ -14,7 +14,7 @@ each cell must be under the variable \code{count}}
 to merge in}
 
 \item{model_ff}{the model formula used to fit the multilevel regression model.
-Currently only expects an binomial, of the form \code{y|responses(n) ~ x1 + x2 + (1|x3)}.
+Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
 Only the RHS will be used but the LHS is necessary.}
 }
 \description{

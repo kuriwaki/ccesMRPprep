@@ -96,7 +96,8 @@ amount of lookup tables internally will pull out the apporpriate
 CD-level counts and label them so that they match up with CCES keys.
 
 ``` r
- fm_brm <- yes | responses(n_cell) ~  age + gender + educ + pct_trump + (1|cd)
+ # brms binomial specification
+ fm_brm <- yes | trials(n_cell) ~  age + gender + educ + pct_trump + (1|cd)
 
 
  acs_tab <- get_acs_cces(
