@@ -104,7 +104,7 @@ get_acs_cces <- function(varlist, varlab_df,
 #'
 #' poststrat <-  get_poststrat(acs_tab, cd_info_2018, fm_brm)
 #' head(poststrat)
-#'     age            gender educ       pct_trump cd    count
+#' #   age            gender educ       pct_trump cd    count
 #' #   <fct>          <fct>  <fct>          <dbl> <chr> <dbl>
 #' # 1 18 to 24 years Male   HS or Less     0.049 NY-15 24216
 #' # 2 18 to 24 years Male   HS or Less     0.054 NY-13 18014
