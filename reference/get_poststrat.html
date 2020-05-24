@@ -87,6 +87,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/acs.html">ACS Tables to Use for CCES and MRP</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -145,7 +157,24 @@ Only the RHS will be used but the LHS is necessary.</p></td>
     <div class='dont-index'><p><a href='get_acs_cces.html'>get_acs_cces</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+ <span class='no'>fm_brm</span> <span class='kw'>&lt;-</span> <span class='no'>yes</span> <span class='kw'>|</span> <span class='fu'>responses</span>(<span class='no'>n_cell</span>) ~  <span class='no'>age</span> + <span class='no'>gender</span> + <span class='no'>educ</span> + <span class='no'>pct_trump</span> + (<span class='fl'>1</span><span class='kw'>|</span><span class='no'>cd</span>)
+ <span class='no'>acs_tab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_acs_cces.html'>get_acs_cces</a></span>(
+              <span class='kw'>varlist</span> <span class='kw'>=</span> <span class='no'>acscodes_age_sex_educ</span>,
+              <span class='kw'>varlab_df</span> <span class='kw'>=</span> <span class='no'>acscodes_df</span>,
+             <span class='kw'>.year</span> <span class='kw'>=</span> <span class='fl'>2018</span>)
+
+<span class='no'>poststrat</span> <span class='kw'>&lt;-</span>  <span class='fu'>get_poststrat</span>(<span class='no'>acs_tab</span>, <span class='no'>cd_info_2018</span>, <span class='no'>fm_brm</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>poststrat</span>)
+<span class='co'>#   age            gender educ       pct_trump cd    count</span>
+<span class='co'>#   &lt;fct&gt;          &lt;fct&gt;  &lt;fct&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>
+<span class='co'># 1 18 to 24 years Male   HS or Less     0.049 NY-15 24216</span>
+<span class='co'># 2 18 to 24 years Male   HS or Less     0.054 NY-13 18014</span>
+<span class='co'># 3 18 to 24 years Male   HS or Less     0.068 CA-13 14153</span>
+<span class='co'># 4 18 to 24 years Male   HS or Less     0.07  PA-03 15750</span>
+<span class='co'># 5 18 to 24 years Male   HS or Less     0.087 CA-12  6270</span>
+<span class='co'># 6 18 to 24 years Male   HS or Less     0.092 IL-07 18734</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
