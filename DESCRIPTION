@@ -40,5 +40,6 @@ URL: https://www.github.com/kuriwaki/ccesMRPprep
 BugReports: http://github.com/kuriwaki/ccesMRPprep/issues
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    tidyverse
 VignetteBuilder: knitr
