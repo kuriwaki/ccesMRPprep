@@ -37,3 +37,14 @@ reference:
   desc: Wrangling cleaned data for apporpriate modeling
 - contents:
   - build_counts
+
+
+articles:
+- title: Get started
+  navbar: ~
+  contents:
+    - overview
+- title: ACS data
+  navbar: ~
+  contents:
+    - acs

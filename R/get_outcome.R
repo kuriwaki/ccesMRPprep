@@ -37,24 +37,24 @@
 #'
 #'
 #' @examples
-#' \dontrun{
-#' # need data/input/cces/cces_2018.rds to run this
-#' get_cces_question(qcode = "CC18_326", year = "2018", qID = "TCJA")
+#'  \dontrun{
+#'   # need data/input/cces/cces_2018.rds to run this
+#'   get_cces_question(qcode = "CC18_326", year = "2018", qID = "TCJA")
 #'
-#' # A tibble: 60,000 x 4
-#' # year   case_id qID   response
-#' # <int>     <int> <chr> <fct>
-#' # 1  2018 123464282 TCJA  Support
-#' # 2  2018 170169205 TCJA  Support
-#' # 3  2018 175996005 TCJA  Support
-#' # 4  2018 176818556 TCJA  Oppose
-#' # 5  2018 202120533 TCJA  Oppose
-#' # 6  2018 226449148 TCJA  Oppose
-#' # 7  2018 238205342 TCJA  Oppose
-#' # 8  2018 238806466 TCJA  Support
-#' # 9  2018 267564481 TCJA  Support
-#' … with 59,991 more rows
-#' }
+#'   # A tibble: 60,000 x 4
+#'   # year   case_id qID   response
+#'   # <int>     <int> <chr> <fct>
+#'   # 1  2018 123464282 TCJA  Support
+#'   # 2  2018 170169205 TCJA  Support
+#'   # 3  2018 175996005 TCJA  Support
+#'   # 4  2018 176818556 TCJA  Oppose
+#'   # 5  2018 202120533 TCJA  Oppose
+#'   # 6  2018 226449148 TCJA  Oppose
+#'   # 7  2018 238205342 TCJA  Oppose
+#'   # 8  2018 238806466 TCJA  Support
+#'   # 9  2018 267564481 TCJA  Support
+#'   # … with 59,991 more rows
+#'  }
 #'
 #' @export
 get_cces_question <- function(qcode, year, qID, data_dir = "data/input/cces") {
