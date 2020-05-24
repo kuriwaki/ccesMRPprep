@@ -5,6 +5,7 @@
 \alias{acscodes_partitions}
 \alias{acscodes_age_sex_race}
 \alias{acscodes_age_sex_educ}
+\alias{acscodes_sex_educ_race}
 \title{ACS codes for partitions}
 \format{
 \subsection{acscodes_age_sex_race}{
@@ -30,7 +31,7 @@ acscodes_age_sex_race
 
 acscodes_age_sex_educ
 
-acscodes_age_sex_educ
+acscodes_sex_educ_race
 }
 \description{
 Each vector defines a partition, or at least an attempt at one. Each element of

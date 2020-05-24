@@ -47,7 +47,7 @@ NULL
 #' There are 48 codes in \code{acscodes_sex_educ_race} because they specify cells
 #' interacting sex (2 bins), education (3 bins), and race (8 bins).
 #'
-"acscodes_age_sex_educ"
+"acscodes_sex_educ_race"
 
 
 #' ACS code lookup table
