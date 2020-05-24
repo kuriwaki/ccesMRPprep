@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/spacelab/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -139,30 +139,30 @@ is collected by Daily Kos.</p>
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A dataframe with the 435 Congressional Districts, one row per cd.</p><dl>
-   <dt>cd_year</dt><dd><p>The year for the district line. A congressional district's
-   actual geography can change year to year, and significantly so in different
-   redistricting cylces. 2019 indicates the data about voteshare and placenames
-   corresponds to district lines as of 2019.</p></dd>
-   <dt>cd</dt><dd><p>District code. The formatting corresponds to the CCES cumulative
-   codeing of <code>cd</code>: a two-letter abbrevation for the state followed by
-   a dash, and the district number padded with zeros to the left to be of length
-   2. At-large districts like Delwaware are given a "-01" for the district number.</p></dd>
-   <dt>pct_trump, pct_romney, pct_mccain</dt><dd><p>The voteshare of presidential candidates
-   in that district for the given year. E.g. the pct_mccain data when <code>cd_year == 2018</code>
-   represents the percent of the vote by McCain in 2008 for that district _under 2018 lines._</p></dd>
-   <dt>dailykos_name</dt><dd><p>The unique descriptive name for the district given by Daily Kos.
-   See Source</p></dd>
-   <dt>largest_place</dt><dd><p>The largest place in the district. Multiple districts may
-   have the largest place.</p></dd>
- 
+<dt>cd_year</dt><dd><p>The year for the district line. A congressional district's
+actual geography can change year to year, and significantly so in different
+redistricting cylces. 2019 indicates the data about voteshare and placenames
+corresponds to district lines as of 2019.</p></dd>
+<dt>cd</dt><dd><p>District code. The formatting corresponds to the CCES cumulative
+codeing of <code>cd</code>: a two-letter abbrevation for the state followed by
+a dash, and the district number padded with zeros to the left to be of length
+2. At-large districts like Delwaware are given a "-01" for the district number.</p></dd>
+<dt>pct_trump, pct_romney, pct_mccain</dt><dd><p>The voteshare of presidential candidates
+in that district for the given year. E.g. the pct_mccain data when <code>cd_year == 2018</code>
+represents the percent of the vote by McCain in 2008 for that district <em>under 2018 lines.</em></p></dd>
+<dt>dailykos_name</dt><dd><p>The unique descriptive name for the district given by Daily Kos.
+See Source</p></dd>
+<dt>largest_place</dt><dd><p>The largest place in the district. Multiple districts may
+have the largest place.</p></dd>
+
 </dl>
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>The Daily Kos Elections naming guide to the nation's congressional districts.
-  &lt;https://bit.ly/2XsFI5W&gt;</p>
+<a href='https://bit.ly/2XsFI5W'>https://bit.ly/2XsFI5W</a></p>
 <p>Daily Kos, "2008, 2012, &amp; 2016 results for districts used in 2018."
-   &lt;https://bit.ly/3bXtAPB&gt;</p>
+<a href='https://bit.ly/3bXtAPB'>https://bit.ly/3bXtAPB</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>cd_info_2018</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 7</span><span>
@@ -185,7 +185,7 @@ is collected by Daily Kos.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Shiro Kuriwaki.</p>
+  <p>Developed by <a href='https://www.shirokuriwaki.com'>Shiro Kuriwaki</a>.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ACS Tables to Use for CCES and MRP • ccesMRPprep</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/spacelab/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -93,16 +93,26 @@
 <div id="common-misperceptions-limiations-of-the-acs-for-mrp" class="section level3">
 <h3 class="hasAnchor">
 <a href="#common-misperceptions-limiations-of-the-acs-for-mrp" class="anchor"></a>Common Misperceptions: Limiations of the ACS for MRP</h3>
-<p>The ACS is the main dataset used for post-stratification in MRP because of its wide coverage of different geographies. However, there are a couple of data limitations to the ACS that make subsequent MRP differ from the classic treatment of MRP:</p>
-<ul>
-<li>The ACS is conducted by the Census Bureau but it <strong>is a survey</strong>, not a population census. It is an extremely large survey, with over 3 million respondents in any given year. It is still a survey, and therefore its counts are estimates. The ACS even provides margin of error estimates around its counts.</li>
+<p>The ACS is the main dataset used for post-stratification in MRP because of its wide coverage of different geographies. However, there are a couple of data limitations to the ACS that make subsequent MRP diverge from the classic MRP as it is usually taught:</p>
+<ol style="list-style-type: decimal">
+<li>The ACS is conducted by the Census Bureau but it <strong>is a survey</strong>, not a population census. It is an extremely large survey, with over 3 million respondents in any given year. But it is still a sample, and therefore its counts are estimates. The ACS even provides margin of error estimates around its counts.</li>
 <li>
-<strong>Microdata is not available</strong> for some geographies like congressional districts. By microdata, we mean data where each row is an individual respondent and can be aggregated up. The Census page and IPUMS (<a href="https://usa.ipums.org/" class="uri">https://usa.ipums.org/</a>) has an amazing interface to download microdata, but that data does not include congressional district. The Census provides some crosswalk files but they are mainly ZCTA to CD crosswalks. PUMAs are the main unit of area for the ACS but these do not link well to CD, for example Cambridge Mass. is a single PUMA, but Cambridge has about 8 zipcodes and is split into parts of MA-05 (Rep. Katherine Clark) and MA-07 (Rep. Ayana Pressley)</li>
+<strong>Microdata is not available</strong> for some geographies like congressional districts. By microdata, we mean data where each row is an individual respondent and can be aggregated up. The Census page, tidycensus, IPUMS (<a href="https://usa.ipums.org/" class="uri">https://usa.ipums.org/</a>) has an amazing interface to download microdata, but that data does not include congressional district.
+<ul>
+<li>The Census provides some crosswalk files but they are mainly ZCTA to CD crosswalks.</li>
+<li>PUMAs are the main unit of area for the ACS but these do not link well to CD (see <a href="https://forum.ipums.org/t/is-there-a-way-of-linking-acs-pums-data-with-voter-districts/611">here</a> for discussion and potential fractional matching). For example Cambridge Mass. is a single PUMA, but Cambridge has about 8 zipcodes and is split into parts of MA-05 (Rep. Katherine Clark) and MA-07 (Rep. Ayana Pressley)</li>
+</ul>
+</li>
 <li>The population Census is ideal, but the Census only occurs every 10 years, and only a 5 percent sample of it (with its restrictions of its own) is given to the public with some lag time. Therefore the population Census is often not a good alternative to the ACS / CPS.</li>
 <li>The ACS does <strong>not ask some key variables</strong>, such as voter registration (which is asked in the CPS) or party identification (which is only asked in political surveys like the CCES or Pew). That limits the variables one could include in the MRP model.</li>
-<li>Of the variables that are available, <strong>only certain variable combinations</strong> of them are available at the district level. There are three are three-way interactions of some demograhic variables but not more than that. The ACS provides thounsands of cell counts, but only a subset of them are useful for MRP because cells for MRP must form a partition of the population (i.e., exclusive and exhaustive categories). I describe several important combinations below.</li>
-<li>Some of the partition counts are <strong>not perfect partitions</strong>. For example, some of the variable codes I define below <em>exclude</em> people aged 18-24, include non-citizens, or double-count African Americans who also identify as Hispanic/Latino. These introduce some error into the post-stratification.</li>
+<li>Of the variables that are available, <strong>only certain variable combinations</strong> of them are available at the district level:
+<ul>
+<li>There are three are three-way interactions of some demographic variables but not more than that.</li>
+<li>The ACS provides thousands of cell counts, but only a subset of them are useful for MRP because cells for MRP must form a partition of the population (i.e., exclusive and exhaustive categories). I describe several important combinations below.</li>
 </ul>
+</li>
+<li>Some of the partition counts are <strong>not perfect partitions</strong>. For example, some of the variable codes I define below <em>exclude</em> people aged 18-24, include non-citizens, or double-count African Americans who also identify as Hispanic/Latino. These introduce some error into the post-stratification.</li>
+</ol>
 <p>This package and vignette goes into more detail about these limitations and the nature of the data that is available.</p>
 </div>
 <div id="three-types-of-acs-tables" class="section level3">
@@ -120,12 +130,12 @@
 <div id="collapsing-variable-codes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#collapsing-variable-codes" class="anchor"></a>Collapsing variable codes</h3>
-<p>The survey and the post-stratification must share discrete variables the level of which match 1:1. Therefore, if age is binned 9 ways in the ACS but there are only 5 response options in the CCES, then the finer group must be collapsed to coarser groupings of the 5 levels in the CCES. That also means, for example, that the recoding must be nested – i.e., it is hard to salvage two variable codings that are not many-to-one nested mappings to each other. These judgements must be made with careful attention to the question wording and are documented to some extent in <code><a href="../reference/race_key.html">?race_key</a></code>.</p>
+<p>The survey and the post-stratification must share discrete variables the level of which match 1:1. Therefore, if race is binned 9 ways in the ACS but there are only 5 response options in the CCES, then the finer group must be collapsed to coarser groupings of the 5 levels in the CCES. That also means, for example, that the recoding must be nested – i.e., it is hard to salvage two variable codings that are not many-to-one nested mappings to each other. These judgments must be made with careful attention to the question wording and are documented to some extent in <code><a href="../reference/keyvalue.html">?race_key</a></code>.</p>
 </div>
 <div id="thanks" class="section level3">
 <h3 class="hasAnchor">
 <a href="#thanks" class="anchor"></a>Thanks</h3>
-<p>The statements in this vignette benefitted from many online resources and correspondence with experts including Andrew Gelman, Yair Ghitza, Matto Mildenberger, and Jonathan Robinson. I also relies on findings from several published papers:</p>
+<p>The statements in this vignette benefited from many online resources and correspondence with experts including Yair Ghitza and Matto Mildenberger. I also relies on findings from several published papers:</p>
 <ul>
 <li>Howe, P. D., Mildenberger, M., Marlon, J. R., &amp; Leiserowitz, A. (2015). Geographic variation in opinions on climate change at state and local scales in the USA. <em>Nature Climate Change</em>, 5(6), 596–603. <a href="https://doi.org/10.1038/nclimate2583" class="uri">https://doi.org/10.1038/nclimate2583</a>
 </li>
@@ -148,7 +158,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Shiro Kuriwaki.</p>
+  <p>Developed by <a href="https://www.shirokuriwaki.com">Shiro Kuriwaki</a>.</p>
 </div>
 
 <div class="pkgdown">

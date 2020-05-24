@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/spacelab/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -128,7 +128,7 @@ data to give meaning to variable codes e.g. acscodes_age_sex_educ" />
 
     <div class="ref-description">
     <p>A tidy dataframe where each row is a ACS code. This is useful internal
-data to give meaning to variable codes e.g. <a href='acscodes_age_sex_educ.html'>acscodes_age_sex_educ</a></p>
+data to give meaning to variable codes e.g. <a href='acscodes_partitions.html'>acscodes_age_sex_educ</a></p>
     </div>
 
     <pre class="usage"><span class='no'>acscodes_df</span></pre>
@@ -137,13 +137,13 @@ data to give meaning to variable codes e.g. <a href='acscodes_age_sex_educ.html'
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A data frame where each row represents a column.</p><dl>
- <dt>variable</dt><dd><p>the ACS code (2018)</p></dd>
- <dt>gender</dt><dd><p>A labelled variable for gender. 1 is Male, 2 is Female. Use
-   the <code>labelled</code> or <code>haven</code> package to see labels.</p></dd>
- <dt>age</dt><dd><p>A labelled variable specifying which age biin the variable specifies</p></dd>
- <dt>race</dt><dd><p>A labelled variable specifying which education bin the variable specifies</p></dd>
- <dt>educ</dt><dd><p>A labelled variable specifying which race binthe variable specifies</p></dd>
- 
+<dt>variable</dt><dd><p>the ACS code (2018)</p></dd>
+<dt>gender</dt><dd><p>A labelled variable for gender. 1 is Male, 2 is Female. Use
+the <code>labelled</code> or <code>haven</code> package to see labels.</p></dd>
+<dt>age</dt><dd><p>A labelled variable specifying which age biin the variable specifies</p></dd>
+<dt>race</dt><dd><p>A labelled variable specifying which education bin the variable specifies</p></dd>
+<dt>educ</dt><dd><p>A labelled variable specifying which race binthe variable specifies</p></dd>
+
 </dl>
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
@@ -178,7 +178,7 @@ wods, NA here can be thought of as meaning "all".</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Shiro Kuriwaki.</p>
+  <p>Developed by <a href='https://www.shirokuriwaki.com'>Shiro Kuriwaki</a>.</p>
 </div>
 
 <div class="pkgdown">

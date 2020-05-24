@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/spacelab/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -133,8 +133,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-lookup-tables-and-variable-metadata" class="hasAnchor"><a href="#section-lookup-tables-and-variable-metadata" class="anchor"></a>Lookup tables and variable metadata</h2>
+          <p class="section-desc"><p>tibbles that obtain, link, collpase, and describe ACS and CCES values</p></p>
         </th>
       </tr>
       
@@ -145,39 +145,9 @@
       <tr>
         
         <td>
-          <p><code><a href="acscodes_age_sex_educ.html">acscodes_age_sex_educ</a></code> </p>
+          <p><code><a href="keyvalue.html">race_key</a></code> <code><a href="keyvalue.html">gender_key</a></code> <code><a href="keyvalue.html">educ_key</a></code> <code><a href="keyvalue.html">educ_key2</a></code> <code><a href="keyvalue.html">age5_key</a></code> <code><a href="keyvalue.html">age10_key</a></code> </p>
         </td>
-        <td><p>ACS codes for a age-sex-education partition</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="acscodes_age_sex_race.html">acscodes_age_sex_race</a></code> </p>
-        </td>
-        <td><p>ACS codes for a age-sex-race partition</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="acscodes_df.html">acscodes_df</a></code> </p>
-        </td>
-        <td><p>ACS code lookup table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ccc_bin_age.html">ccc_bin_age()</a></code> </p>
-        </td>
-        <td><p>Discretize a vector of age integers into labelled variables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ccc_samp.html">ccc_samp</a></code> </p>
-        </td>
-        <td><p>Sample cumulative CCES data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ccc_std_demographics.html">ccc_std_demographics()</a></code> </p>
-        </td>
-        <td><p>Recode CCES variables so that they merge to ACS variables</p></td>
+        <td><p>CCES-ACS variable key value pairs for recoding</p></td>
       </tr><tr>
         
         <td>
@@ -187,16 +157,29 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="cd_from_acs.html">cd_from_acs()</a></code> </p>
+          <p><code><a href="acscodes_df.html">acscodes_df</a></code> </p>
         </td>
-        <td><p>Format CD format from ACS</p></td>
+        <td><p>ACS code lookup table</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="cd_info_2018.html">cd_info_2018</a></code> </p>
+          <p><code><a href="acscodes_partitions.html">acscodes_age_sex_race</a></code> <code><a href="acscodes_partitions.html">acscodes_age_sex_educ</a></code> <code><a href="acscodes_partitions.html">acscodes_age_sex_educ</a></code> </p>
         </td>
-        <td><p>Sample district level data</p></td>
-      </tr><tr>
+        <td><p>ACS codes for partitions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-reading-data" class="hasAnchor"><a href="#section-reading-data" class="anchor"></a>Reading Data</h2>
+          <p class="section-desc"><p>Functions that read in CCES and ACS data from an API</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="get_acs_cces.html">get_acs_cces()</a></code> </p>
@@ -214,12 +197,62 @@
           <p><code><a href="get_poststrat.html">get_poststrat()</a></code> </p>
         </td>
         <td><p>Formats a post-strat table from ACS and district-level data</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-sample-datasets" class="hasAnchor"><a href="#section-sample-datasets" class="anchor"></a>Sample datasets</h2>
+          <p class="section-desc"><p>Samples of datasets one can get from the data loading functions</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="ccc_samp.html">ccc_samp</a></code> </p>
+        </td>
+        <td><p>Sample cumulative CCES data</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="race_key.html">race_key</a></code> <code><a href="race_key.html">gender_key</a></code> <code><a href="race_key.html">educ_key</a></code> <code><a href="race_key.html">educ_key2</a></code> <code><a href="race_key.html">age5_key</a></code> <code><a href="race_key.html">age10_key</a></code> </p>
+          <p><code><a href="cd_info_2018.html">cd_info_2018</a></code> </p>
         </td>
-        <td><p>CCES-ACS variable recode keys</p></td>
+        <td><p>Sample district level data</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-recoding-and-cleaning" class="hasAnchor"><a href="#section-data-recoding-and-cleaning" class="anchor"></a>Data recoding and cleaning</h2>
+          <p class="section-desc"><p>Functions that standardize and clean variable names and formats</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="ccc_bin_age.html">ccc_bin_age()</a></code> </p>
+        </td>
+        <td><p>Discretize a vector of age integers into labelled variables</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ccc_std_demographics.html">ccc_std_demographics()</a></code> </p>
+        </td>
+        <td><p>Recode CCES variables so that they merge to ACS variables</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cd_from_acs.html">cd_from_acs()</a></code> </p>
+        </td>
+        <td><p>Format CD format from ACS</p></td>
       </tr>
     </tbody>
     </table>
@@ -235,7 +268,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Shiro Kuriwaki.</p>
+  <p>Developed by <a href='https://www.shirokuriwaki.com'>Shiro Kuriwaki</a>.</p>
 </div>
 
 <div class="pkgdown">

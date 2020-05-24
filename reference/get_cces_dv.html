@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/spacelab/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -41,9 +41,9 @@
 
 <meta property="og:title" content="Download a specifc CCES dataset from dataverse — get_cces_dv" />
 <meta property="og:description" content="You must download the development version of https://github.com/IQSS/dataverse-client-r
- and get your own dataverse API Key. The current dataverse package downloads
- the raw data, so this function writes the raw binary into a tempfile and
- loads it into a tibble with the appropriate file data type." />
+and get your own dataverse API Key. The current dataverse package downloads
+the raw data, so this function writes the raw binary into a tempfile and
+loads it into a tibble with the appropriate file data type." />
 
 
 
@@ -130,9 +130,9 @@
 
     <div class="ref-description">
     <p>You must download the development version of https://github.com/IQSS/dataverse-client-r
- and get your own dataverse API Key. The current dataverse package downloads
- the raw data, so this function writes the raw binary into a tempfile and
- loads it into a tibble with the appropriate file data type.</p>
+and get your own dataverse API Key. The current dataverse package downloads
+the raw data, so this function writes the raw binary into a tempfile and
+loads it into a tibble with the appropriate file data type.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_cces_dv</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>cces_dv_ids</span>$<span class='no'>cces_name</span>, <span class='kw'>dataverse_paths</span> <span class='kw'>=</span> <span class='no'>cces_dv_ids</span>)</pre>
@@ -155,10 +155,10 @@ not be changed.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>To get a user key, you need to have your own dataverse account. Go to your account
- online and look for "API Token". Generate a API Token. You can then save your
- token by following <code><a href='https://rdrr.io/pkg/dataverse/man/get_user_key.html'>dataverse::get_user_key</a></code>, or directly saving
- <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv("DATAVERSE_KEY" = "YOUR KEY HERE")</a></code>
- <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</a></code></p>
+online and look for "API Token". Generate a API Token. You can then save your
+token by following <code><a href='https://rdrr.io/pkg/dataverse/man/get_user_key.html'>dataverse::get_user_key</a></code>, or directly saving
+<code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv("DATAVERSE_KEY" = "YOUR KEY HERE")</a></code>
+<code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</a></code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -176,7 +176,7 @@ not be changed.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Shiro Kuriwaki.</p>
+  <p>Developed by <a href='https://www.shirokuriwaki.com'>Shiro Kuriwaki</a>.</p>
 </div>
 
 <div class="pkgdown">
