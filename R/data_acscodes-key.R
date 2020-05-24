@@ -1,35 +1,53 @@
-#' ACS codes for a age-sex-education partition
+#' ACS codes for partitions
 #'
-#'
-#' @details Each element of the vector is a code for a ACS variable, which can be used
-#' for example  in the \code{variables} argument of \code{tidycensus::get_acs()}.
-#' There are 70 codes in \code{acscodes_age_sex_edu} because they specify cells
-#' interacting age (5 bins), sex (2 bins), and education (7 bins). Some of
+#' Each vector defines a partition, or at least an attempt at one. Each element of
+#' the vector is a code for a ACS variable, which can be used,
+#' for example in the \code{variables} argument of \code{tidycensus::get_acs()}. Some of
 #' these will be collapsed for MRP to form a common denominator with the CCES; see
-#' \link{educ_key}
+#' \link{keyvalue}
 #'
-#' @seealso \link{acscodes_age_sex_race}
+#' @name acscodes_partitions
 #'
-#' @examples
-#' head(acscodes_age_sex_educ)
-"acscodes_age_sex_educ"
-
-
-#' ACS codes for a age-sex-race partition
+#' @seealso \link{acscodes_df} for a definition of all codes,
+#' and <https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html> for a Vignette
+#' on ACS value pairs
 #'
-#'
-#' @details Each element of the vector is a code for a ACS variable, which can be used,
-#' for example  in the \code{variables} argument of \code{tidycensus::get_acs()}.
-#' There are 160 codes in \code{acscodes_age_sex_rac} because they specify cells
-#' interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).  Some of
-#' these will be collapsed for MRP to form a common denominator with the CCES; see
-#' \link{race_key}
-#'
-#' @seealso \link{acscodes_age_sex_educ}
 #'
 #' @examples
 #' head(acscodes_age_sex_race)
+#' head(acscodes_age_sex_educ)
+#' head(acscodes_sex_educ_race)
+NULL
+
+#' @rdname acscodes_partitions
+#'
+#' @format ### acscodes_age_sex_race
+#'
+#' There are 160 codes in \code{acscodes_age_sex_rac} because they specify cells
+#' interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).
+#'
 "acscodes_age_sex_race"
+
+
+#' @rdname acscodes_partitions
+#'
+#'
+#' @format ### acscoes_age_sex_educ
+#'
+#' There are 70 codes in \code{acscodes_age_sex_edu} because they specify cells
+#' interacting age (5 bins), sex (2 bins), and education (7 bins).
+#'
+"acscodes_age_sex_educ"
+
+#' @rdname acscodes_partitions
+#'
+#'
+#' @format ### acscodes_sex_educ_race
+#'
+#' There are 48 codes in \code{acscodes_sex_educ_race} because they specify cells
+#' interacting sex (2 bins), education (3 bins), and race (8 bins).
+#'
+"acscodes_age_sex_educ"
 
 
 #' ACS code lookup table

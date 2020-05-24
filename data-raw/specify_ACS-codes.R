@@ -72,14 +72,9 @@ acscodes_age_sex_race <- vars %>%
   filter(!is.na(gender), !is.na(age), !is.na(race)) %>%
   pull(variable)
 
-
-vdf <- vars %>%
-  mutate(race = str_to_upper(race)) %>%
-  rename(gender_chr = gender, age_chr = age, educ_chr = educ, race_acs = race)
-
-vdf %>%
-  filter(!is.na(gender_chr), !is.na(race_acs), !is.na(educ_chr))
-
+acscodes_sex_educ_race <- vars %>%
+  filter(!is.na(educ), !is.na(gender), !is.na(race)) %>%
+  pull(variable)
 
 
 # to labelled
@@ -95,5 +90,6 @@ acscodes_df <- vars %>%
 # Write ----
 usethis::use_data(acscodes_age_sex_educ, overwrite = TRUE)
 usethis::use_data(acscodes_age_sex_race, overwrite = TRUE)
+usethis::use_data(acscodes_sex_educ_race, overwrite = TRUE)
 usethis::use_data(acscodes_df, overwrite = TRUE)
 
