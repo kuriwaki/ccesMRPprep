@@ -10,13 +10,13 @@
 \format{
 \subsection{acscodes_age_sex_race}{
 
-There are 160 codes in \code{acscodes_age_sex_rac} because they specify cells
+There are 160 codes in \code{acscodes_age_sex_race} because they specify cells
 interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).
 }
 
 \subsection{acscoes_age_sex_educ}{
 
-There are 70 codes in \code{acscodes_age_sex_edu} because they specify cells
+There are 70 codes in \code{acscodes_age_sex_educ} because they specify cells
 interacting age (5 bins), sex (2 bins), and education (7 bins).
 }
 
