@@ -9,14 +9,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Cite as:
 
-* Shiro Kuriwaki (2020). ccesMRPprep: Functions to Prepare CCES data for MRP. R package. <https://www.github.com/kuriwaki/ccesMRPprep>
+* Shiro Kuriwaki (2020). ccesMRPprep: Functions and Data to Prepare CCES data for MRP. R package. <https://www.github.com/kuriwaki/ccesMRPprep>
 
 
 ### Purpose and Contribution
 
-Multi-level Regression and Post-stratification is an increasingly popular method for analyzing surveys, and can be implemented on public datasets such as the [CCES](https://cces.gov.harvard.edu/) and ACS. However, there are considerable upfront costs in preparing the data, recoding values and generating post-stratification frames so data can be matched.
+Multilevel Regression and Poststratification (MRP) is an increasingly popular method for analyzing surveys, and can be implemented on public datasets such as the [CCES](https://cces.gov.harvard.edu/) and ACS. 
 
-This package provides data loading, processing, and formatting functions for a particular task: using _CCES data_ for MRP. Its key contributions are functions that are calibrated to a consistent syntax, lookup tables and value-key pairs of data that are based upon a careful reading of data sources, and data loading functions that use APIs to reduce the dependency on downloading large files. Model fitting and visualization of MRP itself is handled elsewhere. This package is focused on the preparation to get there. 
+Despite its increasingly popularity MRP, entails considerable upfront costs in preparing the data, recoding values and generating post-stratification frames so the survey and census datasets can be joined. While there already exist some attempts to make a "MRP package" (e.g. [`gelman/mrp`](https://github.com/gelman/mrp), `vignette("mrp", package = "rstanarm")`, [`kuriwaki/sparseregMRP`](https://github.com/kuriwaki/sparseregMRP)), often these focuses on general functions with specific input format requirements and not enough on data cleaning and data loading in order to use those functions. 
+
+This package instead provides data loading, processing, and formatting functions for a particular task: using _CCES data_ for MRP. Limiting its usage to a fixed (but fairly widespred) set of survey data has several benefits. Its key contributions are functions that are calibrated to a consistent syntax, lookup tables and value-key pairs of data that are based upon a careful reading of data sources, and data loading functions that use APIs ([`IQSS/dataverse-client-r`](https://github.com/IQSS/dataverse-client-r) and [`walkerke/tidycensus`](https://github.com/walkerke/tidycensus)) to reduce the dependency on downloading large files. _Model fitting and visualization of MRP itself is handled elsewhere._ This package is focused on the preparation to get there. 
    
    
 ```{r, echo = TRUE, message = FALSE}
