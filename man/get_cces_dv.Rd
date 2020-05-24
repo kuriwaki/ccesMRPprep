@@ -15,16 +15,16 @@ not be changed.}
 }
 \description{
 You must download the development version of https://github.com/IQSS/dataverse-client-r
- and get your own dataverse API Key. The current dataverse package downloads
- the raw data, so this function writes the raw binary into a tempfile and
- loads it into a tibble with the appropriate file data type.
+and get your own dataverse API Key. The current dataverse package downloads
+the raw data, so this function writes the raw binary into a tempfile and
+loads it into a tibble with the appropriate file data type.
 }
 \details{
 To get a user key, you need to have your own dataverse account. Go to your account
- online and look for "API Token". Generate a API Token. You can then save your
- token by following \code{dataverse::get_user_key}, or directly saving
- \code{Sys.setenv("DATAVERSE_KEY" = "YOUR KEY HERE")}
- \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
+online and look for "API Token". Generate a API Token. You can then save your
+token by following \code{dataverse::get_user_key}, or directly saving
+\code{Sys.setenv("DATAVERSE_KEY" = "YOUR KEY HERE")}
+\code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
 }
 \examples{
 

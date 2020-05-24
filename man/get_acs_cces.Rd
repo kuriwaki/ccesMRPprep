@@ -28,7 +28,7 @@ renames some variables to later merge with CCES-based regression models.
 }
 \details{
 To run this, you need to have a API token to run \link[tidycensus]{get_acs}.
- See \link[tidycensus]{census_api_key} for details.
+See \link[tidycensus]{census_api_key} for details.
 }
 \examples{
 \dontrun{

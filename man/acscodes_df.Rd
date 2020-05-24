@@ -7,13 +7,13 @@
 \format{
 A data frame where each row represents a column.
 \describe{
- \item{variable}{the ACS code (2018)}
- \item{gender}{A labelled variable for gender. 1 is Male, 2 is Female. Use
-   the \code{labelled} or \code{haven} package to see labels.}
- \item{age}{A labelled variable specifying which age biin the variable specifies}
- \item{race}{A labelled variable specifying which education bin the variable specifies}
- \item{educ}{A labelled variable specifying which race binthe variable specifies}
- }
+\item{variable}{the ACS code (2018)}
+\item{gender}{A labelled variable for gender. 1 is Male, 2 is Female. Use
+the \code{labelled} or \code{haven} package to see labels.}
+\item{age}{A labelled variable specifying which age biin the variable specifies}
+\item{race}{A labelled variable specifying which education bin the variable specifies}
+\item{educ}{A labelled variable specifying which race binthe variable specifies}
+}
 }
 \source{
 Modifications around tidycensus::load_variables

@@ -8,28 +8,28 @@
 A data frame with 1000 observations. See the CCES cumulative codebook
 for more explanation of the variables
 \describe{
-  \item{year}{Year of the common content}
-  \item{case_id}{Respondent identifier (unique within each year)}
-  \item{state}{State (in the form of \code{state.name})}
-  \item{st}{State Abbreviation (in the form of \code{state.abb})}
-  \item{cd}{Congressional district at the time of the survey}
-  \item{zipcode}{Zipcode (See codebook)}
-  \item{county_fips}{County FIPS code (See codebook)}
-  \item{age}{Age, in integers}
-  \item{race}{Race and ethnicity}
-  \item{hispanic}{Hispanic identifier}
-  \item{educ}{Education level}
-  \item{faminc}{Family Income}
-  \item{marstat}{Martial status}
-  \item{newsint}{Frequency of following the news}
-  \item{vv_turnout_gvm}{Validated turnout in general election}
-  \item{voted_pres_16}{Self-reported vote choice for 2016}
-  \item{economy_retro}{Opinion on retrospective economy}
+\item{year}{Year of the common content}
+\item{case_id}{Respondent identifier (unique within each year)}
+\item{state}{State (in the form of \code{state.name})}
+\item{st}{State Abbreviation (in the form of \code{state.abb})}
+\item{cd}{Congressional district at the time of the survey}
+\item{zipcode}{Zipcode (See codebook)}
+\item{county_fips}{County FIPS code (See codebook)}
+\item{age}{Age, in integers}
+\item{race}{Race and ethnicity}
+\item{hispanic}{Hispanic identifier}
+\item{educ}{Education level}
+\item{faminc}{Family Income}
+\item{marstat}{Martial status}
+\item{newsint}{Frequency of following the news}
+\item{vv_turnout_gvm}{Validated turnout in general election}
+\item{voted_pres_16}{Self-reported vote choice for 2016}
+\item{economy_retro}{Opinion on retrospective economy}
 }
 }
 \source{
 Kuriwaki, Shiro, 2018, "Cumulative CCES Common Content (2006-2018)",
-<https://doi.org/10.7910/DVN/II2DB6>, Harvard Dataverse
+\url{https://doi.org/10.7910/DVN/II2DB6}, Harvard Dataverse
 }
 \usage{
 ccc_samp
