@@ -80,10 +80,7 @@ ccc_samp_out
 
 ##  **Step 5.** Prepare a post-stratification table, after preparing ACS data
 
-We provide wrappers around the great [tidycensus](https://walker-data.com/tidycensus/) package
-that produces ACS data and post-stratification tables from the ACS. A considerable amount of
-lookup tables internally will pull out the appropriate CD-level counts and label them
-so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/
+We provide wrappers around the great [tidycensus](https://walker-data.com/tidycensus/) package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/
 
 ```{r, eval = FALSE}
 

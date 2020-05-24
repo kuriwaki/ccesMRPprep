@@ -37,11 +37,14 @@ reduce the dependency on downloading large files. *Model fitting and
 visualization of MRP itself is handled elsewhere.* This package is
 focused on the preparation to get there.
 
+## Installation
+
 ``` r
 # remotes::install_github("kuriwaki/ccesMRPprep")
 library(ccesMRPprep)
-library(tidyverse)
 ```
+
+## Vignettes
 
 See the vignettes for more long-form workflow overviews
 (`vignette("overview")`) and documentation and explanation of the nature
