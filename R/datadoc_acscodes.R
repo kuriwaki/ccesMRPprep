@@ -71,13 +71,13 @@ NULL
 #'  }
 #'
 #' @details The 5-yr ACS at 2018 is used,
-#' although codes should be fairly consistent across time. IF a demographic variable is NA,
+#' although codes should be fairly consistent across time. IF a demographic variable is \code{NA},
 #' that means the variable collapses over the levels of that variable. In other
-#' words, NA here can be thought of as meaning "all".
+#' words, \code{NA} here can be thought of as meaning "all".
 #'
-#' @source Modifications around tidycensus::load_variables
+#' @source Modifications around `tidycensus::load_variables`
 #'
-#' @importFrom labelled labelled
+#' @importFrom haven labelled
 #' @importFrom tibble tibble
 #'
 #'

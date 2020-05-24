@@ -27,7 +27,6 @@ Imports:
     readr,
     glue,
     dataverse,
-    labelled,
     tidycensus,
     purrr
 Remotes:

@@ -19,7 +19,7 @@ the \code{labelled} or \code{haven} package to see labels.}
 }
 }
 \source{
-Modifications around tidycensus::load_variables
+Modifications around \code{tidycensus::load_variables}
 }
 \usage{
 acscodes_df
@@ -30,9 +30,9 @@ data to give meaning to variable codes e.g. \link{acscodes_age_sex_educ}
 }
 \details{
 The 5-yr ACS at 2018 is used,
-although codes should be fairly consistent across time. IF a demographic variable is NA,
+although codes should be fairly consistent across time. IF a demographic variable is \code{NA},
 that means the variable collapses over the levels of that variable. In other
-words, NA here can be thought of as meaning "all".
+words, \code{NA} here can be thought of as meaning "all".
 }
 \examples{
  head(acscodes_df)
