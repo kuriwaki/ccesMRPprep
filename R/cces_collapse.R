@@ -1,8 +1,8 @@
 #' Collapse CCES data to be analyzed in binomial model
 #' @param data A cleaned CCES dataset, e.g. from \link{ccc_std_demographics} which is
-#' then attached a outcome variable. Currently, it assumes the outcome is named
-#' \code{response}. This variable need not be numeric or binarized, but it will be
-#' binarized with \link{yesno_to_binary}
+#' then combined with outcome and contextual data in \link{cces_join_slim}. Currently, it
+#'  assumes the outcome is named \code{response}. This variable need not be numeric or
+#'  binarized, but it will be binarized with \link{yesno_to_binary}.
 #' @param model_ff the model formula used to fit the multilevel regression model.
 #' Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
 #' Only the RHS will be used but the LHS is necessary.

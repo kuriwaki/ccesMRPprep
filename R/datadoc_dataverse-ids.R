@@ -6,7 +6,8 @@
 #'  \item{year}{Specific year the data surveys, if there is one unique year}
 #'  \item{caseid_var}{The variable in that dataset that specifies
 #'   the unique case (respondent/person) identifier. Use a string. }
-#'  \item{doi}{The DOI for the dataverse dataset. The URL is therefore https://doi.org/[doi]}
+#'  \item{doi}{The DOI for the dataverse dataset. The URL is therefore https://doi.org/
+#'  followed by the DOI}
 #'  \item{filename}{The name of the data file, as it appears in the dataverse.}
 #'  }
 #'

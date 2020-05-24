@@ -2,10 +2,66 @@
 % Please edit documentation in R/get_outcome.R
 \name{get_cces_question}
 \alias{get_cces_question}
-\title{Obtain the dataset that contains the question}
+\title{Get one column of outcome questions for each model}
 \usage{
-get_cces_question(.qcode, .year, .q_df = q_df)
+get_cces_question(qcode, year, qID, data_dir = "data/input/cces")
+}
+\arguments{
+\item{qcode}{A string, the variable name of the outcome variable of interest,
+exactly as it appears in the CCES dataset. Together with \code{year}, uniquely identifies
+the outcome question data}
+
+\item{year}{A string for the year the question was asked, which will correspond
+to the dataset. If using a dataset from the cumulative, set to \code{"cumulative"}.
+Together with \code{qcode}, uniquely identifies the outcome question data}
+
+\item{qID}{A string, the user's unique name for the question. For example, we use the
+syntax in our question table.}
+
+\item{data_dir}{A path for the directory where flat files for the CCES common content is
+stored.  Currently the data must be of the form \verb{cces_\{year\}.rds}  in that directory
+to be read in. For a general script that uses \link{get_cces_dv}, see
+\url{https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R}
+which is still private.}
+}
+\value{
+A three-column dataframe with the columns
+\describe{
+\item{year}{The year}
+\item{case_id}{The respondent identifier within year}
+\item{qID}{The question ID}
+\item{response}{The outcome question, of class factor}
+}
+The objeet will also have an attribute called \code{question}, which will save
+the question identifier \code{qID}
 }
 \description{
-Obtain the dataset that contains the question
+Get one column of outcome questions for each model
+}
+\details{
+This transformation currently only supports Yes/No questions. For some common
+ordinal questions that ca n be, with manual recodes, be set to a Yes/No question,
+there is some hard-coding of the recode in the question. In the future, this should be
+defined outside of the function in a taxanomy.
+}
+\examples{
+\dontrun{
+# need data/input/cces/cces_2018.rds to run this
+get_cces_question(qcode = "CC18_326", year = "2018", qID = "TCJA")
+
+# A tibble: 60,000 x 4
+# year   case_id qID   response
+# <int>     <int> <chr> <fct>
+# 1  2018 123464282 TCJA  Support
+# 2  2018 170169205 TCJA  Support
+# 3  2018 175996005 TCJA  Support
+# 4  2018 176818556 TCJA  Oppose
+# 5  2018 202120533 TCJA  Oppose
+# 6  2018 226449148 TCJA  Oppose
+# 7  2018 238205342 TCJA  Oppose
+# 8  2018 238806466 TCJA  Support
+# 9  2018 267564481 TCJA  Support
+# 10  2018 291997134 TCJA  Oppose
+}
+
 }

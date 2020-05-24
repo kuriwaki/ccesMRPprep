@@ -18,6 +18,7 @@ Depends:
 Imports:
     tibble,
     magrittr,
+    fs,
     rlang,
     dplyr (>= 0.8.99),
     tidyr,
