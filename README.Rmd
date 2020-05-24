@@ -56,12 +56,21 @@ ccc_std <- ccc_std_demographics(ccc_samp)
 ```
 
 
-_Step 3. Collapsing the CCES data_
+
+_Step 3. Preparing the brms function_
+
+We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form
 
 ```{r}
-# fake outcome data
-# must be called "response"
+fm_brm <- yes | trials(n_responses) ~  age + gender + educ + pct_trump + (1|cd)
+```
 
+
+_Step 4. Collapsing the CCES data_
+
+```{r}
+# fake outcome data - must be called "response"
+set.seed(02138)
 ccc_samp_std <- ccc_samp %>% 
    mutate(response = sample(c("For", "Against"), size = n(), replace = TRUE)) %>% 
    ccc_std_demographics()
@@ -73,22 +82,12 @@ ccc_samp_out
 ```
 
 
-_Step 4. Preparing the brms function_
-
-We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form
-
-```{r}
-fm_brm <- yes | trials(n_responses) ~  age + gender + educ + pct_trump + (1|cd)
-```
-
-
-
-_Step 5. Cleaning and preparing the ACS data_
+_Step 5. Prepare a post-stratification table, after preparing ACS data_
 
 We provide wrappers around the great [tidycensus](https://walker-data.com/tidycensus/) package
 that produces ACS data and post-stratification tables from the ACS. A considerable amount of
 lookup tables internally will pull out the apporpriate CD-level counts and label them
-so that they match up with CCES keys.
+so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/
 
 ```{r, eval = FALSE}
 

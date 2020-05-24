@@ -36,15 +36,16 @@ This package and vignette goes into more detail about these limitations and the 
 
 ### Three types of ACS Tables
 
-1. __Age x Sex x Education__. These variable codes are encoded in `acscodes_age_sex_edu`.
-2. __Age x Sex x Race__. These variable codes are encoded in `acscodes_age_sex_race.`
+1. __Age x Sex x Education__. These variable codes are encoded in `?acscodes_age_sex_educ`.
+2. __Age x Sex x Race__. These variable codes are encoded in `?acscodes_age_sex_race.`
+3. __Sex x Education x Race __. These variable codes are encodd in `?acscodes_sex_educ_race`
 
 See their help pages (e.g. `?acscodes_age_sex_edu`) for more information. A detailed list of limitations to come. 
 
 
 ### Collapsing variable codes
 
-The survey and the post-stratification must share discrete variables the level of which match 1:1. Therefore, if race is binned 9 ways in the ACS but there are only 5 response options in the CCES, then the finer group must be collapsed to coarser groupings of the 5 levels in the CCES. That also means, for example, that the recoding must be nested -- i.e., it is hard to salvage two variable codings that are not many-to-one nested mappings to each other. These judgments must be made with careful attention to the question wording and are documented to some extent in `?race_key`. 
+The survey and the post-stratification must share discrete variables the level of which match 1:1. Therefore, if race is binned 9 ways in the ACS but there are only 5 response options in the CCES, then the finer group must be collapsed to coarser groupings of the 5 levels in the CCES. That also means, for example, that the recoding must be nested -- i.e., it is hard to salvage two variable codings that are not many-to-one nested mappings to each other. These judgments must be made with careful attention to the question wording and are documented to some extent in `?keyvalue`. 
 
 ### Thanks
 

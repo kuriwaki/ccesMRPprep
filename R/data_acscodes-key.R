@@ -45,7 +45,9 @@ NULL
 #' @format ### acscodes_sex_educ_race
 #'
 #' There are 48 codes in \code{acscodes_sex_educ_race} because they specify cells
-#' interacting sex (2 bins), education (3 bins), and race (8 bins).
+#' interacting sex (2 bins), education (3 bins), and race (8 bins). The entire partition
+#' is not actually exhaustive; it appears to only limit to 25 years and above
+#' and not incude postgraduate degrees. Cross-check with \link{acscodes_df} to verify.
 #'
 "acscodes_sex_educ_race"
 

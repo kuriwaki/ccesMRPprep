@@ -83,12 +83,21 @@ recodes.
 ccc_std <- ccc_std_demographics(ccc_samp)
 ```
 
-*Step 3. Collapsing the CCES data*
+*Step 3. Preparing the brms function*
+
+We presume the formula will be used in brms. Currently we support binary
+outcomes. This can be modeled as a binomial, which in brms is of the
+form
 
 ``` r
-# fake outcome data
-# must be called "response"
+fm_brm <- yes | trials(n_responses) ~  age + gender + educ + pct_trump + (1|cd)
+```
 
+*Step 4. Collapsing the CCES data*
+
+``` r
+# fake outcome data - must be called "response"
+set.seed(02138)
 ccc_samp_std <- ccc_samp %>% 
    mutate(response = sample(c("For", "Against"), size = n(), replace = TRUE)) %>% 
    ccc_std_demographics()
@@ -102,35 +111,27 @@ ccc_samp_out
     ## # A tibble: 400 x 5
     ##      age gender educ         n_response   yes
     ##    <int> <fct>  <fct>             <int> <int>
-    ##  1    18 Male   HS or Less            3     2
-    ##  2    18 Female HS or Less            7     4
+    ##  1    18 Male   HS or Less            3     0
+    ##  2    18 Female HS or Less            7     5
     ##  3    18 Female Some College          1     0
     ##  4    19 Male   HS or Less            1     1
     ##  5    19 Female HS or Less            2     1
-    ##  6    19 Female Some College          2     2
-    ##  7    20 Male   HS or Less            1     1
+    ##  6    19 Female Some College          2     1
+    ##  7    20 Male   HS or Less            1     0
     ##  8    20 Male   Some College          5     3
-    ##  9    20 Female HS or Less            3     1
-    ## 10    20 Female Some College          5     2
+    ##  9    20 Female HS or Less            3     2
+    ## 10    20 Female Some College          5     4
     ## # … with 390 more rows
 
-*Step 4. Preparing the brms function*
-
-We presume the formula will be used in brms. Currently we support binary
-outcomes. This can be modeled as a binomial, which in brms is of the
-form
-
-``` r
-fm_brm <- yes | trials(n_responses) ~  age + gender + educ + pct_trump + (1|cd)
-```
-
-*Step 5. Cleaning and preparing the ACS data*
+*Step 5. Prepare a post-stratification table, after preparing ACS data*
 
 We provide wrappers around the great
 [tidycensus](https://walker-data.com/tidycensus/) package that produces
 ACS data and post-stratification tables from the ACS. A considerable
 amount of lookup tables internally will pull out the apporpriate
 CD-level counts and label them so that they match up with CCES keys.
+District-level information, which is not necessary ACS data
+(e.g. election outcomes) must be supplied here as well/
 
 ``` r
  acs_tab <- get_acs_cces(
