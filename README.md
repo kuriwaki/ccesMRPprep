@@ -36,7 +36,7 @@ provides documentation as well. An overview of the workflow is below.
 
 ## Workflow
 
-*Step 1. Loading CCES data*
+***Step 1.** Loading CCES data*
 
 All CCES data can be downloaded directly from dataverse, using the
 development version of the `dataverse` R package. Once you set your
@@ -71,7 +71,7 @@ ccc_samp
     ## #   educ <int+lbl>, faminc <fct>, marstat <int+lbl>, newsint <int+lbl>,
     ## #   vv_turnout_gvm <fct>, voted_pres_16 <fct>, economy_retro <int+lbl>
 
-*Step 2. Cleaning CCES data*
+***Step 2.** Cleaning CCES data*
 
 The CCES cumulative dataset is already harmonized and cleaned, but
 values must be recoded so that they later match with the values of th
@@ -79,11 +79,15 @@ ACS. I have created key-value pairings for the main demographic
 variables. The wrapper function expects a CCES cumulative dataset and
 recodes.
 
+See `?get_cces_question` for how to get the *outcome* data, which is a
+single column from another CCES dataset. This still relies on a flat
+file being pre-downloaded (via `?get_cces_dv`.
+
 ``` r
 ccc_std <- ccc_std_demographics(ccc_samp)
 ```
 
-*Step 3. Preparing the brms function*
+***Step 3.** Preparing the brms function*
 
 We presume the formula will be used in brms. Currently we support binary
 outcomes. This can be modeled as a binomial, which in brms is of the
@@ -93,7 +97,18 @@ form
 fm_brm <- yes | trials(n_responses) ~  age + gender + educ + pct_trump + (1|cd)
 ```
 
-*Step 4. Collapsing the CCES data*
+A prior could be specified here as well, but this is not strictly
+necessary and can be defined when fitting the model.
+
+***Step 4.** Collapsing the CCES data*
+
+For speed, we collapse the individual-level data where each outcome is
+binary to a count dataset where each row is a cell (with a trial and
+success value). This form also makes drawing posteriors much easier in
+the next step. We use `?build_counts` for this, which takes a
+individual-level dataset (built from `?ccc_std_demographics`, or further
+passed through `?ccces_join_slim` for all relevant outcomes and
+predictors).
 
 ``` r
 # fake outcome data - must be called "response"
@@ -123,7 +138,8 @@ ccc_samp_out
     ## 10    20 Female Some College          5     4
     ## # … with 390 more rows
 
-*Step 5. Prepare a post-stratification table, after preparing ACS data*
+***Step 5.** Prepare a post-stratification table, after preparing ACS
+data*
 
 We provide wrappers around the great
 [tidycensus](https://walker-data.com/tidycensus/) package that produces
@@ -142,7 +158,21 @@ District-level information, which is not necessary ACS data
  poststrat <-  get_poststrat(acs_tab, cd_info_2018, fm_brm)
 ```
 
-### Related Packages
+***Final Output***
+
+Under this workflow, only three objects are needed to conduct MRP with a
+brms model:
+
+  - The model specification which can be a plain text line of a brms
+    formula (in Step 3)
+  - The survey data that is formatted via `?build_counts` at the end (in
+    Step 4)
+  - The poststratification table via `?get_poststrat` (in Step 5).
+
+Together, these uniquely define one MRP model for one operationalization
+of one question with a particular set of covariates.
+
+## Related Packages
 
   - <https://github.com/kuriwaki/rcces> has another set of CCES related
     functions, but these are either my own personal functions in
@@ -151,7 +181,7 @@ District-level information, which is not necessary ACS data
     package that uses (among others) this package to process large CCES
     data for MRP at scale.
 
-### Support
+## Support
 
 This package is a part of the CCES MRP project, supported by NSF Grant
 1926424: [Bayesian analytical tools to improve survey estimates for

@@ -32,7 +32,7 @@ A three-column dataframe with the columns
 \item{qID}{The question ID}
 \item{response}{The outcome question, of class factor}
 }
-The objeet will also have an attribute called \code{question}, which will save
+The object will also have an attribute called \code{question}, which will save
 the question identifier \code{qID}
 }
 \description{
@@ -61,7 +61,7 @@ get_cces_question(qcode = "CC18_326", year = "2018", qID = "TCJA")
 # 7  2018 238205342 TCJA  Oppose
 # 8  2018 238806466 TCJA  Support
 # 9  2018 267564481 TCJA  Support
-# 10  2018 291997134 TCJA  Oppose
+… with 59,991 more rows
 }
 
 }

@@ -26,7 +26,7 @@
 #' \item{qID}{The question ID}
 #' \item{response}{The outcome question, of class factor}
 #' }
-#' The objeet will also have an attribute called \code{question}, which will save
+#' The object will also have an attribute called \code{question}, which will save
 #' the question identifier \code{qID}
 #'
 #' @import dplyr
@@ -53,8 +53,7 @@
 #' # 7  2018 238205342 TCJA  Oppose
 #' # 8  2018 238806466 TCJA  Support
 #' # 9  2018 267564481 TCJA  Support
-#' # 10  2018 291997134 TCJA  Oppose
-# … with 59,990 more rows
+#' … with 59,991 more rows
 #' }
 #'
 #' @export

@@ -2,7 +2,7 @@
 #'
 #'
 #' Produces a person-level dataset with question-level dataset. This will only
-#' use the variables necesary for the model, thus its name "slim".  Therefore,
+#' use the variables necessary for the model, thus its name "slim".  Therefore,
 #' is model dependent.
 #'
 #'
@@ -41,8 +41,7 @@
 #'   # 7  2018 412161131 TCJA  Support     32 3 [Some College] IN-3
 #'   # 8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-1
 #'   # 9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-2
-#'   # 10  2018 412276349 TCJA  Support     85 6 [Post-Grad]    PA-7
-#'
+#'   # ...
 #'  }
 #'
 #' @export
