@@ -1,0 +1,84 @@
+#' CCES-ACS variable key value pairs for recoding
+#'
+#' @details These value-value tables are useful for recoding the values of
+#' from one dataset (CCES) so that they can be merged immediately with another
+#' (ACS). These get used internally in \link{ccc_std_demographics}, but they are
+#' available as built in datasets
+#'
+#' @name keyvalue
+#'
+#' @format All keys are tibbles with one row per recoding value.
+#'
+#' @importFrom tibble tibble
+#'
+#' @examples
+#'  library(ccesMRPprep)
+#'  race_key
+#'  educ_key
+#'  educ_key2
+#'  gender_key
+#'  age5_key
+#'  age10_key
+NULL
+
+#' @rdname keyvalue
+#'
+#' @format ### \code{race_key}
+#'  \describe{
+#'  \item{race}{An labelled integer of class haven::labelled.
+#'     Most compact form of both sources and the values both will get recoded
+#'     to in MRP.}
+#'  \item{race_cces}{Labelled versions of the CCES race codings. These are of the
+#'    same class as the CCES cumualtive file.}
+#'  \item{race_cces_chr}{Labels for the first column, in characters}
+#'  \item{race_acs}{Corresponding character in the ACS data via the tidycensus package}
+#'  \item{race_5}{A numeric value underlying the \code{race} label.}
+#'  }
+"race_key"
+
+#' @rdname  keyvalue
+#' @format ### \code{gender_key}:
+#'  \describe{
+#'  \item{gender}{An labelled integer of class haven::labelled. Target variable}
+#'  \item{gender_chr}{Character to recode from. CCES and ACS use the same values.}
+#'  }
+"gender_key"
+
+#' @rdname  keyvalue
+#' @format ### \code{educ_key}
+#'  For mapping ACS data values for education e.g. in \link{get_acs}:
+#'  \describe{
+#'  \item{educ_cces_chr}{Character to recode from, in CCES}
+#'  \item{educ_chr}{Character to recode from, in ACS. See \link{}}
+#'  \item{educ}{An labelled integer of class haven::labelled. Target variable}
+#'  }
+"educ_key"
+
+#' @rdname  keyvalue
+#' @format  ### \code{educ_key2}
+#'  Education with slightly different ACS value encoding, used e.g. in building
+#'  \link{acscodes_age_sex_educ}:
+#'  \describe{
+#'  \item{educ_cces_chr}{Character to recode from, in CCES}
+#'  \item{educ_chr}{Character to recode from, in ACS. See \link{}}
+#'  \item{educ}{An labelled integer of class haven::labelled. Target variable}
+#'  }
+"educ_key2"
+
+#' @rdname  keyvalue
+#' @format ### \code{age5_key}
+#'  Age bins, 5-ways, used in \link{acscodes_age_sex_educ}. Use \link{ccc_bin_age}
+#'  to recode CCES variabe
+#'  \describe{
+#'  \item{age}{An labelled integer of class haven::labelled. Target variable.}
+#'  \item{age_chr}{Character to recode from, in ACS}
+#'  }
+"age5_key"
+
+#' @rdname  keyvalue
+#' @format \code{age10_key}: Age bins, 10-ways, used in \link{acscodes_age_sex_race}:
+#' \describe{
+#'  \item{age}{An labelled integer of class haven::labelled. Target variable.}
+#'  \item{age_chr}{Character to recode from, in ACS}
+#'  }
+"age10_key"
