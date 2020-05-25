@@ -7,8 +7,8 @@
 get_acs_cces(
   varlist,
   varlab_df,
-  .year = 2018,
-  .geography = "congressional district"
+  year = 2018,
+  geography = "congressional district"
 )
 }
 \arguments{
@@ -16,10 +16,10 @@ get_acs_cces(
 
 \item{varlab_df}{a dataframe that appends the categories based on the varcode}
 
-\item{.year}{The year of the ACS to get. Because of data availability limitations, this is
+\item{year}{The year of the ACS to get. Because of data availability limitations, this is
 capped to 2010-2018.}
 
-\item{.geography}{the type of geography to pull. Currently only supports
+\item{geography}{the type of geography to pull. Currently only supports
 \code{"congressional district"}.}
 }
 \description{
@@ -36,7 +36,7 @@ See \link[tidycensus]{census_api_key} for details.
  acs_tab <- get_acs_cces(
               varlist = acscodes_age_sex_educ,
               varlab_df = acscodes_df,
-             .year = 2018)
+              year = 2018)
 #   year  cd    gender age            educ         race  count count_moe
 #   <dbl> <chr> <fct>  <fct>          <fct>        <fct> <dbl>     <dbl>
 # 1  2018 AL-01 Male   18 to 24 years HS or Less   NA      703       240

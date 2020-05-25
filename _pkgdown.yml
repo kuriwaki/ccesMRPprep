@@ -30,7 +30,7 @@ reference:
 - contents:
   - ccc_bin_age
   - ccc_std_demographics
-  - cd_from_acs
+  - std_acs_cdformat
   - cces_join_slim
   - yesno_to_binary
 - title: Data collapsing and reshaping
