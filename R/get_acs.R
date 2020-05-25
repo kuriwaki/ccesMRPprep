@@ -1,6 +1,3 @@
-
-
-
 #' Obtain a ACS tabulation from tidycensus
 #'
 #' This loads ACS counts via tidycensus and gives them additional labels and
@@ -8,9 +5,9 @@
 #'
 #' @param varlist a vector of variable codes to pull
 #' @param varlab_df a dataframe that appends the categories based on the varcode
-#' @param .year The year of the ACS to get. Because of data availability limitations, this is
+#' @param year The year of the ACS to get. Because of data availability limitations, this is
 #'  capped to 2010-2018.
-#' @param .geography the type of geography to pull. Currently only supports
+#' @param geography the type of geography to pull. Currently only supports
 #'  \code{"congressional district"}.
 #'
 #' @details To run this, you need to have a API token to run \link[tidycensus]{get_acs}.
@@ -34,7 +31,7 @@
 #'  acs_tab <- get_acs_cces(
 #'               varlist = acscodes_age_sex_educ,
 #'               varlab_df = acscodes_df,
-#'              .year = 2018)
+#'               year = 2018)
 #' #   year  cd    gender age            educ         race  count count_moe
 #' #   <dbl> <chr> <fct>  <fct>          <fct>        <fct> <dbl>     <dbl>
 #' # 1  2018 AL-01 Male   18 to 24 years HS or Less   NA      703       240
@@ -49,11 +46,11 @@
 #' }
 #'
 get_acs_cces <- function(varlist, varlab_df,
-                         .year = 2018,
-                         .geography =  "congressional district") {
+                         year = 2018,
+                         geography =  "congressional district") {
 
-  get_acs(geography = .geography,
-          year = min(max(.year, 2010), 2018),
+  get_acs(geography = geography,
+          year = min(max(year, 2010), 2018),
           survey = "acs5",
           variable = varlist,
           geometry = FALSE) %>%
@@ -65,8 +62,8 @@ get_acs_cces <- function(varlist, varlab_df,
     ) %>%
     mutate(count = replace_na(count, 0)) %>%
     left_join(varlab_df, by = "variable") %>%
-    mutate(year = .year,
-           cd = cd_from_acs(NAME)) %>%
+    mutate(year = year,
+           cd = std_acs_cdformat(NAME)) %>%
     mutate_if(haven::is.labelled, haven::as_factor) %>%
     select(year, cd, matches("(gender|age|educ|race)"), count, count_moe)
 }
@@ -143,11 +140,11 @@ get_poststrat <- function(cleaned_acs, dist_data, model_ff) {
 #' @importFrom glue glue
 #'
 #' @examples
-#'  cd_from_acs("Congressional District 32 (115th Congress), California")
+#'  std_acs_cdformat("Congressional District 32 (115th Congress), California")
 #'
 #'
 #' @export
-cd_from_acs <- function(vec) {
+std_acs_cdformat <- function(vec) {
 
   st_to_state <- tibble(st = state.abb, state = state.name) %>%
     add_row(st = "DC", state = "District of Columbia")
