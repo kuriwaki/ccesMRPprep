@@ -95,12 +95,12 @@
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ccesMRPprep</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">haven</span>)</pre></body></html></div>
-<div id="step-1--loading-cces-data" class="section level2">
+<div id="step-1--downloading-cces-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#step-1--loading-cces-data" class="anchor"></a><strong>Step 1.</strong> Loading CCES data</h2>
-<p>All CCES data can be downloaded directly from dataverse, using the development version of the <code>dataverse</code> R package. Once you set your dataverse API token, the function <code>get_cces_dv</code> will make this quick and simple.</p>
+<a href="#step-1--downloading-cces-data" class="anchor"></a><strong>Step 1.</strong> Downloading CCES data</h2>
+<p>All CCES data can be downloaded directly from dataverse, using the development version of the <code>dataverse</code> R package. Once you set your dataverse API token, the function <code><a href="../reference/get_cces_dv.html">get_cces_dv()</a></code> will make this quick and simple.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">ccc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_cces_dv.html">get_cces_dv</a></span>(<span class="st">"cumulative"</span>)</pre></body></html></div>
-<p>We will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">?ccc_samp</a></code>).</p>
+<p>We will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">ccc_samp()</a></code>).</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">ccc_samp</span>
 <span class="co">#&gt; # A tibble: 1,000 x 18</span>
 <span class="co">#&gt;     year case_id state st    cd    zipcode county_fips  gender   age    race</span>
@@ -123,20 +123,20 @@
 <h2 class="hasAnchor">
 <a href="#step-2--cleaning-cces-data" class="anchor"></a><strong>Step 2.</strong> Cleaning CCES data</h2>
 <p>The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of the ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.</p>
-<p>See <code><a href="../reference/get_cces_question.html">?get_cces_question</a></code> for how to get the <em>outcome</em> data, which is a single column from another CCES dataset. This still relies on a flat file being pre-downloaded (via <code><a href="../reference/get_cces_dv.html">?get_cces_dv</a></code>).</p>
+<p>See <code><a href="../reference/get_cces_question.html">get_cces_question()</a></code> for how to get the <em>outcome</em> data, which is a single column from another CCES dataset. This still relies on a flat file being pre-downloaded (via <code><a href="../reference/get_cces_dv.html">get_cces_dv()</a></code>).</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">ccc_std</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ccc_std_demographics.html">ccc_std_demographics</a></span>(<span class="no">ccc_samp</span>)</pre></body></html></div>
 </div>
-<div id="step-3--preparing-the-brms-function" class="section level2">
+<div id="step-3--define-a-model-specification" class="section level2">
 <h2 class="hasAnchor">
-<a href="#step-3--preparing-the-brms-function" class="anchor"></a><strong>Step 3.</strong> Preparing the brms function</h2>
-<p>We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form</p>
+<a href="#step-3--define-a-model-specification" class="anchor"></a><strong>Step 3.</strong> Define a Model Specification</h2>
+<p>A formula represents the variables that are in the model, how they are interacted, and which variables are random effects. We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">fm_brm</span> <span class="kw">&lt;-</span> <span class="no">yes</span> <span class="kw">|</span> <span class="fu">trials</span>(<span class="no">n_responses</span>) ~  <span class="no">age</span> + <span class="no">gender</span> + <span class="no">educ</span> + <span class="no">pct_trump</span> + (<span class="fl">1</span><span class="kw">|</span><span class="no">cd</span>)</pre></body></html></div>
 <p>A prior could be specified here as well, but this is not strictly necessary and can be defined when fitting the model.</p>
 </div>
 <div id="step-4--collapsing-the-cces-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-4--collapsing-the-cces-data" class="anchor"></a><strong>Step 4.</strong> Collapsing the CCES data</h2>
-<p>For speed, we collapse the individual-level data where each outcome is binary to a count dataset where each row is a cell (with a trial and success value). This form also makes drawing posteriors much easier in the next step. We use <code><a href="../reference/build_counts.html">?build_counts</a></code> for this, which takes a individual-level dataset (built from <code><a href="../reference/ccc_std_demographics.html">?ccc_std_demographics</a></code>, or further passed through <code>?ccces_join_slim</code> for all relevant outcomes and predictors).</p>
+<p>For speed, we collapse the individual-level data where each outcome is binary to a count dataset where each row is a cell (with a trial and success value). This form also makes drawing posteriors much easier in the next step. We use <code><a href="../reference/build_counts.html">build_counts()</a></code> for this, which takes a individual-level dataset (built from <code><a href="../reference/ccc_std_demographics.html">ccc_std_demographics()</a></code>, or further passed through <code><a href="../reference/cces_join_slim.html">cces_join_slim()</a></code> for all relevant outcomes and predictors).</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># fake outcome data - must be called "response"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">02138</span>)
 <span class="no">ccc_samp_std</span> <span class="kw">&lt;-</span> <span class="no">ccc_samp</span> <span class="kw">%&gt;%</span>
@@ -162,15 +162,15 @@
 <span class="co">#&gt; 10    20 Female Some College          5     4</span>
 <span class="co">#&gt; # … with 390 more rows</span></pre></body></html></div>
 </div>
-<div id="step-5--prepare-a-post-stratification-table-after-preparing-acs-data" class="section level2">
+<div id="step-5--prepare-acs-data-and-poststratification-table" class="section level2">
 <h2 class="hasAnchor">
-<a href="#step-5--prepare-a-post-stratification-table-after-preparing-acs-data" class="anchor"></a><strong>Step 5.</strong> Prepare a post-stratification table, after preparing ACS data</h2>
+<a href="#step-5--prepare-acs-data-and-poststratification-table" class="anchor"></a><strong>Step 5.</strong> Prepare ACS data and Poststratification Table</h2>
 <p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r">
  <span class="no">acs_tab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_acs_cces.html">get_acs_cces</a></span>(
               <span class="kw">varlist</span> <span class="kw">=</span> <span class="no">acscodes_age_sex_educ</span>,
               <span class="kw">varlab_df</span> <span class="kw">=</span> <span class="no">acscodes_df</span>,
-             <span class="kw">.year</span> <span class="kw">=</span> <span class="fl">2018</span>)
+             <span class="kw">year</span> <span class="kw">=</span> <span class="fl">2018</span>)
 
  <span class="no">poststrat</span> <span class="kw">&lt;-</span>  <span class="fu"><a href="../reference/get_poststrat.html">get_poststrat</a></span>(<span class="no">acs_tab</span>, <span class="no">cd_info_2018</span>, <span class="no">fm_brm</span>)</pre></body></html></div>
 </div>
@@ -179,11 +179,11 @@
 <a href="#final-output" class="anchor"></a><strong>Final Output</strong>
 </h2>
 <p>Under this workflow, only three objects are needed to conduct MRP with a brms model:</p>
-<ul>
+<ol style="list-style-type: decimal">
 <li>The model specification which can be a plain text line of a brms formula (in Step 3)</li>
-<li>The survey data that is formatted via <code><a href="../reference/build_counts.html">?build_counts</a></code> at the end (in Step 4)</li>
-<li>The poststratification table via <code><a href="../reference/get_poststrat.html">?get_poststrat</a></code> (in Step 5).</li>
-</ul>
+<li>The survey data that is formatted via <code><a href="../reference/build_counts.html">build_counts()</a></code> at the end (in Step 4)</li>
+<li>The poststratification table via <code><a href="../reference/get_poststrat.html">get_poststrat()</a></code> (in Step 5).</li>
+</ol>
 <p>Together, these uniquely define one MRP model for one operationalization of one question with a particular set of covariates.</p>
 </div>
   </div>

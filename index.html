@@ -95,9 +95,9 @@
 <div id="purpose-and-contribution" class="section level3">
 <h3 class="hasAnchor">
 <a href="#purpose-and-contribution" class="anchor"></a>Purpose and Contribution</h3>
-<p>Multilevel Regression and Poststratification (MRP) is an increasingly popular method for analyzing surveys, and can be implemented on public datasets such as the <a href="https://cces.gov.harvard.edu/">CCES</a> and ACS.</p>
-<p>Despite its increasingly popularity MRP, entails considerable upfront costs in preparing the data, recoding values and generating post-stratification frames so the survey and census datasets can be joined. While there already exist some attempts to make a “MRP package” (e.g. <a href="https://github.com/gelman/mrp"><code>gelman/mrp</code></a>, <code>vignette("mrp", package = "rstanarm")</code>, <a href="https://github.com/kuriwaki/sparseregMRP"><code>kuriwaki/sparseregMRP</code></a>), often these focuses on general functions with specific input format requirements and not enough on data cleaning and data loading in order to use those functions.</p>
-<p>This package instead provides data loading, processing, and formatting functions for a particular task: using <em>CCES data</em> for MRP. Limiting its usage to a fixed (but fairly widespred) set of survey data has several benefits. Its key contributions are functions that are calibrated to a consistent syntax, lookup tables and value-key pairs of data that are based upon a careful reading of data sources, and data loading functions that use APIs (<a href="https://github.com/IQSS/dataverse-client-r"><code>IQSS/dataverse-client-r</code></a> and <a href="https://github.com/walkerke/tidycensus"><code>walkerke/tidycensus</code></a>) to reduce the dependency on downloading large files. <em>Model fitting and visualization of MRP itself is handled elsewhere.</em> This package is focused on the preparation to get there.</p>
+<p>Multilevel Regression and Poststratification (MRP) is an increasingly popular method for analyzing surveys, and can be implemented on public datasets such as the <a href="https://cces.gov.harvard.edu/">CCES</a> and ACS. Several helpful tutorials give introductions with sample R code (Kastellec, Lax, and Phillips, <a href="https://scholar.princeton.edu/sites/default/files/jkastellec/files/mrp_primer.pdf">2019</a>; Hanretty, <a href="https://doi.org/10.1177%2F1478929919864773">2019</a>),</p>
+<p>But despite its increasingly popularity, <em>doing</em> your own MRP entails considerable upfront costs specific to the data: downloading the appropriate survey and contextual, recoding values and generating post-stratification frames so the survey and census datasets can be joined. While there already exist some attempts to make a “MRP package” (e.g. <a href="https://github.com/gelman/mrp"><code>gelman/mrp</code></a>, <a href="https://mc-stan.org/rstanarm/articles/mrp.html"><code>stan-dev/rstanarm</code></a>, <a href="https://github.com/kuriwaki/sparseregMRP"><code>kuriwaki/sparseregMRP</code></a>), often these packages define general functions with specific input requirements and not enough on data cleaning and data loading in order to use those functions.</p>
+<p>This package instead provides data loading, processing, and formatting functions for a particular task: using <em>CCES data</em> for MRP. Limiting its usage to a fixed (but fairly widespread) set of survey data has several benefits. Its key contributions are functions that are calibrated to a consistent syntax, pre-built lookup tables and value-key pairs of data that are based upon a careful reading of data sources, and data loading functions that use APIs (<a href="https://github.com/IQSS/dataverse-client-r"><code>IQSS/dataverse-client-r</code></a> and <a href="https://github.com/walkerke/tidycensus"><code>walkerke/tidycensus</code></a>) to reduce the dependency on downloading large files. <em>Model fitting and visualization of MRP itself is handled elsewhere.</em> This package is focused on the preparation to get there.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -120,15 +120,15 @@
 <a href="#related-packages" class="anchor"></a>Related Packages</h2>
 <ul>
 <li>
-<a href="https://github.com/kuriwaki/rcces" class="uri">https://github.com/kuriwaki/rcces</a> has another set of CCES related functions, but these are either my own personal functions in development (not for production), or specific to non-MRP projects.</li>
+<a href="https://github.com/kuriwaki/rcces">kuriwaki/rcces</a> has another set of CCES related functions, but these are either my own personal functions in development (not for production), or specific to non-MRP projects.</li>
 <li>
-<a href="https://github.com/kuriwaki/CCES_district-opinion" class="uri">https://github.com/kuriwaki/CCES_district-opinion</a> is a private package that uses (among others) this package to process large CCES data for MRP at scale.</li>
+<a href="https://github.com/kuriwaki/CCES_district-opinion">kuriwaki/CCES_district-opinion</a> is a private package that uses (among others) this package to process large CCES data for MRP at scale.</li>
 </ul>
 </div>
 <div id="support" class="section level2">
 <h2 class="hasAnchor">
 <a href="#support" class="anchor"></a>Support</h2>
-<p>This package is a part of the CCES MRP project, supported by NSF Grant 1926424: <a href="https://nsf.gov/awardsearch/showAward?AWD_ID=1926424">Bayesian analytical tools to improve survey estimates for subpopulations and small areas</a>. The contents are based on collaborations and helpful discussions with Ben Bales, Lauren Kennedy, Mitzi Morris, and Soichiro Yamauchi.</p>
+<p>This package is a part of the CCES MRP project, supported by NSF Grant 1926424: <a href="https://nsf.gov/awardsearch/showAward?AWD_ID=1926424">Bayesian analytical tools to improve survey estimates for subpopulations and small areas</a>. The contents are based on collaborations with Ben Bales, Lauren Kennedy, Mitzi Morris, and Soichiro Yamauchi.</p>
 </div>
 </div>
   </div>

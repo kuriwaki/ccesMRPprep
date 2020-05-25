@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Obtain a ACS tabulation from tidycensus — get_acs_cces • ccesMRPprep</title>
+<title>Format CD format from ACS — std_acs_cdformat • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Obtain a ACS tabulation from tidycensus — get_acs_cces" />
-<meta property="og:description" content="This loads ACS counts via tidycensus and gives them additional labels and
-renames some variables to later merge with CCES-based regression models." />
+<meta property="og:title" content="Format CD format from ACS — std_acs_cdformat" />
+<meta property="og:description" content="Convert ACS' cd labels to the form &quot;AK-01&quot;." />
 
 
 
@@ -124,73 +123,31 @@ renames some variables to later merge with CCES-based regression models." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Obtain a ACS tabulation from tidycensus</h1>
+    <h1>Format CD format from ACS</h1>
     <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/get_acs.R'><code>R/get_acs.R</code></a></small>
-    <div class="hidden name"><code>get_acs_cces.Rd</code></div>
+    <div class="hidden name"><code>std_acs_cdformat.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This loads ACS counts via tidycensus and gives them additional labels and
-renames some variables to later merge with CCES-based regression models.</p>
+    <p>Convert ACS' cd labels to the form "AK-01".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_acs_cces</span>(
-  <span class='no'>varlist</span>,
-  <span class='no'>varlab_df</span>,
-  <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>,
-  <span class='kw'>geography</span> <span class='kw'>=</span> <span class='st'>"congressional district"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>std_acs_cdformat</span>(<span class='no'>vec</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>varlist</th>
-      <td><p>a vector of variable codes to pull</p></td>
-    </tr>
-    <tr>
-      <th>varlab_df</th>
-      <td><p>a dataframe that appends the categories based on the varcode</p></td>
-    </tr>
-    <tr>
-      <th>year</th>
-      <td><p>The year of the ACS to get. Because of data availability limitations, this is
-capped to 2010-2018.</p></td>
-    </tr>
-    <tr>
-      <th>geography</th>
-      <td><p>the type of geography to pull. Currently only supports
-<code>"congressional district"</code>.</p></td>
+      <th>vec</th>
+      <td><p>a vector of strings from the ACS congressional district naming</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>To run this, you need to have a API token to run <a href='https://rdrr.io/pkg/tidycensus/man/get_acs.html'>get_acs</a>.
-See <a href='https://rdrr.io/pkg/tidycensus/man/census_api_key.html'>census_api_key</a> for details.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>get_acs_cces</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='no'>fm_brm</span> <span class='kw'>&lt;-</span> <span class='no'>yes</span> <span class='kw'>|</span> <span class='fu'>responses</span>(<span class='no'>n_cell</span>) ~  <span class='no'>age</span> + <span class='no'>gender</span> + <span class='no'>educ</span> + <span class='no'>pct_trump</span> + (<span class='fl'>1</span><span class='kw'>|</span><span class='no'>cd</span>)
- <span class='no'>acs_tab</span> <span class='kw'>&lt;-</span> <span class='fu'>get_acs_cces</span>(
-              <span class='kw'>varlist</span> <span class='kw'>=</span> <span class='no'>acscodes_age_sex_educ</span>,
-              <span class='kw'>varlab_df</span> <span class='kw'>=</span> <span class='no'>acscodes_df</span>,
-              <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>)
-<span class='co'>#   year  cd    gender age            educ         race  count count_moe</span>
-<span class='co'>#   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt;          &lt;fct&gt;        &lt;fct&gt; &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class='co'># 1  2018 AL-01 Male   18 to 24 years HS or Less   NA      703       240</span>
-<span class='co'># 2  2018 AL-01 Male   18 to 24 years HS or Less   NA     5665       581</span>
-<span class='co'># 3  2018 AL-01 Male   18 to 24 years HS or Less   NA    11764       747</span>
-<span class='co'># 4  2018 AL-01 Male   18 to 24 years Some College NA     9528       750</span>
-<span class='co'># 5  2018 AL-01 Male   18 to 24 years Some College NA     1389       355</span>
-<span class='co'># 6  2018 AL-01 Male   18 to 24 years 4-Year       NA     1519       276</span>
+    <pre class="examples"><div class='input'> <span class='fu'>std_acs_cdformat</span>(<span class='st'>"Congressional District 32 (115th Congress), California"</span>)</div><div class='output co'>#&gt; [1] "CA-32"</div><div class='input'>
 
-
- <span class='no'>poststrat</span> <span class='kw'>&lt;-</span>  <span class='fu'><a href='get_poststrat.html'>get_poststrat</a></span>(<span class='no'>acs_tab</span>, <span class='no'>cd_info_2018</span>, <span class='no'>fm_brm</span>)
-}</div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
