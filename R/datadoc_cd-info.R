@@ -16,11 +16,11 @@
 #'    a dash, and the district number padded with zeros to the left to be of length
 #'    2. At-large districts like Delaware are given a "-01" for the district number.}
 #'    \item{pct_trump, pct_romney, pct_mccain}{The voteshare of presidential candidates
-#'    in that district for the given year. E.g. the pct_mccain data when \code{cd_year == 2018}
+#'    in that district for the given year. E.g. the \code{pct_mccain} data when \code{cd_year == 2018}
 #'    represents the percent of the vote by McCain in 2008 for that district _under 2018 lines._}
 #'    \item{dailykos_name}{The unique descriptive name for the district given by Daily Kos.
-#'    See Source}
-#'    \item{largest_place}{The largest place in the district. Multiple districts may
+#'    See Source for full citation.}
+#'    \item{largest_place}{The largest place in the district given by Daily Kos. Multiple districts may
 #'    have the largest place.}
 #'  }
 #'
