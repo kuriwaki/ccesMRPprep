@@ -38,9 +38,9 @@ This package and vignette goes into more detail about these limitations and the 
 
 1. __Age x Sex x Education__. These variable codes are encoded in `?acscodes_age_sex_educ`.
 2. __Age x Sex x Race__. These variable codes are encoded in `?acscodes_age_sex_race`.
-3. __Sex x Education x Race __. These variable codes are encodd in `?acscodes_sex_educ_race`
+3. __Sex x Education x Race __. These variable codes are encoded in `?acscodes_sex_educ_race`
 
-See their help pages (e.g. `?acscodes_age_sex_edu`) for more information. A detailed list of limitations to come. 
+See their help pages for more information. A detailed list of limitations to come. 
 
 
 ### Collapsing variable codes
