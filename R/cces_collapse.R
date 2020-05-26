@@ -34,10 +34,16 @@ build_counts <- function(data, model_ff, multiple_qIDs = FALSE) {
   if (multiple_qIDs)
     xvars <- c("qID", xvars)
 
+  n_na <- sum(is.na(yesno_to_binary(data$response)))
+  if (n_na > 0) {
+    warning(cat(glue("{n_na} observations in the data have missing values,
+                 which will be counted as failures")))
+  }
+
   data_counts <- data %>%
     group_by(!!!syms(xvars)) %>%
     summarize(n_response = sum(!is.na(response)),
-              yes = sum(yesno_to_binary(response)),
+              yes = sum(yesno_to_binary(response), na.rm = TRUE),
               .groups = "drop") %>%
     filter(n_response > 0) %>%
     mutate_if(is.labelled, haven::as_factor) %>%
