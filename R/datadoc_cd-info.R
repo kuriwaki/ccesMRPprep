@@ -27,10 +27,10 @@
 #'
 #' @source
 #'   The Daily Kos Elections naming guide to the nation's congressional districts.
-#'   <https://bit.ly/2XsFI5W>
+#'   \url{https://bit.ly/2XsFI5W}
 #'
 #'   Daily Kos, "2008, 2012, & 2016 results for districts used in 2018."
-#'    <https://bit.ly/3bXtAPB>
+#'   \url{https://bit.ly/3bXtAPB}
 #'
 #'
 #' @importFrom tibble tibble
