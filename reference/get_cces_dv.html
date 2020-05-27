@@ -40,10 +40,11 @@
 
 
 <meta property="og:title" content="Download a specific CCES dataset from dataverse — get_cces_dv" />
-<meta property="og:description" content="You must download the development version of https://github.com/IQSS/dataverse-client-r
-and get your own dataverse API Key. The current dataverse package downloads
+<meta property="og:description" content="The current dataverse package downloads
 the raw data, so this function writes the raw binary into a tempfile and
-loads it into a tibble with the appropriate file data type." />
+loads it into a tibble with the appropriate file data type.
+You must download the development version of
+IQSS/dataverse-client-r." />
 
 
 
@@ -132,10 +133,11 @@ loads it into a tibble with the appropriate file data type." />
     </div>
 
     <div class="ref-description">
-    <p>You must download the development version of https://github.com/IQSS/dataverse-client-r
-and get your own dataverse API Key. The current dataverse package downloads
+    <p>The current dataverse package downloads
 the raw data, so this function writes the raw binary into a tempfile and
-loads it into a tibble with the appropriate file data type.</p>
+loads it into a tibble with the appropriate file data type.
+You must download the development version of
+<a href='https://github.com/IQSS/dataverse-client-r'>IQSS/dataverse-client-r</a>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_cces_dv</span>(
@@ -168,11 +170,7 @@ not be changed.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>To get a user key, you need to have your own dataverse account. Go to your account
-online and look for "API Token". Generate a API Token. You can then save your
-token by following <code><a href='https://rdrr.io/pkg/dataverse/man/get_user_key.html'>dataverse::get_user_key</a></code>, or directly saving
-<code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv("DATAVERSE_KEY" = "YOUR KEY HERE")</a></code>
-<code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</a></code></p>
+    <p>To write to dataverse, you will need to create your own dataverse API Token.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

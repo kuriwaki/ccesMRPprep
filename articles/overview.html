@@ -98,8 +98,9 @@
 <div id="step-1--downloading-cces-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-1--downloading-cces-data" class="anchor"></a><strong>Step 1.</strong> Downloading CCES data</h2>
-<p>All CCES data can be downloaded directly from dataverse, using the development version of the <code>dataverse</code> R package. Once you set your dataverse API token, the function <code><a href="../reference/get_cces_dv.html">get_cces_dv()</a></code> will make this quick and simple.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">ccc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_cces_dv.html">get_cces_dv</a></span>(<span class="st">"cumulative"</span>)</pre></body></html></div>
+<p>All CCES data can be downloaded directly from dataverse, using the development version of the <a href="https://github.com/IQSS/dataverse-client-r"><code>dataverse</code></a> R package. The function <code><a href="../reference/get_cces_dv.html">get_cces_dv()</a></code> will make this quick and simple - you only need to specify the name of the dataset, given in <code><a href="../reference/cces_dv_ids.html">?cces_dv_ids</a></code>.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># may take about 30 seconds to download</span>
+<span class="no">ccc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_cces_dv.html">get_cces_dv</a></span>(<span class="st">"cumulative"</span>)</pre></body></html></div>
 <p>We will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">ccc_samp()</a></code>).</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">ccc_samp</span>
 <span class="co">#&gt; # A tibble: 1,000 x 18</span>
