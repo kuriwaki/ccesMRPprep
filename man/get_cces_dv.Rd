@@ -29,9 +29,6 @@ loads it into a tibble with the appropriate file data type.
 You must download the development version of
 \href{https://github.com/IQSS/dataverse-client-r}{IQSS/dataverse-client-r}.
 }
-\details{
-To write to dataverse, you will need to create your own dataverse API Token.
-}
 \examples{
 
 \dontrun{

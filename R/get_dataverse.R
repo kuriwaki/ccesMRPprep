@@ -7,9 +7,6 @@
 #' [IQSS/dataverse-client-r](https://github.com/IQSS/dataverse-client-r).
 #'
 #'
-#' @details
-#'  To write to dataverse, you will need to create your own dataverse API Token.
-#'
 #' @param name The name of the dataset as defined in \code{data(cces_dv_ids)}.
 #' @param year_subset The year (or years, a vector) to subset too. If `name` is a year specific dataset, this
 #' argument is redundant, but if `name == "cumulative"`, then the output
