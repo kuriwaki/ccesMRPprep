@@ -1,13 +1,27 @@
+url: https://kuriwaki.github.io/ccesMRPprep
+
 destination: docs
 
 template:
   params:
     bootswatch: spacelab
+  docsearch:
+    api_key: '1a2c0d939f9a70090cf27efbbac5ba52'
+    index_name: 'ccesmrpprep'
+
+home:
+  title: Portable Routines for Preparing CCES and ACS data for MRP
+  description: >
+    Multilevel Regression and Poststratification (MRP) is a method for analyzing
+    surveys, and can be implemented on public datasets such as the CCES and ACS.
+    This package provides data loading, processing, and formatting functions for
+    a particular task: using CCES data for MRP. It uses the dataverse and
+    tidycensus packages to load data and provide some crosswalks. Model fitting
+    and visualization of MRP itself is handled elsewhere.
 
 authors:
   Shiro Kuriwaki:
     href: "https://www.shirokuriwaki.com"
-
 
 reference:
 - title: Lookup tables and variable metadata
