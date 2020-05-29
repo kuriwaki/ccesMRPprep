@@ -1,4 +1,7 @@
 #' Collapse CCES data to be analyzed in binomial model
+#'
+#' Currently only is compatible with question of type \code{"yesno"}.
+#'
 #' @param data A cleaned CCES dataset, e.g. from \link{ccc_std_demographics} which is
 #' then combined with outcome and contextual data in \link{cces_join_slim}. Currently, it
 #'  assumes the outcome is named \code{response}. This variable need not be numeric or

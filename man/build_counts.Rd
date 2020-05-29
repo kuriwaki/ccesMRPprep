@@ -20,7 +20,7 @@ Only the RHS will be used but the LHS is necessary.}
 therefore require the counts to be built for each outcome? Defaults to \code{FALSE}.}
 }
 \description{
-Collapse CCES data to be analyzed in binomial model
+Currently only is compatible with question of type \code{"yesno"}.
 }
 \examples{
 
