@@ -69,7 +69,7 @@ get_cces_question <- function(qcode, year, qID, data_dir = "data/input/cces") {
     cces_resp <- cces_resp %>%
       mutate(response = recode(as.integer(response), .missing = "No", .default = "Yes"))
   }
-  # we wil code Rs as 1 for CL_party
+  # we will code Rs as 1 for CL_party
   if (qcode == "CL_party") {
     cces_resp <- cces_resp %>%
       mutate(response = recode(as.integer(response), `11` = "Yes", .missing = "No", .default = "No"))
