@@ -85,7 +85,7 @@ get_cces_question <- function(qcode, year, qID, data_dir = "data/input/cces") {
 
   cces_df <- cces_resp %>%
     transmute(year = as.integer(year),
-              case_id = as.integer(case_id),
+              case_id = as.character(case_id),
               qID = qID,
               response = as_factor(response))
 
