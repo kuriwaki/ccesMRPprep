@@ -109,7 +109,7 @@
 <p>All CCES data can be downloaded directly from dataverse, using the development version of the <a href="https://github.com/IQSS/dataverse-client-r"><code>dataverse</code></a> R package. The function <code><a href="../reference/get_cces_dv.html">get_cces_dv()</a></code> will make this quick and simple - you only need to specify the name of the dataset, given in <code><a href="../reference/cces_dv_ids.html">?cces_dv_ids</a></code>.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># may take about 30 seconds to download</span>
 <span class="no">ccc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_cces_dv.html">get_cces_dv</a></span>(<span class="st">"cumulative"</span>)</pre></body></html></div>
-<p>We will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">ccc_samp()</a></code>).</p>
+<p>Here we will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">ccc_samp()</a></code>). In production, you will want to download all 14 datasets to your local directory via a script like <a href="https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R">initialize-cces-downloads.R</a> (still private).</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">ccc_samp</span>
 <span class="co">#&gt; # A tibble: 1,000 x 18</span>
 <span class="co">#&gt;     year case_id state st    cd    zipcode county_fips  gender   age    race</span>
@@ -194,7 +194,7 @@
 <li>The poststratification table via <code><a href="../reference/get_poststrat.html">get_poststrat()</a></code> (in Step 5).</li>
 </ol>
 <p>Together, these uniquely define one MRP model for one operationalization of one question with a particular set of covariates.</p>
-<p>Another way to draw the data would be to use <code><a href="../reference/get_cces_dv.html">get_cces_dv()</a></code>, use the demographics from the cumulative passed into <code><a href="../reference/ccc_std_demographics.html">ccc_std_demographics()</a></code>, and then merge the outcome from each year’s CCES (e.g. <code><a href="../reference/get_cces_dv.html">get_cces_dv("2016")</a></code>). The year-specific CCES does come with demographics too, but they are not guaranteed to be standardized by this package’s procedures.</p>
+<p>Another way to draw the data would be to use <code><a href="../reference/get_cces_dv.html">get_cces_dv()</a></code>, use the demographics from the cumulative passed into <code><a href="../reference/ccc_std_demographics.html">ccc_std_demographics()</a></code>, and then merge the outcome from each year’s CCES (e.g. <code><a href="../reference/get_cces_dv.html">get_cces_dv("2016")</a></code>) using <code><a href="../reference/get_cces_question.html">get_cces_question()</a></code>. The year-specific CCES does come with demographics too, but they are not guaranteed to be standardized by this package’s procedures. Use the formula, the standardized cumulative CCES, and a column of outcomes, and the ACS.</p>
 </div>
   </div>
 
