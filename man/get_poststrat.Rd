@@ -4,7 +4,7 @@
 \alias{get_poststrat}
 \title{Formats a post-strat table from ACS and district-level data}
 \usage{
-get_poststrat(cleaned_acs, dist_data, model_ff)
+get_poststrat(cleaned_acs, dist_data = NULL, model_ff)
 }
 \arguments{
 \item{cleaned_acs}{An output of \link{get_acs_cces}. The count of people in

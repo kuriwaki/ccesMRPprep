@@ -111,13 +111,15 @@ get_acs_cces <- function(varlist, varlab_df,
 #' # 6 18 to 24 years Male   HS or Less     0.092 IL-07 18734
 #' }
 #'
-get_poststrat <- function(cleaned_acs, dist_data, model_ff) {
+get_poststrat <- function(cleaned_acs, dist_data = NULL, model_ff) {
 
   xvars <- setdiff(all.vars(as.formula(model_ff))[-c(1:2)], "response")
   xvar_regex <- glue("^({str_c(xvars, collapse = '|')})$")
 
+  if (!is.null(dist_data))
+    cleaned_acs <- left_join(dist_data, cleaned_acs)
+
   cleaned_acs %>%
-    left_join(dist_data) %>%
     filter_at(vars(matches(xvar_regex)), all_vars(!is.na(.))) %>%
     group_by(!!!syms(xvars), add = TRUE) %>%
     summarize(count = sum(count, na.rm = TRUE)) %>%
