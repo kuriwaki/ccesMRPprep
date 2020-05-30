@@ -103,3 +103,5 @@ Under this workflow, only three objects are needed to conduct MRP with a brms mo
 
 Together, these uniquely define one MRP model for one operationalization of one question with a particular set of covariates. 
 
+
+Another way to draw the data would be to use `get_cces_dv()`, use the demographics from the cumulative passed into `ccc_std_demographics()`, and then merge the outcome from each year's CCES (e.g. `get_cces_dv("2016")`). The year-specific CCES does come with demographics too, but they are not guaranteed to be standardized by this package's procedures.

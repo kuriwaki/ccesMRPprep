@@ -4,10 +4,10 @@ destination: docs
 
 template:
   params:
+    docsearch:
+      api_key: '1a2c0d939f9a70090cf27efbbac5ba52'
+      index_name: 'ccesmrpprep'
     bootswatch: spacelab
-  docsearch:
-    api_key: '1a2c0d939f9a70090cf27efbbac5ba52'
-    index_name: 'ccesmrpprep'
 
 home:
   title: Portable Routines for Preparing CCES and ACS data for MRP
@@ -40,7 +40,7 @@ reference:
   - ccc_samp
   - cd_info_2018
   - questions_samp
-- title: Data recoding and cle1aning
+- title: Data recoding and cleaning
   desc: Functions that standardize and clean variable names and formats
 - contents:
   - ccc_bin_age
