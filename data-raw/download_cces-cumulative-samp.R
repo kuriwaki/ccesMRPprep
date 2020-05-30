@@ -2,6 +2,7 @@ source("R/my_API_tokens.R")
 
 library(tidyverse)
 library(dataverse)
+library(haven)
 library(ccesMRPprep)
 
 
@@ -18,3 +19,4 @@ ccc_samp <- ccc %>%
 
 
 usethis::use_data(ccc_samp, overwrite = TRUE)
+
