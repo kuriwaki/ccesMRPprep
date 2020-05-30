@@ -20,7 +20,7 @@ Imports:
     magrittr,
     fs,
     rlang,
-    dplyr (>= 0.8.99),
+    dplyr (>= 1.0.0),
     tidyr,
     haven,
     stringr,
