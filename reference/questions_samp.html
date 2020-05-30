@@ -37,6 +37,12 @@
 <script src="../pkgdown.js"></script>
 
 
+<!-- docsearch -->
+<script src="../docsearch.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+
 
 
 <meta property="og:title" content="Question metadata (sample) — questions_samp" />
@@ -112,6 +118,12 @@
 </li>
       </ul>
       
+      <form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+        </div>
+      </form>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -156,8 +168,21 @@ of <code>"yesno"</code>, <code>"categorical"</code> (discrete but not ordered), 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='no'>questions_samp</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'questions_samp' not found</span></div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'> <span class='no'>questions_samp</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 28 x 5</span><span>
+#&gt;    q_ID      q_label               cces_data q_code   response_type
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
+#&gt; </span><span style='color: #555555;'> 1</span><span> CC06_3075 Cut Capital Gains Tax 2006      v3075    yesno        
+#&gt; </span><span style='color: #555555;'> 2</span><span> CC06_3069 Immigration Reform    2006      v3069    yesno        
+#&gt; </span><span style='color: #555555;'> 3</span><span> CC07_34   SCHIP 2007            2007      CC34     yesno        
+#&gt; </span><span style='color: #555555;'> 4</span><span> CC08_316E SCHIP 2007            2008      CC316e   yesno        
+#&gt; </span><span style='color: #555555;'> 5</span><span> CC09_59F  PPACA                 2009      cc09_59f yesno        
+#&gt; </span><span style='color: #555555;'> 6</span><span> CC10_332D PPACA                 2010      CC332D   yesno        
+#&gt; </span><span style='color: #555555;'> 7</span><span> CC11_341D PPACA                 2011      CC341D   yesno        
+#&gt; </span><span style='color: #555555;'> 8</span><span> CC12_332G Repeal ACA 2012       2012      CC332G   yesno        
+#&gt; </span><span style='color: #555555;'> 9</span><span> CC12_332I PPACA                 2012      CC332I   yesno        
+#&gt; </span><span style='color: #555555;'>10</span><span> CC12_332D Tax Relief 2012       2012      CC332D   yesno        
+#&gt; </span><span style='color: #555555;'># … with 18 more rows</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -180,6 +205,23 @@ of <code>"yesno"</code>, <code>"categorical"</code> (discrete but not ordered), 
    </div>
 
   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script>
+<script>
+  docsearch({
+    
+    
+    apiKey: '1a2c0d939f9a70090cf27efbbac5ba52',
+    indexName: 'ccesmrpprep',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+
 
 
   </body>
