@@ -40,20 +40,7 @@
 
 
 <meta property="og:title" content="Question metadata (sample) — questions_samp" />
-<meta property="og:description" content="A tibble with 28 rows, each row corresponding
-to a variable (column) in a particular CCES dataset. It contains metadata about
-the question in columns.
-
-q_IDA unique identifier for the question. This is roughly a concatenation
-of cces_year and q_code, with some standardization.
-q_labelA short descriptive label of the question, based on a reading of the
-actual question wording.
-cces_dataThe dataset the variable column comes from. Because the CCES is fielded
-each year, this is often a year, with the exception of &quot;cumulative&quot;
-q_codeA string of the variable as it appears in the dataset.
-response_typeA classification of the response option. Currently it consists
-of &quot;yesno&quot;, &quot;categorical&quot; (discrete but not ordered), &quot;ordinal&quot;
-(discrete and ordered). All of these presume a discrete response." />
+<meta property="og:description" content="Question metadata (sample)" />
 
 
 
@@ -142,20 +129,7 @@ of &quot;yesno&quot;, &quot;categorical&quot; (discrete but not ordered), &quot;
     </div>
 
     <div class="ref-description">
-    <p>A tibble with 28 rows, each row corresponding
-to a variable (column) in a particular CCES dataset. It contains metadata about
-the question in columns.
-
-q_IDA unique identifier for the question. This is roughly a concatenation
-of <code>cces_year</code> and <code>q_code</code>, with some standardization.
-q_labelA short descriptive label of the question, based on a reading of the
-actual question wording.
-cces_dataThe dataset the variable column comes from. Because the CCES is fielded
-each year, this is often a year, with the exception of <code>"cumulative"</code>
-q_codeA string of the variable as it appears in the dataset.
-response_typeA classification of the response option. Currently it consists
-of <code>"yesno"</code>, <code>"categorical"</code> (discrete but not ordered), <code>"ordinal"</code>
-(discrete and ordered). All of these presume a discrete response.</p>
+    <p>Question metadata (sample)</p>
     </div>
 
     <pre class="usage"><span class='no'>questions_samp</span></pre>
@@ -163,7 +137,23 @@ of <code>"yesno"</code>, <code>"categorical"</code> (discrete but not ordered), 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 28 rows and 5 columns.</p>
+    <p>A tibble with 28 rows, each row corresponding
+to a variable (column) in a particular CCES dataset. It contains metadata about
+the question in columns.</p>
+<dl'>
+<dt>q_ID</dt><dd><p>A unique identifier for the question. This is roughly a concatenation
+of <code>cces_year</code> and <code>q_code</code>, with some standardization.</p></dd>
+<dt>q_label</dt><dd><p>A short descriptive label of the question, based on a reading of the
+actual question wording.</p></dd>
+<dt>cces_data</dt><dd><p>The dataset the variable column comes from. Because the CCES is fielded
+each year, this is often a year, with the exception of <code>"cumulative"</code></p></dd>
+<dt>q_code</dt><dd><p>A string of the variable as it appears in the dataset.</p></dd>
+<dt>response_type</dt><dd><p>A classification of the response option. Currently it consists
+of <code>"yesno"</code>, <code>"categorical"</code> (discrete but not ordered), <code>"ordinal"</code>
+(discrete and ordered). All of these presume a discrete response.</p></dd>
+
+</dl>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'> <span class='no'>questions_samp</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'questions_samp' not found</span></div><div class='input'>
