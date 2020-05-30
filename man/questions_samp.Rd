@@ -5,16 +5,11 @@
 \alias{questions_samp}
 \title{Question metadata (sample)}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 28 rows and 5 columns.
-}
-\usage{
-questions_samp
-}
-\description{
 A tibble with 28 rows, each row corresponding
 to a variable (column) in a particular CCES dataset. It contains metadata about
 the question in columns.
-\description{
+
+\describe{
 \item{q_ID}{A unique identifier for the question. This is roughly a concatenation
 of \code{cces_year} and \code{q_code}, with some standardization.}
 \item{q_label}{A short descriptive label of the question, based on a reading of the
@@ -26,6 +21,12 @@ each year, this is often a year, with the exception of \code{"cumulative"}}
 of \code{"yesno"}, \code{"categorical"} (discrete but not ordered), \code{"ordinal"}
 (discrete and ordered). All of these presume a discrete response.}
 }
+}
+\usage{
+questions_samp
+}
+\description{
+Question metadata (sample)
 }
 \examples{
  questions_samp

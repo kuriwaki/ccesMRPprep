@@ -1,10 +1,11 @@
 #' Question metadata (sample)
 #'
 #'
-#' @description A tibble with `r nrow(questions_samp)` rows, each row corresponding
+#' @format A tibble with `r nrow(questions_samp)` rows, each row corresponding
 #' to a variable (column) in a particular CCES dataset. It contains metadata about
 #' the question in columns.
-#' \description{
+#'
+#' \describe{
 #' \item{q_ID}{A unique identifier for the question. This is roughly a concatenation
 #'  of \code{cces_year} and \code{q_code}, with some standardization.}
 #' \item{q_label}{A short descriptive label of the question, based on a reading of the
@@ -16,6 +17,7 @@
 #'  of \code{"yesno"}, \code{"categorical"} (discrete but not ordered), \code{"ordinal"}
 #'  (discrete and ordered). All of these presume a discrete response.}
 #' }
+#'
 #' @importFrom tibble tibble
 #'
 #' @examples
