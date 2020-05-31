@@ -9,15 +9,14 @@
 #' @param qID A string, the user's unique name for the question. For example, we use the
 #'  syntax in our question table.
 #' @param data_dir A path for the directory where flat files for the CCES common content is
-#'  stored.  Currently the data must be of the form `cces_{year}.rds`  in that directory
-#'  to be read in. For a general script that uses \link{get_cces_dv}, see
-#'  <https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R>
-#'  which is still private.
+#'  stored.  Currently the data must be of the form `cces_{year}.rds`  (e.g. `"cces_2016.rds"`)
+#'  and it must exist wherever \code{data_dir} is. We recommend looping over \link{get_cces_dv}
+#'  to download data first.
 #'
 #' @details This transformation currently only supports Yes/No questions. For some common
-#'  ordinal questions that ca n be, with manual recodes, be set to a Yes/No question,
+#'  ordinal questions that can, with manual recodes, be set to a Yes/No question,
 #'  there is some hard-coding of the recode in the question. In the future, this should be
-#'  defined outside of the function in a taxanomy.
+#'  defined outside of the function in a taxonomy.
 #'
 #' @return A three-column dataframe with the columns
 #' \describe{
@@ -60,8 +59,13 @@
 get_cces_question <- function(qcode, year, qID, data_dir = "data/input/cces") {
 
   # data
+  cces_year <- read_rds(path(data_dir, glue("cces_{year}.rds")))
+
+  # check
+  stopifnot(qcode %in% colnames(cces_year))
+
   # rename outcome to "response"
-  cces_resp <- read_rds(path(data_dir, glue("cces_{year}.rds"))) %>%
+  cces_resp <- cces_year  %>%
     select(case_id, response = !!qcode)
 
   # turnout is special. If missing, means they didn't turn out.
