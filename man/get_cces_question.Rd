@@ -19,10 +19,9 @@ Together with \code{qcode}, uniquely identifies the outcome question data}
 syntax in our question table.}
 
 \item{data_dir}{A path for the directory where flat files for the CCES common content is
-stored.  Currently the data must be of the form \verb{cces_\{year\}.rds}  in that directory
-to be read in. For a general script that uses \link{get_cces_dv}, see
-\url{https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R}
-which is still private.}
+stored.  Currently the data must be of the form \verb{cces_\{year\}.rds}  (e.g. \code{"cces_2016.rds"})
+and it must exist wherever \code{data_dir} is. We recommend looping over \link{get_cces_dv}
+to download data first.}
 }
 \value{
 A three-column dataframe with the columns
@@ -40,9 +39,9 @@ Get one column of outcome questions for each model
 }
 \details{
 This transformation currently only supports Yes/No questions. For some common
-ordinal questions that ca n be, with manual recodes, be set to a Yes/No question,
+ordinal questions that can, with manual recodes, be set to a Yes/No question,
 there is some hard-coding of the recode in the question. In the future, this should be
-defined outside of the function in a taxanomy.
+defined outside of the function in a taxonomy.
 }
 \examples{
  \dontrun{

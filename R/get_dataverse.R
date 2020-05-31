@@ -8,13 +8,18 @@
 #'
 #'
 #' @param name The name of the dataset as defined in \code{data(cces_dv_ids)}.
-#' @param year_subset The year (or years, a vector) to subset too. If `name` is a year specific dataset, this
-#' argument is redundant, but if `name == "cumulative"`, then the output
-#' will be the cumulative dataset subsetted to that year. This is useful when
-#' using the cumulative dataset for its harmonized variables.
+#' @param year_subset The year (or years, a vector) to subset too. If `name` is a year
+#' specific dataset, this argument is redundant, but if `name == "cumulative"`, then
+#' the output will be the cumulative dataset subsetted to that year. This is useful
+#' when using the cumulative dataset for its harmonized variables.
 #' @param dataverse_paths A dataframe where one row represents metadata for one
-#' CCES dataset. Built-in data \code{cces_dv_ids} is used as a default and should
+#' CCES dataset. Built-in data \link{cces_dv_ids} is used as a default and should
 #' not be changed.
+#'
+#' @details We find it convenient to loop over this function for all values in
+#' \link{cces_dv_ids} and populate the MRP directory with all datasets (about 2GB
+#' in total). Each dataset has slightly different formats; using \link{get_cces_question}
+#' will standardize, for example, the name of the case ID.
 #'
 #' @importFrom glue glue
 #' @importFrom stringr str_extract
