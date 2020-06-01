@@ -167,19 +167,25 @@ You must download the development version of
     </tr>
     <tr>
       <th>year_subset</th>
-      <td><p>The year (or years, a vector) to subset too. If <code>name</code> is a year specific dataset, this
-argument is redundant, but if <code>name == "cumulative"</code>, then the output
-will be the cumulative dataset subsetted to that year. This is useful when
-using the cumulative dataset for its harmonized variables.</p></td>
+      <td><p>The year (or years, a vector) to subset too. If <code>name</code> is a year
+specific dataset, this argument is redundant, but if <code>name == "cumulative"</code>, then
+the output will be the cumulative dataset subsetted to that year. This is useful
+when using the cumulative dataset for its harmonized variables.</p></td>
     </tr>
     <tr>
       <th>dataverse_paths</th>
       <td><p>A dataframe where one row represents metadata for one
-CCES dataset. Built-in data <code>cces_dv_ids</code> is used as a default and should
+CCES dataset. Built-in data <a href='cces_dv_ids.html'>cces_dv_ids</a> is used as a default and should
 not be changed.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>We find it convenient to loop over this function for all values in
+<a href='cces_dv_ids.html'>cces_dv_ids</a> and populate the MRP directory with all datasets (about 2GB
+in total). Each dataset has slightly different formats; using <a href='get_cces_question.html'>get_cces_question</a>
+will standardize, for example, the name of the case ID.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -201,7 +207,7 @@ not be changed.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

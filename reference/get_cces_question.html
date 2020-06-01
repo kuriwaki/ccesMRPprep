@@ -169,16 +169,15 @@ syntax in our question table.</p></td>
     <tr>
       <th>data_dir</th>
       <td><p>A path for the directory where flat files for the CCES common content is
-stored.  Currently the data must be of the form <code>cces_{year}.rds</code>  in that directory
-to be read in. For a general script that uses <a href='get_cces_dv.html'>get_cces_dv</a>, see
-<a href='https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R'>https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R</a>
-which is still private.</p></td>
+stored.  Currently the data must be of the form <code>cces_{year}.rds</code>  (e.g. <code>"cces_2016.rds"</code>)
+and it must exist wherever <code>data_dir</code> is. We recommend looping over <a href='get_cces_dv.html'>get_cces_dv</a>
+to download data first.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A three-column dataframe with the columns</p><dl'>
+    <p>A three-column dataframe with the columns</p><dl>
 <dt>year</dt><dd><p>The year</p></dd>
 <dt>case_id</dt><dd><p>The respondent identifier within year</p></dd>
 <dt>qID</dt><dd><p>The question ID</p></dd>
@@ -189,9 +188,9 @@ the question identifier <code>qID</code></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This transformation currently only supports Yes/No questions. For some common
-ordinal questions that ca n be, with manual recodes, be set to a Yes/No question,
+ordinal questions that can, with manual recodes, be set to a Yes/No question,
 there is some hard-coding of the recode in the question. In the future, this should be
-defined outside of the function in a taxanomy.</p>
+defined outside of the function in a taxonomy.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'> <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -227,7 +226,7 @@ defined outside of the function in a taxanomy.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

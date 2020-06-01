@@ -148,7 +148,14 @@ use the variables necessary for the model, thus its name "slim".  Therefore,
 is model dependent.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cces_join_slim</span>(<span class='no'>ccq_df</span>, <span class='no'>ccc_df</span>, <span class='no'>cd_df</span>, <span class='no'>model_ff</span>, <span class='kw'>subset_dist</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>cces_join_slim</span>(
+  <span class='no'>ccq_df</span>,
+  <span class='no'>ccc_df</span>,
+  <span class='no'>cd_df</span>,
+  <span class='no'>model_ff</span>,
+  <span class='kw'>coerce_to_char</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>subset_dist</span> <span class='kw'>=</span> <span class='fl'>NA</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,7 +173,11 @@ with CAS.</p></td>
     </tr>
     <tr>
       <th>cd_df</th>
-      <td><p>dataframe of district-level predictors, see <a href='cd_info_2018.html'>cd_info_2018</a> for a sample.</p></td>
+      <td><p>dataframe of district-level predictors, see <a href='cd_info_2018.html'>cd_info_2018</a> for a
+sample. Currently, we join this to the rest of the data on the column called
+<code>"cd"</code>.
+@param coerce_to_char Whether to coerce the case identifier to character class,
+this enables the join.</p></td>
     </tr>
     <tr>
       <th>model_ff</th>
@@ -217,7 +228,7 @@ with CAS.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

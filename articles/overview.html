@@ -87,7 +87,7 @@
 
       
 
-      </header><script src="overview_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Workflow Overview</h1>
@@ -112,21 +112,22 @@
 <p>Here we will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">ccc_samp()</a></code>). In production, you will want to download all 14 datasets to your local directory via a script like <a href="https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R">initialize-cces-downloads.R</a> (still private).</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">ccc_samp</span>
 <span class="co">#&gt; # A tibble: 1,000 x 18</span>
-<span class="co">#&gt;     year case_id state st    cd    zipcode county_fips  gender   age    race</span>
-<span class="co">#&gt;    &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;int+l&gt; &lt;int&gt; &lt;int+l&gt;</span>
-<span class="co">#&gt;  1  2006  439254 Neva… NV    NV-2  89703   32510       2 [Fem…    20 1 [Whi…</span>
-<span class="co">#&gt;  2  2006  440689 Cali… CA    CA-2  96067   06093       2 [Fem…    71 1 [Whi…</span>
-<span class="co">#&gt;  3  2006  445845 Colo… CO    CO-5  80922   08041       2 [Fem…    39 1 [Whi…</span>
-<span class="co">#&gt;  4  2006  452572 Minn… MN    MN-5  55428   27053       1 [Mal…    74 1 [Whi…</span>
-<span class="co">#&gt;  5  2006  498451 Iowa  IA    IA-2  50060   19185       2 [Fem…    53 1 [Whi…</span>
-<span class="co">#&gt;  6  2006  502543 Tenn… TN    TN-5  37206   47037       2 [Fem…    50 1 [Whi…</span>
-<span class="co">#&gt;  7  2006  523050 West… WV    WV-2  25312   54039       1 [Mal…    55 1 [Whi…</span>
-<span class="co">#&gt;  8  2006  523861 Illi… IL    IL-3  60629   17031       2 [Fem…    51 1 [Whi…</span>
-<span class="co">#&gt;  9  2006  532881 Minn… MN    MN-7  55396   27143       1 [Mal…    44 1 [Whi…</span>
-<span class="co">#&gt; 10  2006  553375 Ohio  OH    OH-11 44112   39035       2 [Fem…    53 1 [Whi…</span>
-<span class="co">#&gt; # … with 990 more rows, and 8 more variables: hispanic &lt;int+lbl&gt;,</span>
-<span class="co">#&gt; #   educ &lt;int+lbl&gt;, faminc &lt;fct&gt;, marstat &lt;int+lbl&gt;, newsint &lt;int+lbl&gt;,</span>
-<span class="co">#&gt; #   vv_turnout_gvm &lt;fct&gt;, voted_pres_16 &lt;fct&gt;, economy_retro &lt;int+lbl&gt;</span></pre></body></html></div>
+<span class="co">#&gt;     year case_id    state      st cd    zipcode county_fips  gender   age</span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;dbl+lb&gt; &lt;dbl+l&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl+l&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;  1  2006 1005058 26 [Mic… 26 [MI] MI-4  48603   26145       2 [Fem…    36</span>
+<span class="co">#&gt;  2  2006 1006614 48 [Tex… 48 [TX] TX-18 77040   48201       1 [Mal…    40</span>
+<span class="co">#&gt;  3  2006 1009338  6 [Cal…  6 [CA] CA-48 92656   06059       1 [Mal…    32</span>
+<span class="co">#&gt;  4  2006 1088898 12 [Flo… 12 [FL] FL-13 34224   12015       2 [Fem…    52</span>
+<span class="co">#&gt;  5  2006 1090564 42 [Pen… 42 [PA] PA-19 17011   42041       2 [Fem…    25</span>
+<span class="co">#&gt;  6  2006 1093132 45 [Sou… 45 [SC] SC-2  29073   45063       2 [Fem…    48</span>
+<span class="co">#&gt;  7  2006 1093573 49 [Uta… 49 [UT] UT-3  84118   49035       2 [Fem…    74</span>
+<span class="co">#&gt;  8  2006 1105620 15 [Haw… 15 [HI] HI-1  96701   15003       1 [Mal…    37</span>
+<span class="co">#&gt;  9  2006 1116569 48 [Tex… 48 [TX] TX-21 78610   48209       2 [Fem…    20</span>
+<span class="co">#&gt; 10  2006 1117377 39 [Ohi… 39 [OH] OH-7  45502   39023       2 [Fem…    49</span>
+<span class="co">#&gt; # … with 990 more rows, and 9 more variables: race &lt;dbl+lbl&gt;,</span>
+<span class="co">#&gt; #   hispanic &lt;dbl+lbl&gt;, educ &lt;dbl+lbl&gt;, faminc &lt;dbl+lbl&gt;, marstat &lt;dbl+lbl&gt;,</span>
+<span class="co">#&gt; #   newsint &lt;dbl+lbl&gt;, vv_turnout_gvm &lt;dbl+lbl&gt;, voted_pres_16 &lt;dbl+lbl&gt;,</span>
+<span class="co">#&gt; #   economy_retro &lt;dbl+lbl&gt;</span></pre></body></html></div>
 </div>
 <div id="step-2--cleaning-cces-data" class="section level2">
 <h2 class="hasAnchor">
@@ -158,17 +159,17 @@
 <span class="no">ccc_samp_out</span>
 <span class="co">#&gt; # A tibble: 400 x 5</span>
 <span class="co">#&gt;      age gender educ         n_response   yes</span>
-<span class="co">#&gt;    &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;             &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt;  1    18 Male   HS or Less            3     0</span>
-<span class="co">#&gt;  2    18 Female HS or Less            7     5</span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;             &lt;int&gt; &lt;int&gt;</span>
+<span class="co">#&gt;  1    18 Male   HS or Less            3     1</span>
+<span class="co">#&gt;  2    18 Female HS or Less            7     4</span>
 <span class="co">#&gt;  3    18 Female Some College          1     0</span>
 <span class="co">#&gt;  4    19 Male   HS or Less            1     1</span>
 <span class="co">#&gt;  5    19 Female HS or Less            2     1</span>
 <span class="co">#&gt;  6    19 Female Some College          2     1</span>
 <span class="co">#&gt;  7    20 Male   HS or Less            1     0</span>
 <span class="co">#&gt;  8    20 Male   Some College          5     3</span>
-<span class="co">#&gt;  9    20 Female HS or Less            3     2</span>
-<span class="co">#&gt; 10    20 Female Some College          5     4</span>
+<span class="co">#&gt;  9    20 Female HS or Less            3     3</span>
+<span class="co">#&gt; 10    20 Female Some College          5     3</span>
 <span class="co">#&gt; # … with 390 more rows</span></pre></body></html></div>
 </div>
 <div id="step-5--prepare-acs-data-and-poststratification-table" class="section level2">
@@ -213,7 +214,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
