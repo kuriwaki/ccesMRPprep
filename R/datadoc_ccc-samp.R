@@ -15,7 +15,8 @@
 #'   \item{case_id}{Respondent identifier (unique within each year)}
 #'   \item{state}{State (in the form of \code{state.name})}
 #'   \item{st}{State Abbreviation (in the form of \code{state.abb})}
-#'   \item{cd}{Congressional district at the time of the survey}
+#'   \item{cd}{Congressional district at the time of the survey. See \link{ccc_std_demographics}
+#'             for how it is and should be standardized.}
 #'   \item{zipcode}{Zipcode (See codebook)}
 #'   \item{county_fips}{County FIPS code (See codebook)}
 #'   \item{gender}{Gender (equivalent to sex in ACS for the purposes of this package)}
