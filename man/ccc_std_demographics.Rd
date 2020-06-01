@@ -8,7 +8,8 @@ ccc_std_demographics(tbl, only_demog = FALSE)
 }
 \arguments{
 \item{tbl}{A subset of the cumulative common content. Must include variables
-\code{age}, \code{race}, \code{educ}, and \code{gender}.}
+\code{age}, \code{race}, \code{educ}, \code{gender}, \code{st}, \code{state},
+and \code{cd}. See \link{ccc_samp} for an example.}
 
 \item{only_demog}{Drop variables besides demographics? Defaults to FALSE}
 }

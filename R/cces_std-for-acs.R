@@ -1,7 +1,8 @@
 #' Recode CCES variables so that they merge to ACS variables
 #'
 #' @param tbl A subset of the cumulative common content. Must include variables
-#'  \code{age}, \code{race}, \code{educ}, and \code{gender}.
+#'  \code{age}, \code{race}, \code{educ}, \code{gender}, \code{st}, \code{state},
+#'  and \code{cd}. See \link{ccc_samp} for an example.
 #' @param only_demog Drop variables besides demographics? Defaults to FALSE
 #'
 #'
@@ -49,10 +50,26 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
   race_cces_to_acs <- race_key %>% distinct(race_cces_chr, race)
   educ_cces_to_acs <- educ_key %>% distinct(educ_cces_chr, educ)
 
+  # districts
+  if (inherits(tbl$st, "labelled"))
+    tbl$st <- as.character(as_factor(tbl$st))
+  if (inherits(tbl$state, "labelled"))
+    tbl$state <- as.character(as_factor(tbl$state))
 
-  tbl_modified <- tbl %>%
-    # cd pad 0s
-    mutate(cd = str_c(st, "-", str_pad(dist, width = 2, pad = "0"))) %>%
+  # cd pad 0s
+  if ("dist" %in% colnames(tbl)) {
+    tbl <- tbl %>%
+      mutate(cd = str_c(st, "-", str_pad(dist, width = 2, pad = "0")))
+  }
+  # no single digits and "AL" notation
+  if ("cd" %in% colnames(tbl)) {
+    stopifnot(!any(str_detect(tbl$cd, "[A-Z][A-Z]-[1-9]$")))
+    stopifnot(!any(str_detect(tbl$cd, "[A-Z][A-Z]-AL")))
+  }
+
+
+  # demographics
+  tbl_mod <- tbl %>%
     # age
     mutate(age_bin = ccc_bin_age(age)) %>%
     # race
@@ -64,7 +81,7 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
     mutate(educ_cces_chr = as.character(as_factor(educ_cces_chr))) %>%
     left_join(educ_cces_to_acs, by = "educ_cces_chr")
 
-    tbl_out <- tbl_modified %>%
+    tbl_out <- tbl_mod %>%
       select(matches("year"),
            matches("case_id"),
            matches("weight"),
