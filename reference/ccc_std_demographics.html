@@ -152,7 +152,8 @@
     <tr>
       <th>tbl</th>
       <td><p>A subset of the cumulative common content. Must include variables
-<code>age</code>, <code>race</code>, <code>educ</code>, and <code>gender</code>.</p></td>
+<code>age</code>, <code>race</code>, <code>educ</code>, <code>gender</code>, <code>st</code>, <code>state</code>,
+and <code>cd</code>. See <a href='ccc_samp.html'>ccc_samp</a> for an example.</p></td>
     </tr>
     <tr>
       <th>only_demog</th>
@@ -163,12 +164,18 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The output is of the same dimensions as the input (unless <code>only_demog = TRUE</code>)
-but with the following exceptions. <code>age_bin</code> is coded to match up with the ACS
-bins and the recoding occurs in a separate function, <code>ccc_bin_age</code>.
-<code>educ</code> is recoded (coarsened and relabelled) to match up with the ACS.
-(the original version is left as <code>educ_cces_chr</code>), and the same goes for
-<code>race</code>. These recodings are governed by the key-value pairs <a href='keyvalue.html'>educ_key</a> and
-<a href='keyvalue.html'>race_key</a>.</p>
+but with the following exceptions:</p><ul>
+<li><p><code>age_bin</code> is coded to match up with the ACS bins and the recoding occurs
+in a separate function, <code>ccc_bin_age</code>.</p></li>
+<li><p><code>educ</code> is recoded (coarsened and relabelled) to match up with the ACS.
+(the original version is left as <code>educ_cces_chr</code>). Recoding is governed by
+the key-value pairs <a href='keyvalue.html'>educ_key</a></p></li>
+<li><p>the same goes for <code>race</code>. These recodings are governed by the
+key-value pair <a href='keyvalue.html'>race_key</a>.</p></li>
+<li><p><code>cd</code> is standardized so that at large districs are given "01" and
+single-digit districts are padded with 0s. e.g. <code>"WY-01"</code> and <code>"CA-02"</code>.</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

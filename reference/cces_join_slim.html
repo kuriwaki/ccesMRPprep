@@ -138,7 +138,7 @@ is model dependent." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Build CCES Data by Joining Component Pieces</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/cces_format.R'><code>R/cces_format.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/cces_join.R'><code>R/cces_join.R</code></a></small>
     <div class="hidden name"><code>cces_join_slim.Rd</code></div>
     </div>
 
@@ -199,19 +199,19 @@ this enables the join.</p></td>
                  <span class='kw'>ccc_df</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>ccc_samp</span>, <span class='no'>year</span> <span class='kw'>==</span> <span class='fl'>2018</span>),
                  <span class='kw'>cd_df</span> <span class='kw'>=</span> <span class='no'>cd_info_2018</span>,
                  <span class='kw'>model_ff</span> <span class='kw'>=</span> <span class='st'>"yes | trials(n_response) ~ age + educ + (1|cd)"</span>)
-  <span class='co'># A tibble: 133 x 7</span>
-  <span class='co'>#    year  case_id qID   response   age             educ cd</span>
-  <span class='co'>#  &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;fct&gt;    &lt;int&gt;        &lt;int+lbl&gt; &lt;chr&gt;</span>
-  <span class='co'># 1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11</span>
-  <span class='co'># 2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-4</span>
-  <span class='co'># 3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-2</span>
-  <span class='co'># 4  2018 411717742 TCJA  Oppose      50 1 [No HS]        IL-3</span>
-  <span class='co'># 5  2018 412022838 TCJA  Oppose      66 5 [4-Year]       OH-8</span>
-  <span class='co'># 6  2018 412123052 TCJA  Oppose      35 3 [Some College] WA-4</span>
-  <span class='co'># 7  2018 412161131 TCJA  Support     32 3 [Some College] IN-3</span>
-  <span class='co'># 8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-1</span>
-  <span class='co'># 9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-2</span>
-  <span class='co'># ...</span>
+
+<span class='co'># A tibble: 133 x 7</span>
+<span class='co'>#     year case_id   qID   response   age             educ cd</span>
+<span class='co'>#     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;fct&gt;    &lt;dbl&gt;        &lt;dbl+lbl&gt; &lt;chr&gt;</span>
+<span class='co'>#     1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11</span>
+<span class='co'>#     2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-04</span>
+<span class='co'>#     3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-02</span>
+<span class='co'>#     4  2018 411717742 TCJA  Oppose      50 1 [No HS]        IL-03</span>
+<span class='co'>#     5  2018 412022838 TCJA  Oppose      66 5 [4-Year]       OH-08</span>
+<span class='co'>#     6  2018 412123052 TCJA  Oppose      35 3 [Some College] WA-04</span>
+<span class='co'>#     7  2018 412161131 TCJA  Support     32 3 [Some College] IN-03</span>
+<span class='co'>#     8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-01</span>
+<span class='co'>#     9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-02</span>
  }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
