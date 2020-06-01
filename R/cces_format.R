@@ -11,7 +11,11 @@
 #' @param ccc_df dataframe of covariates, currently taken only from the cumulative
 #'  common content. It should have passed \link{ccc_std_demographics} to be compatible
 #'  with CAS.
-#' @param cd_df dataframe of district-level predictors, see \link{cd_info_2018} for a sample.
+#' @param cd_df dataframe of district-level predictors, see \link{cd_info_2018} for a
+#'  sample. Currently, we join this to the rest of the data on the column called
+#'  \code{"cd"}.
+#'  @param coerce_to_char Whether to coerce the case identifier to character class,
+#'  this enables the join.
 #' @param model_ff the MRP model. Only the variables on the RHS will be kept.
 #' @param subset_dist a character for the geography of cd to subset
 #'
@@ -45,14 +49,27 @@
 #'  }
 #'
 #' @export
-cces_join_slim <- function(ccq_df, ccc_df, cd_df, model_ff, subset_dist = NA) {
+cces_join_slim <- function(ccq_df,
+                           ccc_df,
+                           cd_df,
+                           model_ff,
+                           coerce_to_char = TRUE,
+                           subset_dist = NA) {
 
   vars <- c("year", "case_id", "qID",
             "response",
             all.vars(as.formula(model_ff))[-c(1:2)]) # the outcome is sum(yes) | trials(n)
 
-  joined_df <- left_join(ungroup(ccc_df), ungroup(ccq_df), by = c("case_id", "year")) %>%
+  if (coerce_to_char) {
+    ccq_df$case_id <- as.character(ccq_df$case_id)
+    ccc_df$case_id <- as.character(ccc_df$case_id)
+  }
+
+  joined_df <- ungroup(ccc_df) %>%
+    left_join(ungroup(ccq_df), by = c("case_id", "year")) %>%
     left_join(cd_df, by = "cd")
+
+
 
   # if party reg, also update by only giving 1s to active registrants
   if (attr(ccq_df, "question") == "CL_party") {

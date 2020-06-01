@@ -4,7 +4,14 @@
 \alias{cces_join_slim}
 \title{Build CCES Data by Joining Component Pieces}
 \usage{
-cces_join_slim(ccq_df, ccc_df, cd_df, model_ff, subset_dist = NA)
+cces_join_slim(
+  ccq_df,
+  ccc_df,
+  cd_df,
+  model_ff,
+  coerce_to_char = TRUE,
+  subset_dist = NA
+)
 }
 \arguments{
 \item{ccq_df}{dataframe of outcomes, taken from \link{get_cces_question}. We
@@ -14,7 +21,11 @@ currently assume the name for the outcome is named "response".}
 common content. It should have passed \link{ccc_std_demographics} to be compatible
 with CAS.}
 
-\item{cd_df}{dataframe of district-level predictors, see \link{cd_info_2018} for a sample.}
+\item{cd_df}{dataframe of district-level predictors, see \link{cd_info_2018} for a
+sample. Currently, we join this to the rest of the data on the column called
+\code{"cd"}.
+@param coerce_to_char Whether to coerce the case identifier to character class,
+this enables the join.}
 
 \item{model_ff}{the MRP model. Only the variables on the RHS will be kept.}
 

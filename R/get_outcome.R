@@ -56,7 +56,10 @@
 #'  }
 #'
 #' @export
-get_cces_question <- function(qcode, year, qID, data_dir = "data/input/cces") {
+get_cces_question <- function(qcode,
+                              year,
+                              qID,
+                              data_dir = "data/input/cces") {
 
   # data
   cces_year <- read_rds(path(data_dir, glue("cces_{year}.rds")))
