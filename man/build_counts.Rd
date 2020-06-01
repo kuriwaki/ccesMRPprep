@@ -30,6 +30,10 @@ ccc_samp_std <- ccc_samp \%>\%
   mutate(response = sample(c("For", "Against"), size = n(), replace = TRUE)) \%>\%
   ccc_std_demographics()
 
+ff <- "yes | trials(n_response) ~ age + gender + educ + (1|cd)"
 ccc_samp_out <- build_counts(ccc_samp_std,
-                             "yes | trials(n_response) ~ age + gender + educ")
+                             model_ff = ff)
+
+ccc_samp_out
+
 }

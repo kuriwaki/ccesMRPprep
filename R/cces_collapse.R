@@ -28,8 +28,12 @@
 #'   mutate(response = sample(c("For", "Against"), size = n(), replace = TRUE)) %>%
 #'   ccc_std_demographics()
 #'
+#' ff <- "yes | trials(n_response) ~ age + gender + educ + (1|cd)"
 #' ccc_samp_out <- build_counts(ccc_samp_std,
-#'                              "yes | trials(n_response) ~ age + gender + educ")
+#'                              model_ff = ff)
+#'
+#' ccc_samp_out
+#'
 build_counts <- function(data, model_ff, multiple_qIDs = FALSE) {
   all_vars <- all.vars(as.formula(model_ff))[-c(1:2)]
   xvars <- setdiff(all_vars, "response")

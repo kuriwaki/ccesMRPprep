@@ -33,19 +33,19 @@
 #'                  ccc_df = filter(ccc_samp, year == 2018),
 #'                  cd_df = cd_info_2018,
 #'                  model_ff = "yes | trials(n_response) ~ age + educ + (1|cd)")
-#'   # A tibble: 133 x 7
-#'   #    year  case_id qID   response   age             educ cd
-#'   #  <int>     <int> <chr> <fct>    <int>        <int+lbl> <chr>
-#'   # 1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11
-#'   # 2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-4
-#'   # 3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-2
-#'   # 4  2018 411717742 TCJA  Oppose      50 1 [No HS]        IL-3
-#'   # 5  2018 412022838 TCJA  Oppose      66 5 [4-Year]       OH-8
-#'   # 6  2018 412123052 TCJA  Oppose      35 3 [Some College] WA-4
-#'   # 7  2018 412161131 TCJA  Support     32 3 [Some College] IN-3
-#'   # 8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-1
-#'   # 9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-2
-#'   # ...
+#'
+#' # A tibble: 133 x 7
+#' #     year case_id   qID   response   age             educ cd
+#' #     <dbl> <chr>     <chr> <fct>    <dbl>        <dbl+lbl> <chr>
+#' #     1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11
+#' #     2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-04
+#' #     3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-02
+#' #     4  2018 411717742 TCJA  Oppose      50 1 [No HS]        IL-03
+#' #     5  2018 412022838 TCJA  Oppose      66 5 [4-Year]       OH-08
+#' #     6  2018 412123052 TCJA  Oppose      35 3 [Some College] WA-04
+#' #     7  2018 412161131 TCJA  Support     32 3 [Some College] IN-03
+#' #     8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-01
+#' #     9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-02
 #'  }
 #'
 #' @export
