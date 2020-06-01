@@ -14,12 +14,18 @@ ccc_std_demographics(tbl, only_demog = FALSE)
 }
 \value{
 The output is of the same dimensions as the input (unless \code{only_demog = TRUE})
-but with the following exceptions. \code{age_bin} is coded to match up with the ACS
-bins and the recoding occurs in a separate function, \code{ccc_bin_age}.
-\code{educ} is recoded (coarsened and relabelled) to match up with the ACS.
-(the original version is left as \code{educ_cces_chr}), and the same goes for
-\code{race}. These recodings are governed by the key-value pairs \link{educ_key} and
-\link{race_key}.
+but with the following exceptions:
+\itemize{
+\item \code{age_bin} is coded to match up with the ACS bins and the recoding occurs
+in a separate function, \code{ccc_bin_age}.
+\item \code{educ} is recoded (coarsened and relabelled) to match up with the ACS.
+(the original version is left as \code{educ_cces_chr}). Recoding is governed by
+the key-value pairs \link{educ_key}
+\item the same goes for \code{race}. These recodings are governed by the
+key-value pair \link{race_key}.
+\item \code{cd} is standardized so that at large districs are given "01" and
+single-digit districts are padded with 0s. e.g. \code{"WY-01"} and \code{"CA-02"}.
+}
 }
 \description{
 Recode CCES variables so that they merge to ACS variables
