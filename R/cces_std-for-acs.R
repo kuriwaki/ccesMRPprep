@@ -51,9 +51,9 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
   educ_cces_to_acs <- educ_key %>% distinct(educ_cces_chr, educ)
 
   # districts
-  if (inherits(tbl$st, "labelled"))
+  if (inherits(tbl$st, "haven_labelled"))
     tbl$st <- as.character(as_factor(tbl$st))
-  if (inherits(tbl$state, "labelled"))
+  if (inherits(tbl$state, "haven_labelled"))
     tbl$state <- as.character(as_factor(tbl$state))
 
   # cd pad 0s
