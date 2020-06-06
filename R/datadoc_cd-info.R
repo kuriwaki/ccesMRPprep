@@ -7,7 +7,7 @@
 #'
 #' @format A dataframe with the `r nrow(cd_info_2018)` Congressional Districts, one row per cd.
 #'  \describe{
-#'    \item{cd_year}{The year for the district line. A congressional district's
+#'    \item{year}{The year for the district line. A congressional district's
 #'    actual geography can change year to year, and significantly so in different
 #'    redistricting cycles. 2019 indicates the data about voteshare and place names
 #'    corresponds to district lines as of 2019.}

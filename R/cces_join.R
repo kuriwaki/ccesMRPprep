@@ -13,7 +13,7 @@
 #'  with CAS.
 #' @param cd_df dataframe of district-level predictors, see \link{cd_info_2018} for a
 #'  sample. Currently, we join this to the rest of the data on the column called
-#'  \code{"cd"}.
+#'  \code{"cd"} and \code{"year"}.
 #'  @param coerce_to_char Whether to coerce the case identifier to character class,
 #'  this enables the join.
 #' @param model_ff the MRP model. Only the variables on the RHS will be kept.
@@ -67,7 +67,7 @@ cces_join_slim <- function(ccq_df,
 
   joined_df <- ungroup(ccc_df) %>%
     left_join(ungroup(ccq_df), by = c("case_id", "year")) %>%
-    left_join(cd_df, by = "cd")
+    left_join(cd_df, by = c("cd", "year"))
 
 
 

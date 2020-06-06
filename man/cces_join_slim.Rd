@@ -23,7 +23,7 @@ with CAS.}
 
 \item{cd_df}{dataframe of district-level predictors, see \link{cd_info_2018} for a
 sample. Currently, we join this to the rest of the data on the column called
-\code{"cd"}.
+\code{"cd"} and \code{"year"}.
 @param coerce_to_char Whether to coerce the case identifier to character class,
 this enables the join.}
 
