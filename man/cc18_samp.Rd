@@ -15,7 +15,7 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 cc18_samp
 }
 \description{
-1000 rows from th CCES Common Content. Contains all columns, retaining the
+1000 rows from th 2018 CCES Common Content. Contains all columns, retaining the
 \code{haven_labelled} class. This is \url{doi:10.7910/DVN/ZSBZ7K/H5IDTA} originally read
 in using \code{read_dta} via \code{get_cces_dv()}. To search for variable by its content,
 \code{questionr::lookfor} (or \code{rcces::vartab}) is a useful option (see example).
@@ -28,11 +28,12 @@ common content, of which 2018 is a subset. A sample of the cumulative is contain
 in this package as \code{?ccc_samp}.
 }
 \examples{
-cc18_samp
 
-# use questionr::lookfor to search the label and labels --
-
+# use questionr::lookfor to search the label and labels
 questionr::lookfor(cc18_samp, "Trump")
+
+# all data
+cc18_samp
 
 }
 \keyword{datasets}
