@@ -2,11 +2,12 @@
 % Please edit documentation in R/get_dataverse.R
 \name{get_cces_dv}
 \alias{get_cces_dv}
-\title{Download a specific CCES dataset from dataverse}
+\title{Download a specific CCES dataset from dataverse, with some indexing}
 \usage{
 get_cces_dv(
   name = "cumulative",
   year_subset = 2006:2019,
+  std_index = TRUE,
   dataverse_paths = cces_dv_ids
 )
 }
@@ -18,19 +19,25 @@ specific dataset, this argument is redundant, but if \code{name == "cumulative"}
 the output will be the cumulative dataset subsetted to that year. This is useful
 when using the cumulative dataset for its harmonized variables.}
 
+\item{std_index}{Whetehr to standardize the unique case identifier. These
+have different column names in different datasets, but setting this to \code{TRUE}
+(the default) will all rename them \code{"case_id"} and also add the year of the dataset.
+This way, every dataset that gets downloaded will have the unique identifier
+defined by the variables \code{c("year", "case_id")}.}
+
 \item{dataverse_paths}{A dataframe where one row represents metadata for one
 CCES dataset. Built-in data \link{cces_dv_ids} is used as a default and should
 not be changed.}
 }
 \description{
-The current dataverse package downloads
-the raw data, so this function writes the raw binary into a tempfile and
-loads it into a tibble with the appropriate file data type.
-You must download the development version of
-\href{https://github.com/IQSS/dataverse-client-r}{IQSS/dataverse-client-r}.
+Get the data from dataverse into the current R environment. You must use
+the development version of \href{https://github.com/IQSS/dataverse-client-r}{IQSS/dataverse-client-r}.
+The function also does
 }
 \details{
-We find it convenient to loop over this function for all values in
+The current dataverse package downloads the raw data, so this function writes
+the raw binary into a tempfile and loads it into a tibble with the appropriate
+file data type. We find it convenient to loop over this function for all values in
 \link{cces_dv_ids} and populate the MRP directory with all datasets (about 2GB
 in total). Each dataset has slightly different formats; using \link{get_cces_question}
 will standardize, for example, the name of the case ID.
@@ -38,7 +45,7 @@ will standardize, for example, the name of the case ID.
 \examples{
 
 \dontrun{
- ccc <- get_cces_dv("cumulative", year = 2018)
+ ccc <- get_cces_dv("cumulative", year_subset = 2018)
  }
 
 }
