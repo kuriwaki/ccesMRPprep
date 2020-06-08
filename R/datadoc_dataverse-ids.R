@@ -1,8 +1,8 @@
-#' Identifiers for datasets in CCES dataverse
+#' Identifiers for datasets in CCES Dataverse
 #'
 #' @format A tibble with one row per dataverse dataset. The \code{doi},
 #' \code{filename}, and \code{server} can uniquely define a file in
-#' \link{dataverse::get_file}.
+#' `?dataverse::get_file()`.
 #'  \describe{
 #'  \item{cces_name}{The unique name/shorthand for this dataset}
 #'  \item{year}{Specific year the data surveys, if there is one unique year}

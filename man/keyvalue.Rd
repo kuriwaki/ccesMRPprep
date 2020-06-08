@@ -39,7 +39,7 @@ same class as the CCES cumulative file.}
 For mapping ACS data values for education e.g. in \link{get_acs}:
 \describe{
 \item{educ_cces_chr}{Character to recode from, in CCES}
-\item{educ_chr}{Character to recode from, in ACS. See \link{}}
+\item{educ_chr}{Character to recode from, in ACS.}
 \item{educ}{An labelled integer of class haven::labelled. Target variable}
 }
 }
@@ -56,7 +56,7 @@ to recode CCES variable
 
 \code{age10_key}: Age bins, 10-ways, used in \link{acscodes_age_sex_race}:
 \describe{
-\item{age}{An labelled integer of class haven::labelled. Target variable.}
+\item{age}{An labelled integer of class \code{haven::haven_labelled}. Target variable.}
 \item{age_chr}{Character to recode from, in ACS}
 }
 }

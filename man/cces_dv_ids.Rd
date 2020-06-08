@@ -3,11 +3,11 @@
 \docType{data}
 \name{cces_dv_ids}
 \alias{cces_dv_ids}
-\title{Identifiers for datasets in CCES dataverse}
+\title{Identifiers for datasets in CCES Dataverse}
 \format{
 A tibble with one row per dataverse dataset. The \code{doi},
 \code{filename}, and \code{server} can uniquely define a file in
-\link{dataverse::get_file}.
+\code{?dataverse::get_file()}.
 \describe{
 \item{cces_name}{The unique name/shorthand for this dataset}
 \item{year}{Specific year the data surveys, if there is one unique year}
@@ -23,7 +23,7 @@ the unique case (respondent/person) identifier. Use a string. }
 cces_dv_ids
 }
 \description{
-Identifiers for datasets in CCES dataverse
+Identifiers for datasets in CCES Dataverse
 }
 \examples{
  cces_dv_ids
