@@ -38,6 +38,7 @@ reference:
   desc: Samples of datasets one can get from the data loading functions
 - contents:
   - ccc_samp
+  - cc18_samp
   - cd_info_2018
   - questions_samp
 - title: Data recoding and cleaning
