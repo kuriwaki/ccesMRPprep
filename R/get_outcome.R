@@ -3,11 +3,14 @@
 #' @param qcode A string, the variable name of the outcome variable of interest,
 #'  exactly as it appears in the CCES dataset. Together with \code{year}, uniquely identifies
 #'  the outcome question data
-#' @param year A string for the year the question was asked, which will correspond
-#' to the dataset. If using a dataset from the cumulative, set to \code{"cumulative"}.
+#' @param year A string for the year the question was asked, which defines the
+#' the _dataset_. If using a dataset from the cumulative, set to \code{"cumulative"}.
 #' Together with \code{qcode}, uniquely identifies the outcome question data
 #' @param qID A string, the user's unique name for the question. For example, we use the
 #'  syntax in our question table.
+#' @param dataframe An optional argument to pass the entire CCES dataframe in-environment.
+#' If left empty, this will supersede the arguments \code{year} and \code{dataframe} and
+#' use the provided datasets instead.
 #' @param data_dir A path for the directory where flat files for the CCES common content is
 #'  stored.  Currently the data must be of the form `cces_{year}.rds`  (e.g. `"cces_2016.rds"`)
 #'  and it must exist wherever \code{data_dir} is. We recommend looping over \link{get_cces_dv}
@@ -36,8 +39,12 @@
 #'
 #'
 #' @examples
+#'
+#'  # with sample data
+#'  get_cces_question("pid3", dataframe = cc18_samp, year = 2018, qID = "pid3")
+#'
+#'  # need data/input/cces/cces_2018.rds to run this
 #'  \dontrun{
-#'   # need data/input/cces/cces_2018.rds to run this
 #'   get_cces_question(qcode = "CC18_326", year = "2018", qID = "TCJA")
 #'
 #'   # A tibble: 60,000 x 4
@@ -59,10 +66,19 @@
 get_cces_question <- function(qcode,
                               year,
                               qID,
+                              dataframe = NULL,
                               data_dir = "data/input/cces") {
 
   # data
-  cces_year <- read_rds(path(data_dir, glue("cces_{year}.rds")))
+  if (is.null(dataframe)) {
+    cat(glue("Attempting to read in data from local flat file in the directory {data_dir}") , "\n")
+    cces_year <- read_rds(path(data_dir, glue("cces_{year}.rds")))
+  }
+
+  if (!is.null(dataframe)) {
+    cat("Using the dataframe provided", "\n")
+    cces_year <- dataframe
+  }
 
   # check
   stopifnot(qcode %in% colnames(cces_year))

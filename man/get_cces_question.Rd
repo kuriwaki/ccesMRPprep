@@ -4,19 +4,29 @@
 \alias{get_cces_question}
 \title{Get one column of outcome questions for each model}
 \usage{
-get_cces_question(qcode, year, qID, data_dir = "data/input/cces")
+get_cces_question(
+  qcode,
+  year,
+  qID,
+  dataframe = NULL,
+  data_dir = "data/input/cces"
+)
 }
 \arguments{
 \item{qcode}{A string, the variable name of the outcome variable of interest,
 exactly as it appears in the CCES dataset. Together with \code{year}, uniquely identifies
 the outcome question data}
 
-\item{year}{A string for the year the question was asked, which will correspond
-to the dataset. If using a dataset from the cumulative, set to \code{"cumulative"}.
+\item{year}{A string for the year the question was asked, which defines the
+the \emph{dataset}. If using a dataset from the cumulative, set to \code{"cumulative"}.
 Together with \code{qcode}, uniquely identifies the outcome question data}
 
 \item{qID}{A string, the user's unique name for the question. For example, we use the
 syntax in our question table.}
+
+\item{dataframe}{An optional argument to pass the entire CCES dataframe in-environment.
+If left empty, this will supersede the arguments \code{year} and \code{dataframe} and
+use the provided datasets instead.}
 
 \item{data_dir}{A path for the directory where flat files for the CCES common content is
 stored.  Currently the data must be of the form \verb{cces_\{year\}.rds}  (e.g. \code{"cces_2016.rds"})
@@ -44,8 +54,12 @@ there is some hard-coding of the recode in the question. In the future, this sho
 defined outside of the function in a taxonomy.
 }
 \examples{
+
+ # with sample data
+ get_cces_question("pid3", dataframe = cc18_samp, year = 2018, qID = "pid3")
+
+ # need data/input/cces/cces_2018.rds to run this
  \dontrun{
-  # need data/input/cces/cces_2018.rds to run this
   get_cces_question(qcode = "CC18_326", year = "2018", qID = "TCJA")
 
   # A tibble: 60,000 x 4
