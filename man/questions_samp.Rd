@@ -5,7 +5,7 @@
 \alias{questions_samp}
 \title{Question metadata (sample)}
 \format{
-A tibble with 28 rows, each row corresponding
+A tibble with 30 rows, each row corresponding
 to a variable (column) in a particular CCES dataset. It contains metadata about
 the question in columns.
 
