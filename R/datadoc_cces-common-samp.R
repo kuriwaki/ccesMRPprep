@@ -39,3 +39,23 @@
 #' ccc_samp
 #'
 "ccc_samp"
+
+
+#' Sample 2018 Common Content
+#'
+#' 1000 rows from th CCES Common Content. Contains all columns, retaining the
+#' `haven_labelled` class. This is <doi:10.7910/DVN/ZSBZ7K/H5IDTA> originally read
+#' in using `read_dta` via `get_cces_dv()`.
+#'
+#' @details See the 2018 Codebook in the DOI below for question wording of
+#' each column. To use the harmonized and easier-to-use versions of common variables
+#' like geography, partisan ID, demographics and vote choice, use the cumulative
+#' common content, of which 2018 is a subset. A sample of the cumulative is contained
+#' in this package as `?ccc_samp`.
+#'
+#' @source "Brian Schaffner; Stephen Ansolabehere; Sam Luks, 2019,
+#' "CCES Common Content, 2018", https://doi.org/10.7910/DVN/ZSBZ7K, Harvard Dataverse V6.
+#'
+#' @examples
+#' cc18_samp
+"cc18_samp"
