@@ -55,11 +55,15 @@ reference:
 
 
 articles:
-- title: Get started
+- title: Get Started
   navbar: ~
   contents:
     - overview
-- title: ACS data
+- title: Derived Variables
+  navbar: ~
+  contents:
+    - derived
+- title: ACS Data
   navbar: ~
   contents:
     - acs

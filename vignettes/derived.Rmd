@@ -1,0 +1,190 @@
+---
+title: "Deriving Variables"
+author: "Shiro Kuriwaki"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(ccesMRPprep)
+library(tidyverse)
+library(haven)
+```
+
+All survey questions are inherently discrete so the analyst must decide how to derive (or operationalize) that into a numeric indicator. This decision choice that rarely gets the limelight is a difficult operation to encode in a generic way.
+
+# Original Encodings (haven_labelled)   
+
+`factor` is a R variable class in which value comprises a value has a _level_ and a _label_ (See [Advanced R](http://adv-r.had.co.nz/Data-structures.html#attributes) for a brief technical overview.). Both of these are necessary to store in survey design because the order in which the values were presented and the label matters. Even though the levels can be thought of as fundamentally as integers, the transformation from R factors to integers is actually cumbersome. `?base::factor` recommends `as.numeric(levels(f))[f]` where `f` is a factor vector. 
+
+`haven_labelled` is a separate R class that was defined in the `haven` package, a part of tidyverse that is designed to read Stata and SPSS files. Stata and SPSS have their own analogs to factors, but in Stata, these variables are literally integers/doubles with a _"labels"_ attribute which is a named vector where the values are the numbers and the labels are the _label_ equivalent of factors. `haven_labelled` is a class that preserves this information (See `?haven::labelled` help page or the [vignette](https://cran.r-project.org/web/packages/labelled/vignettes/intro_labelled.html) from the `labelled` package for more detail).  For example, look at any of the variables in the CCES 2018 sample which contains a `lbl` tag:
+
+```{r}
+gov_approval_lbl <- select(cc18_samp, case_id, CC18_308d)
+gov_approval_lbl
+```
+
+Recent versions of `haven` (>= 2.1.0) will display the labels in square brackets if the dataset is a tibble, but we can see that the values are basically doubles.  If we had used factors, these numerical values would be obscured, though the levels and labels will be kept.
+
+```{r}
+gov_approval_fct <- transmute(cc18_samp, case_id, CC18_308d = as_factor(CC18_308d))
+gov_approval_fct
+```
+
+For using CCES outcomes, the __haven_labelled__ class is more concise then factors, for the following reasons:
+
+1. It is closer to the original format of the data as exported by YouGov (SPSS)
+2. Creating derived variables via operators is more concise (think `gov_approval <= 2` instead of `gov_approval %in% c("Strongly approve", "approve")`).
+
+
+
+The second point is consequential. For example suppose we want to model a derived variable, Governor approval, which is 1 if the respondent strongly approves or approves of the governor. With the haven_labelled class, we can do what we would do in Stata:
+
+```{r}
+gov_approval_lbl %>% 
+  mutate(outcome = CC18_308d <= 2) %>% 
+  count(CC18_308d, outcome)
+```
+
+But this will not work with factors, 
+```{r}
+gov_approval_fct %>% 
+  mutate(outcome = CC18_308d <= "Somewhat approve") %>% 
+  count(outcome)
+```
+That means, with factors, we would need to figure out all the labels and type them up exactly as they appear. In surveys, the labels can be long and contain punctuation which is easy to miss. Of course we can extract these from attributes and save the trouble of hand-entering them, but the same information is available in the haven_labelled class too. 
+
+On the other hand, `haven_labelled` is a bit inconvenient because the raw number is not immediately informative. A quick way to transform the numerical data to its labels is `haven::as_factor` (notice this is different from `base::as.factor`). Or, for metadata, we can look at its attributes:
+
+
+
+In the `haven_labelled` class, three pieces of information are stored  as attributes:
+
+1. `label`: Description of the entire variable (this contains a short version of the question or an indication of the question in CCES data)
+2. `labels`: Label-Value keyvalue pairs.
+
+
+We can use `str` and `attr` to view and extract these metadata:
+
+```{r}
+str(gov_approval_lbl$CC18_308d)
+```
+
+For example, this indicates that `CC18_308d` is about `"Job approval -- The Governor of $inputstate"`. This is _not_ the question wording verbatim, of course. This is something that needs to be looked up in the Word Doc YouGov questionnaires each time, or in the CCES codebooks (Shiro and the CCES team has some of this in plain-text tabular form for recent years). 
+
+And the possible values are 
+
+```{r}
+attr(gov_approval_lbl$CC18_308d, "labels")
+```
+
+where again the numbers are the values and the labels attribute of the vector are the value labels.
+
+
+As long as we retain these attributes (which is possible as long as haven is loaded), we can express derivation in a simple way.
+
+
+
+# Question Types
+
+
+Another thing this metadata _does not_ include is whether the response options are binary, ordinal, or categorical (no inherent ordering). This is something we need to hand-classify, although it is usually obvious once we see the question. 
+
+We consider the of the most common types below.  These are from the sample question metadata (see the `q_type` variable):
+
+```{r}
+questions_samp %>% 
+  filter(q_ID %in% c("CC18_322C","CC18_308d", "CC18_pid3"))
+```
+
+
+This classification narrows down the type of function we would use for deriving a variable.  
+
+
+__All three types__ can be derived by the basic atomic operator:
+
+```
+outcome = lbl_var %in% c(v1, v2, v3, ...)
+```
+
+where `outcome` is the derived variable, `lbl_var` the data vector of class `haven_labelled`, and `c(v1, v2, v3, ...)` is a vector of one or more in the data vector that that we consider a success. 
+
+For this project we only consider binomial models, which is why this is sufficient. Survey data is almost never continuous, and running multinomial models in MRP is still exceedingly uncommon. 
+
+
+
+## 1. Yes-No variables  - use `yesno_to_binary`
+
+This is the simplest case because there are only two options and it is almost always clear which of the two is naturally corresponds to a "success" instead of a "failure" in a Bernoulli random variable. That means we currently _only- use `yesno_to_binary()` for the derivation. For example, `CC18_322C` is a question asking for people's support of a measure to withdraw federal funding for so-called "Sanctuary Cities":
+
+
+
+```{r}
+cc18_samp %>% 
+  select(case_id, CC18_322c)
+```
+
+```{r}
+cc18_samp %>% 
+  select(case_id, CC18_322c) %>% 
+  mutate(outcome = yesno_to_binary(as_factor(CC18_322c))) %>% 
+  count(CC18_322c, outcome)
+```
+
+
+
+
+## 2. Categorical variables
+
+These have no inherent ordering, i.e. there is no likert scale or obvious scale. These can be vote choice for parties, race, religion, or method of voting. Here we show partisanship (on a 3 point multiple choice question). 
+
+```{r}
+str(cc18_samp$pid3)
+```
+
+
+
+To make a derived variable out of this, we need __a function that takes an ordered vector of value(s) that counts as a success__ . For example, let's say we want to measure the proportion of independents. Then the derivation will be 
+
+```{r}
+cc18_samp %>% 
+  select(case_id, pid3) %>% 
+  mutate(outcome = pid3 %in% 3) %>% 
+  count(pid3, outcome)
+```
+because `3` stands for independent in this case, as can be seen from the metadata.
+
+Clearly, "Yes/No" variable type can be considered a type of categorical variable type.  I still distinguish these between because in the former, the analyst does need to make a decision about what consists as a success, whereas in `pid3` for example, three reasonable operations can exist and the what is a success as opposed to a failure is ambiguous from the name `pid3`.
+
+## 3. Ordinal variables
+
+Ordinal variables have a clear ordering in their labels and their values conform to that order, for example likert scales agree-disagree, approve-disagree, as well as measures like education, income, and news interest.
+
+This  means that derivation can use operators `<` and `>` instead of simply `%in%` -- as in the Governor approval example in the beginning. We may want to lump  together this with a categorical variable, but again  the distinction can be meaningful because in  an ordinal variable one would almost never "skip" a value, as in `governor_approval %in% c(1, 3, 4)`, whereas in a categorical variable, one might do that depending on the order of the variables. 
+
+
+_Note_ one must be careful that almost all the variables considered here are not exhaustively "ordinal" because they have "Not Sure" / "Other" / "Not Asked" values as taking values of 8 or 9. For example, because `pid3 == 4` means "Other", a derived variable defined as "pid3 >= 3" is not very meaningful unless you are interested in the group of people who identify as "Independent" or "Other".
+
+```{r}
+cc18_samp %>% 
+  select(case_id, CC18_308d) %>% 
+  mutate(outcome = CC18_308d <= 2) %>% 
+  count(CC18_308d, outcome)
+```
+
+
+
+# Other Considerations
+
+Missing Values
+
+Generic versions of derivation
