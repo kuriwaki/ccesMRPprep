@@ -54,10 +54,17 @@ get_cces_dv <- function(name = "cumulative",
   filetype <- str_extract(y_info$filename, "\\.[A-z]+$")
   svr <- y_info$server
   caseid_var <- y_info$caseid_var
+  yr <- y_info$year
+  doi <- y_info$doi
 
 
+  # warning
+  if (yr %% 2 == 0 | doi == "10.7910/DVN/II2DB6")
+    cat("Downloading and reading large dataset, can take about 3-5 minutes to complete.", "\n")
+
+    # read tempfile
   cces_dv <- get_file(file = glue("{y_info$filename}"),
-                      dataset = glue("doi:{y_info$doi}"),
+                      dataset = glue("doi:{doi}"),
                       server = svr)
   tmp <- tempfile(fileext = filetype)
   writeBin(cces_dv, tmp)
@@ -86,10 +93,10 @@ get_cces_dv <- function(name = "cumulative",
       select(case_id, everything())
 
     if (!is.na(y_info$year))
-      cces <- add_column(cces, year = y_info$year, .before = 1)
+      cces <- add_column(cces, year = yr, .before = 1)
   } else {
     cces <- cces_raw
   }
 
-  return(cces_raw)
+  return(cces)
 }
