@@ -107,6 +107,9 @@ available as built in datasets." />
       <a href="../articles/overview.html">Workflow Overview</a>
     </li>
     <li>
+      <a href="../articles/derived.html">Deriving Variables</a>
+    </li>
+    <li>
       <a href="../articles/acs.html">ACS Tables to Use for CCES and MRP</a>
     </li>
   </ul>
@@ -195,7 +198,7 @@ same class as the CCES cumulative file.</p></dd>
 
 <p>For mapping ACS data values for education e.g. in get_acs:</p><dl>
 <dt>educ_cces_chr</dt><dd><p>Character to recode from, in CCES</p></dd>
-<dt>educ_chr</dt><dd><p>Character to recode from, in ACS. See</p></dd>
+<dt>educ_chr</dt><dd><p>Character to recode from, in ACS.</p></dd>
 <dt>educ</dt><dd><p>An labelled integer of class haven::labelled. Target variable</p></dd>
 
 </dl>
@@ -213,7 +216,7 @@ to recode CCES variable</p><dl>
 
 
 <p><code>age10_key</code>: Age bins, 10-ways, used in <a href='acscodes_partitions.html'>acscodes_age_sex_race</a>:</p><dl>
-<dt>age</dt><dd><p>An labelled integer of class haven::labelled. Target variable.</p></dd>
+<dt>age</dt><dd><p>An labelled integer of class <code>haven::haven_labelled</code>. Target variable.</p></dd>
 <dt>age_chr</dt><dd><p>Character to recode from, in ACS</p></dd>
 
 </dl>

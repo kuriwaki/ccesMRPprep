@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Identifiers for datasets in CCES dataverse — cces_dv_ids • ccesMRPprep</title>
+<title>Identifiers for datasets in CCES Dataverse — cces_dv_ids • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,8 @@
 
 
 
-<meta property="og:title" content="Identifiers for datasets in CCES dataverse — cces_dv_ids" />
-<meta property="og:description" content="Identifiers for datasets in CCES dataverse" />
+<meta property="og:title" content="Identifiers for datasets in CCES Dataverse — cces_dv_ids" />
+<meta property="og:description" content="Identifiers for datasets in CCES Dataverse" />
 
 
 
@@ -104,6 +104,9 @@
       <a href="../articles/overview.html">Workflow Overview</a>
     </li>
     <li>
+      <a href="../articles/derived.html">Deriving Variables</a>
+    </li>
+    <li>
       <a href="../articles/acs.html">ACS Tables to Use for CCES and MRP</a>
     </li>
   </ul>
@@ -135,13 +138,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Identifiers for datasets in CCES dataverse</h1>
+    <h1>Identifiers for datasets in CCES Dataverse</h1>
     <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/datadoc_dataverse-ids.R'><code>R/datadoc_dataverse-ids.R</code></a></small>
     <div class="hidden name"><code>cces_dv_ids.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Identifiers for datasets in CCES dataverse</p>
+    <p>Identifiers for datasets in CCES Dataverse</p>
     </div>
 
     <pre class="usage"><span class='no'>cces_dv_ids</span></pre>
@@ -151,7 +154,7 @@
 
     <p>A tibble with one row per dataverse dataset. The <code>doi</code>,
 <code>filename</code>, and <code>server</code> can uniquely define a file in
-dataverse::get_file.</p><dl>
+<code>?dataverse::get_file()</code>.</p><dl>
 <dt>cces_name</dt><dd><p>The unique name/shorthand for this dataset</p></dd>
 <dt>year</dt><dd><p>Specific year the data surveys, if there is one unique year</p></dd>
 <dt>doi</dt><dd><p>The DOI for the dataverse dataset (instead of the specific file). The URL is therefore https://doi.org/

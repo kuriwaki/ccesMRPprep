@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download a specific CCES dataset from dataverse — get_cces_dv • ccesMRPprep</title>
+<title>Download a specific CCES dataset from dataverse, with some indexing — get_cces_dv • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,12 +45,10 @@
 
 
 
-<meta property="og:title" content="Download a specific CCES dataset from dataverse — get_cces_dv" />
-<meta property="og:description" content="The current dataverse package downloads
-the raw data, so this function writes the raw binary into a tempfile and
-loads it into a tibble with the appropriate file data type.
-You must download the development version of
-IQSS/dataverse-client-r." />
+<meta property="og:title" content="Download a specific CCES dataset from dataverse, with some indexing — get_cces_dv" />
+<meta property="og:description" content="Get the data from dataverse into the current R environment. You must use
+the development version of IQSS/dataverse-client-r.
+The function also does" />
 
 
 
@@ -108,6 +106,9 @@ IQSS/dataverse-client-r." />
       <a href="../articles/overview.html">Workflow Overview</a>
     </li>
     <li>
+      <a href="../articles/derived.html">Deriving Variables</a>
+    </li>
+    <li>
       <a href="../articles/acs.html">ACS Tables to Use for CCES and MRP</a>
     </li>
   </ul>
@@ -139,22 +140,21 @@ IQSS/dataverse-client-r." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download a specific CCES dataset from dataverse</h1>
+    <h1>Download a specific CCES dataset from dataverse, with some indexing</h1>
     <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/get_dataverse.R'><code>R/get_dataverse.R</code></a></small>
     <div class="hidden name"><code>get_cces_dv.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The current dataverse package downloads
-the raw data, so this function writes the raw binary into a tempfile and
-loads it into a tibble with the appropriate file data type.
-You must download the development version of
-<a href='https://github.com/IQSS/dataverse-client-r'>IQSS/dataverse-client-r</a>.</p>
+    <p>Get the data from dataverse into the current R environment. You must use
+the development version of <a href='https://github.com/IQSS/dataverse-client-r'>IQSS/dataverse-client-r</a>.
+The function also does</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_cces_dv</span>(
   <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"cumulative"</span>,
   <span class='kw'>year_subset</span> <span class='kw'>=</span> <span class='fl'>2006</span>:<span class='fl'>2019</span>,
+  <span class='kw'>std_index</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>dataverse_paths</span> <span class='kw'>=</span> <span class='no'>cces_dv_ids</span>
 )</pre>
 
@@ -173,6 +173,14 @@ the output will be the cumulative dataset subsetted to that year. This is useful
 when using the cumulative dataset for its harmonized variables.</p></td>
     </tr>
     <tr>
+      <th>std_index</th>
+      <td><p>Whetehr to standardize the unique case identifier. These
+have different column names in different datasets, but setting this to <code>TRUE</code>
+(the default) will all rename them <code>"case_id"</code> and also add the year of the dataset.
+This way, every dataset that gets downloaded will have the unique identifier
+defined by the variables <code><a href='https://rdrr.io/r/base/c.html'>c("year", "case_id")</a></code>.</p></td>
+    </tr>
+    <tr>
       <th>dataverse_paths</th>
       <td><p>A dataframe where one row represents metadata for one
 CCES dataset. Built-in data <a href='cces_dv_ids.html'>cces_dv_ids</a> is used as a default and should
@@ -182,7 +190,9 @@ not be changed.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>We find it convenient to loop over this function for all values in
+    <p>The current dataverse package downloads the raw data, so this function writes
+the raw binary into a tempfile and loads it into a tibble with the appropriate
+file data type. We find it convenient to loop over this function for all values in
 <a href='cces_dv_ids.html'>cces_dv_ids</a> and populate the MRP directory with all datasets (about 2GB
 in total). Each dataset has slightly different formats; using <a href='get_cces_question.html'>get_cces_question</a>
 will standardize, for example, the name of the case ID.</p>
@@ -190,7 +200,7 @@ will standardize, for example, the name of the case ID.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='no'>ccc</span> <span class='kw'>&lt;-</span> <span class='fu'>get_cces_dv</span>(<span class='st'>"cumulative"</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>)
+ <span class='no'>ccc</span> <span class='kw'>&lt;-</span> <span class='fu'>get_cces_dv</span>(<span class='st'>"cumulative"</span>, <span class='kw'>year_subset</span> <span class='kw'>=</span> <span class='fl'>2018</span>)
  }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
