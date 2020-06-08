@@ -1,5 +1,5 @@
 ---
-title: "Deriving Variables"
+title: "Derived Variables"
 author: "Shiro Kuriwaki"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -22,7 +22,7 @@ library(haven)
 
 All survey questions are inherently discrete so the analyst must decide how to derive (or operationalize) that into a numeric indicator. This decision choice that rarely gets much spotlight is a difficult operation to represent in a general function.
 
-# Original Encodings (haven_labelled)   
+# Factors and haven_labelled variable classes
 
 `factor` is a base R variable class in which values are defined by exclusive and exhaustive list of a _level_ and a _label_ (See [Advanced R](http://adv-r.had.co.nz/Data-structures.html#attributes) for a brief technical overview.). Both levels and labels are necessary to track because the order in which the values were presented and what the respondent saw (the labels) matters. The levels can be thought of as fundamentally as integers, to represent the order. That said, the transformation from R factors to integers is cumbersome. `?base::factor` recommends `as.numeric(levels(f))[f]` where `f` is a factor vector. 
 
@@ -38,7 +38,10 @@ Recent versions of `haven` (>= 2.1.0) will display the labels in square brackets
 ```{r}
 gov_approval_fct <- transmute(cc18_samp, case_id, CC18_308d = as_factor(CC18_308d))
 gov_approval_fct
+
 ```
+### Why haven_labelled is more concise
+
 
 For using CCES outcomes, the __haven_labelled__ class is more concise then factors, for the following reasons:
 
@@ -66,6 +69,7 @@ That means, with factors, we would need to figure out all the labels and type th
 On the other hand, `haven_labelled` is a bit inconvenient because the raw number is not immediately informative. A quick way to transform the numerical data to its labels is `haven::as_factor` (notice this is different from `base::as.factor`). Or, for metadata, we can look at its attributes:
 
 
+### Metadata contained in a haven_labelled variable
 
 In the `haven_labelled` class, three pieces of information are stored  as attributes:
 
@@ -94,7 +98,7 @@ As long as we retain these attributes (which is possible as long as haven is loa
 
 
 
-# Question Types
+# Classifying Questions by Type of Derivation
 
 
 Another thing this metadata _does not_ include is whether the response options are binary, ordinal, or categorical (no inherent ordering). This is something we need to hand-classify, although it is usually obvious once we see the question. 
@@ -163,7 +167,7 @@ cc18_samp %>%
 ```
 because `3` stands for independent in this case, as can be seen from the metadata.
 
-Clearly, "Yes/No" variable type can be considered a type of categorical variable type.  I still distinguish these between because in the former, the analyst does need to make a decision about what consists as a success, whereas in `pid3` for example, three reasonable operations can exist and the what is a success as opposed to a failure is ambiguous from the name `pid3`.
+Clearly, "Yes/No" variable type can be considered a type of categorical variable type.  I still distinguish these between because in the former, the analyst does not need to make a decision about what consists as a success, whereas in `pid3` for example, three reasonable operations can exist and the what is a success as opposed to a failure is ambiguous from the name `pid3`.
 
 ## 3. Ordinal variables
 
