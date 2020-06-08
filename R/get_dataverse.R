@@ -38,9 +38,21 @@
 #'
 #' @examples
 #'
+#' # read in cumulative common content, subsetted to 2018, into environemt
 #' \dontrun{
 #'  ccc <- get_cces_dv("cumulative", year_subset = 2018)
 #'  }
+#'
+#' # Example code to read _and_ write a series of common content datasets
+#' # in a directory "data/input/cces/
+#' \dontrun{
+#' dir_create("data/cces")
+#' for (d in c("cumulative", "2018")) {
+#' if (file_exists(glue("data/input/cces/cces_{d}.rds")))
+#'     next
+#'   write_rds(get_cces_dv(d), glue("data/input/cces/cces_{d}.rds")) # takes a few minutes
+#' }
+#' }
 #'
 #' @export
 #'
