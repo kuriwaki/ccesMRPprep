@@ -22,7 +22,7 @@ Imports:
     rlang,
     dplyr (>= 1.0.0),
     tidyr,
-    haven,
+    haven (>= 2.1.0),
     stringr,
     readr,
     glue,
@@ -41,5 +41,6 @@ BugReports: http://github.com/kuriwaki/ccesMRPprep/issues
 Suggests: 
     knitr,
     rmarkdown,
-    tidyverse
+    tidyverse,
+    questionr
 VignetteBuilder: knitr

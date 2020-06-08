@@ -45,7 +45,8 @@
 #'
 #' 1000 rows from th CCES Common Content. Contains all columns, retaining the
 #' `haven_labelled` class. This is <doi:10.7910/DVN/ZSBZ7K/H5IDTA> originally read
-#' in using `read_dta` via `get_cces_dv()`.
+#' in using `read_dta` via `get_cces_dv()`. To search for variable by its content,
+#' `questionr::lookfor` (or `rcces::vartab`) is a useful option (see example).
 #'
 #' @details See the 2018 Codebook in the DOI below for question wording of
 #' each column. To use the harmonized and easier-to-use versions of common variables
@@ -54,8 +55,13 @@
 #' in this package as `?ccc_samp`.
 #'
 #' @source "Brian Schaffner; Stephen Ansolabehere; Sam Luks, 2019,
-#' "CCES Common Content, 2018", https://doi.org/10.7910/DVN/ZSBZ7K, Harvard Dataverse V6.
+#' "CCES Common Content, 2018", <doi:https://doi.org/10.7910>, Harvard Dataverse V6.
 #'
 #' @examples
 #' cc18_samp
+#'
+#' # use questionr::lookfor to search the label and labels --
+#'
+#' questionr::lookfor(cc18_samp, "Trump")
+#'
 "cc18_samp"

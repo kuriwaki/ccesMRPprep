@@ -9,7 +9,7 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 }
 \source{
 "Brian Schaffner; Stephen Ansolabehere; Sam Luks, 2019,
-"CCES Common Content, 2018", https://doi.org/10.7910/DVN/ZSBZ7K, Harvard Dataverse V6.
+"CCES Common Content, 2018", \url{doi:https://doi.org/10.7910}, Harvard Dataverse V6.
 }
 \usage{
 cc18_samp
@@ -17,7 +17,8 @@ cc18_samp
 \description{
 1000 rows from th CCES Common Content. Contains all columns, retaining the
 \code{haven_labelled} class. This is \url{doi:10.7910/DVN/ZSBZ7K/H5IDTA} originally read
-in using \code{read_dta} via \code{get_cces_dv()}.
+in using \code{read_dta} via \code{get_cces_dv()}. To search for variable by its content,
+\code{questionr::lookfor} (or \code{rcces::vartab}) is a useful option (see example).
 }
 \details{
 See the 2018 Codebook in the DOI below for question wording of
@@ -28,5 +29,10 @@ in this package as \code{?ccc_samp}.
 }
 \examples{
 cc18_samp
+
+# use questionr::lookfor to search the label and labels --
+
+questionr::lookfor(cc18_samp, "Trump")
+
 }
 \keyword{datasets}
