@@ -23,6 +23,7 @@
 #'  gender_key
 #'  age5_key
 #'  age10_key
+#'  st_key
 NULL
 
 #' @rdname keyvalue
@@ -76,3 +77,16 @@ NULL
 #'  \item{age_chr}{Character to recode from, in ACS}
 #'  }
 "age10_key"
+
+#' @rdname keyvalue
+#' @format \code{states_key}: State codes and regions:
+#' \describe{
+#' \item{st}{State two-letter abbreviation `state.abb`}
+#' \item{state}{State full name via `state.name`}
+#' \item{st_fips}{Integer, state FIPS code}
+#' \item{region}{Census region (Northeast, Midwest, South, West)}
+#' \item{division}{Census division (New England, Middle Atlantic,
+#'   South Atlantic, East South Central, West South Central,
+#'   East North Central, "West North Central, Mountain, Pacific)}
+#' }
+"states_key"

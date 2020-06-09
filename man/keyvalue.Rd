@@ -8,6 +8,7 @@
 \alias{educ_key}
 \alias{age5_key}
 \alias{age10_key}
+\alias{states_key}
 \title{CCES-ACS variable key value pairs for recoding}
 \format{
 All keys are tibbles with one row per recoding value.
@@ -59,6 +60,17 @@ to recode CCES variable
 \item{age}{An labelled integer of class \code{haven::haven_labelled}. Target variable.}
 \item{age_chr}{Character to recode from, in ACS}
 }
+
+\code{states_key}: State codes and regions:
+\describe{
+\item{st}{State two-letter abbreviation \code{state.abb}}
+\item{state}{State full name via \code{state.name}}
+\item{st_fips}{Integer, state FIPS code}
+\item{region}{Census region (Northeast, Midwest, South, West)}
+\item{division}{Census division (New England, Middle Atlantic,
+South Atlantic, East South Central, West South Central,
+East North Central, "West North Central, Mountain, Pacific)}
+}
 }
 \usage{
 race_key
@@ -70,6 +82,8 @@ educ_key
 age5_key
 
 age10_key
+
+states_key
 }
 \description{
 These value-value tables are useful for recoding the values of
@@ -90,5 +104,6 @@ use the \code{dplyr::distinct} to reduce the key to two columns with unique rows
  gender_key
  age5_key
  age10_key
+ st_key
 }
 \keyword{datasets}
