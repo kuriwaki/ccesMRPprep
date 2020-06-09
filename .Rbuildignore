@@ -8,3 +8,5 @@
 ^README.Rmd$
 ^data/input$
 ^mwe_slurm.R$
+
+^simulate.R$

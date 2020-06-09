@@ -23,7 +23,7 @@
 #'  gender_key
 #'  age5_key
 #'  age10_key
-#'  st_key
+#'  states_key
 NULL
 
 #' @rdname keyvalue
@@ -51,7 +51,7 @@ NULL
 
 #' @rdname  keyvalue
 #' @format ### \code{educ_key}
-#'  For mapping ACS data values for education e.g. in \link{get_acs}:
+#'  For mapping ACS data values for education e.g. in \link{get_acs_cces}:
 #'  \describe{
 #'  \item{educ_cces_chr}{Character to recode from, in CCES}
 #'  \item{educ_chr}{Character to recode from, in ACS.}
@@ -71,7 +71,7 @@ NULL
 "age5_key"
 
 #' @rdname  keyvalue
-#' @format \code{age10_key}: Age bins, 10-ways, used in \link{acscodes_age_sex_race}:
+#' @format ###  \code{age10_key}: Age bins, 10-ways, used in \link{acscodes_age_sex_race}:
 #' \describe{
 #'  \item{age}{An labelled integer of class `haven::haven_labelled`. Target variable.}
 #'  \item{age_chr}{Character to recode from, in ACS}
@@ -79,7 +79,7 @@ NULL
 "age10_key"
 
 #' @rdname keyvalue
-#' @format \code{states_key}: State codes and regions:
+#' @format ###  \code{states_key}: State codes and regions:
 #' \describe{
 #' \item{st}{State two-letter abbreviation `state.abb`}
 #' \item{state}{State full name via `state.name`}

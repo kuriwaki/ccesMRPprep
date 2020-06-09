@@ -43,10 +43,6 @@
 #'
 ccc_std_demographics <- function(tbl, only_demog = FALSE) {
 
-  data("educ_key", envir = environment())
-  data("race_key", envir = environment())
-
-
   race_cces_to_acs <- race_key %>% distinct(race_cces_chr, race)
   educ_cces_to_acs <- educ_key %>% distinct(educ_cces_chr, educ)
 

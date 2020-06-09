@@ -37,7 +37,7 @@ same class as the CCES cumulative file.}
 
 \subsection{\code{educ_key}}{
 
-For mapping ACS data values for education e.g. in \link{get_acs}:
+For mapping ACS data values for education e.g. in \link{get_acs_cces}:
 \describe{
 \item{educ_cces_chr}{Character to recode from, in CCES}
 \item{educ_chr}{Character to recode from, in ACS.}
@@ -55,13 +55,16 @@ to recode CCES variable
 }
 }
 
-\code{age10_key}: Age bins, 10-ways, used in \link{acscodes_age_sex_race}:
+\subsection{\code{age10_key}: Age bins, 10-ways, used in \link{acscodes_age_sex_race}:}{
+
 \describe{
 \item{age}{An labelled integer of class \code{haven::haven_labelled}. Target variable.}
 \item{age_chr}{Character to recode from, in ACS}
 }
+}
 
-\code{states_key}: State codes and regions:
+\subsection{\code{states_key}: State codes and regions:}{
+
 \describe{
 \item{st}{State two-letter abbreviation \code{state.abb}}
 \item{state}{State full name via \code{state.name}}
@@ -70,6 +73,7 @@ to recode CCES variable
 \item{division}{Census division (New England, Middle Atlantic,
 South Atlantic, East South Central, West South Central,
 East North Central, "West North Central, Mountain, Pacific)}
+}
 }
 }
 \usage{
@@ -104,6 +108,6 @@ use the \code{dplyr::distinct} to reduce the key to two columns with unique rows
  gender_key
  age5_key
  age10_key
- st_key
+ states_key
 }
 \keyword{datasets}
