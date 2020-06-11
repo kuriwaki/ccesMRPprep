@@ -39,8 +39,10 @@ functions that use APIs
 ([`IQSS/dataverse-client-r`](https://github.com/IQSS/dataverse-client-r)
 and [`walkerke/tidycensus`](https://github.com/walkerke/tidycensus)) to
 reduce the dependency on downloading large files. *Model fitting and
-visualization of MRP itself is handled elsewhere.* This package is
-focused on the preparation to get there.
+visualization of MRP itself is handled elsewhere* (See
+[`kuriwaki/ccesMRPrun`](https://www.github.com/kuriwaki/ccesMRPrun) for
+something in development). This package is focused on the preparation to
+get there.
 
 ## Installation
 
