@@ -81,7 +81,7 @@ available as built in datasets." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -113,6 +113,9 @@ available as built in datasets." />
       <a href="../articles/acs.html">ACS Tables to Use for CCES and MRP</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -161,7 +164,9 @@ available as built in datasets.</p>
 
 <span class='no'>age5_key</span>
 
-<span class='no'>age10_key</span></pre>
+<span class='no'>age10_key</span>
+
+<span class='no'>states_key</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -170,7 +175,7 @@ available as built in datasets.</p>
 <h3><code>race_key</code></h3>
 
 
-<dl>
+<dl'>
 <dt>race</dt><dd><p>An labelled integer of class haven::labelled.
 Most compact form of both sources and the values both will get recoded
 to in MRP.</p></dd>
@@ -186,7 +191,7 @@ same class as the CCES cumulative file.</p></dd>
 <h3><code>gender_key</code>:</h3>
 
 
-<dl>
+<dl'>
 <dt>gender</dt><dd><p>An labelled integer of class haven::labelled. Target variable</p></dd>
 <dt>gender_chr</dt><dd><p>Character to recode from. CCES and ACS use the same values.</p></dd>
 
@@ -196,7 +201,7 @@ same class as the CCES cumulative file.</p></dd>
 <h3><code>educ_key</code></h3>
 
 
-<p>For mapping ACS data values for education e.g. in get_acs:</p><dl>
+<p>For mapping ACS data values for education e.g. in <a href='get_acs_cces.html'>get_acs_cces</a>:</p><dl'>
 <dt>educ_cces_chr</dt><dd><p>Character to recode from, in CCES</p></dd>
 <dt>educ_chr</dt><dd><p>Character to recode from, in ACS.</p></dd>
 <dt>educ</dt><dd><p>An labelled integer of class haven::labelled. Target variable</p></dd>
@@ -208,18 +213,37 @@ same class as the CCES cumulative file.</p></dd>
 
 
 <p>Age bins, 5-ways, used in <a href='acscodes_partitions.html'>acscodes_age_sex_educ</a>. Use <a href='ccc_bin_age.html'>ccc_bin_age</a>
-to recode CCES variable</p><dl>
+to recode CCES variable</p><dl'>
 <dt>age</dt><dd><p>An labelled integer of class haven::labelled. Target variable.</p></dd>
 <dt>age_chr</dt><dd><p>Character to recode from, in ACS</p></dd>
 
 </dl>
 
 
-<p><code>age10_key</code>: Age bins, 10-ways, used in <a href='acscodes_partitions.html'>acscodes_age_sex_race</a>:</p><dl>
+<h3><code>age10_key</code>: Age bins, 10-ways, used in <a href='acscodes_partitions.html'>acscodes_age_sex_race</a>:</h3>
+
+
+<dl'>
 <dt>age</dt><dd><p>An labelled integer of class <code>haven::haven_labelled</code>. Target variable.</p></dd>
 <dt>age_chr</dt><dd><p>Character to recode from, in ACS</p></dd>
 
 </dl>
+
+
+<h3><code>states_key</code>: State codes and regions:</h3>
+
+
+<dl'>
+<dt>st</dt><dd><p>State two-letter abbreviation <code>state.abb</code></p></dd>
+<dt>state</dt><dd><p>State full name via <code>state.name</code></p></dd>
+<dt>st_fips</dt><dd><p>Integer, state FIPS code</p></dd>
+<dt>region</dt><dd><p>Census region (Northeast, Midwest, South, West)</p></dd>
+<dt>division</dt><dd><p>Census division (New England, Middle Atlantic,
+South Atlantic, East South Central, West South Central,
+East North Central, "West North Central, Mountain, Pacific)</p></dd>
+
+</dl>
+
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -276,7 +300,20 @@ use the <code><a href='https://dplyr.tidyverse.org/reference/distinct.html'>dply
 #&gt; </span><span style='color: #555555;'> 7</span><span> 55 to 64 years          4 4</span><span style='color: #555555;'> [45 to 64 years]</span><span>   
 #&gt; </span><span style='color: #555555;'> 8</span><span> 65 to 74 years          5 5</span><span style='color: #555555;'> [65 years and over]</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> 75 to 84 years          5 5</span><span style='color: #555555;'> [65 years and over]</span><span>
-#&gt; </span><span style='color: #555555;'>10</span><span> 85 years and over       5 5</span><span style='color: #555555;'> [65 years and over]</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'>10</span><span> 85 years and over       5 5</span><span style='color: #555555;'> [65 years and over]</span><span></div><div class='input'> <span class='no'>states_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 50 x 5</span><span>
+#&gt;    st    state       st_fips region    division          
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>             
+#&gt; </span><span style='color: #555555;'> 1</span><span> AL    Alabama           1 South     East South Central
+#&gt; </span><span style='color: #555555;'> 2</span><span> AK    Alaska            2 West      Pacific           
+#&gt; </span><span style='color: #555555;'> 3</span><span> AZ    Arizona           4 West      Mountain          
+#&gt; </span><span style='color: #555555;'> 4</span><span> AR    Arkansas          5 South     West South Central
+#&gt; </span><span style='color: #555555;'> 5</span><span> CA    California        6 West      Pacific           
+#&gt; </span><span style='color: #555555;'> 6</span><span> CO    Colorado          8 West      Mountain          
+#&gt; </span><span style='color: #555555;'> 7</span><span> CT    Connecticut       9 Northeast New England       
+#&gt; </span><span style='color: #555555;'> 8</span><span> DE    Delaware         10 South     South Atlantic    
+#&gt; </span><span style='color: #555555;'> 9</span><span> FL    Florida          12 South     South Atlantic    
+#&gt; </span><span style='color: #555555;'>10</span><span> GA    Georgia          13 South     South Atlantic    
+#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -292,7 +329,7 @@ use the <code><a href='https://dplyr.tidyverse.org/reference/distinct.html'>dply
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
