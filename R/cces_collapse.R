@@ -49,7 +49,7 @@ build_counts <- function(data, model_ff, multiple_qIDs = FALSE) {
 
   data_counts <- data %>%
     group_by(!!!syms(xvars)) %>%
-    summarize(n_response = sum(!is.na(response)),
+    summarize(n_response = sum(!is.na(yesno_to_binary(response))),
               yes = sum(yesno_to_binary(response), na.rm = TRUE),
               .groups = "drop") %>%
     filter(n_response > 0) %>%
