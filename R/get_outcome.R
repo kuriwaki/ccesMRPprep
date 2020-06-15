@@ -15,6 +15,7 @@
 #'  stored.  Currently the data must be of the form `cces_{year}.rds`  (e.g. `"cces_2016.rds"`)
 #'  and it must exist wherever \code{data_dir} is. We recommend looping over \link{get_cces_dv}
 #'  to download data first.
+#' @param verbose whether to print a message; defaults to TRUE
 #'
 #' @details This transformation currently only supports Yes/No questions. For some common
 #'  ordinal questions that can, with manual recodes, be set to a Yes/No question,
@@ -67,16 +68,19 @@ get_cces_question <- function(qcode,
                               year,
                               qID,
                               dataframe = NULL,
-                              data_dir = "data/input/cces") {
+                              data_dir = "data/input/cces",
+                              verbose = TRUE) {
 
   # data
   if (is.null(dataframe)) {
-    cat(glue("Attempting to read in data from local flat file in the directory {data_dir}") , "\n")
+    if (verbose)
+      cat(glue("Attempting to read in data from local flat file in the directory {data_dir}") , "\n")
     cces_year <- read_rds(path(data_dir, glue("cces_{year}.rds")))
   }
 
   if (!is.null(dataframe)) {
-    cat("Using the dataframe provided", "\n")
+    if (verbose)
+      cat("Using the dataframe provided", "\n")
     cces_year <- dataframe
   }
 

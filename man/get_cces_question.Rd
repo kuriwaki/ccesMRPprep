@@ -9,7 +9,8 @@ get_cces_question(
   year,
   qID,
   dataframe = NULL,
-  data_dir = "data/input/cces"
+  data_dir = "data/input/cces",
+  verbose = TRUE
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ use the provided datasets instead.}
 stored.  Currently the data must be of the form \verb{cces_\{year\}.rds}  (e.g. \code{"cces_2016.rds"})
 and it must exist wherever \code{data_dir} is. We recommend looping over \link{get_cces_dv}
 to download data first.}
+
+\item{verbose}{whether to print a message; defaults to TRUE}
 }
 \value{
 A three-column dataframe with the columns
