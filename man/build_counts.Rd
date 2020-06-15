@@ -4,7 +4,7 @@
 \alias{build_counts}
 \title{Collapse CCES data to be analyzed in binomial model}
 \usage{
-build_counts(data, model_ff, multiple_qIDs = FALSE)
+build_counts(data, model_ff, multiple_qIDs = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{data}{A cleaned CCES dataset, e.g. from \link{ccc_std_demographics} which is
@@ -19,7 +19,7 @@ Only the RHS will be used but the LHS is necessary.}
 \item{multiple_qIDs}{Does the data contain \emph{multiple} outcomes in long form and
 therefore require the counts to be built for each outcome? Defaults to \code{FALSE}.}
 
-\item{verbose}{Show warning messages?}
+\item{verbose}{Show warning messages? Defaults to TRUE}
 }
 \description{
 Currently only is compatible with question of type \code{"yesno"}.

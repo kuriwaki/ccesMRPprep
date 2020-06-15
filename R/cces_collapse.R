@@ -11,7 +11,7 @@
 #' Only the RHS will be used but the LHS is necessary.
 #' @param multiple_qIDs Does the data contain _multiple_ outcomes in long form and
 #'  therefore require the counts to be built for each outcome? Defaults to \code{FALSE}.
-#' @param verbose Show warning messages?
+#' @param verbose Show warning messages? Defaults to TRUE
 #'
 #' @importFrom haven as_factor is.labelled
 #' @import rlang
@@ -35,7 +35,7 @@
 #'
 #' ccc_samp_out
 #'
-build_counts <- function(data, model_ff, multiple_qIDs = FALSE) {
+build_counts <- function(data, model_ff, multiple_qIDs = FALSE, verbose = TRUE) {
   all_vars <- all.vars(as.formula(model_ff))[-c(1:2)]
   xvars <- setdiff(all_vars, "response")
 
