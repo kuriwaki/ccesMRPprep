@@ -19,7 +19,7 @@ currently assume the name for the outcome is named "response".}
 
 \item{ccc_df}{dataframe of covariates, currently taken only from the cumulative
 common content. It should have passed \link{ccc_std_demographics} to be compatible
-with CAS.}
+with ACS.}
 
 \item{cd_df}{dataframe of district-level predictors, see \link{cd_info_2018} for a
 sample. Currently, we join this to the rest of the data on the column called
