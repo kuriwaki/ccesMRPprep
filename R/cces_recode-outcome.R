@@ -9,7 +9,7 @@
 #'
 #' @return A vector of integers
 #'
-#' @importFrom stringr str_detect str_replace_all
+#' @importFrom stringr regex str_detect str_replace_all
 #' @importFrom dplyr recode
 #' @importFrom magrittr `%>%`
 #'
