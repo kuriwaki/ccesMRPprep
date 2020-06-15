@@ -29,6 +29,11 @@ jobs:
           key: macOS-r-4.0-0-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: macOS-r-4.0-0-
 
+      - name: Install system dependencies
+        if: runner.os == 'macOS'
+        run: |
+          brew install udunits
+
       - name: Install dependencies
         run: |
           install.packages("remotes")
