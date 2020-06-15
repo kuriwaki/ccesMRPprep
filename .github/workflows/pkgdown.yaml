@@ -33,6 +33,7 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install udunits
+          brew install gdal
 
       - name: Install dependencies
         run: |
