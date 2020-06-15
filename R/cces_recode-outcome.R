@@ -11,6 +11,7 @@
 #'
 #' @importFrom stringr str_detect str_replace_all
 #' @importFrom dplyr recode
+#' @importFrom magrittr `%>%`
 #'
 #' @examples
 #'  yesno_to_binary(
@@ -30,7 +31,7 @@
 yesno_to_binary <- function(vec, DK_to_NA = TRUE) {
 
   # Yes
-  vec_char <- vec %>%
+  vec_char <- as.character(vec) %>%
     replace(str_detect(., regex("^Against", ignore_case = TRUE)), "Against") %>%
     replace(str_detect(., regex("^For", ignore_case = TRUE)), "For") %>%
     str_replace_all(regex("somewhat\\s+", ignore_case = TRUE), "") %>%
