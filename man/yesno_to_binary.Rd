@@ -4,10 +4,12 @@
 \alias{yesno_to_binary}
 \title{Translate a Yes/No variable into 1/0}
 \usage{
-yesno_to_binary(vec)
+yesno_to_binary(vec, DK_to_NA = TRUE)
 }
 \arguments{
 \item{vec}{A vector of CCES response values, in character}
+
+\item{DK_to_NA}{Whether don't knows should be treated as NA. Defaults to TRUE.}
 }
 \value{
 A vector of integers
@@ -27,6 +29,8 @@ but also "Support" and "For"
     "Somewhat oppose",
     "For this bill",
     "Against this bill",
+    "Not sure",
+    "Don't Know",
     NA_character_)
 )
 }
