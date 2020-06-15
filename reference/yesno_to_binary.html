@@ -154,7 +154,7 @@ given the values to count as a "Yes" by regular expression, e.g. not only "Yes"
 but also "Support" and "For"</p>
     </div>
 
-    <pre class="usage"><span class='fu'>yesno_to_binary</span>(<span class='no'>vec</span>)</pre>
+    <pre class="usage"><span class='fu'>yesno_to_binary</span>(<span class='no'>vec</span>, <span class='kw'>DK_to_NA</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,6 +162,10 @@ but also "Support" and "For"</p>
     <tr>
       <th>vec</th>
       <td><p>A vector of CCES response values, in character</p></td>
+    </tr>
+    <tr>
+      <th>DK_to_NA</th>
+      <td><p>Whether don't knows should be treated as NA. Defaults to TRUE.</p></td>
     </tr>
     </table>
 
@@ -179,8 +183,10 @@ but also "Support" and "For"</p>
     <span class='st'>"Somewhat oppose"</span>,
     <span class='st'>"For this bill"</span>,
     <span class='st'>"Against this bill"</span>,
+    <span class='st'>"Not sure"</span>,
+    <span class='st'>"Don't Know"</span>,
     <span class='fl'>NA_character_</span>)
-)</div><div class='output co'>#&gt; [1]  1  0  1  0  0  0  1  0 NA</div></pre>
+)</div><div class='output co'>#&gt;  [1]  1  0  1  0  0  0  1  0  0  0 NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
