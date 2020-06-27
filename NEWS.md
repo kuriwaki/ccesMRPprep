@@ -1,3 +1,7 @@
+# ccesMRPprep 0.1.3
+
+* Change default so that age gets replaced to bins in `ccc_std_demographics` 
+* treat Don't knows as NA in `yesno_to_binary`
 
 # ccesMRPprep 0.1.2
 
