@@ -4,13 +4,15 @@
 #'  \code{age}, \code{race}, \code{educ}, \code{gender}, \code{st}, \code{state},
 #'  and \code{cd}. See \link{ccc_samp} for an example.
 #' @param only_demog Drop variables besides demographics? Defaults to FALSE
+#' @param age_key The vector key to use to bin age. Can be `deframe(age5_key)` or `deframe(age10_key)`
 #'
 #'
 #' @return The output is of the same dimensions as the input (unless \code{only_demog = TRUE})
 #' but with the following exceptions:
 #'
-#' *  \code{age_bin} is coded to match up with the ACS bins and the recoding occurs
-#'  in a separate function, \code{ccc_bin_age}.
+#' * \code{age} is coded to match up with the ACS bins and the recoding occurs
+#'  in a separate function, \code{ccc_bin_age}. The unbinned age is left instead to
+#'  \code{age_orig}.
 #' * \code{educ} is recoded (coarsened and relabelled) to match up with the ACS.
 #'  (the original version is left as \code{educ_cces_chr}). Recoding is governed by
 #'  the key-value pairs \link{educ_key}
@@ -22,6 +24,7 @@
 #' @import dplyr
 #' @importFrom glue glue
 #' @importFrom haven as_factor
+#' @importFrom tibble deframe
 #' @importFrom magrittr `%>%`
 #' @importFrom rlang .data
 #' @importFrom utils data
@@ -41,7 +44,7 @@
 #' @export
 #'
 #'
-ccc_std_demographics <- function(tbl, only_demog = FALSE) {
+ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(ccesMRPprep::age5_key)) {
 
   race_cces_to_acs <- race_key %>% distinct(race_cces_chr, race)
   educ_cces_to_acs <- educ_key %>% distinct(educ_cces_chr, educ)
@@ -65,9 +68,12 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
 
 
   # demographics
+  age_vec <-  tbl$age # to check
+
   tbl_mod <- tbl %>%
     # age
-    mutate(age_bin = ccc_bin_age(age)) %>%
+    mutate(age_orig = age,
+           age = ccc_bin_age(age, agelbl = age_key)) %>%
     # race
     rename(race_cces_chr = race) %>%
     mutate(race_cces_chr = as.character(as_factor(race_cces_chr))) %>%
@@ -92,6 +98,9 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE) {
            matches("marstat"),
            matches("vv"),
            everything())
+
+    if (!identical(age_vec, tbl_mod$age))
+      cat("age variable modified to bins. Original age variable is now in age_orig.", "\n")
 
     if (only_demog)
       tbl_out <- select(tbl_out, .data$year:.data$marstat, matches("vv"))

@@ -4,7 +4,11 @@
 \alias{ccc_std_demographics}
 \title{Recode CCES variables so that they merge to ACS variables}
 \usage{
-ccc_std_demographics(tbl, only_demog = FALSE)
+ccc_std_demographics(
+  tbl,
+  only_demog = FALSE,
+  age_key = deframe(ccesMRPprep::age5_key)
+)
 }
 \arguments{
 \item{tbl}{A subset of the cumulative common content. Must include variables
@@ -12,13 +16,16 @@ ccc_std_demographics(tbl, only_demog = FALSE)
 and \code{cd}. See \link{ccc_samp} for an example.}
 
 \item{only_demog}{Drop variables besides demographics? Defaults to FALSE}
+
+\item{age_key}{The vector key to use to bin age. Can be \code{deframe(age5_key)} or \code{deframe(age10_key)}}
 }
 \value{
 The output is of the same dimensions as the input (unless \code{only_demog = TRUE})
 but with the following exceptions:
 \itemize{
-\item \code{age_bin} is coded to match up with the ACS bins and the recoding occurs
-in a separate function, \code{ccc_bin_age}.
+\item \code{age} is coded to match up with the ACS bins and the recoding occurs
+in a separate function, \code{ccc_bin_age}. The unbinned age is left instead to
+\code{age_orig}.
 \item \code{educ} is recoded (coarsened and relabelled) to match up with the ACS.
 (the original version is left as \code{educ_cces_chr}). Recoding is governed by
 the key-value pairs \link{educ_key}
