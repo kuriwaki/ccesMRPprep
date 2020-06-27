@@ -93,7 +93,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="overview_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Workflow Overview</h1>
@@ -106,17 +106,22 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ccesMRPprep</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">haven</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://www.github.com/kuriwaki/ccesMRPprep">ccesMRPprep</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://haven.tidyverse.org">haven</a></span>)
+</pre></div>
 <div id="step-1--downloading-cces-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-1--downloading-cces-data" class="anchor"></a><strong>Step 1.</strong> Downloading CCES data</h2>
 <p>All CCES data can be downloaded directly from dataverse, using the development version of the <a href="https://github.com/IQSS/dataverse-client-r"><code>dataverse</code></a> R package. The function <code><a href="../reference/get_cces_dv.html">get_cces_dv()</a></code> will make this quick and simple - you only need to specify the name of the dataset, given in <code><a href="../reference/cces_dv_ids.html">?cces_dv_ids</a></code>.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># may take about 30 seconds to download</span>
-<span class="no">ccc</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_cces_dv.html">get_cces_dv</a></span>(<span class="st">"cumulative"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># may take about 30 seconds to download</span>
+<span class="kw">ccc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_cces_dv.html">get_cces_dv</a></span>(<span class="st">"cumulative"</span>)
+</pre></div>
 <p>Here we will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">ccc_samp()</a></code>). In production, you will want to download all 14 datasets to your local directory via a script like <a href="https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R">initialize-cces-downloads.R</a> (still private).</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">ccc_samp</span>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">ccc_samp</span>
 <span class="co">#&gt; # A tibble: 1,000 x 18</span>
 <span class="co">#&gt;     year case_id state st    cd    zipcode county_fips  gender   age    race</span>
 <span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl+l&gt; &lt;dbl&gt; &lt;dbl+l&gt;</span>
@@ -132,62 +137,73 @@
 <span class="co">#&gt; 10  2006 1117377 Ohio  OH    OH-07 45502   39023       2 [Fem…    49 1 [Whi…</span>
 <span class="co">#&gt; # … with 990 more rows, and 8 more variables: hispanic &lt;dbl+lbl&gt;,</span>
 <span class="co">#&gt; #   educ &lt;dbl+lbl&gt;, faminc &lt;dbl+lbl&gt;, marstat &lt;dbl+lbl&gt;, newsint &lt;dbl+lbl&gt;,</span>
-<span class="co">#&gt; #   vv_turnout_gvm &lt;dbl+lbl&gt;, voted_pres_16 &lt;dbl+lbl&gt;, economy_retro &lt;dbl+lbl&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   vv_turnout_gvm &lt;dbl+lbl&gt;, voted_pres_16 &lt;dbl+lbl&gt;, economy_retro &lt;dbl+lbl&gt;</span>
+</pre></div>
 </div>
 <div id="step-2--cleaning-cces-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-2--cleaning-cces-data" class="anchor"></a><strong>Step 2.</strong> Cleaning CCES data</h2>
 <p>The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of the ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.</p>
 <p>See <code><a href="../reference/get_cces_question.html">get_cces_question()</a></code> for how to get the <em>outcome</em> data, which is a single column from another CCES dataset. This still relies on a flat file being pre-downloaded (via <code><a href="../reference/get_cces_dv.html">get_cces_dv()</a></code>).</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">ccc_std</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ccc_std_demographics.html">ccc_std_demographics</a></span>(<span class="no">ccc_samp</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">ccc_std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ccc_std_demographics.html">ccc_std_demographics</a></span>(<span class="kw">ccc_samp</span>)
+<span class="co">#&gt; age variable modified to bins. Original age variable is now in age_orig.</span>
+</pre></div>
 </div>
 <div id="step-3--define-a-model-specification" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-3--define-a-model-specification" class="anchor"></a><strong>Step 3.</strong> Define a Model Specification</h2>
 <p>A formula represents the variables that are in the model, how they are interacted, and which variables are random effects. We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">fm_brm</span> <span class="kw">&lt;-</span> <span class="no">yes</span> <span class="kw">|</span> <span class="fu">trials</span>(<span class="no">n_responses</span>) ~  <span class="no">age</span> + <span class="no">gender</span> + <span class="no">educ</span> + <span class="no">pct_trump</span> + (<span class="fl">1</span><span class="kw">|</span><span class="no">cd</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">fm_brm</span> <span class="op">&lt;-</span> <span class="kw">yes</span> <span class="op">|</span> <span class="fu">trials</span>(<span class="kw">n_responses</span>) <span class="op">~</span>  <span class="kw">age</span> <span class="op">+</span> <span class="kw">gender</span> <span class="op">+</span> <span class="kw">educ</span> <span class="op">+</span> <span class="kw">pct_trump</span> <span class="op">+</span> (<span class="fl">1</span><span class="op">|</span><span class="kw">cd</span>)
+</pre></div>
 <p>A prior could be specified here as well, but this is not strictly necessary and can be defined when fitting the model.</p>
 </div>
 <div id="step-4--collapsing-the-cces-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-4--collapsing-the-cces-data" class="anchor"></a><strong>Step 4.</strong> Collapsing the CCES data</h2>
 <p>For speed, we collapse the individual-level data where each outcome is binary to a count dataset where each row is a cell (with a trial and success value). This form also makes drawing posteriors much easier in the next step. We use <code><a href="../reference/build_counts.html">build_counts()</a></code> for this, which takes a individual-level dataset (built from <code><a href="../reference/ccc_std_demographics.html">ccc_std_demographics()</a></code>, or further passed through <code><a href="../reference/cces_join_slim.html">cces_join_slim()</a></code> for all relevant outcomes and predictors).</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># fake outcome data - must be called "response"</span>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="co"># fake outcome data - must be called "response"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">02138</span>)
-<span class="no">ccc_samp_std</span> <span class="kw">&lt;-</span> <span class="no">ccc_samp</span> <span class="kw">%&gt;%</span>
-   <span class="fu">mutate</span>(<span class="kw">response</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"For"</span>, <span class="st">"Against"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fu">n</span>(), <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) <span class="kw">%&gt;%</span>
+<span class="kw">ccc_samp_std</span> <span class="op">&lt;-</span> <span class="kw">ccc_samp</span> <span class="op">%&gt;%</span> 
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(response = <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"For"</span>, <span class="st">"Against"</span>), size = <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span>(), replace = <span class="fl">TRUE</span>)) <span class="op">%&gt;%</span> 
    <span class="fu"><a href="../reference/ccc_std_demographics.html">ccc_std_demographics</a></span>()
+<span class="co">#&gt; age variable modified to bins. Original age variable is now in age_orig.</span>
 
-<span class="no">ccc_samp_out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/build_counts.html">build_counts</a></span>(<span class="no">ccc_samp_std</span>,
+<span class="kw">ccc_samp_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_counts.html">build_counts</a></span>(<span class="kw">ccc_samp_std</span>,
                              <span class="st">"yes | trials(n_response) ~ age + gender + educ"</span>)
 
-<span class="no">ccc_samp_out</span>
-<span class="co">#&gt; # A tibble: 400 x 5</span>
-<span class="co">#&gt;      age gender educ         n_response   yes</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;             &lt;int&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1    18 Male   HS or Less            3     1</span>
-<span class="co">#&gt;  2    18 Female HS or Less            7     4</span>
-<span class="co">#&gt;  3    18 Female Some College          1     0</span>
-<span class="co">#&gt;  4    19 Male   HS or Less            1     1</span>
-<span class="co">#&gt;  5    19 Female HS or Less            2     1</span>
-<span class="co">#&gt;  6    19 Female Some College          2     1</span>
-<span class="co">#&gt;  7    20 Male   HS or Less            1     0</span>
-<span class="co">#&gt;  8    20 Male   Some College          5     3</span>
-<span class="co">#&gt;  9    20 Female HS or Less            3     3</span>
-<span class="co">#&gt; 10    20 Female Some College          5     3</span>
-<span class="co">#&gt; # … with 390 more rows</span></pre></body></html></div>
+<span class="kw">ccc_samp_out</span>
+<span class="co">#&gt; # A tibble: 39 x 5</span>
+<span class="co">#&gt;    age            gender educ         n_response   yes</span>
+<span class="co">#&gt;    &lt;fct&gt;          &lt;fct&gt;  &lt;fct&gt;             &lt;int&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 18 to 24 years Male   HS or Less            9     5</span>
+<span class="co">#&gt;  2 18 to 24 years Male   Some College         12     6</span>
+<span class="co">#&gt;  3 18 to 24 years Male   4-Year                3     0</span>
+<span class="co">#&gt;  4 18 to 24 years Female HS or Less           19    12</span>
+<span class="co">#&gt;  5 18 to 24 years Female Some College         26    11</span>
+<span class="co">#&gt;  6 18 to 24 years Female 4-Year                5     2</span>
+<span class="co">#&gt;  7 18 to 24 years Female Post-Grad             1     1</span>
+<span class="co">#&gt;  8 25 to 34 years Male   HS or Less           10     4</span>
+<span class="co">#&gt;  9 25 to 34 years Male   Some College         11     7</span>
+<span class="co">#&gt; 10 25 to 34 years Male   4-Year               23    14</span>
+<span class="co">#&gt; # … with 29 more rows</span>
+</pre></div>
 </div>
 <div id="step-5--prepare-acs-data-and-poststratification-table" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-5--prepare-acs-data-and-poststratification-table" class="anchor"></a><strong>Step 5.</strong> Prepare ACS data and Poststratification Table</h2>
 <p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r">
- <span class="no">acs_tab</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_acs_cces.html">get_acs_cces</a></span>(
-              <span class="kw">varlist</span> <span class="kw">=</span> <span class="no">acscodes_age_sex_educ</span>,
-              <span class="kw">varlab_df</span> <span class="kw">=</span> <span class="no">acscodes_df</span>,
-             <span class="kw">year</span> <span class="kw">=</span> <span class="fl">2018</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
 
- <span class="no">poststrat</span> <span class="kw">&lt;-</span>  <span class="fu"><a href="../reference/get_poststrat.html">get_poststrat</a></span>(<span class="no">acs_tab</span>, <span class="no">cd_info_2018</span>, <span class="no">fm_brm</span>)</pre></body></html></div>
+ <span class="kw">acs_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acs_cces.html">get_acs_cces</a></span>(
+              varlist = <span class="kw">acscodes_age_sex_educ</span>,
+              varlab_df = <span class="kw">acscodes_df</span>,
+             year = <span class="fl">2018</span>)
+
+ <span class="kw">poststrat</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/get_poststrat.html">get_poststrat</a></span>(<span class="kw">acs_tab</span>, <span class="kw">cd_info_2018</span>, <span class="kw">fm_brm</span>)
+</pre></div>
 </div>
 <div id="final-output" class="section level2">
 <h2 class="hasAnchor">

@@ -152,21 +152,21 @@ available as built in datasets." />
     <div class="ref-description">
     <p>These value-value tables are useful for recoding the values of
 from one dataset (CCES) so that they can be merged immediately with another
-(ACS).  These get used internally in <a href='ccc_std_demographics.html'>ccc_std_demographics</a>, but they are
+(ACS).  These get used internally in <a href='https://rdrr.io/pkg/ccesMRPprep/man/ccc_std_demographics.html'>ccc_std_demographics</a>, but they are
 available as built in datasets.</p>
     </div>
 
-    <pre class="usage"><span class='no'>race_key</span>
+    <pre class="usage"><span class='kw'>race_key</span>
 
-<span class='no'>gender_key</span>
+<span class='kw'>gender_key</span>
 
-<span class='no'>educ_key</span>
+<span class='kw'>educ_key</span>
 
-<span class='no'>age5_key</span>
+<span class='kw'>age5_key</span>
 
-<span class='no'>age10_key</span>
+<span class='kw'>age10_key</span>
 
-<span class='no'>states_key</span></pre>
+<span class='kw'>states_key</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -201,7 +201,7 @@ same class as the CCES cumulative file.</p></dd>
 <h3><code>educ_key</code></h3>
 
 
-<p>For mapping ACS data values for education e.g. in <a href='get_acs_cces.html'>get_acs_cces</a>:</p><dl>
+<p>For mapping ACS data values for education e.g. in <a href='https://rdrr.io/pkg/ccesMRPprep/man/get_acs_cces.html'>get_acs_cces</a>:</p><dl>
 <dt>educ_cces_chr</dt><dd><p>Character to recode from, in CCES</p></dd>
 <dt>educ_chr</dt><dd><p>Character to recode from, in ACS.</p></dd>
 <dt>educ</dt><dd><p>An labelled integer of class haven::labelled. Target variable</p></dd>
@@ -212,7 +212,7 @@ same class as the CCES cumulative file.</p></dd>
 <h3><code>age5_key</code></h3>
 
 
-<p>Age bins, 5-ways, used in <a href='acscodes_partitions.html'>acscodes_age_sex_educ</a>. Use <a href='ccc_bin_age.html'>ccc_bin_age</a>
+<p>Age bins, 5-ways, used in <a href='https://rdrr.io/pkg/ccesMRPprep/man/acscodes_partitions.html'>acscodes_age_sex_educ</a>. Use <a href='https://rdrr.io/pkg/ccesMRPprep/man/ccc_bin_age.html'>ccc_bin_age</a>
 to recode CCES variable</p><dl>
 <dt>age</dt><dd><p>An labelled integer of class haven::labelled. Target variable.</p></dd>
 <dt>age_chr</dt><dd><p>Character to recode from, in ACS</p></dd>
@@ -220,7 +220,7 @@ to recode CCES variable</p><dl>
 </dl>
 
 
-<h3><code>age10_key</code>: Age bins, 10-ways, used in <a href='acscodes_partitions.html'>acscodes_age_sex_race</a>:</h3>
+<h3><code>age10_key</code>: Age bins, 10-ways, used in <a href='https://rdrr.io/pkg/ccesMRPprep/man/acscodes_partitions.html'>acscodes_age_sex_race</a>:</h3>
 
 
 <dl>
@@ -253,8 +253,8 @@ a given recode, rows are not distinct. To avoid duplicating rows inadvertently,
 use the <code><a href='https://dplyr.tidyverse.org/reference/distinct.html'>dplyr::distinct</a></code> to reduce the key to two columns with unique rows.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ccesMRPprep</span>)
- <span class='no'>race_key</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 9 x 5</span><span>
+    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://www.github.com/kuriwaki/ccesMRPprep'>ccesMRPprep</a></span>)
+ <span class='kw'>race_key</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 9 x 5</span><span>
 #&gt;   race_5 race_cces_chr   race_acs                           race_cces       race
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                              </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>      1 White           WHITE ALONE, NOT HISPANIC OR LA…  1</span><span style='color: #555555;'> [White]</span><span>  1</span><span style='color: #555555;'> [White]</span><span> 
@@ -265,7 +265,7 @@ use the <code><a href='https://dplyr.tidyverse.org/reference/distinct.html'>dply
 #&gt; </span><span style='color: #555555;'>6</span><span>      5 Native American AMERICAN INDIAN AND ALASKA NATI… </span><span style='color: #BB0000;'>NA</span><span>          5</span><span style='color: #555555;'> [All Ot…</span><span>
 #&gt; </span><span style='color: #555555;'>7</span><span>      5 Mixed           TWO OR MORE RACES                </span><span style='color: #BB0000;'>NA</span><span>          5</span><span style='color: #555555;'> [All Ot…</span><span>
 #&gt; </span><span style='color: #555555;'>8</span><span>      5 Other           SOME OTHER RACE ALONE            </span><span style='color: #BB0000;'>NA</span><span>          5</span><span style='color: #555555;'> [All Ot…</span><span>
-#&gt; </span><span style='color: #555555;'>9</span><span>      5 Middle Eastern  </span><span style='color: #BB0000;'>NA</span><span>                               </span><span style='color: #BB0000;'>NA</span><span>          5</span><span style='color: #555555;'> [All Ot…</span><span></div><div class='input'> <span class='no'>educ_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 3</span><span>
+#&gt; </span><span style='color: #555555;'>9</span><span>      5 Middle Eastern  </span><span style='color: #BB0000;'>NA</span><span>                               </span><span style='color: #BB0000;'>NA</span><span>          5</span><span style='color: #555555;'> [All Ot…</span><span></div><div class='input'> <span class='kw'>educ_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 3</span><span>
 #&gt;    educ_chr                                  educ_cces_chr                  educ
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Less than 9th grade                       No HS               1</span><span style='color: #555555;'> [HS or Less]</span><span> 
@@ -277,18 +277,18 @@ use the <code><a href='https://dplyr.tidyverse.org/reference/distinct.html'>dply
 #&gt; </span><span style='color: #555555;'> 7</span><span> Some college, no degree                   Some College        2</span><span style='color: #555555;'> [Some Colleg…</span><span>
 #&gt; </span><span style='color: #555555;'> 8</span><span> Associate's degree                        2-Year              2</span><span style='color: #555555;'> [Some Colleg…</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> Bachelor's degree                         4-Year              3</span><span style='color: #555555;'> [4-Year]</span><span>     
-#&gt; </span><span style='color: #555555;'>10</span><span> Graduate or professional degree           Post-Grad           4</span><span style='color: #555555;'> [Post-Grad]</span><span>  </div><div class='input'> <span class='no'>gender_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 2</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> Graduate or professional degree           Post-Grad           4</span><span style='color: #555555;'> [Post-Grad]</span><span>  </div><div class='input'> <span class='kw'>gender_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 2</span><span>
 #&gt;   gender_chr     gender
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> Male       1</span><span style='color: #555555;'> [Male]</span><span>  
-#&gt; </span><span style='color: #555555;'>2</span><span> Female     2</span><span style='color: #555555;'> [Female]</span><span></div><div class='input'> <span class='no'>age5_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 2</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> Female     2</span><span style='color: #555555;'> [Female]</span><span></div><div class='input'> <span class='kw'>age5_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5 x 2</span><span>
 #&gt;   age_chr                             age
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> 18 to 24 years    1</span><span style='color: #555555;'> [18 to 24 years]</span><span>   
 #&gt; </span><span style='color: #555555;'>2</span><span> 25 to 34 years    2</span><span style='color: #555555;'> [25 to 34 years]</span><span>   
 #&gt; </span><span style='color: #555555;'>3</span><span> 35 to 44 years    3</span><span style='color: #555555;'> [35 to 44 years]</span><span>   
 #&gt; </span><span style='color: #555555;'>4</span><span> 45 to 64 years    4</span><span style='color: #555555;'> [45 to 64 years]</span><span>   
-#&gt; </span><span style='color: #555555;'>5</span><span> 65 years and over 5</span><span style='color: #555555;'> [65 years and over]</span><span></div><div class='input'> <span class='no'>age10_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 3</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span> 65 years and over 5</span><span style='color: #555555;'> [65 years and over]</span><span></div><div class='input'> <span class='kw'>age10_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 10 x 3</span><span>
 #&gt;    age_chr           age_num                   age
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 18 and 19 years         1 1</span><span style='color: #555555;'> [18 to 24 years]</span><span>   
@@ -300,7 +300,7 @@ use the <code><a href='https://dplyr.tidyverse.org/reference/distinct.html'>dply
 #&gt; </span><span style='color: #555555;'> 7</span><span> 55 to 64 years          4 4</span><span style='color: #555555;'> [45 to 64 years]</span><span>   
 #&gt; </span><span style='color: #555555;'> 8</span><span> 65 to 74 years          5 5</span><span style='color: #555555;'> [65 years and over]</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> 75 to 84 years          5 5</span><span style='color: #555555;'> [65 years and over]</span><span>
-#&gt; </span><span style='color: #555555;'>10</span><span> 85 years and over       5 5</span><span style='color: #555555;'> [65 years and over]</span><span></div><div class='input'> <span class='no'>states_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 50 x 5</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> 85 years and over       5 5</span><span style='color: #555555;'> [65 years and over]</span><span></div><div class='input'> <span class='kw'>states_key</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 50 x 5</span><span>
 #&gt;    st    state       st_fips region    division          
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>             
 #&gt; </span><span style='color: #555555;'> 1</span><span> AL    Alabama           1 South     East South Central
