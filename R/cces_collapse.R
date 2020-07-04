@@ -9,6 +9,12 @@
 #' @param model_ff the model formula used to fit the multilevel regression model.
 #' Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
 #' Only the RHS will be used but the LHS is necessary.
+#' @param keep_vars Variables that will be kept as a cell variable, regardless
+#'  of whether it is specified in a formula.
+#' @param name_ones_as What to name the variable that represents the number of
+#'  successes in the binomial
+#' @param name_trls_as What to name the variable that represents the number of
+#'  trials in the binomial.
 #' @param multiple_qIDs Does the data contain _multiple_ outcomes in long form and
 #'  therefore require the counts to be built for each outcome? Defaults to \code{FALSE}.
 #' @param verbose Show warning messages? Defaults to TRUE
@@ -19,6 +25,13 @@
 #' @importFrom stats as.formula
 #'
 #' @export
+#'
+#' @return A dataframe of cells. The following variables have fixed names and
+#'  will be assumed by `ccesMRPrun::fit_brms_binomial`:
+#'
+#'  - `yes`: the number of successes observed in the cell
+#'  - `n_response` the number of non-missing responses, representing the number
+#'   of trials.
 #'
 #'
 #' @examples
@@ -35,9 +48,17 @@
 #'
 #' ccc_samp_out
 #'
-build_counts <- function(data, model_ff, multiple_qIDs = FALSE, verbose = TRUE) {
+#' # alternative options
+#' build_counts(ccc_samp_std, model_ff = ff, name_ones_as = "success", name_trls_as = "trials")
+#' build_counts(ccc_samp_std, model_ff = ff, keep_vars = "state")
+#'
+build_counts <- function(data, model_ff,
+                         keep_vars = NULL,
+                         name_ones_as = "yes",
+                         name_trls_as = "n_response",
+                         multiple_qIDs = FALSE, verbose = TRUE) {
   all_vars <- all.vars(as.formula(model_ff))[-c(1:2)]
-  xvars <- setdiff(all_vars, "response")
+  xvars <- setdiff(c(all_vars, keep_vars), "response")
 
   if (multiple_qIDs)
     xvars <- c("qID", xvars)
@@ -50,12 +71,13 @@ build_counts <- function(data, model_ff, multiple_qIDs = FALSE, verbose = TRUE) 
 
   data_counts <- data %>%
     group_by(!!!syms(xvars)) %>%
-    summarize(n_response = sum(!is.na(yesno_to_binary(response))),
-              yes = sum(yesno_to_binary(response), na.rm = TRUE),
+    summarize(!!sym(name_trls_as) := sum(!is.na(yesno_to_binary(response))),
+              !!sym(name_ones_as) := sum(yesno_to_binary(response), na.rm = TRUE),
               .groups = "drop") %>%
-    filter(n_response > 0) %>%
+    filter(!!sym(name_trls_as) > 0) %>%
     mutate_if(is.labelled, haven::as_factor) %>%
     mutate_if(is.logical, as.integer)
+
 
   attr(data_counts, "question") <- attr(data, "question")
   data_counts

@@ -4,7 +4,15 @@
 \alias{build_counts}
 \title{Collapse CCES data to be analyzed in binomial model}
 \usage{
-build_counts(data, model_ff, multiple_qIDs = FALSE, verbose = TRUE)
+build_counts(
+  data,
+  model_ff,
+  keep_vars = NULL,
+  name_ones_as = "yes",
+  name_trls_as = "n_response",
+  multiple_qIDs = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{data}{A cleaned CCES dataset, e.g. from \link{ccc_std_demographics} which is
@@ -16,10 +24,28 @@ binarized, but it will be binarized with \link{yesno_to_binary}.}
 Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
 Only the RHS will be used but the LHS is necessary.}
 
+\item{keep_vars}{Variables that will be kept as a cell variable, regardless
+of whether it is specified in a formula.}
+
+\item{name_ones_as}{What to name the variable that represents the number of
+successes in the binomial}
+
+\item{name_trls_as}{What to name the variable that represents the number of
+trials in the binomial.}
+
 \item{multiple_qIDs}{Does the data contain \emph{multiple} outcomes in long form and
 therefore require the counts to be built for each outcome? Defaults to \code{FALSE}.}
 
 \item{verbose}{Show warning messages? Defaults to TRUE}
+}
+\value{
+A dataframe of cells. The following variables have fixed names and
+will be assumed by \code{ccesMRPrun::fit_brms_binomial}:
+\itemize{
+\item \code{yes}: the number of successes observed in the cell
+\item \code{n_response} the number of non-missing responses, representing the number
+of trials.
+}
 }
 \description{
 Currently only is compatible with question of type \code{"yesno"}.
@@ -37,5 +63,9 @@ ccc_samp_out <- build_counts(ccc_samp_std,
                              model_ff = ff)
 
 ccc_samp_out
+
+# alternative options
+build_counts(ccc_samp_std, model_ff = ff, name_ones_as = "success", name_trls_as = "trials")
+build_counts(ccc_samp_std, model_ff = ff, keep_vars = "state")
 
 }
