@@ -11,6 +11,7 @@ cces_join_slim(
   model_ff,
   y_named_as = "response",
   coerce_to_char = TRUE,
+  keep_vars = NULL,
   subset_dist = NA
 )
 }
@@ -20,20 +21,23 @@ currently assume the name for the outcome is named "response", although this
 can be modified with the \code{y_named_as} argument}
 
 \item{ccc_df}{dataframe of covariates, currently taken only from the cumulative
-common content. It should have passed \link{ccc_std_demographics} to be compatible
-with ACS.}
+common content. It should have passed \link{ccc_std_demographics} to be
+compatible with ACS.}
 
-\item{cd_df}{dataframe of district-level predictors, see \link{cd_info_2018} for a
-sample. Currently, we join this to the rest of the data on the column called
-\code{"cd"} and \code{"year"}.}
+\item{cd_df}{dataframe of district-level predictors, see \link{cd_info_2018}
+for a sample. Currently, we join this to the rest of the data on the column
+called \code{"cd"} and \code{"year"}.}
 
 \item{model_ff}{the MRP model. Only the variables on the RHS will be kept.}
 
 \item{y_named_as}{What is the outcome variable called? defaults to \code{"response"},
-from \link{get_cces_question}.}
+from \link{get_cces_question}. Input as character.}
 
 \item{coerce_to_char}{Whether to coerce the case identifier to character class,
 this enables the join.}
+
+\item{keep_vars}{Variables that will be kept as a cell variable, regardless
+of whether it is specified in a formula. Input as character vector.}
 
 \item{subset_dist}{a character for the geography of cd to subset}
 }
@@ -52,9 +56,16 @@ is model dependent.
                  cd_df = cd_info_2018,
                  model_ff = "yes | trials(n_response) ~ age + educ + (1|cd)")
 
+  # alternative - cd and state not in the formula, but cells follow this
+  cces_join_slim(ccq_df = ccq_tcja,
+                 ccc_df = filter(ccc_samp, year == 2018),
+                 cd_df = cd_info_2018,
+                 keep_vars = c("st", "cd"),
+                 model_ff = "yes | trials(n_response) ~ age + educ")
+
 # A tibble: 133 x 7
-#     year case_id   qID   response   age             educ cd
-#     <dbl> <chr>     <chr> <fct>    <dbl>        <dbl+lbl> <chr>
+#        year case_id   qID   response   age educ             cd
+#       <dbl> <chr>     <chr> <fct>    <dbl> <dbl+lbl>        <chr>
 #     1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11
 #     2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-04
 #     3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-02

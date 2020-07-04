@@ -26,7 +26,7 @@ Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2
 Only the RHS will be used but the LHS is necessary.}
 
 \item{keep_vars}{Variables that will be kept as a cell variable, regardless
-of whether it is specified in a formula.}
+of whether it is specified in a formula. Input as character vector.}
 
 \item{name_ones_as}{What to name the variable that represents the number of
 successes in the binomial}

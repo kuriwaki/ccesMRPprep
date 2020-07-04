@@ -17,8 +17,10 @@
 #'  called \code{"cd"} and \code{"year"}.
 #' @param coerce_to_char Whether to coerce the case identifier to character class,
 #'  this enables the join.
+#' @param keep_vars Variables that will be kept as a cell variable, regardless
+#'  of whether it is specified in a formula. Input as character vector.
 #' @param y_named_as What is the outcome variable called? defaults to `"response"`,
-#'  from \link{get_cces_question}.
+#'  from \link{get_cces_question}. Input as character.
 #' @param model_ff the MRP model. Only the variables on the RHS will be kept.
 #' @param subset_dist a character for the geography of cd to subset
 #'
@@ -37,9 +39,16 @@
 #'                  cd_df = cd_info_2018,
 #'                  model_ff = "yes | trials(n_response) ~ age + educ + (1|cd)")
 #'
+#'   # alternative - cd and state not in the formula, but cells follow this
+#'   cces_join_slim(ccq_df = ccq_tcja,
+#'                  ccc_df = filter(ccc_samp, year == 2018),
+#'                  cd_df = cd_info_2018,
+#'                  keep_vars = c("st", "cd"),
+#'                  model_ff = "yes | trials(n_response) ~ age + educ")
+#'
 #' # A tibble: 133 x 7
-#' #     year case_id   qID   response   age             educ cd
-#' #     <dbl> <chr>     <chr> <fct>    <dbl>        <dbl+lbl> <chr>
+#' #        year case_id   qID   response   age educ             cd
+#' #       <dbl> <chr>     <chr> <fct>    <dbl> <dbl+lbl>        <chr>
 #' #     1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11
 #' #     2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-04
 #' #     3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-02
@@ -58,10 +67,12 @@ cces_join_slim <- function(ccq_df,
                            model_ff,
                            y_named_as = "response",
                            coerce_to_char = TRUE,
+                           keep_vars = NULL,
                            subset_dist = NA) {
 
   vars <- c("year", "case_id", "qID",
             y_named_as,
+            keep_vars,
             # the outcome is sum(yes) | trials(n)
             all.vars(as.formula(model_ff))[-c(1:2)])
 
