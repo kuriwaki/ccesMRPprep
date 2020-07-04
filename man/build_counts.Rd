@@ -10,6 +10,7 @@ build_counts(
   keep_vars = NULL,
   name_ones_as = "yes",
   name_trls_as = "n_response",
+  y_named_as = "response",
   multiple_qIDs = FALSE,
   verbose = TRUE
 )
@@ -32,6 +33,9 @@ successes in the binomial}
 
 \item{name_trls_as}{What to name the variable that represents the number of
 trials in the binomial.}
+
+\item{y_named_as}{What is the original response / outcome variable called?
+Currently defaults to "response" from \link{get_cces_outcome}.}
 
 \item{multiple_qIDs}{Does the data contain \emph{multiple} outcomes in long form and
 therefore require the counts to be built for each outcome? Defaults to \code{FALSE}.}

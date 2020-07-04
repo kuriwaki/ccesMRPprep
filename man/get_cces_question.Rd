@@ -9,6 +9,7 @@ get_cces_question(
   year,
   qID,
   dataframe = NULL,
+  y_named_as = "response",
   data_dir = "data/input/cces",
   verbose = TRUE
 )
@@ -28,6 +29,9 @@ syntax in our question table.}
 \item{dataframe}{An optional argument to pass the entire CCES dataframe in-environment.
 If left empty, this will supersede the arguments \code{year} and \code{dataframe} and
 use the provided datasets instead.}
+
+\item{y_named_as}{What to name the response variable. Defaults to "response", which is also
+the default assumption for \link{joined_df}.}
 
 \item{data_dir}{A path for the directory where flat files for the CCES common content is
 stored.  Currently the data must be of the form \verb{cces_\{year\}.rds}  (e.g. \code{"cces_2016.rds"})

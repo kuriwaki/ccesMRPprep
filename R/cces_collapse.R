@@ -11,6 +11,8 @@
 #' Only the RHS will be used but the LHS is necessary.
 #' @param keep_vars Variables that will be kept as a cell variable, regardless
 #'  of whether it is specified in a formula.
+#' @param y_named_as What is the original response / outcome variable called?
+#'  Currently defaults to "response" from \link{get_cces_outcome}.
 #' @param name_ones_as What to name the variable that represents the number of
 #'  successes in the binomial
 #' @param name_trls_as What to name the variable that represents the number of
@@ -56,14 +58,15 @@ build_counts <- function(data, model_ff,
                          keep_vars = NULL,
                          name_ones_as = "yes",
                          name_trls_as = "n_response",
+                         y_named_as = "response",
                          multiple_qIDs = FALSE, verbose = TRUE) {
   all_vars <- all.vars(as.formula(model_ff))[-c(1:2)]
-  xvars <- setdiff(c(all_vars, keep_vars), "response")
+  xvars <- setdiff(c(all_vars, keep_vars), y_named_as)
 
   if (multiple_qIDs)
     xvars <- c("qID", xvars)
 
-  n_na <- sum(is.na(yesno_to_binary(data$response)))
+  n_na <- sum(is.na(yesno_to_binary(data[[y_named_as]])))
   if (n_na > 0 & verbose) {
     warning(as.character(glue("{n_na} observations in the data have missing values,
                  which will be dropped from the counts.\n")))
@@ -71,8 +74,8 @@ build_counts <- function(data, model_ff,
 
   data_counts <- data %>%
     group_by(!!!syms(xvars)) %>%
-    summarize(!!sym(name_trls_as) := sum(!is.na(yesno_to_binary(response))),
-              !!sym(name_ones_as) := sum(yesno_to_binary(response), na.rm = TRUE),
+    summarize(!!sym(name_trls_as) := sum(!is.na(yesno_to_binary(!!sym(y_named_as)))),
+              !!sym(name_ones_as) := sum(yesno_to_binary(!!sym(y_named_as)), na.rm = TRUE),
               .groups = "drop") %>%
     filter(!!sym(name_trls_as) > 0) %>%
     mutate_if(is.labelled, haven::as_factor) %>%

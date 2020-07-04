@@ -8,6 +8,8 @@
 #' Together with \code{qcode}, uniquely identifies the outcome question data
 #' @param qID A string, the user's unique name for the question. For example, we use the
 #'  syntax in our question table.
+#' @param y_named_as What to name the response variable. Defaults to "response", which is also
+#'  the default assumption for \link{joined_df}.
 #' @param dataframe An optional argument to pass the entire CCES dataframe in-environment.
 #' If left empty, this will supersede the arguments \code{year} and \code{dataframe} and
 #' use the provided datasets instead.
@@ -68,6 +70,7 @@ get_cces_question <- function(qcode,
                               year,
                               qID,
                               dataframe = NULL,
+                              y_named_as = "response",
                               data_dir = "data/input/cces",
                               verbose = TRUE) {
 
@@ -114,7 +117,7 @@ get_cces_question <- function(qcode,
     transmute(year = as.integer(year),
               case_id = as.character(case_id),
               qID = qID,
-              response = as_factor(response))
+              !!sym(y_named_as) := as_factor(response))
 
   attr(cces_df, "question") <- qID
 

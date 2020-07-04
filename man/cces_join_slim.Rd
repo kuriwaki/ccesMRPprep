@@ -9,13 +9,15 @@ cces_join_slim(
   ccc_df,
   cd_df,
   model_ff,
+  y_named_as = "response",
   coerce_to_char = TRUE,
   subset_dist = NA
 )
 }
 \arguments{
 \item{ccq_df}{dataframe of outcomes, taken from \link{get_cces_question}. We
-currently assume the name for the outcome is named "response".}
+currently assume the name for the outcome is named "response", although this
+can be modified with the \code{y_named_as} argument}
 
 \item{ccc_df}{dataframe of covariates, currently taken only from the cumulative
 common content. It should have passed \link{ccc_std_demographics} to be compatible
@@ -23,11 +25,15 @@ with ACS.}
 
 \item{cd_df}{dataframe of district-level predictors, see \link{cd_info_2018} for a
 sample. Currently, we join this to the rest of the data on the column called
-\code{"cd"} and \code{"year"}.
-@param coerce_to_char Whether to coerce the case identifier to character class,
-this enables the join.}
+\code{"cd"} and \code{"year"}.}
 
 \item{model_ff}{the MRP model. Only the variables on the RHS will be kept.}
+
+\item{y_named_as}{What is the outcome variable called? defaults to \code{"response"},
+from \link{get_cces_question}.}
+
+\item{coerce_to_char}{Whether to coerce the case identifier to character class,
+this enables the join.}
 
 \item{subset_dist}{a character for the geography of cd to subset}
 }
