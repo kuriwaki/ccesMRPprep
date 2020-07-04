@@ -161,6 +161,7 @@ is model dependent.</p>
   <span class='kw'>model_ff</span>,
   y_named_as = <span class='st'>"response"</span>,
   coerce_to_char = <span class='fl'>TRUE</span>,
+  keep_vars = <span class='kw'>NULL</span>,
   subset_dist = <span class='fl'>NA</span>
 )</pre>
 
@@ -176,14 +177,14 @@ can be modified with the <code>y_named_as</code> argument</p></td>
     <tr>
       <th>ccc_df</th>
       <td><p>dataframe of covariates, currently taken only from the cumulative
-common content. It should have passed <a href='https://rdrr.io/pkg/ccesMRPprep/man/ccc_std_demographics.html'>ccc_std_demographics</a> to be compatible
-with ACS.</p></td>
+common content. It should have passed <a href='https://rdrr.io/pkg/ccesMRPprep/man/ccc_std_demographics.html'>ccc_std_demographics</a> to be
+compatible with ACS.</p></td>
     </tr>
     <tr>
       <th>cd_df</th>
-      <td><p>dataframe of district-level predictors, see <a href='https://rdrr.io/pkg/ccesMRPprep/man/cd_info_2018.html'>cd_info_2018</a> for a
-sample. Currently, we join this to the rest of the data on the column called
-<code>"cd"</code> and <code>"year"</code>.</p></td>
+      <td><p>dataframe of district-level predictors, see <a href='https://rdrr.io/pkg/ccesMRPprep/man/cd_info_2018.html'>cd_info_2018</a>
+for a sample. Currently, we join this to the rest of the data on the column
+called <code>"cd"</code> and <code>"year"</code>.</p></td>
     </tr>
     <tr>
       <th>model_ff</th>
@@ -192,12 +193,17 @@ sample. Currently, we join this to the rest of the data on the column called
     <tr>
       <th>y_named_as</th>
       <td><p>What is the outcome variable called? defaults to <code>"response"</code>,
-from <a href='https://rdrr.io/pkg/ccesMRPprep/man/get_cces_question.html'>get_cces_question</a>.</p></td>
+from <a href='https://rdrr.io/pkg/ccesMRPprep/man/get_cces_question.html'>get_cces_question</a>. Input as character.</p></td>
     </tr>
     <tr>
       <th>coerce_to_char</th>
       <td><p>Whether to coerce the case identifier to character class,
 this enables the join.</p></td>
+    </tr>
+    <tr>
+      <th>keep_vars</th>
+      <td><p>Variables that will be kept as a cell variable, regardless
+of whether it is specified in a formula. Input as character vector.</p></td>
     </tr>
     <tr>
       <th>subset_dist</th>
@@ -216,9 +222,16 @@ this enables the join.</p></td>
                  cd_df = <span class='kw'>cd_info_2018</span>,
                  model_ff = <span class='st'>"yes | trials(n_response) ~ age + educ + (1|cd)"</span>)
 
+  <span class='co'># alternative - cd and state not in the formula, but cells follow this</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/cces_join_slim.html'>cces_join_slim</a></span>(ccq_df = <span class='kw'>ccq_tcja</span>,
+                 ccc_df = <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='kw'>ccc_samp</span>, <span class='kw'>year</span> <span class='op'>==</span> <span class='fl'>2018</span>),
+                 cd_df = <span class='kw'>cd_info_2018</span>,
+                 keep_vars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"st"</span>, <span class='st'>"cd"</span>),
+                 model_ff = <span class='st'>"yes | trials(n_response) ~ age + educ"</span>)
+
 <span class='co'># A tibble: 133 x 7</span>
-<span class='co'>#     year case_id   qID   response   age             educ cd</span>
-<span class='co'>#     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;fct&gt;    &lt;dbl&gt;        &lt;dbl+lbl&gt; &lt;chr&gt;</span>
+<span class='co'>#        year case_id   qID   response   age educ             cd</span>
+<span class='co'>#       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;fct&gt;    &lt;dbl&gt; &lt;dbl+lbl&gt;        &lt;chr&gt;</span>
 <span class='co'>#     1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11</span>
 <span class='co'>#     2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-04</span>
 <span class='co'>#     3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-02</span>
