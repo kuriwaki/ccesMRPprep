@@ -42,9 +42,11 @@ Recode CCES variables so that they merge to ACS variables
 
 This function requires data to have the following columns:
 \itemize{
-\item A string column called \code{st} that is a two-letter abbreviation of the state
+\item A string column called \code{st} that is a two-letter abbreviation of the state, or a labelled
+variable coercible to a string.
 \item A string column called \code{cd} that has the congressional district that is of the form
-\code{"WY-01"}, OR a numeric column called \code{dist} that has the numeric district number
+\code{"WY-01"}, OR a numeric column called \code{dist} that has the numeric district number.
+\code{cd_up} can also be used for the district in the upcoming election.
 \item A <numeric+labelled> column called \code{educ} for education, \code{race} for race,
 \code{age} for age, and \code{gender} for gender, with values following
 the cumulative content.

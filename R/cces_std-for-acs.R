@@ -8,9 +8,11 @@
 #'
 #' @section Input Requirements:
 #'  This function requires data to have the following columns:
-#'   * A string column called `st` that is a two-letter abbreviation of the state
+#'   * A string column called `st` that is a two-letter abbreviation of the state, or a labelled
+#'     variable coercible to a string.
 #'   * A string column called `cd` that has the congressional district that is of the form
-#'    `"WY-01"`, OR a numeric column called `dist` that has the numeric district number
+#'    `"WY-01"`, OR a numeric column called `dist` that has the numeric district number.
+#'     `cd_up` can also be used for the district in the upcoming election.
 #'   * A <numeric+labelled> column called `educ` for education, `race` for race,
 #'    `age` for age, and `gender` for gender, with values following
 #'    the cumulative content.
@@ -79,13 +81,19 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(cces
     message("Re-creating cd from st and dist, in standard form.")
   }
 
+  if ("dist_up" %in% colnames(tbl)) {
+    tbl <- tbl %>%
+      mutate(cd_up = str_c(st, "-", str_pad(dit_up, width = 2, pad = "0")))
+    message("Re-creating cd_up from st and dist_up, in standard form.")
+  }
+
   # no single digits and "AL" notation
   if ("cd" %in% colnames(tbl)) {
-    if (any(str_detect(tbl$cd, "[A-Z][A-Z]-[1-9]$")))
+    if (any(str_detect(tbl$cd, "[A-Z][A-Z]-[1-9]$"), na.rm = TRUE))
       stop("CD must be of the form MA-01, not MA-1. Give a dataset with numeric variable
            called dist so it can make that for you.")
 
-    if (any(str_detect(tbl$cd, "[A-Z][A-Z]-AL")))
+    if (any(str_detect(tbl$cd, "[A-Z][A-Z]-AL"), na.rm = TRUE))
       stop("CD must be of the form AK-01, not AK-AL, for at large districts.
            Give a dataset with numeric variable called dist so it can make that for you.")
   }
