@@ -31,22 +31,44 @@ in a separate function, \code{ccc_bin_age}. The unbinned age is left instead to
 the key-value pairs \link{educ_key}
 \item the same goes for \code{race}. These recodings are governed by the
 key-value pair \link{race_key}.
-\item \code{cd} is standardized so that at large districs are given "01" and
+\item \code{cd} is standardized so that at large districts are given "01" and
 single-digit districts are padded with 0s. e.g. \code{"WY-01"} and \code{"CA-02"}.
 }
 }
 \description{
 Recode CCES variables so that they merge to ACS variables
 }
+\section{Input Requirements}{
+
+This function requires data to have the following columns:
+\itemize{
+\item A string column called \code{st} that is a two-letter abbreviation of the state
+\item A string column called \code{cd} that has the congressional district that is of the form
+\code{"WY-01"}, OR a numeric column called \code{dist} that has the numeric district number
+\item A <numeric+labelled> column called \code{educ} for education, \code{race} for race,
+\code{age} for age, and \code{gender} for gender, with values following
+the cumulative content.
+}
+}
+
 \examples{
+
+ ccc_std_demographics(ccc_samp)
+
 \dontrun{
+ # For full data (takes a while)
  library(dataverse)
-
- # Load Cumulative dataset (need your own Token)
  cumulative_rds <- get_cces_dv("cumulative")
-
  cumulative_std <- ccc_std_demographics(cumulative_rds)
-
  }
+
+\dontrun{
+ wrong_cd_fmt <- mutate(ccc_samp, cd = str_replace_all(cd, "01", "1"))
+ wrong_cd_fmt \%>\% filter(st == "HI") \%>\% count(cd)
+
+ # throws error because CD is formatted the wrong way
+ ccc_std_demographics(wrong_cd_fmt)
+}
+
 
 }

@@ -6,6 +6,14 @@
 #' @param only_demog Drop variables besides demographics? Defaults to FALSE
 #' @param age_key The vector key to use to bin age. Can be `deframe(age5_key)` or `deframe(age10_key)`
 #'
+#' @section Input Requirements:
+#'  This function requires data to have the following columns:
+#'   * A string column called `st` that is a two-letter abbreviation of the state
+#'   * A string column called `cd` that has the congressional district that is of the form
+#'    `"WY-01"`, OR a numeric column called `dist` that has the numeric district number
+#'   * A <numeric+labelled> column called `educ` for education, `race` for race,
+#'    `age` for age, and `gender` for gender, with values following
+#'    the cumulative content.
 #'
 #' @return The output is of the same dimensions as the input (unless \code{only_demog = TRUE})
 #' but with the following exceptions:
@@ -18,7 +26,7 @@
 #'  the key-value pairs \link{educ_key}
 #' * the same goes for \code{race}. These recodings are governed by the
 #'  key-value pair \link{race_key}.
-#' * \code{cd} is standardized so that at large districs are given "01" and
+#' * \code{cd} is standardized so that at large districts are given "01" and
 #'  single-digit districts are padded with 0s. e.g. \code{"WY-01"} and \code{"CA-02"}.
 #'
 #' @import dplyr
@@ -31,15 +39,24 @@
 #' @importFrom stringr str_c str_pad
 #'
 #' @examples
+#'
+#'  ccc_std_demographics(ccc_samp)
+#'
 #' \dontrun{
+#'  # For full data (takes a while)
 #'  library(dataverse)
-#'
-#'  # Load Cumulative dataset (need your own Token)
 #'  cumulative_rds <- get_cces_dv("cumulative")
-#'
 #'  cumulative_std <- ccc_std_demographics(cumulative_rds)
-#'
 #'  }
+#'
+#' \dontrun{
+#'  wrong_cd_fmt <- mutate(ccc_samp, cd = str_replace_all(cd, "01", "1"))
+#'  wrong_cd_fmt %>% filter(st == "HI") %>% count(cd)
+#'
+#'  # throws error because CD is formatted the wrong way
+#'  ccc_std_demographics(wrong_cd_fmt)
+#' }
+#'
 #'
 #' @export
 #'
@@ -59,11 +76,18 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(cces
   if ("dist" %in% colnames(tbl)) {
     tbl <- tbl %>%
       mutate(cd = str_c(st, "-", str_pad(dist, width = 2, pad = "0")))
+    message("Re-creating cd from st and dist, in standard form.")
   }
+
   # no single digits and "AL" notation
   if ("cd" %in% colnames(tbl)) {
-    stopifnot(!any(str_detect(tbl$cd, "[A-Z][A-Z]-[1-9]$")))
-    stopifnot(!any(str_detect(tbl$cd, "[A-Z][A-Z]-AL")))
+    if (any(str_detect(tbl$cd, "[A-Z][A-Z]-[1-9]$")))
+      stop("CD must be of the form MA-01, not MA-1. Give a dataset with numeric variable
+           called dist so it can make that for you.")
+
+    if (any(str_detect(tbl$cd, "[A-Z][A-Z]-AL")))
+      stop("CD must be of the form AK-01, not AK-AL, for at large districts.
+           Give a dataset with numeric variable called dist so it can make that for you.")
   }
 
 
