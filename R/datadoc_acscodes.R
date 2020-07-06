@@ -4,13 +4,12 @@
 #' the vector is a code for a ACS variable, which can be used,
 #' for example in the \code{variables} argument of \code{tidycensus::get_acs()}. Some of
 #' these will be collapsed for MRP to form a common denominator with the CCES; see
-#' \link{keyvalue}
+#' \link{keyvalue}.
 #'
 #' @name acscodes_partitions
 #'
 #' @seealso \link{acscodes_df} for a definition of all codes,
-#' and <https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html> for a Vignette
-#' on ACS value pairs
+#' and the [Vignette on ACS value pairs](https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html).
 #'
 #'
 #' @examples

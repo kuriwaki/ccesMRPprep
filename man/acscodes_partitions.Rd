@@ -40,7 +40,7 @@ Each vector defines a partition, or at least an attempt at one. Each element of
 the vector is a code for a ACS variable, which can be used,
 for example in the \code{variables} argument of \code{tidycensus::get_acs()}. Some of
 these will be collapsed for MRP to form a common denominator with the CCES; see
-\link{keyvalue}
+\link{keyvalue}.
 }
 \examples{
 head(acscodes_age_sex_race)
@@ -49,7 +49,6 @@ head(acscodes_sex_educ_race)
 }
 \seealso{
 \link{acscodes_df} for a definition of all codes,
-and \url{https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html} for a Vignette
-on ACS value pairs
+and the \href{https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html}{Vignette on ACS value pairs}.
 }
 \keyword{datasets}
