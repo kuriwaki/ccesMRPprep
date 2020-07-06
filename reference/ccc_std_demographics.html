@@ -196,9 +196,11 @@ single-digit districts are padded with 0s. e.g. <code>"WY-01"</code> and <code>"
     
 
 <p>This function requires data to have the following columns:</p><ul>
-<li><p>A string column called <code>st</code> that is a two-letter abbreviation of the state</p></li>
+<li><p>A string column called <code>st</code> that is a two-letter abbreviation of the state, or a labelled
+variable coercible to a string.</p></li>
 <li><p>A string column called <code>cd</code> that has the congressional district that is of the form
-<code>"WY-01"</code>, OR a numeric column called <code>dist</code> that has the numeric district number</p></li>
+<code>"WY-01"</code>, OR a numeric column called <code>dist</code> that has the numeric district number.
+<code>cd_up</code> can also be used for the district in the upcoming election.</p></li>
 <li><p>A &lt;numeric+labelled&gt; column called <code>educ</code> for education, <code>race</code> for race,
 <code>age</code> for age, and <code>gender</code> for gender, with values following
 the cumulative content.</p></li>
