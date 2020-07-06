@@ -83,11 +83,11 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(cces
 
   if ("dist_up" %in% colnames(tbl)) {
     tbl <- tbl %>%
-      mutate(cd_up = str_c(st, "-", str_pad(dit_up, width = 2, pad = "0")))
+      mutate(cd_up = str_c(st, "-", str_pad(dist_up, width = 2, pad = "0")))
     message("Re-creating cd_up from st and dist_up, in standard form.")
   }
 
-  # no single digits and "AL" notation
+  # CHECK for no single digits and "AL" notation
   if ("cd" %in% colnames(tbl)) {
     if (any(str_detect(tbl$cd, "[A-Z][A-Z]-[1-9]$"), na.rm = TRUE))
       stop("CD must be of the form MA-01, not MA-1. Give a dataset with numeric variable
