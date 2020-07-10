@@ -102,20 +102,3 @@ race_key <- tribble(
 
 usethis::use_data(age5_key, age10_key, gender_key, educ_key, race_key,
                   overwrite = TRUE)
-
-
-# state FIPS
-library(tigris)
-
-regions <- tibble(st = state.abb,
-                  region = state.region,
-                  division = state.division)
-
-states_key <-  tigris::fips_codes %>%
-  as_tibble() %>%
-  transmute(st = state, state = state_name, st_fips = as.integer(state_code)) %>%
-  distinct() %>%
-  filter(!st_fips %in% 60:78, st != "DC") %>%
-  left_join(regions, by = "st")
-
-usethis::use_data(states_key, overwrite = TRUE)
