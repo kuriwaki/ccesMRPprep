@@ -45,7 +45,7 @@ See their help pages for more information. A detailed list of limitations to com
 
 ### Collapsing variable codes
 
-The survey and the post-stratification must share discrete variables the level of which match 1:1. Therefore, if race is binned 9 ways in the ACS but there are only 5 response options in the CCES, then the finer group must be collapsed to coarser groupings of the 5 levels in the CCES. That also means, for example, that the recoding must be nested -- i.e., it is hard to salvage two variable codings that are not many-to-one nested mappings to each other. These judgments must be made with careful attention to the question wording and are documented to some extent in `?keyvalue`. 
+The survey and the post-stratification must share discrete variables the level of which match 1:1. Therefore, if race is binned 9 ways in the ACS but there are only 5 response options in the CCES, then the finer group must be collapsed to coarser groupings of the 5 levels in the CCES. That also means, for example, that the recoding must be nested -- i.e., it is hard to salvage two variable codings that are not many-to-one nested mappings to each other. These judgments must be made with careful attention to the question wording and are documented to some extent in `?namevalue`. 
 
 ### Thanks
 

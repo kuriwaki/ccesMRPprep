@@ -50,17 +50,17 @@ cces_edlbl <- tibble(educ_cces_chr = names(educ_cces_lbl)[2:7],
                      educ = labelled(c(1, 1, 2, 2, 3, 4), educ_lbl_clps))
 
 educ_key  <- tribble(
-  ~educ_chr, ~educ_cces_chr,
-   "Less than 9th grade", "No HS",
-   "9th to 12th grade no diploma", "No HS",
-   "9th to 12th grade, no diploma", "No HS",
-   "High school graduate (includes equivalency)", "High School Graduate",
-   "High school graduate, GED, or alternative", "High School Graduate",
-   "Some college no degree", "Some College",
-   "Some college, no degree", "Some College",
-   "Associate's degree", "2-Year",
-   "Bachelor's degree", "4-Year",
-   "Graduate or professional degree", "Post-Grad"
+  ~educ_chr, ~educ_cces_chr, ~doc_note,
+   "Less than 9th grade", "No HS", NA,
+   "9th to 12th grade no diploma", "No HS", "ACS spelling varies",
+   "9th to 12th grade, no diploma", "No HS", "ACS spelling varies",
+   "High school graduate (includes equivalency)", "High School Graduate", NA,
+   "High school graduate, GED, or alternative", "High School Graduate", NA,
+   "Some college no degree", "Some College", "ACS spelling varies",
+   "Some college, no degree", "Some College", "ACS spelling varies",
+   "Associate's degree", "2-Year", "Lumped into Some college",
+   "Bachelor's degree", "4-Year", NA,
+   "Graduate or professional degree", "Post-Grad", NA
 ) %>%
   left_join(cces_edlbl, by = "educ_cces_chr")
 
@@ -102,3 +102,35 @@ race_key <- tribble(
 
 usethis::use_data(age5_key, age10_key, gender_key, educ_key, race_key,
                   overwrite = TRUE)
+
+
+# create googlesheets for more public documentation
+library(googlesheets4)
+recreate_sheet <- TRUE
+if (recreate_sheet)
+  gs_cces_acs <- gs4_create("CCES-ACS name value pairs", sheets = "Overview")
+
+
+
+#' transform int+labelled to csv
+# flatten_csv <- function(rd_tbl) {
+#   rd_tbl %>%
+#     mutate(race_cces_value = zap_labels(race_cces),
+#            race_cces_name = as_factor(race_cces),
+#            race_value = zap_labels(race),
+#            race_name = as_factor(race)) %>%
+#     select(-race_cces, -race)
+# }
+
+educ_key_csv <- educ_key %>%
+  rename(educ_acs_name = educ_chr,
+         educ_cces_name = educ_cces_chr) %>% # shouldn't this be called ACS to begin with
+  mutate(educ_value = zap_labels(educ),
+         educ_name = as_factor(educ),
+         educ = NULL) %>%
+  relocate(doc_note, .after = -1)
+
+
+sheet_write(educ_key_csv, ss = gs_cces_acs, sheet = "educ")
+
+

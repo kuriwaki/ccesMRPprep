@@ -20,16 +20,18 @@ questions_samp <- tibble::tribble(
   "CC17_340G", "Withold Sanctuary Funding",  "2017",  "CC17_340G", "yesno",
   "CC18_326",           "Tax Cut Jobs Act",  "2018",   "CC18_326", "yesno",
   "CC18_322C", "Withold Sanctuary Funding",  "2018",  "CC18_322c", "yesno",
+  "CC16_422F", "Racism is isolated", "2016", "CC16_422f", "ordinal",
   "CC18_308d", "Governor Approval",     "2018",  "CC18_308d", "ordinal",
   "CC18_pid3", "Partisan Identification (3-point)",     "2018",  "pid3", "categorical",
   "CC18_pid7", "Partisan Identification (7-point)",     "2018",  "pid7", "categorical",
   "CC18_religpew", "2018 Religion",     "2018",  "religpew", "categorical",
+  "CCC_pid3", "Partisan Identification (3-point)", "cumulative", "pid3", "categorical",
+  "CCC_newsint", "Follow the News", "cumulative", "newsint", "categorical",
   "CCC_turnout_g", "Turnout in the General Election", "cumulative", "vv_turnout_gvm", "categorical",
   "CCC_econ_retro",  "Retrospective Economy", "cumulative", "economy_retro", "ordinal",
   "CCC_voted_sen", "Party vote for US Senate", "cumulative", "voted_sen_party", "categorical",
   "CCC_voted_rep", "Party vote for US Representative", "cumulative", "voted_rep_party", "categorical",
   "CCC_voted_gov", "Party vote for Governor", "cumulative", "voted_gov_party", "categorical",
-  "CC16_422F", "Racism is isolated", "2016", "CC16_422f", "ordinal",
 )
 
 

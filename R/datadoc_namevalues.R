@@ -10,7 +10,7 @@
 #' a given recode, rows are not distinct. To avoid duplicating rows inadvertently,
 #' use the `dplyr::distinct` to reduce the key to two columns with unique rows.
 #'
-#' @name keyvalue
+#' @name namevalue
 #'
 #' @format All keys are tibbles with one row per recoding value.
 #'
@@ -26,7 +26,7 @@
 #'  states_key
 NULL
 
-#' @rdname keyvalue
+#' @rdname namevalue
 #'
 #' @format ### \code{race_key}
 #'  \describe{
@@ -41,7 +41,7 @@ NULL
 #'  }
 "race_key"
 
-#' @rdname  keyvalue
+#' @rdname  namevalue
 #' @format ### \code{gender_key}:
 #'  \describe{
 #'  \item{gender}{An labelled integer of class haven::labelled. Target variable}
@@ -49,7 +49,7 @@ NULL
 #'  }
 "gender_key"
 
-#' @rdname  keyvalue
+#' @rdname  namevalue
 #' @format ### \code{educ_key}
 #'  For mapping ACS data values for education e.g. in \link{get_acs_cces}:
 #'  \describe{
@@ -60,7 +60,7 @@ NULL
 "educ_key"
 
 
-#' @rdname  keyvalue
+#' @rdname  namevalue
 #' @format ### \code{age5_key}
 #'  Age bins, 5-ways, used in \link{acscodes_age_sex_educ}. Use \link{ccc_bin_age}
 #'  to recode CCES variable
@@ -70,7 +70,7 @@ NULL
 #'  }
 "age5_key"
 
-#' @rdname  keyvalue
+#' @rdname  namevalue
 #' @format ###  \code{age10_key}: Age bins, 10-ways, used in \link{acscodes_age_sex_race}:
 #' \describe{
 #'  \item{age}{An labelled integer of class `haven::haven_labelled`. Target variable.}
@@ -78,7 +78,7 @@ NULL
 #'  }
 "age10_key"
 
-#' @rdname keyvalue
+#' @rdname namevalue
 #' @format ###  \code{states_key}: State codes and regions:
 #' \describe{
 #' \item{st}{State two-letter abbreviation `state.abb`}

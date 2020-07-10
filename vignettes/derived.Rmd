@@ -74,7 +74,7 @@ On the other hand, `haven_labelled` is a bit inconvenient because the raw number
 In the `haven_labelled` class, three pieces of information are stored  as attributes:
 
 1. `label`: Description of the entire variable (this contains a short version of the question or an indication of the question in CCES data)
-2. `labels`: Label-Value keyvalue pairs.
+2. `labels`: name-value pairs.
 
 
 We can use `str` and `attr` to view and extract these metadata:
