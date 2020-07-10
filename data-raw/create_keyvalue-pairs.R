@@ -1,6 +1,6 @@
 library(dplyr)
 library(tibble)
-library(labelled)
+library(haven)
 
 # Recode variable df ------
 ages5  <- c("18 to 24 years",
