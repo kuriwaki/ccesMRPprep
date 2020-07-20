@@ -5,7 +5,7 @@
 \alias{acscodes_df}
 \title{ACS code lookup table}
 \format{
-A data frame with 26,271 rows where
+A data frame with 22,134 rows where
 each row represents a variable in the ACS for which there is a count (e.g.
 18-24 year olds who identify as Hispanic).
 
