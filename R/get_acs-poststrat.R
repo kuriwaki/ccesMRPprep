@@ -65,7 +65,10 @@ get_acs_cces <- function(varlist, varlab_df,
     mutate(year = year,
            cd = std_acs_cdformat(NAME)) %>%
     mutate_if(haven::is.labelled, haven::as_factor) %>%
-    select(year, cd, matches("(gender|age|educ|race)"), count, count_moe)
+    select(acscode = variable,
+           year,
+           cd,
+           matches("(gender|female|age|educ|race)"), count, count_moe)
 }
 
 #' Formats a post-strat table from ACS and district-level data
