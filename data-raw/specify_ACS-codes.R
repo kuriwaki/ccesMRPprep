@@ -46,11 +46,12 @@ races_regex <- as.character(glue("({str_c(races, collapse = '|')})"))
 
 
 # get vars ----
-vars_raw <- tidycensus::load_variables(2018, "acs5")
+vars_raw_18 <- tidycensus::load_variables(2018, "acs5")
+vars_raw_16 <- tidycensus::load_variables(2016, "acs5")
 
 # format these and recode
 # to strings ----
-vars <- vars_raw %>%
+vars <- vars_raw_16 %>%
   mutate(variable = name) %>%
   separate(name, sep = "_", into = c("table", "num")) %>%
   select(variable, table, concept, num, label, everything()) %>%
@@ -77,16 +78,19 @@ acscodes_sex_educ_race <- vars %>%
   filter(!is.na(educ), !is.na(gender), !is.na(race)) %>%
   pull(variable)
 
-
+library(tidylog)
 # to labelled
 acscodes_df <- vars %>%
   mutate(race = str_to_upper(race)) %>%
   rename(gender_chr = gender, age_chr = age, educ_chr = educ, race_acs = race) %>%
   left_join(gender_key, by = "gender_chr") %>%
-  left_join(age5_key, by = "age_chr") %>% # age 10 if using race interactions consider binding while keeping the label
+  # age 10 if using race interactions consider binding while keeping the label
+  left_join(age5_key, by = "age_chr") %>%
+  left_join(age10_key, by = "age_chr", suffix = c("_5", "_10")) %>%
   left_join(educ_key, by = "educ_chr") %>%
   left_join(filter(race_key, !is.na(race_acs)), by = "race_acs") %>%
-  select(variable, gender, age, educ, race)
+  mutate(female = as.integer(gender == 2)) %>%
+  select(variable, gender, female, matches("age_(5|10)"), educ, race)
 
 # Write ----
 usethis::use_data(acscodes_age_sex_educ, overwrite = TRUE)
