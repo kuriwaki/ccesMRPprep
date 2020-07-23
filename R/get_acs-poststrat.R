@@ -45,11 +45,12 @@
 #'  poststrat <-  get_poststrat(acs_tab, cd_info_2018, fm_brm)
 #' }
 #'
-get_acs_cces <- function(varlist, varlab_df,
+get_acs_cces <- function(varlist,
+                         varlab_df = acscodes_df,
                          year = 2018,
                          geography =  "congressional district") {
 
-  get_acs(geography = geography,
+  acs_df <- get_acs(geography = geography,
           year = min(max(year, 2010), 2018),
           survey = "acs5",
           variable = varlist,
@@ -60,7 +61,9 @@ get_acs_cces <- function(varlist, varlab_df,
       count_moe = moe,
       cdid = GEOID,
     ) %>%
-    mutate(count = replace_na(count, 0)) %>%
+    mutate(count = replace_na(count, 0))
+
+  acs_lbl <- acs_df %>%
     left_join(varlab_df, by = "variable") %>%
     mutate(year = year,
            cd = std_acs_cdformat(NAME)) %>%
@@ -68,7 +71,11 @@ get_acs_cces <- function(varlist, varlab_df,
     select(acscode = variable,
            year,
            cd,
-           matches("(gender|female|age|educ|race)"), count, count_moe)
+           matches("(gender|female|age|educ|race)"), count, count_moe) %>%
+      mutate(age = coalesce(age_5, age_10)) %>%
+      select(-age_5, -age_10)
+
+  acs_lbl
 }
 
 #' Formats a post-strat table from ACS and district-level data
@@ -125,9 +132,8 @@ get_poststrat <- function(cleaned_acs, dist_data = NULL, model_ff) {
   cleaned_acs %>%
     filter_at(vars(matches(xvar_regex)), all_vars(!is.na(.))) %>%
     group_by(!!!syms(xvars), add = TRUE) %>%
-    summarize(count = sum(count, na.rm = TRUE)) %>%
-    filter(count > 0) %>%
-    ungroup()
+    summarize(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+    filter(count > 0)
 }
 
 
