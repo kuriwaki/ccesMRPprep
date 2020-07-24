@@ -99,7 +99,7 @@
       <h1 data-toc-skip>Derived Variables</h1>
                         <h4 class="author">Shiro Kuriwaki</h4>
             
-            <h4 class="date">2020-07-10</h4>
+            <h4 class="date">2020-07-24</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/master/vignettes/derived.Rmd"><code>vignettes/derived.Rmd</code></a></small>
       <div class="hidden name"><code>derived.Rmd</code></div>
@@ -117,13 +117,6 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="kw">gov_approval_lbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">cc18_samp</span>, <span class="kw">case_id</span>, <span class="kw">CC18_308d</span>)
 <span class="kw">gov_approval_lbl</span>
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 1,000 x 2</span>
 <span class="co">#&gt;      case_id               CC18_308d</span>
 <span class="co">#&gt;        &lt;dbl&gt;               &lt;dbl+lbl&gt;</span>
@@ -143,13 +136,6 @@
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="kw">gov_approval_fct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">transmute</a></span>(<span class="kw">cc18_samp</span>, <span class="kw">case_id</span>, CC18_308d = <span class="fu">as_factor</span>(<span class="kw">CC18_308d</span>))
 <span class="kw">gov_approval_fct</span>
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 1,000 x 2</span>
 <span class="co">#&gt;      case_id CC18_308d          </span>
 <span class="co">#&gt;        &lt;dbl&gt; &lt;fct&gt;              </span>
@@ -178,13 +164,6 @@
 <span class="kw">gov_approval_lbl</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(outcome = <span class="kw">CC18_308d</span> <span class="op">&lt;=</span> <span class="fl">2</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span>(<span class="kw">CC18_308d</span>, <span class="kw">outcome</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 6 x 3</span>
 <span class="co">#&gt;                  CC18_308d outcome     n</span>
 <span class="co">#&gt;                  &lt;dbl+lbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
@@ -202,13 +181,6 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span>(<span class="kw">outcome</span>)
 <span class="co">#&gt; Warning in Ops.factor(CC18_308d, "Somewhat approve"): '&lt;=' not meaningful for</span>
 <span class="co">#&gt; factors</span>
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;   outcome     n</span>
 <span class="co">#&gt;   &lt;lgl&gt;   &lt;int&gt;</span>
@@ -256,13 +228,6 @@
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="kw">questions_samp</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">q_ID</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"CC18_322C"</span>,<span class="st">"CC18_308d"</span>, <span class="st">"CC18_pid3"</span>))
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 3 x 5</span>
 <span class="co">#&gt;   q_ID      q_label                           cces_data q_code    response_type</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                             &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        </span>
@@ -283,13 +248,6 @@
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">cc18_samp</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">case_id</span>, <span class="kw">CC18_322c</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 1,000 x 2</span>
 <span class="co">#&gt;      case_id   CC18_322c</span>
 <span class="co">#&gt;        &lt;dbl&gt;   &lt;dbl+lbl&gt;</span>
@@ -310,13 +268,6 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">case_id</span>, <span class="kw">CC18_322c</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(outcome = <span class="fu"><a href="../reference/yesno_to_binary.html">yesno_to_binary</a></span>(<span class="fu">as_factor</span>(<span class="kw">CC18_322c</span>))) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span>(<span class="kw">CC18_322c</span>, <span class="kw">outcome</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 3 x 3</span>
 <span class="co">#&gt;      CC18_322c outcome     n</span>
 <span class="co">#&gt;      &lt;dbl+lbl&gt;   &lt;dbl&gt; &lt;int&gt;</span>
@@ -342,13 +293,6 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">case_id</span>, <span class="kw">pid3</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(outcome = <span class="kw">pid3</span> <span class="op">%in%</span> <span class="fl">3</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span>(<span class="kw">pid3</span>, <span class="kw">outcome</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;              pid3 outcome     n</span>
 <span class="co">#&gt;         &lt;dbl+lbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
@@ -372,13 +316,6 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">case_id</span>, <span class="kw">CC18_308d</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(outcome = <span class="kw">CC18_308d</span> <span class="op">&lt;=</span> <span class="fl">2</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span>(<span class="kw">CC18_308d</span>, <span class="kw">outcome</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 6 x 3</span>
 <span class="co">#&gt;                  CC18_308d outcome     n</span>
 <span class="co">#&gt;                  &lt;dbl+lbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>

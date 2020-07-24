@@ -152,7 +152,7 @@ questionr::lookfor (or rcces::vartab) is a useful option (see example)." />
     <div class="ref-description">
     <p>1000 rows from th 2018 CCES Common Content. Contains all columns, retaining the
 <code>haven_labelled</code> class. This is <a href='doi:10.7910/DVN/ZSBZ7K/H5IDTA'>doi:10.7910/DVN/ZSBZ7K/H5IDTA</a> originally read
-in using <code>read_dta</code> via <code><a href='https://rdrr.io/pkg/ccesMRPprep/man/get_cces_dv.html'>get_cces_dv()</a></code>. To search for variable by its content,
+in using <code>read_dta</code> via <code><a href='get_cces_dv.html'>get_cces_dv()</a></code>. To search for variable by its content,
 <code><a href='https://rdrr.io/pkg/questionr/man/lookfor.html'>questionr::lookfor</a></code> (or <code>rcces::vartab</code>) is a useful option (see example).</p>
     </div>
 
@@ -172,7 +172,7 @@ in using <code>read_dta</code> via <code><a href='https://rdrr.io/pkg/ccesMRPpre
 each column. To use the harmonized and easier-to-use versions of common variables
 like geography, partisan ID, demographics and vote choice, use the cumulative
 common content, of which 2018 is a subset. A sample of the cumulative is contained
-in this package as <code><a href='https://rdrr.io/pkg/ccesMRPprep/man/ccc_samp.html'>?ccc_samp</a></code>.</p>
+in this package as <code><a href='ccc_samp.html'>?ccc_samp</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -183,13 +183,7 @@ in this package as <code><a href='https://rdrr.io/pkg/ccesMRPprep/man/ccc_samp.h
 #&gt; 162            CC18_335                Trump Russia collusion
 #&gt; 430 CC18_app_dtrmp_post          President Trump Job Approval</div><div class='input'>
 <span class='co'># all data</span>
-<span class='kw'>cc18_samp</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,000 x 526</span><span>
+<span class='kw'>cc18_samp</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,000 x 526</span><span>
 #&gt;     year case_id commonweight commonpostweight vvweight vvweight_post tookpost
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lb&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018  4.15</span><span style='color: #555555;'>e</span><span>8        1.47             1.48    </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>      2</span><span style='color: #555555;'> [Yes]</span><span>

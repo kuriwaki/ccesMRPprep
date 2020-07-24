@@ -149,7 +149,7 @@ data to give meaning to variable codes e.g. acscodes_age_sex_educ" />
 
     <div class="ref-description">
     <p>A tidy dataframe where each row is a ACS code. This is useful internal
-data to give meaning to variable codes e.g. <a href='https://rdrr.io/pkg/ccesMRPprep/man/acscodes_partitions.html'>acscodes_age_sex_educ</a></p>
+data to give meaning to variable codes e.g. <a href='acscodes_partitions.html'>acscodes_age_sex_educ</a></p>
     </div>
 
     <pre class="usage"><span class='kw'>acscodes_df</span></pre>
@@ -157,7 +157,7 @@ data to give meaning to variable codes e.g. <a href='https://rdrr.io/pkg/ccesMRP
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 26,271 rows where
+    <p>A data frame with 22,134 rows where
 each row represents a variable in the ACS for which there is a count (e.g.
 18-24 year olds who identify as Hispanic).</p>
 <dl>
@@ -181,21 +181,15 @@ that means the variable collapses over the levels of that variable. In other
 words, <code>NA</code> here can be thought of as meaning "all".</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>acscodes_df</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
-#&gt;   variable      gender       age      educ      race
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> B00001_001 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> B00002_001 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> B01001_001 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>4</span><span> B01001_002  1</span><span style='color: #555555;'> [Male]</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>5</span><span> B01001_003  1</span><span style='color: #555555;'> [Male]</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #555555;'>6</span><span> B01001_004  1</span><span style='color: #555555;'> [Male]</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span></div><div class='input'></div></span></pre>
+    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>acscodes_df</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 7</span><span>
+#&gt;   variable      gender female     age_5    age_10      educ      race
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int+lbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> B00001_001 </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> B00002_001 </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> B01001_001 </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> B01001_002  1</span><span style='color: #555555;'> [Male]</span><span>      0        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span> B01001_003  1</span><span style='color: #555555;'> [Male]</span><span>      0        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span> B01001_004  1</span><span style='color: #555555;'> [Male]</span><span>      0        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span></div><div class='input'></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

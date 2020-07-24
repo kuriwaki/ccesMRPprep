@@ -154,7 +154,7 @@ use the variables necessary for the model, thus its name "slim".  Therefore,
 is model dependent.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/cces_join_slim.html'>cces_join_slim</a></span>(
+    <pre class="usage"><span class='fu'>cces_join_slim</span>(
   <span class='kw'>ccq_df</span>,
   <span class='kw'>ccc_df</span>,
   <span class='kw'>cd_df</span>,
@@ -170,19 +170,19 @@ is model dependent.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ccq_df</th>
-      <td><p>dataframe of outcomes, taken from <a href='https://rdrr.io/pkg/ccesMRPprep/man/get_cces_question.html'>get_cces_question</a>. We
+      <td><p>dataframe of outcomes, taken from <a href='get_cces_question.html'>get_cces_question</a>. We
 currently assume the name for the outcome is named "response", although this
 can be modified with the <code>y_named_as</code> argument</p></td>
     </tr>
     <tr>
       <th>ccc_df</th>
       <td><p>dataframe of covariates, currently taken only from the cumulative
-common content. It should have passed <a href='https://rdrr.io/pkg/ccesMRPprep/man/ccc_std_demographics.html'>ccc_std_demographics</a> to be
+common content. It should have passed <a href='ccc_std_demographics.html'>ccc_std_demographics</a> to be
 compatible with ACS.</p></td>
     </tr>
     <tr>
       <th>cd_df</th>
-      <td><p>dataframe of district-level predictors, see <a href='https://rdrr.io/pkg/ccesMRPprep/man/cd_info_2018.html'>cd_info_2018</a>
+      <td><p>dataframe of district-level predictors, see <a href='cd_info_2018.html'>cd_info_2018</a>
 for a sample. Currently, we join this to the rest of the data on the column
 called <code>"cd"</code> and <code>"year"</code>.</p></td>
     </tr>
@@ -193,7 +193,7 @@ called <code>"cd"</code> and <code>"year"</code>.</p></td>
     <tr>
       <th>y_named_as</th>
       <td><p>What is the outcome variable called? defaults to <code>"response"</code>,
-from <a href='https://rdrr.io/pkg/ccesMRPprep/man/get_cces_question.html'>get_cces_question</a>. Input as character.</p></td>
+from <a href='get_cces_question.html'>get_cces_question</a>. Input as character.</p></td>
     </tr>
     <tr>
       <th>coerce_to_char</th>
@@ -215,15 +215,15 @@ of whether it is specified in a formula. Input as character vector.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'> <span class='co'>if</span> (<span class='fl'>FALSE</span>) {
   <span class='co'># need data/input/cces/cces_2018.rds to run this</span>
-  <span class='kw'>ccq_tcja</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/get_cces_question.html'>get_cces_question</a></span>(<span class='st'>"CC18_326"</span>, <span class='st'>"2018"</span>, <span class='st'>"TCJA"</span>)
+  <span class='kw'>ccq_tcja</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_cces_question.html'>get_cces_question</a></span>(<span class='st'>"CC18_326"</span>, <span class='st'>"2018"</span>, <span class='st'>"TCJA"</span>)
 
-  <span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/cces_join_slim.html'>cces_join_slim</a></span>(ccq_df = <span class='kw'>ccq_tcja</span>,
+  <span class='fu'>cces_join_slim</span>(ccq_df = <span class='kw'>ccq_tcja</span>,
                  ccc_df = <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='kw'>ccc_samp</span>, <span class='kw'>year</span> <span class='op'>==</span> <span class='fl'>2018</span>),
                  cd_df = <span class='kw'>cd_info_2018</span>,
                  model_ff = <span class='st'>"yes | trials(n_response) ~ age + educ + (1|cd)"</span>)
 
   <span class='co'># alternative - cd and state not in the formula, but cells follow this</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/cces_join_slim.html'>cces_join_slim</a></span>(ccq_df = <span class='kw'>ccq_tcja</span>,
+  <span class='fu'>cces_join_slim</span>(ccq_df = <span class='kw'>ccq_tcja</span>,
                  ccc_df = <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='kw'>ccc_samp</span>, <span class='kw'>year</span> <span class='op'>==</span> <span class='fl'>2018</span>),
                  cd_df = <span class='kw'>cd_info_2018</span>,
                  keep_vars = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"st"</span>, <span class='st'>"cd"</span>),

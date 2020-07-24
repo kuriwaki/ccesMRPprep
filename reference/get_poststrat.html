@@ -150,14 +150,14 @@
     <p>Formats a post-strat table from ACS and district-level data</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/get_poststrat.html'>get_poststrat</a></span>(<span class='kw'>cleaned_acs</span>, dist_data = <span class='kw'>NULL</span>, <span class='kw'>model_ff</span>)</pre>
+    <pre class="usage"><span class='fu'>get_poststrat</span>(<span class='kw'>cleaned_acs</span>, dist_data = <span class='kw'>NULL</span>, <span class='kw'>model_ff</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>cleaned_acs</th>
-      <td><p>An output of <a href='https://rdrr.io/pkg/ccesMRPprep/man/get_acs_cces.html'>get_acs_cces</a>. The count of people in
+      <td><p>An output of <a href='get_acs_cces.html'>get_acs_cces</a>. The count of people in
 each cell must be under the variable <code>count</code></p></td>
     </tr>
     <tr>
@@ -175,17 +175,17 @@ Only the RHS will be used but the LHS is necessary.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://rdrr.io/pkg/ccesMRPprep/man/get_acs_cces.html'>get_acs_cces</a></p></div>
+    <div class='dont-index'><p><a href='get_acs_cces.html'>get_acs_cces</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
  <span class='kw'>fm_brm</span> <span class='op'>&lt;-</span> <span class='kw'>yes</span> <span class='op'>|</span> <span class='fu'>responses</span>(<span class='kw'>n_cell</span>) <span class='op'>~</span>  <span class='kw'>age</span> <span class='op'>+</span> <span class='kw'>gender</span> <span class='op'>+</span> <span class='kw'>educ</span> <span class='op'>+</span> <span class='kw'>pct_trump</span> <span class='op'>+</span> (<span class='fl'>1</span><span class='op'>|</span><span class='kw'>cd</span>)
- <span class='kw'>acs_tab</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/get_acs_cces.html'>get_acs_cces</a></span>(
+ <span class='kw'>acs_tab</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_acs_cces.html'>get_acs_cces</a></span>(
               varlist = <span class='kw'>acscodes_age_sex_educ</span>,
               varlab_df = <span class='kw'>acscodes_df</span>,
              .year = <span class='fl'>2018</span>)
 
-<span class='kw'>poststrat</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/get_poststrat.html'>get_poststrat</a></span>(<span class='kw'>acs_tab</span>, <span class='kw'>cd_info_2018</span>, <span class='kw'>fm_brm</span>)
+<span class='kw'>poststrat</span> <span class='op'>&lt;-</span>  <span class='fu'>get_poststrat</span>(<span class='kw'>acs_tab</span>, <span class='kw'>cd_info_2018</span>, <span class='kw'>fm_brm</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>poststrat</span>)
 <span class='co'>#   age            gender educ       pct_trump cd    count</span>
 <span class='co'>#   &lt;fct&gt;          &lt;fct&gt;  &lt;fct&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>

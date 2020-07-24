@@ -150,7 +150,7 @@
     <p>Currently only is compatible with question of type <code>"yesno"</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/build_counts.html'>build_counts</a></span>(
+    <pre class="usage"><span class='fu'>build_counts</span>(
   <span class='kw'>data</span>,
   <span class='kw'>model_ff</span>,
   keep_vars = <span class='kw'>NULL</span>,
@@ -166,10 +166,10 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>A cleaned CCES dataset, e.g. from <a href='https://rdrr.io/pkg/ccesMRPprep/man/ccc_std_demographics.html'>ccc_std_demographics</a> which is
-then combined with outcome and contextual data in <a href='https://rdrr.io/pkg/ccesMRPprep/man/cces_join_slim.html'>cces_join_slim</a>. Currently, it
+      <td><p>A cleaned CCES dataset, e.g. from <a href='ccc_std_demographics.html'>ccc_std_demographics</a> which is
+then combined with outcome and contextual data in <a href='cces_join_slim.html'>cces_join_slim</a>. Currently, it
 assumes the outcome is named <code>response</code>. This variable need not be numeric or
-binarized, but it will be binarized with <a href='https://rdrr.io/pkg/ccesMRPprep/man/yesno_to_binary.html'>yesno_to_binary</a>.</p></td>
+binarized, but it will be binarized with <a href='yesno_to_binary.html'>yesno_to_binary</a>.</p></td>
     </tr>
     <tr>
       <th>model_ff</th>
@@ -228,18 +228,12 @@ of trials.</p></li>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'>
 <span class='kw'>ccc_samp_std</span> <span class='op'>&lt;-</span> <span class='kw'>ccc_samp</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(response = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"For"</span>, <span class='st'>"Against"</span>), size = <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span>(), replace = <span class='fl'>TRUE</span>)) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/ccc_std_demographics.html'>ccc_std_demographics</a></span>()</div><div class='output co'>#&gt; age variable modified to bins. Original age variable is now in age_orig. </div><div class='input'>
+  <span class='fu'><a href='ccc_std_demographics.html'>ccc_std_demographics</a></span>()</div><div class='output co'>#&gt; age variable modified to bins. Original age variable is now in age_orig. </div><div class='input'>
 <span class='kw'>ff</span> <span class='op'>&lt;-</span> <span class='st'>"yes | trials(n_response) ~ age + gender + educ + (1|cd)"</span>
-<span class='kw'>ccc_samp_out</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/build_counts.html'>build_counts</a></span>(<span class='kw'>ccc_samp_std</span>,
+<span class='kw'>ccc_samp_out</span> <span class='op'>&lt;-</span> <span class='fu'>build_counts</span>(<span class='kw'>ccc_samp_std</span>,
                              model_ff = <span class='kw'>ff</span>)
 
-<span class='kw'>ccc_samp_out</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 945 x 6</span><span>
+<span class='kw'>ccc_samp_out</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 945 x 6</span><span>
 #&gt;    age            gender educ         cd    n_response   yes
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 18 to 24 years Male   HS or Less   CA-39          1     1
@@ -254,13 +248,7 @@ of trials.</p></li>
 #&gt; </span><span style='color: #555555;'>10</span><span> 18 to 24 years Male   Some College IA-02          1     1
 #&gt; </span><span style='color: #555555;'># … with 935 more rows</span><span></div><div class='input'>
 <span class='co'># alternative options</span>
-<span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/build_counts.html'>build_counts</a></span>(<span class='kw'>ccc_samp_std</span>, model_ff = <span class='kw'>ff</span>, name_ones_as = <span class='st'>"success"</span>, name_trls_as = <span class='st'>"trials"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 945 x 6</span><span>
+<span class='fu'>build_counts</span>(<span class='kw'>ccc_samp_std</span>, model_ff = <span class='kw'>ff</span>, name_ones_as = <span class='st'>"success"</span>, name_trls_as = <span class='st'>"trials"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 945 x 6</span><span>
 #&gt;    age            gender educ         cd    trials success
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 18 to 24 years Male   HS or Less   CA-39      1       1
@@ -273,13 +261,7 @@ of trials.</p></li>
 #&gt; </span><span style='color: #555555;'> 8</span><span> 18 to 24 years Male   HS or Less   NC-11      1       1
 #&gt; </span><span style='color: #555555;'> 9</span><span> 18 to 24 years Male   HS or Less   PA-11      1       1
 #&gt; </span><span style='color: #555555;'>10</span><span> 18 to 24 years Male   Some College IA-02      1       1
-#&gt; </span><span style='color: #555555;'># … with 935 more rows</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/ccesMRPprep/man/build_counts.html'>build_counts</a></span>(<span class='kw'>ccc_samp_std</span>, model_ff = <span class='kw'>ff</span>, keep_vars = <span class='st'>"state"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `...` is not empty.</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>We detected these problematic arguments:</span>
-#&gt; <span class='warning'>* `needs_dots`</span>
-#&gt; <span class='warning'></span>
-#&gt; <span class='warning'>These dots only exist to allow future extensions and should be empty.</span>
-#&gt; <span class='warning'>Did you misspecify an argument?</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 945 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># … with 935 more rows</span><span></div><div class='input'><span class='fu'>build_counts</span>(<span class='kw'>ccc_samp_std</span>, model_ff = <span class='kw'>ff</span>, keep_vars = <span class='st'>"state"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 945 x 7</span><span>
 #&gt;    age            gender educ         cd    state          n_response   yes
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 18 to 24 years Male   HS or Less   CA-39 California              1     1
