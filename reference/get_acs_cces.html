@@ -79,7 +79,7 @@ renames some variables to later merge with CCES-based regression models." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -154,8 +154,9 @@ renames some variables to later merge with CCES-based regression models.</p>
 
     <pre class="usage"><span class='fu'>get_acs_cces</span>(
   <span class='kw'>varlist</span>,
-  <span class='kw'>varlab_df</span>,
+  varlab_df = <span class='kw'>acscodes_df</span>,
   year = <span class='fl'>2018</span>,
+  dataset = <span class='st'>"acs1"</span>,
   geography = <span class='st'>"congressional district"</span>
 )</pre>
 
@@ -174,6 +175,11 @@ renames some variables to later merge with CCES-based regression models.</p>
       <th>year</th>
       <td><p>The year of the ACS to get. Because of data availability limitations, this is
 capped to 2010-2018.</p></td>
+    </tr>
+    <tr>
+      <th>dataset</th>
+      <td><p>Which type of ACS to get. Defaults to <code>"acs1"</code> for ACS-5 year.
+Use <code>"acs5"</code> for 5-year.</p></td>
     </tr>
     <tr>
       <th>geography</th>
