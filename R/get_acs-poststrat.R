@@ -7,6 +7,8 @@
 #' @param varlab_df a dataframe that appends the categories based on the varcode
 #' @param year The year of the ACS to get. Because of data availability limitations, this is
 #'  capped to 2010-2018.
+#' @param dataset Which type of ACS to get. Defaults to `"acs5"` for ACS-5 year.
+#'  Use `"acs1"` for 1-year.
 #' @param geography the type of geography to pull. Currently only supports
 #'  \code{"congressional district"}.
 #'
@@ -48,11 +50,12 @@
 get_acs_cces <- function(varlist,
                          varlab_df = acscodes_df,
                          year = 2018,
+                         dataset = "acs5",
                          geography =  "congressional district") {
 
   acs_df <- get_acs(geography = geography,
           year = min(max(year, 2010), 2018),
-          survey = "acs5",
+          survey = dataset,
           variable = varlist,
           geometry = FALSE) %>%
     filter(!str_detect(NAME, "Puerto Rico")) %>%
@@ -68,11 +71,11 @@ get_acs_cces <- function(varlist,
     mutate(year = year,
            cd = std_acs_cdformat(NAME)) %>%
     mutate_if(haven::is.labelled, haven::as_factor) %>%
+    mutate(age = coalesce(age_5, age_10)) %>%
     select(acscode = variable,
            year,
            cd,
            matches("(gender|female|age|educ|race)"), count, count_moe) %>%
-      mutate(age = coalesce(age_5, age_10)) %>%
       select(-age_5, -age_10)
 
   acs_lbl

@@ -6,8 +6,9 @@
 \usage{
 get_acs_cces(
   varlist,
-  varlab_df,
+  varlab_df = acscodes_df,
   year = 2018,
+  dataset = "acs5",
   geography = "congressional district"
 )
 }
@@ -18,6 +19,9 @@ get_acs_cces(
 
 \item{year}{The year of the ACS to get. Because of data availability limitations, this is
 capped to 2010-2018.}
+
+\item{dataset}{Which type of ACS to get. Defaults to \code{"acs5"} for ACS-5 year.
+Use \code{"acs1"} for 1-year.}
 
 \item{geography}{the type of geography to pull. Currently only supports
 \code{"congressional district"}.}
