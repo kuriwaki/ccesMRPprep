@@ -7,8 +7,8 @@
 #' @param varlab_df a dataframe that appends the categories based on the varcode
 #' @param year The year of the ACS to get. Because of data availability limitations, this is
 #'  capped to 2010-2018.
-#' @param dataset Which type of ACS to get. Defaults to `"acs5"` for ACS-5 year.
-#'  Use `"acs1"` for 1-year.
+#' @param dataset Which type of ACS to get. Defaults to `"acs1"` for ACS-5 year.
+#'  Use `"acs5"` for 5-year.
 #' @param geography the type of geography to pull. Currently only supports
 #'  \code{"congressional district"}.
 #'
@@ -50,7 +50,7 @@
 get_acs_cces <- function(varlist,
                          varlab_df = acscodes_df,
                          year = 2018,
-                         dataset = "acs5",
+                         dataset = "acs1",
                          geography =  "congressional district") {
 
   acs_df <- get_acs(geography = geography,
