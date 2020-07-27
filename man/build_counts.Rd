@@ -35,7 +35,7 @@ successes in the binomial}
 trials in the binomial.}
 
 \item{y_named_as}{What is the original response / outcome variable called?
-Currently defaults to "response" from \link{get_cces_outcome}.}
+Currently defaults to "response" from \link{get_cces_question}.}
 
 \item{multiple_qIDs}{Does the data contain \emph{multiple} outcomes in long form and
 therefore require the counts to be built for each outcome? Defaults to \code{FALSE}.}

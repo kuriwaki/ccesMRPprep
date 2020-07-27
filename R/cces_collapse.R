@@ -12,7 +12,7 @@
 #' @param keep_vars Variables that will be kept as a cell variable, regardless
 #'  of whether it is specified in a formula. Input as character vector.
 #' @param y_named_as What is the original response / outcome variable called?
-#'  Currently defaults to "response" from \link{get_cces_outcome}.
+#'  Currently defaults to "response" from \link{get_cces_question}.
 #' @param name_ones_as What to name the variable that represents the number of
 #'  successes in the binomial
 #' @param name_trls_as What to name the variable that represents the number of

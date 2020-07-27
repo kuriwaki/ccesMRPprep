@@ -9,7 +9,7 @@
 #' @param qID A string, the user's unique name for the question. For example, we use the
 #'  syntax in our question table.
 #' @param y_named_as What to name the response variable. Defaults to "response", which is also
-#'  the default assumption for \link{joined_df}.
+#'  the default assumption for \link{cces_join_slim}.
 #' @param dataframe An optional argument to pass the entire CCES dataframe in-environment.
 #' If left empty, this will supersede the arguments \code{year} and \code{dataframe} and
 #' use the provided datasets instead.

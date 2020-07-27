@@ -4,7 +4,7 @@
 #' the vector is a code for a ACS variable, which can be used,
 #' for example in the \code{variables} argument of \code{tidycensus::get_acs()}. Some of
 #' these will be collapsed for MRP to form a common denominator with the CCES; see
-#' \link{keyvalue}.
+#' \link{namevalue}.
 #'
 #' @name acscodes_partitions
 #'
