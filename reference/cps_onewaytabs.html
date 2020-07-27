@@ -47,7 +47,8 @@
 
 <meta property="og:title" content="CPS variable labels and counts — cps_onewaytabs" />
 <meta property="og:description" content="One summary of the CPS, by reporting all year-by-year raw counts of the microdata
-for main demographic varibales." />
+for main demographic variables. In other words, it tabulates all the unique
+values of each main variable, and shows its sample size." />
 
 
 
@@ -152,7 +153,8 @@ for main demographic varibales." />
 
     <div class="ref-description">
     <p>One summary of the CPS, by reporting all year-by-year raw counts of the microdata
-for main demographic varibales.</p>
+for main demographic variables. In other words, it tabulates all the unique
+values of each main variable, and shows its sample size.</p>
     </div>
 
     <pre class="usage"><span class='kw'>cps_onewaytabs</span></pre>
@@ -163,7 +165,18 @@ for main demographic varibales.</p>
     <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 3258 rows and 5 columns.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>The <a href='https://www.shirokuriwaki.com/ccesMRPprep/articles/cps.html'>Vignette on CPS</a>.</p></div>
+    <div class='dont-index'><p>The <a href='https://www.shirokuriwaki.com/ccesMRPprep/articles/cps.html'>Vignette on CPS</a>.</p>
+<dl>
+<dt>variable</dt><dd><p>Name of the variable, as it appears in the CPS extract</p></dd>
+<dt>year</dt><dd><p>Year of the November supplement</p></dd>
+<dt>name</dt><dd><p>Name (or label) of the value in the November supplement</p></dd>
+<dt>value</dt><dd><p>The integer value of the value in the value. The name and value
+together form the labelled class. See the <code><a href='../articles/derived.html'>vignette("derived")</a></code> vignette.</p></dd>
+<dt>n</dt><dd><p>Number of raw observations (sample size) in the November supplement
+of the CPS.</p></dd>
+
+</dl>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>cps_onewaytabs</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
