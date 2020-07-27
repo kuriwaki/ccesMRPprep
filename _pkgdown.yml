@@ -30,6 +30,7 @@ reference:
   - ends_with("_key")
   - cces_dv_ids
   - starts_with("acscodes")
+  - starts_with("cps")
 - title: Reading Data
   desc: Functions that read in CCES and ACS data from an API
 - contents:
