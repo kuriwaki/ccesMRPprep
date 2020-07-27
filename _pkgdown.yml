@@ -13,7 +13,7 @@ home:
   title: Portable Routines for Preparing CCES and ACS data for MRP
   description: >
     Multilevel Regression and Poststratification (MRP) is a method for analyzing
-    surveys, and can be implemented on public datasets such as the CCES and ACS.
+    surveys, and can be implemented on public datasets such as the CCES, ACS, and CPS.
     This package provides data loading, processing, and formatting functions for
     a particular task: using CCES data for MRP. It uses the dataverse and
     tidycensus packages to load data and provide some crosswalks. Model fitting
@@ -68,3 +68,7 @@ articles:
   navbar: ~
   contents:
     - acs
+- title: CPS Data
+  navbar: ~
+  contents:
+    - cps

@@ -1,0 +1,93 @@
+---
+title: "CPS Overview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{CPS Overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message = FALSE, include = FALSE}
+library(ccesMRPprep)
+library(tidyverse)
+library(haven)
+library(knitr)
+options(knitr.kable.NA = '')
+
+xt <- function(var, tbl = cps_onewaytabs) {
+  tbl %>% 
+    filter(variable == quo_name(enquo(var)), year >= 2006) %>% 
+    pivot_wider(id_cols = name, names_from = year, values_from = n) %>% 
+    rename({{var}} := name) %>% 
+    knitr::kable(format.args = list(big.mark = ','), )
+}
+```
+
+
+
+The CPS is a survey that includes self-reported vote, as well as a variety of other economic indicators. It has less geographic granularity than the ACS.
+
+
+The CPS runs monthly, and in a given month collects about 130,000 repondents, or the twice the amount the CCES collects in a year. Only the November survey includes a "Voter Supplement", which includes a question about the respondent's vote turnout.
+
+# Variable and counts
+
+We list the counts of key demographic variables here, using the one-way tabulations in `?cps_onewaytabs`
+
+## sex
+
+```{r, echo = FALSE}
+xt(sex)
+```
+## age (5-way)
+
+
+```{r, echo = FALSE}
+xt(age)
+```
+
+
+## education
+
+```{r, echo = FALSE}
+xt(educ)
+```
+
+## race
+
+```{r, echo = FALSE}
+xt(race)
+```
+
+## hispanic origin
+
+```{r, echo = FALSE}
+xt(hispan)
+```
+
+
+## Self-reported vote
+
+```{r, echo = FALSE}
+xt(voted)
+```
+
+## state
+
+```{r, echo = FALSE}
+xt(statefip)
+```
+
+
+## county (if not anonymized)
+
+```{r, echo = FALSE}
+xt(county)
+```
