@@ -1,7 +1,11 @@
 library(tidyverse)
+library(tidycensus)
 library(haven)
 
-
+fips_lbl <- fips_codes %>%
+  as_tibble() %>%
+  transmute(name =  as.character(as.numeric(str_c(state_code, county_code))),
+            county_name = glue::glue("{str_remove(county, ' County')}, {state}"))
 
 cps_all <- read_dta("data/input/cps/cps_00009.dta.gz")
 
@@ -24,16 +28,17 @@ cps_onewaytabs <- bind_rows(
   count_long(sex),
   cps_all %>%
     mutate(age = as.integer(as.character(as_factor(age))),
-           age = ccc_bin_age(age)) %>%
+           age = ccesMRPprep::ccc_bin_age(age)) %>%
     count_long(age, .),
   count_long(race),
   count_long(hispan),
   count_long(educ),
   count_long(voted),
   count_long(statefip),
-  count_long(county),
-)
-usethis::use_data(cps_onewaytabs)
+  count_long(county) %>%  left_join(fips_lbl, by = "name") %>% select(-name) %>% rename(name = county_name),
+) %>%
+  mutate(name = as.character(name))
+usethis::use_data(cps_onewaytabs, overwrite = TRUE)
 
 
 # sex

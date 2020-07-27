@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup, message = FALSE, include = FALSE}
 library(ccesMRPprep)
+data(cces_onewaytabs)
 library(tidyverse)
 library(haven)
 library(knitr)
@@ -46,6 +47,8 @@ We list the counts of key demographic variables here, using the one-way tabulati
 ```{r, echo = FALSE}
 xt(sex)
 ```
+
+
 ## age (5-way)
 
 
