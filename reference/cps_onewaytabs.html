@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Formats a post-strat table from ACS and district-level data — get_poststrat • ccesMRPprep</title>
+<title>CPS variable labels and counts — cps_onewaytabs • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,9 @@
 
 
 
-<meta property="og:title" content="Formats a post-strat table from ACS and district-level data — get_poststrat" />
-<meta property="og:description" content="Formats a post-strat table from ACS and district-level data" />
+<meta property="og:title" content="CPS variable labels and counts — cps_onewaytabs" />
+<meta property="og:description" content="One summary of the CPS, by reporting all year-by-year raw counts of the microdata
+for main demographic varibales." />
 
 
 
@@ -144,62 +145,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Formats a post-strat table from ACS and district-level data</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/get_acs-poststrat.R'><code>R/get_acs-poststrat.R</code></a></small>
-    <div class="hidden name"><code>get_poststrat.Rd</code></div>
+    <h1>CPS variable labels and counts</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/datadoc_cps-onewaytabs.R'><code>R/datadoc_cps-onewaytabs.R</code></a></small>
+    <div class="hidden name"><code>cps_onewaytabs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Formats a post-strat table from ACS and district-level data</p>
+    <p>One summary of the CPS, by reporting all year-by-year raw counts of the microdata
+for main demographic varibales.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_poststrat</span>(<span class='kw'>cleaned_acs</span>, dist_data = <span class='kw'>NULL</span>, <span class='kw'>model_ff</span>)</pre>
+    <pre class="usage"><span class='kw'>cps_onewaytabs</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>cleaned_acs</th>
-      <td><p>An output of <a href='get_acs_cces.html'>get_acs_cces</a>. The count of people in
-each cell must be under the variable <code>count</code></p></td>
-    </tr>
-    <tr>
-      <th>dist_data</th>
-      <td><p>District-level (in this case congressional district-level) information
-to merge in</p></td>
-    </tr>
-    <tr>
-      <th>model_ff</th>
-      <td><p>the model formula used to fit the multilevel regression model.
-Currently only expects an binomial, of the brms form <code>y|trials(n) ~ x1 + x2 + (1|x3)</code>.
-Only the RHS will be used but the LHS is necessary.</p></td>
-    </tr>
-    </table>
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 3258 rows and 5 columns.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='get_acs_cces.html'>get_acs_cces</a></p></div>
+    <div class='dont-index'><p>The <a href='https://www.shirokuriwaki.com/ccesMRPprep/articles/cps.html'>Vignette on CPS</a>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='kw'>fm_brm</span> <span class='op'>&lt;-</span> <span class='kw'>yes</span> <span class='op'>|</span> <span class='fu'>responses</span>(<span class='kw'>n_cell</span>) <span class='op'>~</span>  <span class='kw'>age</span> <span class='op'>+</span> <span class='kw'>gender</span> <span class='op'>+</span> <span class='kw'>educ</span> <span class='op'>+</span> <span class='kw'>pct_trump</span> <span class='op'>+</span> (<span class='fl'>1</span><span class='op'>|</span><span class='kw'>cd</span>)
- <span class='kw'>acs_tab</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_acs_cces.html'>get_acs_cces</a></span>(
-              varlist = <span class='kw'>acscodes_age_sex_educ</span>,
-              varlab_df = <span class='kw'>acscodes_df</span>,
-             .year = <span class='fl'>2018</span>)
-
-<span class='kw'>poststrat</span> <span class='op'>&lt;-</span>  <span class='fu'>get_poststrat</span>(<span class='kw'>acs_tab</span>, <span class='kw'>cd_info_2018</span>, <span class='kw'>fm_brm</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>poststrat</span>)
-<span class='co'>#   age            gender educ       pct_trump cd    count</span>
-<span class='co'>#   &lt;fct&gt;          &lt;fct&gt;  &lt;fct&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class='co'># 1 18 to 24 years Male   HS or Less     0.049 NY-15 24216</span>
-<span class='co'># 2 18 to 24 years Male   HS or Less     0.054 NY-13 18014</span>
-<span class='co'># 3 18 to 24 years Male   HS or Less     0.068 CA-13 14153</span>
-<span class='co'># 4 18 to 24 years Male   HS or Less     0.07  PA-03 15750</span>
-<span class='co'># 5 18 to 24 years Male   HS or Less     0.087 CA-12  6270</span>
-<span class='co'># 6 18 to 24 years Male   HS or Less     0.092 IL-07 18734</span>
-}
-</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>cps_onewaytabs</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
+#&gt;   variable  year name  value     n
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> sex       </span><span style='text-decoration: underline;'>2</span><span>004 male      1 </span><span style='text-decoration: underline;'>67</span><span>937
+#&gt; </span><span style='color: #555555;'>2</span><span> sex       </span><span style='text-decoration: underline;'>2</span><span>006 male      1 </span><span style='text-decoration: underline;'>66</span><span>195
+#&gt; </span><span style='color: #555555;'>3</span><span> sex       </span><span style='text-decoration: underline;'>2</span><span>008 male      1 </span><span style='text-decoration: underline;'>64</span><span>595
+#&gt; </span><span style='color: #555555;'>4</span><span> sex       </span><span style='text-decoration: underline;'>2</span><span>010 male      1 </span><span style='text-decoration: underline;'>65</span><span>349
+#&gt; </span><span style='color: #555555;'>5</span><span> sex       </span><span style='text-decoration: underline;'>2</span><span>012 male      1 </span><span style='text-decoration: underline;'>64</span><span>832
+#&gt; </span><span style='color: #555555;'>6</span><span> sex       </span><span style='text-decoration: underline;'>2</span><span>014 male      1 </span><span style='text-decoration: underline;'>66</span><span>091</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
