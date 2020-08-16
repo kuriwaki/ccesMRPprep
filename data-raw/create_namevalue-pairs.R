@@ -69,13 +69,14 @@ gender_key <- tibble(gender_chr = c("Male", "Female"),
                      gender = labelled(1:2L, c(Male = 1, Female = 2)))
 
 # Race -----
-my_racelbl <- setNames(1L:5L, c("White", "Black", "Hispanic", "Asian", "All Other"))
+my_racelbl <- setNames(1L:6L, c("White", "Black", "Hispanic", "Asian", "Native American", "All Other"))
 
 race_cces_key <- structure(list(
-  race_cces = structure(1:5,
-                        labels = structure(1:5, .Names = c("White", "Black", "Hispanic", "Asian", "All Other")), class = "haven_labelled"),
-  race_cces_chr = c("White", "Black", "Hispanic", "Asian", "All Other")),
-  class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA, -5L))
+  race_cces = structure(1:6,
+                        labels = structure(1:6, .Names = c("White", "Black", "Hispanic", "Asian", "Native American", "All Other")),
+                        class = "haven_labelled"),
+  race_cces_chr = c("White", "Black", "Hispanic", "Asian", "Native American", "All Other")),
+  class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA, -6L))
 
 # this was created from cces cumulative file
 # cc18 <- read_rds("data/input/CCES/by-person_cces-2018.Rds")
@@ -86,19 +87,19 @@ race_cces_key <- structure(list(
 
 
 race_key <- tribble(
-  ~race_5, ~race_cces_chr, ~race_acs,
+  ~race_num, ~race_cces_chr, ~race_acs,
   1L, "White", "WHITE ALONE, NOT HISPANIC OR LATINO",
   2L, "Black", "BLACK OR AFRICAN AMERICAN ALONE",
   3L, "Hispanic", "HISPANIC OR LATINO",
   4L, "Asian", "ASIAN ALONE",
   4L, "Asian", "NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE",
   5L, "Native American", "AMERICAN INDIAN AND ALASKA NATIVE ALONE",
-  5L, "Mixed", "TWO OR MORE RACES",
-  5L, "Other", "SOME OTHER RACE ALONE",
-  5L, "Middle Eastern", NA,
+  6L, "Mixed", "TWO OR MORE RACES",
+  6L, "Other", "SOME OTHER RACE ALONE",
+  6L, "Middle Eastern", NA,
 ) %>%
   left_join(race_cces_key, by = "race_cces_chr") %>%
-  mutate(race = labelled(race_5, my_racelbl))
+  mutate(race = labelled(race_num, my_racelbl))
 
 usethis::use_data(age5_key, age10_key, gender_key, educ_key, race_key,
                   overwrite = TRUE)
@@ -106,8 +107,8 @@ usethis::use_data(age5_key, age10_key, gender_key, educ_key, race_key,
 
 # create googlesheets for more public documentation
 library(googlesheets4)
-recreate_sheet <- TRUE
-if (recreate_sheet)
+recreate_sheet <- FALSE
+if (recreate_sheet) {
   gs_cces_acs <- gs4_create("CCES-ACS name value pairs", sheets = "Overview")
 
 
@@ -134,3 +135,4 @@ educ_key_csv <- educ_key %>%
 sheet_write(educ_key_csv, ss = gs_cces_acs, sheet = "educ")
 
 
+}

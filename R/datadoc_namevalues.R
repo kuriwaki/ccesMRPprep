@@ -37,7 +37,7 @@ NULL
 #'    same class as the CCES cumulative file.}
 #'  \item{race_cces_chr}{Labels for the first column, in characters}
 #'  \item{race_acs}{Corresponding character in the ACS data via the tidycensus package}
-#'  \item{race_5}{A numeric value underlying the \code{race} label.}
+#'  \item{race_num}{A numeric value underlying the \code{race} label.}
 #'  }
 "race_key"
 
