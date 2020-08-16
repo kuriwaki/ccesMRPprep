@@ -1,0 +1,97 @@
+---
+title: "Geographic Boundaries: From Blocks to CDs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Geographic Boundaries}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = FALSE,
+  fig.width = 8.83, 
+  message = FALSE,
+  comment = "#>",
+  cache = FALSE
+)
+options(tigris_use_cache = TRUE)
+
+library(tidyverse)
+library(tidycensus)
+library(mapview)
+library(sf)
+```
+
+
+
+```{r}
+acs_race <- c("B02001_001", "B02001_002", "B02001_003")[3]
+# cen_race <- c("P007001", "P007003", "P007004")
+geo_tract <- get_acs(variables = acs_race, geography = "tract", state = "MA", county = "Middlesex", geometry = TRUE)
+geo_blgrp <- get_acs(variables = acs_race, geography = "block group", state = "MA", county = "Middlesex", geometry = TRUE)
+geo_puma  <- get_acs(variables = acs_race, geography = "public use microdata area", state = "MA",geometry = TRUE)
+geo_cd  <- get_acs(variables = acs_race, geography = "congressional district", state = "MA", geometry = TRUE)
+```
+
+
+## Blocks
+
+
+## Block Groups
+
+```{r}
+crop_camb <- c(ymin = 42.35, ymax = 42.4, xmax = -71.06, xmin = -71.16)
+blgrp_cambridge <- st_crop(geo_blgrp, y = crop_camb)
+mapview(blgrp_cambridge, zcol = "estimate", alpha.region = 0.3, layer.name = "Black Population", lwd = 1, at = seq(0, 2.5e3, 5e2))
+```
+
+## Census Tracts
+
+```{r}
+geo_tract_camb <- st_crop(geo_tract, y = crop_camb)
+mapview(geo_tract_camb, zcol = "estimate", layer.name = "Black Population", at = seq(0, 3e3, 5e2))
+```
+
+
+## Congressional Districts
+
+Congressional Districts contain about 600,000 - 750,000 people.
+
+```{r}
+cds_show <- c("2507", "2505", "2508", "2504")
+
+mapview(filter(geo_cd, GEOID %in% cds_show), zcol = "estimate", at = seq(0, 3e5, 5e4), layer.name = "Black Population")
+```
+
+
+## PUMAs
+
+PUMAs are the smallest geographic area shown in ACS IPUMS microuse data. 
+
+
+
+```{r}
+pumas_show <- c("2503303", "2503303", "2503302", "2503400", "2500505", "2500507", "2503302", "2503304", 
+                "2500506", "2500508", "2503301", "2503305", "2503306")
+
+
+mapview(filter(geo_puma, GEOID %in% pumas_show), 
+        zcol = "estimate", at = seq(0, 1e5, 2e4), layer.name = "Black Population")
+```
+
+PUMAs delinate communities but they are pretty coarse, for example, my address is in the PUMA `2500506` for the City of Cambridge, but that shares two congressional districts.
+
+```{r, echo = FALSE}
+cd_outline <- mapview(filter(geo_cd, GEOID %in% c("2505","2507")), 
+                      layer = "Congressional District", alpha = 1, lwd = 3, col.regions = "gray")
+```
+
+```{r}
+cd_outline + mapview(filter(geo_puma, GEOID %in% "2500506"), 
+        at = seq(0, 1e5, 2e4), layer.name = "PUMA 2500506")
+```
+
+
+

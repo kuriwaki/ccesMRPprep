@@ -73,3 +73,7 @@ articles:
   navbar: ~
   contents:
     - cps
+- title: Census Geographies
+  navbar: ~
+  contents:
+    - geo
