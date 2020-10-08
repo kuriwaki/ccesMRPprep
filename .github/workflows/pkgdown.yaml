@@ -43,6 +43,9 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
+      - name: Install RGDAL dependencies
+        run: sudo apt-get install gdal-bin proj-bin libgdal-dev libproj-dev
+
       - name: Install dependencies
         run: |
           install.packages("remotes")
