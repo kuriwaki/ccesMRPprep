@@ -6,7 +6,7 @@ name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: macOS-latest
+    runs-on: macOS-10.15
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -44,7 +44,7 @@ jobs:
           sudo -s eval "$sysreqs"
 
       - name: Install RGDAL dependencies
-        run: brew install pkg-config gdal proj geos
+        run: brew install pkg-config gdal
 
       - name: Install dependencies
         run: |
