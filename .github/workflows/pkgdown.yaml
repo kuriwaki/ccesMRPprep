@@ -44,7 +44,7 @@ jobs:
           sudo -s eval "$sysreqs"
 
       - name: Install RGDAL dependencies
-        run: sudo apt-get install gdal-bin proj-bin libgdal-dev libproj-dev
+        run: brew install pkg-config gdal proj geos
 
       - name: Install dependencies
         run: |
