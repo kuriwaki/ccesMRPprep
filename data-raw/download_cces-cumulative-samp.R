@@ -7,7 +7,7 @@ library(ccesMRPprep)
 
 
 
-ccc <- get_cces_dv("cumulative")
+ccc <- get_cces_dataverse("cumulative")
 
 set.seed(02138)
 ccc_samp <- ccc %>%

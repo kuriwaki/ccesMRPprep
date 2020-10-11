@@ -5,13 +5,13 @@ library(ccesMRPprep)
 questions_samp[20, ]
 
 ## do this once:
-# ccc <- get_cces_dv("cumulative")
+# ccc <- get_cces_dataverse("cumulative")
 # write_rds(ccc, "data/input/cces/cces_cumulative.rds")
 
 # predictors
 ccc <- ccc_std_demographics(read_rds("data/input/cces/cces_cumulative.rds"))
 
-# outcome (after downloading the full datasets to local, looping get_cces_dv()).
+# outcome (after downloading the full datasets to local, looping get_cces_dataverse()).
 cc_outcome <- get_cces_question(qcode = "CC18_322c",
                                 qID = "CC18_332C",
                                 year = "2018")

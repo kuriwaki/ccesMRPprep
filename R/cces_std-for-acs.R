@@ -47,7 +47,7 @@
 #' \dontrun{
 #'  # For full data (takes a while)
 #'  library(dataverse)
-#'  cumulative_rds <- get_cces_dv("cumulative")
+#'  cumulative_rds <- get_cces_dataverse("cumulative")
 #'  cumulative_std <- ccc_std_demographics(cumulative_rds)
 #'  }
 #'

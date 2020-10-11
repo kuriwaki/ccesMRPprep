@@ -39,7 +39,7 @@ ccc_samp
 \description{
 The cumulative CCES stacks CCES common content for all years and harmonizes
 the variables, which makes it ideal for using it for MRP.  This is a sample for
-illustration; see \link{get_cces_dv} to get the full data.
+illustration; see \link{get_cces_dataverse} to get the full data.
 }
 \details{
 This is encoded as a RDS file with some variables stored in the Stata-based

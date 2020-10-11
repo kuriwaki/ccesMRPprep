@@ -17,7 +17,7 @@ cc18_samp
 \description{
 1000 rows from th 2018 CCES Common Content. Contains all columns, retaining the
 \code{haven_labelled} class. This is \url{doi:10.7910/DVN/ZSBZ7K/H5IDTA} originally read
-in using \code{read_dta} via \code{get_cces_dv()}. To search for variable by its content,
+in using \code{read_dta} via \code{get_cces_dataverse()}. To search for variable by its content,
 \code{questionr::lookfor} (or \code{rcces::vartab}) is a useful option (see example).
 }
 \details{

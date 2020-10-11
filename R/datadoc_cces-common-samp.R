@@ -2,7 +2,7 @@
 #'
 #' The cumulative CCES stacks CCES common content for all years and harmonizes
 #' the variables, which makes it ideal for using it for MRP.  This is a sample for
-#' illustration; see \link{get_cces_dv} to get the full data.
+#' illustration; see \link{get_cces_dataverse} to get the full data.
 #'
 #' @details This is encoded as a RDS file with some variables stored in the Stata-based
 #' integer + labelled class instead of as factors. See the CCES cumulative guide
@@ -45,7 +45,7 @@
 #'
 #' 1000 rows from th 2018 CCES Common Content. Contains all columns, retaining the
 #' `haven_labelled` class. This is <doi:10.7910/DVN/ZSBZ7K/H5IDTA> originally read
-#' in using `read_dta` via `get_cces_dv()`. To search for variable by its content,
+#' in using `read_dta` via `get_cces_dataverse()`. To search for variable by its content,
 #' `questionr::lookfor` (or `rcces::vartab`) is a useful option (see example).
 #'
 #' @details See the 2018 Codebook in the DOI below for question wording of

@@ -15,7 +15,7 @@
 #' use the provided datasets instead.
 #' @param data_dir A path for the directory where flat files for the CCES common content is
 #'  stored.  Currently the data must be of the form `cces_{year}.rds`  (e.g. `"cces_2016.rds"`)
-#'  and it must exist wherever \code{data_dir} is. We recommend looping over \link{get_cces_dv}
+#'  and it must exist wherever \code{data_dir} is. We recommend looping over \link{get_cces_dataverse}
 #'  to download data first.
 #' @param verbose whether to print a message; defaults to TRUE
 #'

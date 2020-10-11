@@ -1,7 +1,7 @@
 
 
 
-cc18 <- get_cces_dv("2018")
+cc18 <- get_cces_dataverse("2018")
 
 set.seed(02138)
 cc18_samp <- cc18 %>%
