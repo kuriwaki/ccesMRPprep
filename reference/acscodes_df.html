@@ -99,7 +99,7 @@ data to give meaning to variable codes e.g. acscodes_age_sex_educ" />
       <a href="../articles/overview.html">Workflow Overview</a>
     </li>
     <li>
-      <a href="../articles/derived.html">Derived Variables</a>
+      <a href="../articles/derived.html">Deriving Variables from Question Metadata</a>
     </li>
     <li>
       <a href="../articles/acs.html">ACS Tables to Use for CCES and MRP</a>
@@ -158,12 +158,14 @@ data to give meaning to variable codes e.g. <a href='acscodes_partitions.html'>a
 each row represents a variable in the ACS for which there is a count (e.g.
 18-24 year olds who identify as Hispanic).</p>
 <dl>
-<dt>variable</dt><dd><p>the ACS code (2018)</p></dd>
+<dt>variable</dt><dd><p>the ACS code (2016)</p></dd>
 <dt>gender</dt><dd><p>A labelled variable for gender. 1 is Male, 2 is Female. Use
 the <code>labelled</code> or <code>haven</code> package to see labels.</p></dd>
-<dt>age</dt><dd><p>A labelled variable specifying which age bin the variable specifies</p></dd>
-<dt>race</dt><dd><p>A labelled variable specifying which education bin the variable specifies</p></dd>
+<dt>female</dt><dd><p>A numeric, binary version of gender</p></dd>
+<dt>age_5</dt><dd><p>A labelled variable specifying which 5-way age bin the variable specifies</p></dd>
+<dt>age_10</dt><dd><p>A labelled variable specifying which 10-way age bin the variable specifies</p></dd>
 <dt>educ</dt><dd><p>A labelled variable specifying which race bin the variable specifies</p></dd>
+<dt>race</dt><dd><p>A labelled variable specifying which education bin the variable specifies</p></dd>
 
 </dl>
 

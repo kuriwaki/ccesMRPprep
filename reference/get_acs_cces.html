@@ -99,7 +99,7 @@ renames some variables to later merge with CCES-based regression models." />
       <a href="../articles/overview.html">Workflow Overview</a>
     </li>
     <li>
-      <a href="../articles/derived.html">Derived Variables</a>
+      <a href="../articles/derived.html">Deriving Variables from Question Metadata</a>
     </li>
     <li>
       <a href="../articles/acs.html">ACS Tables to Use for CCES and MRP</a>
@@ -151,7 +151,7 @@ renames some variables to later merge with CCES-based regression models.</p>
 
     <pre class="usage"><span class='fu'>get_acs_cces</span><span class='op'>(</span>
   <span class='va'>varlist</span>,
-  varlab_df <span class='op'>=</span> <span class='va'>acscodes_df</span>,
+  varlab_df <span class='op'>=</span> <span class='fu'>ccesMRPprep</span><span class='fu'>::</span><span class='va'><a href='acscodes_df.html'>acscodes_df</a></span>,
   year <span class='op'>=</span> <span class='fl'>2018</span>,
   dataset <span class='op'>=</span> <span class='st'>"acs1"</span>,
   geography <span class='op'>=</span> <span class='st'>"congressional district"</span>
