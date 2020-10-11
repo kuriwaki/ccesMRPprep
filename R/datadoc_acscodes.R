@@ -61,12 +61,14 @@ NULL
 #' 18-24 year olds who identify as Hispanic).
 #'
 #' \describe{
-#'  \item{variable}{the ACS code (2018)}
+#'  \item{variable}{the ACS code (2016)}
 #'  \item{gender}{A labelled variable for gender. 1 is Male, 2 is Female. Use
 #'    the \code{labelled} or \code{haven} package to see labels.}
-#'  \item{age}{A labelled variable specifying which age bin the variable specifies}
-#'  \item{race}{A labelled variable specifying which education bin the variable specifies}
+#'  \item{female}{A numeric, binary version of gender}
+#'  \item{age_5}{A labelled variable specifying which 5-way age bin the variable specifies}
+#'  \item{age_10}{A labelled variable specifying which 10-way age bin the variable specifies}
 #'  \item{educ}{A labelled variable specifying which race bin the variable specifies}
+#'  \item{race}{A labelled variable specifying which education bin the variable specifies}
 #'  }
 #'
 #' @details The 5-yr ACS at 2018 is used,
