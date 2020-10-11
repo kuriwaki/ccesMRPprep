@@ -46,7 +46,6 @@ races_regex <- as.character(glue("({str_c(races, collapse = '|')})"))
 
 
 # get vars ----
-vars_raw_18 <- tidycensus::load_variables(2018, "acs5")
 vars_raw_16 <- tidycensus::load_variables(2016, "acs5")
 
 # format these and recode
