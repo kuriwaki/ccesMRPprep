@@ -1,10 +1,10 @@
 ---
-title: "Derived Variables"
+title: "Deriving Variables from Question Metadata"
 author: "Shiro Kuriwaki"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Question Metadata}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
