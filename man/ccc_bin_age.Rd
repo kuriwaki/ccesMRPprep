@@ -4,7 +4,7 @@
 \alias{ccc_bin_age}
 \title{Discretize a vector of age integers into labelled variables}
 \usage{
-ccc_bin_age(agevec, agelbl = deframe(age5_key))
+ccc_bin_age(agevec, agelbl = deframe(ccesMRPprep::age5_key))
 }
 \arguments{
 \item{agevec}{a vector of integers}

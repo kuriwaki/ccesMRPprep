@@ -33,7 +33,7 @@
 #' @importFrom dplyr select rename everything filter
 #' @importFrom tibble add_column
 #' @importFrom magrittr `%>%`
-#' @importFrom rlang sym `!!`
+#' @importFrom rlang sym `!!` .data
 #' @importFrom dataverse get_file
 #'
 #' @examples
@@ -60,9 +60,9 @@
 get_cces_dataverse <- function(name = "cumulative",
                         year_subset = 2006:2019,
                         std_index = TRUE,
-                        dataverse_paths = cces_dv_ids) {
+                        dataverse_paths = ccesMRPprep::cces_dv_ids) {
 
-  y_info <- filter(dataverse_paths, cces_name == as.character(name))
+  y_info <- filter(dataverse_paths, .data$cces_name == as.character(name))
   filetype <- str_extract(y_info$filename, "\\.[A-z]+$")
   svr <- y_info$server
   caseid_var <- y_info$caseid_var
@@ -95,14 +95,14 @@ get_cces_dataverse <- function(name = "cumulative",
     cces_raw <- readr::read_rds(tmp)
 
   if (name == "cumulative") {
-    cces_raw <- filter(cces_raw, year %in% year_subset)
+    cces_raw <- filter(cces_raw, .data$year %in% year_subset)
   }
 
   # rename indexing variables
   if (std_index) {
     cces <- cces_raw %>%
       rename(case_id = !!sym(caseid_var)) %>%
-      select(case_id, everything())
+      select(.data$case_id, everything())
 
     if (!is.na(y_info$year))
       cces <- add_column(cces, year = yr, .before = 1)

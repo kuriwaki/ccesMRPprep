@@ -25,6 +25,7 @@
 #' @param subset_dist a character for the geography of cd to subset
 #'
 #' @import dplyr
+#' @importFrom rlang .data
 #' @importFrom stats as.formula
 #' @importFrom stringr str_detect
 #'
@@ -94,7 +95,7 @@ cces_join_slim <- function(ccq_df,
 
   # subset to state
   if (!is.na(subset_dist))
-    df_sel <- filter(df_sel, str_detect(cd, subset_dist))
+    df_sel <- filter(df_sel, str_detect(.data$cd, subset_dist))
 
   attr(df_sel, "question") <- attr(ccq_df, "question")
   df_sel

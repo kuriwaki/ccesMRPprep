@@ -65,8 +65,8 @@
 #'
 ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(ccesMRPprep::age5_key)) {
 
-  race_cces_to_acs <- race_key %>% distinct(race_cces_chr, race)
-  educ_cces_to_acs <- educ_key %>% distinct(educ_cces_chr, educ)
+  race_cces_to_acs <- ccesMRPprep::race_key %>% distinct(.data$race_cces_chr, .data$race)
+  educ_cces_to_acs <- ccesMRPprep::educ_key %>% distinct(.data$educ_cces_chr, .data$educ)
 
   # districts
   if (inherits(tbl$st, "haven_labelled"))
@@ -76,14 +76,12 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(cces
 
   # cd pad 0s
   if ("dist" %in% colnames(tbl)) {
-    tbl <- tbl %>%
-      mutate(cd = str_c(st, "-", str_pad(dist, width = 2, pad = "0")))
+    tbl$cd <- str_c(tbl$st, "-", str_pad(tbl$dist, width = 2, pad = "0"))
     message("Re-creating cd from st and dist, in standard form.")
   }
 
   if ("dist_up" %in% colnames(tbl)) {
-    tbl <- tbl %>%
-      mutate(cd_up = str_c(st, "-", str_pad(dist_up, width = 2, pad = "0")))
+    tbl$cd_up <- str_c(tbl$st, "-", str_pad(tbl$dist_up, width = 2, pad = "0"))
     message("Re-creating cd_up from st and dist_up, in standard form.")
   }
 
@@ -104,15 +102,15 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(cces
 
   tbl_mod <- tbl %>%
     # age
-    mutate(age_orig = age,
-           age = ccc_bin_age(age, agelbl = age_key)) %>%
+    mutate(age_orig = .data$age,
+           age = ccc_bin_age(.data$age, agelbl = age_key)) %>%
     # race
-    rename(race_cces_chr = race) %>%
-    mutate(race_cces_chr = as.character(as_factor(race_cces_chr))) %>%
+    rename(race_cces_chr = .data$race) %>%
+    mutate(race_cces_chr = as.character(as_factor(.data$race_cces_chr))) %>%
     left_join(race_cces_to_acs, by = "race_cces_chr") %>%
     # education
-    rename(educ_cces_chr = educ) %>%
-    mutate(educ_cces_chr = as.character(as_factor(educ_cces_chr))) %>%
+    rename(educ_cces_chr = .data$educ) %>%
+    mutate(educ_cces_chr = as.character(as_factor(.data$educ_cces_chr))) %>%
     left_join(educ_cces_to_acs, by = "educ_cces_chr")
 
     tbl_out <- tbl_mod %>%
@@ -164,7 +162,7 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(cces
 #'
 #' @export
 ccc_bin_age <- function(agevec,
-                        agelbl = deframe(age5_key)) {
+                        agelbl = deframe(ccesMRPprep::age5_key)) {
   data("age5_key", envir = environment())
 
 

@@ -36,6 +36,7 @@
 #'
 #' @import dplyr
 #' @importFrom magrittr `%>%`
+#' @importFrom rlang .data
 #' @importFrom readr read_rds
 #' @importFrom glue glue
 #' @importFrom fs path
@@ -91,33 +92,32 @@ get_cces_question <- function(qcode,
   stopifnot(qcode %in% colnames(cces_year))
 
   # rename outcome to "response"
-  cces_resp <- cces_year  %>%
-    select(case_id, response = !!qcode)
+  cces_resp <- cces_year %>%
+    select(matches("case_id$"), response = !!qcode)
 
   # turnout is special. If missing, means they didn't turn out.
   if (qcode == "CL_2018gvm") {
-    cces_resp <- cces_resp %>%
-      mutate(response = recode(as.integer(response), .missing = "No", .default = "Yes"))
+    cces_resp$response <- recode(as.integer(cces_resp$response), .missing = "No", .default = "Yes")
   }
+
   # we will code Rs as 1 for CL_party
   if (qcode == "CL_party") {
-    cces_resp <- cces_resp %>%
-      mutate(response = recode(as.integer(response), `11` = "Yes", .missing = "No", .default = "No"))
+    cces_resp$response <- recode(as.integer(cces_resp$response), `11` = "Yes", .missing = "No", .default = "No")
   }
+
   if (qcode == "pid7") {
-    cces_resp <- cces_resp %>%
-      mutate(response = recode(as.integer(response), `4` = "Yes", .missing = "No", .default = "No"))
+    cces_resp$response <- recode(as.integer(cces_resp$response), `4` = "Yes", .missing = "No", .default = "No")
   }
+
   if (qcode == "ideo5") {
-    cces_resp <- cces_resp %>%
-      mutate(response = recode(as.integer(response), `3` = "Yes", .missing = "No", .default = "No"))
+    cces_resp$response <- recode(as.integer(cces_resp$response), `3` = "Yes", .missing = "No", .default = "No")
   }
 
   cces_df <- cces_resp %>%
     transmute(year = as.integer(year),
-              case_id = as.character(case_id),
+              case_id = as.character(.data$case_id),
               qID = qID,
-              !!sym(y_named_as) := as_factor(response))
+              !!sym(y_named_as) := as_factor(.data$response))
 
   attr(cces_df, "question") <- qID
 

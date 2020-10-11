@@ -20,6 +20,7 @@
 #' @importFrom tidycensus get_acs
 #' @importFrom stats as.formula
 #' @importFrom magrittr `%>%`
+#' @importFrom rlang .data
 #' @importFrom stringr str_detect
 #' @importFrom tidyr replace_na
 #' @importFrom haven is.labelled as_factor
@@ -48,35 +49,35 @@
 #' }
 #'
 get_acs_cces <- function(varlist,
-                         varlab_df = acscodes_df,
+                         varlab_df = ccesMRPprep::acscodes_df,
                          year = 2018,
                          dataset = "acs1",
                          geography =  "congressional district") {
 
   acs_df <- get_acs(geography = geography,
-          year = min(max(year, 2010), 2018),
-          survey = dataset,
-          variable = varlist,
-          geometry = FALSE) %>%
-    filter(!str_detect(NAME, "Puerto Rico")) %>%
+                    year = min(max(year, 2010), 2018),
+                    survey = dataset,
+                    variables = varlist,
+                    geometry = FALSE) %>%
+    filter(!str_detect(.data$NAME, "Puerto Rico")) %>%
     rename(
-      count = estimate,
-      count_moe = moe,
-      cdid = GEOID,
+      count = .data$estimate,
+      count_moe = .data$moe,
+      cdid = .data$GEOID,
     ) %>%
-    mutate(count = replace_na(count, 0))
+    mutate(count = replace_na(.data$count, 0))
 
   acs_lbl <- acs_df %>%
     left_join(varlab_df, by = "variable") %>%
-    mutate(year = year,
-           cd = std_acs_cdformat(NAME)) %>%
+    mutate(year = .data$year,
+           cd = std_acs_cdformat(.data$NAME)) %>%
     mutate_if(haven::is.labelled, haven::as_factor) %>%
-    mutate(age = coalesce(age_5, age_10)) %>%
-    select(acscode = variable,
-           year,
-           cd,
-           matches("(gender|female|age|educ|race)"), count, count_moe) %>%
-      select(-age_5, -age_10)
+    mutate(age = coalesce(.data$age_5, .data$age_10)) %>%
+    select(acscode = .data$variable,
+           .data$year,
+           .data$cd,
+           matches("(gender|female|age|educ|race)"), .data$count, .data$count_moe) %>%
+      select(-matches("age_(5|10)"))
 
   acs_lbl
 }
@@ -133,7 +134,7 @@ get_poststrat <- function(cleaned_acs, dist_data = NULL, model_ff) {
     cleaned_acs <- left_join(dist_data, cleaned_acs)
 
   cleaned_acs %>%
-    filter_at(vars(matches(xvar_regex)), all_vars(!is.na(.))) %>%
+    filter_at(vars(matches(xvar_regex)), ~all_vars(!is.na(.x))) %>%
     group_by(!!!syms(xvars), add = TRUE) %>%
     summarize(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
     filter(count > 0)
@@ -160,13 +161,14 @@ get_poststrat <- function(cleaned_acs, dist_data = NULL, model_ff) {
 #' @export
 std_acs_cdformat <- function(vec) {
 
-  st_to_state <- tibble(st = state.abb, state = state.name) %>%
+  st_to_state <- tibble(st = datasets::state.abb, state = datasets::state.name) %>%
     add_row(st = "DC", state = "District of Columbia")
 
   distnum <- vec %>%
     str_extract("([0-9]+|at Large)") %>%
     str_replace("at Large", "1") %>%
     str_pad(width = 2, pad = "0")
+
   cong <- vec %>% str_extract("1[01][0-9]")
   states <- vec %>% str_extract("(?<=,\\s)[A-z\\s]+")
   st <- map_chr(states, function(x) st_to_state$st[x == st_to_state$state])

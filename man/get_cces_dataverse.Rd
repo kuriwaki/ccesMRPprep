@@ -8,7 +8,7 @@ get_cces_dataverse(
   name = "cumulative",
   year_subset = 2006:2019,
   std_index = TRUE,
-  dataverse_paths = cces_dv_ids
+  dataverse_paths = ccesMRPprep::cces_dv_ids
 )
 }
 \arguments{

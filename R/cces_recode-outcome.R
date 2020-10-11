@@ -29,6 +29,7 @@
 #' )
 #' @export
 yesno_to_binary <- function(vec, DK_to_NA = TRUE) {
+  . <- NULL
 
   # Yes
   vec_char <- as.character(vec) %>%

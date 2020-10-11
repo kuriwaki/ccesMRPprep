@@ -6,7 +6,7 @@
 \usage{
 get_acs_cces(
   varlist,
-  varlab_df = acscodes_df,
+  varlab_df = ccesMRPprep::acscodes_df,
   year = 2018,
   dataset = "acs1",
   geography = "congressional district"
