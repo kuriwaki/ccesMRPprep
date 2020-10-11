@@ -82,19 +82,13 @@ namevalue." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -161,29 +155,29 @@ these will be collapsed for MRP to form a common denominator with the CCES; see
 <a href='namevalue.html'>namevalue</a>.</p>
     </div>
 
-    <pre class="usage"><span class='kw'>acscodes_age_sex_race</span>
+    <pre class="usage"><span class='va'>acscodes_age_sex_race</span>
 
-<span class='kw'>acscodes_age_sex_educ</span>
+<span class='va'>acscodes_age_sex_educ</span>
 
-<span class='kw'>acscodes_sex_educ_race</span></pre>
+<span class='va'>acscodes_sex_educ_race</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     
-<h3>acscodes_age_sex_race</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>acscodes_age_sex_race</h3>
 
 
 <p>There are 160 codes in <code>acscodes_age_sex_race</code> because they specify cells
 interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).</p>
 
-<h3>acscodes_age_sex_educ</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>acscodes_age_sex_educ</h3>
 
 
 <p>There are 70 codes in <code>acscodes_age_sex_educ</code> because they specify cells
 interacting age (5 bins), sex (2 bins), and education (7 bins).</p>
 
-<h3>acscodes_sex_educ_race</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>acscodes_sex_educ_race</h3>
 
 
 <p>There are 48 codes in <code>acscodes_sex_educ_race</code> because they specify cells
@@ -197,9 +191,12 @@ and not include postgraduate degrees. Cross-check with <a href='acscodes_df.html
 and the <a href='https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html'>Vignette on ACS value pairs</a>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>acscodes_age_sex_race</span>)</div><div class='output co'>#&gt; [1] "B01001B_007" "B01001B_008" "B01001B_009" "B01001B_010" "B01001B_011"
-#&gt; [6] "B01001B_012"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>acscodes_age_sex_educ</span>)</div><div class='output co'>#&gt; [1] "B15001_004" "B15001_005" "B15001_006" "B15001_007" "B15001_008"
-#&gt; [6] "B15001_009"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>acscodes_sex_educ_race</span>)</div><div class='output co'>#&gt; [1] "C15002B_004" "C15002B_005" "C15002B_006" "C15002B_009" "C15002B_010"
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>acscodes_age_sex_race</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "B01001B_007" "B01001B_008" "B01001B_009" "B01001B_010" "B01001B_011"
+#&gt; [6] "B01001B_012"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>acscodes_age_sex_educ</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "B15001_004" "B15001_005" "B15001_006" "B15001_007" "B15001_008"
+#&gt; [6] "B15001_009"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>acscodes_sex_educ_race</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "C15002B_004" "C15002B_005" "C15002B_006" "C15002B_009" "C15002B_010"
 #&gt; [6] "C15002B_011"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -216,7 +213,7 @@ and the <a href='https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html'>Vi
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

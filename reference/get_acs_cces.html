@@ -79,19 +79,13 @@ renames some variables to later merge with CCES-based regression models." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -155,13 +149,13 @@ renames some variables to later merge with CCES-based regression models." />
 renames some variables to later merge with CCES-based regression models.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_acs_cces</span>(
-  <span class='kw'>varlist</span>,
-  varlab_df = <span class='kw'>acscodes_df</span>,
-  year = <span class='fl'>2018</span>,
-  dataset = <span class='st'>"acs1"</span>,
-  geography = <span class='st'>"congressional district"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_acs_cces</span><span class='op'>(</span>
+  <span class='va'>varlist</span>,
+  varlab_df <span class='op'>=</span> <span class='va'>acscodes_df</span>,
+  year <span class='op'>=</span> <span class='fl'>2018</span>,
+  dataset <span class='op'>=</span> <span class='st'>"acs1"</span>,
+  geography <span class='op'>=</span> <span class='st'>"congressional district"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,12 +194,12 @@ See <a href='https://rdrr.io/pkg/tidycensus/man/census_api_key.html'>census_api_
     <div class='dont-index'><p>get_acs_cces</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='kw'>fm_brm</span> <span class='op'>&lt;-</span> <span class='kw'>yes</span> <span class='op'>|</span> <span class='fu'>responses</span>(<span class='kw'>n_cell</span>) <span class='op'>~</span>  <span class='kw'>age</span> <span class='op'>+</span> <span class='kw'>gender</span> <span class='op'>+</span> <span class='kw'>educ</span> <span class='op'>+</span> <span class='kw'>pct_trump</span> <span class='op'>+</span> (<span class='fl'>1</span><span class='op'>|</span><span class='kw'>cd</span>)
- <span class='kw'>acs_tab</span> <span class='op'>&lt;-</span> <span class='fu'>get_acs_cces</span>(
-              varlist = <span class='kw'>acscodes_age_sex_educ</span>,
-              varlab_df = <span class='kw'>acscodes_df</span>,
-              year = <span class='fl'>2018</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+ <span class='va'>fm_brm</span> <span class='op'>&lt;-</span> <span class='va'>yes</span> <span class='op'>|</span> <span class='fu'>responses</span><span class='op'>(</span><span class='va'>n_cell</span><span class='op'>)</span> <span class='op'>~</span>  <span class='va'>age</span> <span class='op'>+</span> <span class='va'>gender</span> <span class='op'>+</span> <span class='va'>educ</span> <span class='op'>+</span> <span class='va'>pct_trump</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>|</span><span class='va'>cd</span><span class='op'>)</span>
+ <span class='va'>acs_tab</span> <span class='op'>&lt;-</span> <span class='fu'>get_acs_cces</span><span class='op'>(</span>
+              varlist <span class='op'>=</span> <span class='va'>acscodes_age_sex_educ</span>,
+              varlab_df <span class='op'>=</span> <span class='va'>acscodes_df</span>,
+              year <span class='op'>=</span> <span class='fl'>2018</span><span class='op'>)</span>
 <span class='co'>#   year  cd    gender age            educ         race  count count_moe</span>
 <span class='co'>#   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt;          &lt;fct&gt;        &lt;fct&gt; &lt;dbl&gt;     &lt;dbl&gt;</span>
 <span class='co'># 1  2018 AL-01 Male   18 to 24 years HS or Less   NA      703       240</span>
@@ -216,8 +210,9 @@ See <a href='https://rdrr.io/pkg/tidycensus/man/census_api_key.html'>census_api_
 <span class='co'># 6  2018 AL-01 Male   18 to 24 years 4-Year       NA     1519       276</span>
 
 
- <span class='kw'>poststrat</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='get_poststrat.html'>get_poststrat</a></span>(<span class='kw'>acs_tab</span>, <span class='kw'>cd_info_2018</span>, <span class='kw'>fm_brm</span>)
-}
+ <span class='va'>poststrat</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='get_poststrat.html'>get_poststrat</a></span><span class='op'>(</span><span class='va'>acs_tab</span>, <span class='va'>cd_info_2018</span>, <span class='va'>fm_brm</span><span class='op'>)</span>
+<span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -234,7 +229,7 @@ See <a href='https://rdrr.io/pkg/tidycensus/man/census_api_key.html'>census_api_
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -48,7 +48,7 @@
 <meta property="og:title" content="Sample 2018 Common Content — cc18_samp" />
 <meta property="og:description" content="1000 rows from th 2018 CCES Common Content. Contains all columns, retaining the
 haven_labelled class. This is doi:10.7910/DVN/ZSBZ7K/H5IDTA originally read
-in using read_dta via get_cces_dv(). To search for variable by its content,
+in using read_dta via get_cces_dataverse(). To search for variable by its content,
 questionr::lookfor (or rcces::vartab) is a useful option (see example)." />
 
 
@@ -81,19 +81,13 @@ questionr::lookfor (or rcces::vartab) is a useful option (see example)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -155,11 +149,11 @@ questionr::lookfor (or rcces::vartab) is a useful option (see example)." />
     <div class="ref-description">
     <p>1000 rows from th 2018 CCES Common Content. Contains all columns, retaining the
 <code>haven_labelled</code> class. This is <a href='doi:10.7910/DVN/ZSBZ7K/H5IDTA'>doi:10.7910/DVN/ZSBZ7K/H5IDTA</a> originally read
-in using <code>read_dta</code> via <code><a href='get_cces_dv.html'>get_cces_dv()</a></code>. To search for variable by its content,
-<code><a href='https://rdrr.io/pkg/questionr/man/lookfor.html'>questionr::lookfor</a></code> (or <code>rcces::vartab</code>) is a useful option (see example).</p>
+in using <code>read_dta</code> via <code><a href='get_cces_dataverse.html'>get_cces_dataverse()</a></code>. To search for variable by its content,
+<code><a href='http://larmarange.github.io/labelled/reference/look_for.html'>questionr::lookfor</a></code> (or <code>rcces::vartab</code>) is a useful option (see example).</p>
     </div>
 
-    <pre class="usage"><span class='kw'>cc18_samp</span></pre>
+    <pre class="usage"><span class='va'>cc18_samp</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -180,13 +174,41 @@ in this package as <code><a href='ccc_samp.html'>?ccc_samp</a></code>.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># use questionr::lookfor to search the label and labels</span>
-<span class='kw'>questionr</span>::<span class='fu'><a href='https://rdrr.io/pkg/questionr/man/lookfor.html'>lookfor</a></span>(<span class='kw'>cc18_samp</span>, <span class='st'>"Trump"</span>)</div><div class='output co'>#&gt;                variable                                 label
-#&gt; 91            CC18_308a       Job approval -- President Trump
-#&gt; 149           CC18_334C Ideological Placement -- Donald Trump
-#&gt; 162            CC18_335                Trump Russia collusion
-#&gt; 430 CC18_app_dtrmp_post          President Trump Job Approval</div><div class='input'>
+<span class='fu'>questionr</span><span class='fu'>::</span><span class='fu'><a href='http://larmarange.github.io/labelled/reference/look_for.html'>lookfor</a></span><span class='op'>(</span><span class='va'>cc18_samp</span>, <span class='st'>"Trump"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; NA.pos NA.variable      NA.label                  NA.col_type NA.values         
+#&gt; <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             
+#&gt; 91     CC18_308a        Job approval -- Presiden… dbl+lbl     [1] Strongly appr…
+#&gt; ​       ​                 ​                          ​            [2] Somewhat appr…
+#&gt; ​       ​                 ​                          ​            [3] Somewhat disa…
+#&gt; ​       ​                 ​                          ​            [4] Strongly disa…
+#&gt; ​       ​                 ​                          ​            [5] Not sure      
+#&gt; ​       ​                 ​                          ​            [8] skipped       
+#&gt; ​       ​                 ​                          ​            [9] not asked     
+#&gt; 149    CC18_334C        Ideological Placement --… dbl+lbl     [1] Very Liberal  
+#&gt; ​       ​                 ​                          ​            [2] Liberal       
+#&gt; ​       ​                 ​                          ​            [3] Somewhat Libe…
+#&gt; ​       ​                 ​                          ​            [4] Middle of the…
+#&gt; ​       ​                 ​                          ​            [5] Somewhat Cons…
+#&gt; ​       ​                 ​                          ​            [6] Conservative  
+#&gt; ​       ​                 ​                          ​            [7] Very Conserva…
+#&gt; ​       ​                 ​                          ​            [8] Not sure      
+#&gt; ​       ​                 ​                          ​            [98] skipped      
+#&gt; ​       ​                 ​                          ​            [99] not asked    
+#&gt; 162    CC18_335         Trump Russia collusion    dbl+lbl     [1] Yes           
+#&gt; ​       ​                 ​                          ​            [2] No            
+#&gt; ​       ​                 ​                          ​            [3] Not sure      
+#&gt; ​       ​                 ​                          ​            [8] skipped       
+#&gt; ​       ​                 ​                          ​            [9] not asked     
+#&gt; 430    CC18_app_dtrmp_… President Trump Job Appr… dbl+lbl     [1] Strongly appr…
+#&gt; ​       ​                 ​                          ​            [2] Somewhat appr…
+#&gt; ​       ​                 ​                          ​            [3] Somewhat disa…
+#&gt; ​       ​                 ​                          ​            [4] Strongly disa…
+#&gt; ​       ​                 ​                          ​            [5] Not sure      
+#&gt; ​       ​                 ​                          ​            [8] skipped       
+#&gt; ​       ​                 ​                          ​            [9] not asked     </div><div class='input'>
 <span class='co'># all data</span>
-<span class='kw'>cc18_samp</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,000 x 526</span><span>
+<span class='va'>cc18_samp</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1,000 x 526</span><span>
 #&gt;     year case_id commonweight commonpostweight vvweight vvweight_post tookpost
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lb&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018  4.15</span><span style='color: #555555;'>e</span><span>8        1.47             1.48    </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>      2</span><span style='color: #555555;'> [Yes]</span><span>
@@ -232,7 +254,8 @@ in this package as <code><a href='ccc_samp.html'>?ccc_samp</a></code>.</p>
 #&gt; </span><span style='color: #555555;'>#   CC18_309b </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, CC18_309c </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, CC18_309d </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   CC18_310a </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, CC18_310b </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, CC18_310c </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   CC18_310d </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, CC18_311a </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, CC18_311b </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   CC18_311c </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, CC18_316 </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, …</span><span></div><div class='input'></div></span></pre>
+#&gt; </span><span style='color: #555555;'>#   CC18_311c </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, CC18_316 </span><span style='color: #555555;font-style: italic;'>&lt;dbl+lbl&gt;</span><span style='color: #555555;'>, …</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -248,7 +271,7 @@ in this package as <code><a href='ccc_samp.html'>?ccc_samp</a></code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

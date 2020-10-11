@@ -78,19 +78,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -153,16 +147,16 @@
     <p>Currently only is compatible with question of type <code>"yesno"</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_counts</span>(
-  <span class='kw'>data</span>,
-  <span class='kw'>model_ff</span>,
-  keep_vars = <span class='kw'>NULL</span>,
-  name_ones_as = <span class='st'>"yes"</span>,
-  name_trls_as = <span class='st'>"n_response"</span>,
-  y_named_as = <span class='st'>"response"</span>,
-  multiple_qIDs = <span class='fl'>FALSE</span>,
-  verbose = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>build_counts</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>model_ff</span>,
+  keep_vars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  name_ones_as <span class='op'>=</span> <span class='st'>"yes"</span>,
+  name_trls_as <span class='op'>=</span> <span class='st'>"n_response"</span>,
+  y_named_as <span class='op'>=</span> <span class='st'>"response"</span>,
+  multiple_qIDs <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -223,20 +217,23 @@ of trials.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://dplyr.tidyverse.org'>dplyr</a></span>)</div><div class='output co'>#&gt; <span class='message'></span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'>
-<span class='kw'>ccc_samp_std</span> <span class='op'>&lt;-</span> <span class='kw'>ccc_samp</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(response = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"For"</span>, <span class='st'>"Against"</span>), size = <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span>(), replace = <span class='fl'>TRUE</span>)) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='ccc_std_demographics.html'>ccc_std_demographics</a></span>()</div><div class='output co'>#&gt; age variable modified to bins. Original age variable is now in age_orig. </div><div class='input'>
-<span class='kw'>ff</span> <span class='op'>&lt;-</span> <span class='st'>"yes | trials(n_response) ~ age + gender + educ + (1|cd)"</span>
-<span class='kw'>ccc_samp_out</span> <span class='op'>&lt;-</span> <span class='fu'>build_counts</span>(<span class='kw'>ccc_samp_std</span>,
-                             model_ff = <span class='kw'>ff</span>)
+<span class='va'>ccc_samp_std</span> <span class='op'>&lt;-</span> <span class='va'>ccc_samp</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>response <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"For"</span>, <span class='st'>"Against"</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ccc_std_demographics.html'>ccc_std_demographics</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; age variable modified to bins. Original age variable is now in age_orig. </div><div class='input'>
+<span class='va'>ff</span> <span class='op'>&lt;-</span> <span class='st'>"yes | trials(n_response) ~ age + gender + educ + (1|cd)"</span>
+<span class='va'>ccc_samp_out</span> <span class='op'>&lt;-</span> <span class='fu'>build_counts</span><span class='op'>(</span><span class='va'>ccc_samp_std</span>,
+                             model_ff <span class='op'>=</span> <span class='va'>ff</span><span class='op'>)</span>
 
-<span class='kw'>ccc_samp_out</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 945 x 6</span><span>
+<span class='va'>ccc_samp_out</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 945 x 6</span><span>
 #&gt;    age            gender educ         cd    n_response   yes
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 18 to 24 years Male   HS or Less   CA-39          1     1
@@ -251,7 +248,8 @@ of trials.</p></li>
 #&gt; </span><span style='color: #555555;'>10</span><span> 18 to 24 years Male   Some College IA-02          1     1
 #&gt; </span><span style='color: #555555;'># … with 935 more rows</span><span></div><div class='input'>
 <span class='co'># alternative options</span>
-<span class='fu'>build_counts</span>(<span class='kw'>ccc_samp_std</span>, model_ff = <span class='kw'>ff</span>, name_ones_as = <span class='st'>"success"</span>, name_trls_as = <span class='st'>"trials"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 945 x 6</span><span>
+<span class='fu'>build_counts</span><span class='op'>(</span><span class='va'>ccc_samp_std</span>, model_ff <span class='op'>=</span> <span class='va'>ff</span>, name_ones_as <span class='op'>=</span> <span class='st'>"success"</span>, name_trls_as <span class='op'>=</span> <span class='st'>"trials"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 945 x 6</span><span>
 #&gt;    age            gender educ         cd    trials success
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 18 to 24 years Male   HS or Less   CA-39      1       1
@@ -264,7 +262,8 @@ of trials.</p></li>
 #&gt; </span><span style='color: #555555;'> 8</span><span> 18 to 24 years Male   HS or Less   NC-11      1       1
 #&gt; </span><span style='color: #555555;'> 9</span><span> 18 to 24 years Male   HS or Less   PA-11      1       1
 #&gt; </span><span style='color: #555555;'>10</span><span> 18 to 24 years Male   Some College IA-02      1       1
-#&gt; </span><span style='color: #555555;'># … with 935 more rows</span><span></div><div class='input'><span class='fu'>build_counts</span>(<span class='kw'>ccc_samp_std</span>, model_ff = <span class='kw'>ff</span>, keep_vars = <span class='st'>"state"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 945 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># … with 935 more rows</span><span></div><div class='input'><span class='fu'>build_counts</span><span class='op'>(</span><span class='va'>ccc_samp_std</span>, model_ff <span class='op'>=</span> <span class='va'>ff</span>, keep_vars <span class='op'>=</span> <span class='st'>"state"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 945 x 7</span><span>
 #&gt;    age            gender educ         cd    state          n_response   yes
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 18 to 24 years Male   HS or Less   CA-39 California              1     1
@@ -277,7 +276,8 @@ of trials.</p></li>
 #&gt; </span><span style='color: #555555;'> 8</span><span> 18 to 24 years Male   HS or Less   NC-11 North Carolina          1     1
 #&gt; </span><span style='color: #555555;'> 9</span><span> 18 to 24 years Male   HS or Less   PA-11 Pennsylvania            1     1
 #&gt; </span><span style='color: #555555;'>10</span><span> 18 to 24 years Male   Some College IA-02 Iowa                    1     1
-#&gt; </span><span style='color: #555555;'># … with 935 more rows</span><span></div><div class='input'></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 935 more rows</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -293,7 +293,7 @@ of trials.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

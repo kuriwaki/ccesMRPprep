@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Identifiers for datasets in CCES Dataverse — cces_dv_ids • ccesMRPprep</title>
+<title>Download a specific CCES dataset from dataverse, with some indexing — get_cces_dataverse • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="Identifiers for datasets in CCES Dataverse — cces_dv_ids" />
-<meta property="og:description" content="Identifiers for datasets in CCES Dataverse" />
+<meta property="og:title" content="Download a specific CCES dataset from dataverse, with some indexing — get_cces_dataverse" />
+<meta property="og:description" content="Get the data from dataverse into the current R environment. You must use
+the development version of IQSS/dataverse-client-r.
+The function also does" />
 
 
 
@@ -138,55 +140,82 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Identifiers for datasets in CCES Dataverse</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/datadoc_dataverse-ids.R'><code>R/datadoc_dataverse-ids.R</code></a></small>
-    <div class="hidden name"><code>cces_dv_ids.Rd</code></div>
+    <h1>Download a specific CCES dataset from dataverse, with some indexing</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/get_dataverse.R'><code>R/get_dataverse.R</code></a></small>
+    <div class="hidden name"><code>get_cces_dataverse.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Identifiers for datasets in CCES Dataverse</p>
+    <p>Get the data from dataverse into the current R environment. You must use
+the development version of <a href='https://github.com/IQSS/dataverse-client-r'>IQSS/dataverse-client-r</a>.
+The function also does</p>
     </div>
 
-    <pre class="usage"><span class='va'>cces_dv_ids</span></pre>
+    <pre class="usage"><span class='fu'>get_cces_dataverse</span><span class='op'>(</span>
+  name <span class='op'>=</span> <span class='st'>"cumulative"</span>,
+  year_subset <span class='op'>=</span> <span class='fl'>2006</span><span class='op'>:</span><span class='fl'>2019</span>,
+  std_index <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  dataverse_paths <span class='op'>=</span> <span class='va'>cces_dv_ids</span>
+<span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>name</th>
+      <td><p>The name of the dataset as defined in <code><a href='https://rdrr.io/r/utils/data.html'>data(cces_dv_ids)</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>year_subset</th>
+      <td><p>The year (or years, a vector) to subset too. If <code>name</code> is a year
+specific dataset, this argument is redundant, but if <code>name == "cumulative"</code>, then
+the output will be the cumulative dataset subsetted to that year. This is useful
+when using the cumulative dataset for its harmonized variables.</p></td>
+    </tr>
+    <tr>
+      <th>std_index</th>
+      <td><p>Whetehr to standardize the unique case identifier. These
+have different column names in different datasets, but setting this to <code>TRUE</code>
+(the default) will all rename them <code>"case_id"</code> and also add the year of the dataset.
+This way, every dataset that gets downloaded will have the unique identifier
+defined by the variables <code><a href='https://rdrr.io/r/base/c.html'>c("year", "case_id")</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>dataverse_paths</th>
+      <td><p>A dataframe where one row represents metadata for one
+CCES dataset. Built-in data <a href='cces_dv_ids.html'>cces_dv_ids</a> is used as a default and should
+not be changed.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A tibble with one row per dataverse dataset. The <code>doi</code>,
-<code>filename</code>, and <code>server</code> can uniquely define a file in
-<code>?dataverse::get_file()</code>.</p><dl>
-<dt>cces_name</dt><dd><p>The unique name/shorthand for this dataset</p></dd>
-<dt>year</dt><dd><p>Specific year the data surveys, if there is one unique year</p></dd>
-<dt>doi</dt><dd><p>The DOI for the dataverse dataset (instead of the specific file). The URL is therefore https://doi.org/
-followed by the DOI</p></dd>
-<dt>filename</dt><dd><p>The name of the data file, as it appears in the dataverse.</p></dd>
-<dt>server</dt><dd><p>The particular dataverse instance.</p></dd>
-<dt>caseid_var</dt><dd><p>The variable in that dataset that specifies
-the unique case (respondent/person) identifier. Use a string.</p></dd>
-
-</dl>
-
+    <p>The current dataverse package downloads the raw data, so this function writes
+the raw binary into a tempfile and loads it into a tibble with the appropriate
+file data type. We find it convenient to loop over this function for all values in
+<a href='cces_dv_ids.html'>cces_dv_ids</a> and populate the MRP directory with all datasets (about 2GB
+in total). Each dataset has slightly different formats; using <a href='get_cces_question.html'>get_cces_question</a>
+will standardize, for example, the name of the case ID.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='va'>cces_dv_ids</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 15 x 6</span><span>
-#&gt;    cces_name   year doi          filename               caseid_var server       
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
-#&gt; </span><span style='color: #555555;'> 1</span><span> cumulative    </span><span style='color: #BB0000;'>NA</span><span> 10.7910/DVN… cumulative_2006-2019.… case_id    dataverse.ha…
-#&gt; </span><span style='color: #555555;'> 2</span><span> 2006        </span><span style='text-decoration: underline;'>2</span><span>006 10.7910/DVN… cces_2006_common.tab   v1000      dataverse.ha…
-#&gt; </span><span style='color: #555555;'> 3</span><span> 2007        </span><span style='text-decoration: underline;'>2</span><span>007 10.7910/DVN… CCES07_OUTPUT.sav      caseid     dataverse.ha…
-#&gt; </span><span style='color: #555555;'> 4</span><span> 2008        </span><span style='text-decoration: underline;'>2</span><span>008 10.7910/DVN… cces_2008_common.tab   V100       dataverse.ha…
-#&gt; </span><span style='color: #555555;'> 5</span><span> 2009        </span><span style='text-decoration: underline;'>2</span><span>009 10.7910/DVN… cces09_cmn_output_2.d… v100       dataverse.ha…
-#&gt; </span><span style='color: #555555;'> 6</span><span> 2010        </span><span style='text-decoration: underline;'>2</span><span>010 10.7910/DVN… cces_2010_common_vali… V100       dataverse.ha…
-#&gt; </span><span style='color: #555555;'> 7</span><span> 2011        </span><span style='text-decoration: underline;'>2</span><span>011 10.7910/DVN… CCES11_Common_OUTPUT.… V100       dataverse.ha…
-#&gt; </span><span style='color: #555555;'> 8</span><span> 2012        </span><span style='text-decoration: underline;'>2</span><span>012 10.7910/DVN… CCES12_Common_VV.tab   V101       dataverse.ha…
-#&gt; </span><span style='color: #555555;'> 9</span><span> 2013        </span><span style='text-decoration: underline;'>2</span><span>013 10.7910/DVN… Common Content Data.t… caseid     dataverse.ha…
-#&gt; </span><span style='color: #555555;'>10</span><span> 2014        </span><span style='text-decoration: underline;'>2</span><span>014 10.7910/DVN… CCES14_Common_Content… V101       dataverse.ha…
-#&gt; </span><span style='color: #555555;'>11</span><span> 2015        </span><span style='text-decoration: underline;'>2</span><span>015 10.7910/DVN… CCES15_Common_OUTPUT_… V101       dataverse.ha…
-#&gt; </span><span style='color: #555555;'>12</span><span> 2016        </span><span style='text-decoration: underline;'>2</span><span>016 10.7910/DVN… CCES16_Common_OUTPUT_… V101       dataverse.ha…
-#&gt; </span><span style='color: #555555;'>13</span><span> 2017        </span><span style='text-decoration: underline;'>2</span><span>017 10.7910/DVN… Common Content Data.t… V101       dataverse.ha…
-#&gt; </span><span style='color: #555555;'>14</span><span> 2018        </span><span style='text-decoration: underline;'>2</span><span>018 10.7910/DVN… cces18_common_vv.dta   caseid     dataverse.ha…
-#&gt; </span><span style='color: #555555;'>15</span><span> 2019        </span><span style='text-decoration: underline;'>2</span><span>019 10.7910/DVN… CCES19_Common_OUTPUT.… caseid     dataverse.ha…</div></span></pre>
+    <pre class="examples"><div class='input'>
+<span class='co'># read in cumulative common content, subsetted to 2018, into environemt</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+ <span class='va'>ccc</span> <span class='op'>&lt;-</span> <span class='fu'>get_cces_dataverse</span><span class='op'>(</span><span class='st'>"cumulative"</span>, year_subset <span class='op'>=</span> <span class='fl'>2018</span><span class='op'>)</span>
+ <span class='op'>}</span>
+
+<span class='co'># Example code to read _and_ write a series of common content datasets</span>
+<span class='co'># in a directory "data/input/cces/</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>dir_create</span><span class='op'>(</span><span class='st'>"data/cces"</span><span class='op'>)</span>
+<span class='kw'>for</span> <span class='op'>(</span><span class='va'>d</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cumulative"</span>, <span class='st'>"2018"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'>file_exists</span><span class='op'>(</span><span class='fu'>glue</span><span class='op'>(</span><span class='st'>"data/input/cces/cces_{d}.rds"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='kw'>next</span>
+  <span class='fu'>write_rds</span><span class='op'>(</span><span class='fu'>get_cces_dataverse</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>, <span class='fu'>glue</span><span class='op'>(</span><span class='st'>"data/input/cces/cces_{d}.rds"</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># takes a few minutes</span>
+<span class='op'>}</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
