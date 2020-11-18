@@ -69,7 +69,7 @@ get_acs_cces <- function(varlist,
 
   acs_lbl <- acs_df %>%
     left_join(varlab_df, by = "variable") %>%
-    mutate(year = .data$year,
+    mutate(year = year,
            cd = std_acs_cdformat(.data$NAME)) %>%
     mutate_if(haven::is.labelled, haven::as_factor) %>%
     mutate(age = coalesce(.data$age_5, .data$age_10)) %>%
