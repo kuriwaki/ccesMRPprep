@@ -17,9 +17,11 @@ build_counts(
 }
 \arguments{
 \item{data}{A cleaned CCES dataset, e.g. from \link{ccc_std_demographics} which is
-then combined with outcome and contextual data in \link{cces_join_slim}. Currently, it
-assumes the outcome is named \code{response}. This variable need not be numeric or
-binarized, but it will be binarized with \link{yesno_to_binary}.}
+then combined with outcome and contextual data in \link{cces_join_slim}.
+By default it expects the LHS outcome to be named \code{response}, and expects
+the dataset to have that variable.
+This variable must be binary or it must be a character vector that can be coerced
+by \link{yesno_to_binary} into a binary variable.}
 
 \item{model_ff}{the model formula used to fit the multilevel regression model.
 Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
