@@ -115,7 +115,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://github.com/kuriwaki/ccesMRPprep/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -164,9 +164,11 @@
     <tr>
       <th>data</th>
       <td><p>A cleaned CCES dataset, e.g. from <a href='ccc_std_demographics.html'>ccc_std_demographics</a> which is
-then combined with outcome and contextual data in <a href='cces_join_slim.html'>cces_join_slim</a>. Currently, it
-assumes the outcome is named <code>response</code>. This variable need not be numeric or
-binarized, but it will be binarized with <a href='yesno_to_binary.html'>yesno_to_binary</a>.</p></td>
+then combined with outcome and contextual data in <a href='cces_join_slim.html'>cces_join_slim</a>.
+By default it expects the LHS outcome to be named <code>response</code>, and expects
+the dataset to have that variable.
+This variable must be binary or it must be a character vector that can be coerced
+by <a href='yesno_to_binary.html'>yesno_to_binary</a> into a binary variable.</p></td>
     </tr>
     <tr>
       <th>model_ff</th>
