@@ -5,27 +5,26 @@
 \title{Collapse CCES data to be analyzed in binomial model}
 \usage{
 build_counts(
+  formula,
   data,
-  model_ff,
   keep_vars = NULL,
   name_ones_as = "yes",
   name_trls_as = "n_response",
-  y_named_as = "response",
   multiple_qIDs = FALSE,
   verbose = TRUE
 )
 }
 \arguments{
+\item{formula}{the model formula used to fit the multilevel regression model.
+Should be of the form \code{y ~ x1 + x2 + (1|x3)} where y is a binary variable
+and only categorical variables should be used in the random effects notation}
+
 \item{data}{A cleaned CCES dataset, e.g. from \link{ccc_std_demographics} which is
 then combined with outcome and contextual data in \link{cces_join_slim}.
 By default it expects the LHS outcome to be named \code{response}, and expects
 the dataset to have that variable.
 This variable must be binary or it must be a character vector that can be coerced
 by \link{yesno_to_binary} into a binary variable.}
-
-\item{model_ff}{the model formula used to fit the multilevel regression model.
-Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
-Only the RHS will be used but the LHS is necessary.}
 
 \item{keep_vars}{Variables that will be kept as a cell variable, regardless
 of whether it is specified in a formula. Input as character vector.}
@@ -35,9 +34,6 @@ successes in the binomial}
 
 \item{name_trls_as}{What to name the variable that represents the number of
 trials in the binomial.}
-
-\item{y_named_as}{What is the original response / outcome variable called?
-Currently defaults to "response" from \link{get_cces_question}.}
 
 \item{multiple_qIDs}{Does the data contain \emph{multiple} outcomes in long form and
 therefore require the counts to be built for each outcome? Defaults to \code{FALSE}.}
@@ -61,17 +57,18 @@ Currently only is compatible with question of type \code{"yesno"}.
 library(dplyr)
 
 ccc_samp_std <- ccc_samp \%>\%
-  mutate(response = sample(c("For", "Against"), size = n(), replace = TRUE)) \%>\%
+  mutate(y = sample(c("For", "Against"), size = n(), replace = TRUE)) \%>\%
   ccc_std_demographics()
 
-ff <- "yes | trials(n_response) ~ age + gender + educ + (1|cd)"
-ccc_samp_out <- build_counts(ccc_samp_std,
-                             model_ff = ff)
+ccc_samp_out <- build_counts(y ~ age + gender + educ + (1|cd),
+                             ccc_samp_std)
 
 ccc_samp_out
 
 # alternative options
-build_counts(ccc_samp_std, model_ff = ff, name_ones_as = "success", name_trls_as = "trials")
-build_counts(ccc_samp_std, model_ff = ff, keep_vars = "state")
+build_counts(y ~ educ + (1|cd), ccc_samp_std,
+             name_ones_as = "success", name_trls_as = "trials")
+build_counts(y ~ educ + (1|cd), ccc_samp_std,
+             keep_vars = "state")
 
 }

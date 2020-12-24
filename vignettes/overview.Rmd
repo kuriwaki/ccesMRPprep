@@ -24,7 +24,6 @@ library(haven)
 
 All CCES data can be downloaded directly from dataverse, using the development version of the [`dataverse`](https://github.com/IQSS/dataverse-client-r) R package. The function `get_cces_dataverse()` will make this quick and simple - you only need to specify the name of the dataset, given in `?cces_dv_ids`.
 
-
 ```{r, eval = FALSE}
 # may take about 30 seconds to download
 ccc <- get_cces_dataverse("cumulative")
@@ -36,20 +35,17 @@ Here we will use a built-in sample of 1,000 observations for illustration (see `
 ccc_samp
 ```
 
-
-
-##  **Step 2.** Cleaning CCES data
+## **Step 2.** Cleaning CCES data
 
 The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of the ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.
 
-See `get_cces_question()` for how to get the _outcome_ data, which is a single column from another CCES dataset. This still relies on a flat file being pre-downloaded (via `get_cces_dataverse()`). 
+See `get_cces_question()` for how to get the *outcome* data, which is a single column from another CCES dataset. This still relies on a flat file being pre-downloaded (via `get_cces_dataverse()`).
 
 ```{r}
 ccc_std <- ccc_std_demographics(ccc_samp)
 ```
 
-
-##  **Step 3.** Define a Model Specification
+## **Step 3.** Define a Model Specification
 
 A formula represents the variables that are in the model, how they are interacted, and which variables are random effects. We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form
 
@@ -57,29 +53,25 @@ A formula represents the variables that are in the model, how they are interacte
 fm_brm <- yes | trials(n_responses) ~  age + gender + educ + pct_trump + (1|cd)
 ```
 
+A prior could be specified here as well, but this is not strictly necessary and can be defined when fitting the model.
 
-A prior could be specified here as well, but this is not strictly necessary and can be defined when fitting the model. 
-
-
-##  **Step 4.** Collapsing the CCES data
+## **Step 4.** Collapsing the CCES data
 
 For speed, we collapse the individual-level data where each outcome is binary to a count dataset where each row is a cell (with a trial and success value). This form also makes drawing posteriors much easier in the next step. We use `build_counts()` for this, which takes a individual-level dataset (built from `ccc_std_demographics()`, or further passed through `cces_join_slim()` for all relevant outcomes and predictors).
 
 ```{r}
-# fake outcome data - must be called "response"
 set.seed(02138)
 ccc_samp_std <- ccc_samp %>% 
    mutate(response = sample(c("For", "Against"), size = n(), replace = TRUE)) %>% 
    ccc_std_demographics()
 
-ccc_samp_out <- build_counts(ccc_samp_std,
-                             "yes | trials(n_response) ~ age + gender + educ")
+ccc_samp_out <- build_counts(response ~ age + gender + educ,
+                             ccc_samp_std)
 
 ccc_samp_out
 ```
 
-
-##  **Step 5.** Prepare ACS data and Poststratification Table
+## **Step 5.** Prepare ACS data and Poststratification Table
 
 We provide wrappers around the great [tidycensus](https://walker-data.com/tidycensus/) package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/
 
@@ -93,15 +85,14 @@ We provide wrappers around the great [tidycensus](https://walker-data.com/tidyce
  poststrat <-  get_poststrat(acs_tab, cd_info_2018, fm_brm)
 ```
 
-##  **Final Output**
+## **Final Output**
 
 Under this workflow, only three objects are needed to conduct MRP with a brms model:
 
-1. The model specification which can be a plain text line of a brms formula (in Step 3)
-2. The survey data that is formatted via `build_counts()` at the end (in Step 4)
-3. The poststratification table via `get_poststrat()` (in Step 5).
+1.  The model specification which can be a plain text line of a brms formula (in Step 3)
+2.  The survey data that is formatted via `build_counts()` at the end (in Step 4)
+3.  The poststratification table via `get_poststrat()` (in Step 5).
 
-Together, these uniquely define one MRP model for one operationalization of one question with a particular set of covariates. 
-
+Together, these uniquely define one MRP model for one operationalization of one question with a particular set of covariates.
 
 Another way to draw the data would be to use `get_cces_dataverse()`, use the demographics from the cumulative passed into `ccc_std_demographics()`, and then merge the outcome from each year's CCES (e.g. `get_cces_dataverse("2016")`) using `get_cces_question()`. The year-specific CCES does come with demographics too, but they are not guaranteed to be standardized by this package's procedures. Use the formula, the standardized cumulative CCES, and a column of outcomes, and the ACS.
