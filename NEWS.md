@@ -1,6 +1,8 @@
 
-* Rename `get_cces_dv` to  `get_cces_dataverse` 
+# ccesMRPprep 0.1.6++
 
+* Rename `get_cces_dv` to  `get_cces_dataverse` 
+* Change formula notation in `build_counts` to (y ~ x) instead of `yes | trials(n_response)`
 
 # ccesMRPprep 0.1.6
 

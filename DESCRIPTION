@@ -1,7 +1,7 @@
 Package: ccesMRPprep
 Type: Package
 Title: Functions and Data to Prepare CCES data for MRP
-Version: 0.1.6
+Version: 0.1.7
 Authors@R: person(given = "Shiro",
              family = "Kuriwaki",
              role = c("aut", "cre"),
