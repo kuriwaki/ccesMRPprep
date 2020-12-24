@@ -76,8 +76,10 @@ build_counts <- function(data, model_ff,
   if (is.character(data$y))
     data$y <- yesno_to_binary(data$y)
 
-  if (!any(data$y == 0) | !any(data$y == 1) | any(data$y > 1))
+  if (!any(data$y == 0, na.rm = TRUE) | !any(data$y == 1, na.rm = TRUE) |
+      any(data$y > 1, na.rm = TRUE)) {
     stop("outcome variable is not binary or has no variation")
+  }
 
   # report missings due to outcome NA
   n_na <- sum(is.na(data$y))
