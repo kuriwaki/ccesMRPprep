@@ -10,7 +10,7 @@
 #' specific dataset, this argument is redundant, but if `name == "cumulative"`, then
 #' the output will be the cumulative dataset subsetted to that year. This is useful
 #' when using the cumulative dataset for its harmonized variables.
-#' @param std_index Whetehr to standardize the unique case identifier. These
+#' @param std_index Whether to standardize the unique case identifier. These
 #' have different column names in different datasets, but setting this to \code{TRUE}
 #' (the default) will all rename them \code{"case_id"} and also add the year of the dataset.
 #' This way, every dataset that gets downloaded will have the unique identifier
