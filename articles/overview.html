@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
       </span>
     </div>
 
@@ -156,15 +156,14 @@
 <a href="#step-4--collapsing-the-cces-data" class="anchor"></a><strong>Step 4.</strong> Collapsing the CCES data</h2>
 <p>For speed, we collapse the individual-level data where each outcome is binary to a count dataset where each row is a cell (with a trial and success value). This form also makes drawing posteriors much easier in the next step. We use <code><a href="../reference/build_counts.html">build_counts()</a></code> for this, which takes a individual-level dataset (built from <code><a href="../reference/ccc_std_demographics.html">ccc_std_demographics()</a></code>, or further passed through <code><a href="../reference/cces_join_slim.html">cces_join_slim()</a></code> for all relevant outcomes and predictors).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># fake outcome data - must be called "response"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">02138</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">02138</span><span class="op">)</span>
 <span class="va">ccc_samp_std</span> <span class="op">&lt;-</span> <span class="va">ccc_samp</span> <span class="op">%&gt;%</span> 
    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"For"</span>, <span class="st">"Against"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
    <span class="fu"><a href="../reference/ccc_std_demographics.html">ccc_std_demographics</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; age variable modified to bins. Original age variable is now in age_orig.</span>
 
-<span class="va">ccc_samp_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_counts.html">build_counts</a></span><span class="op">(</span><span class="va">ccc_samp_std</span>,
-                             <span class="st">"yes | trials(n_response) ~ age + gender + educ"</span><span class="op">)</span>
+<span class="va">ccc_samp_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_counts.html">build_counts</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">educ</span>,
+                             <span class="va">ccc_samp_std</span><span class="op">)</span>
 
 <span class="va">ccc_samp_out</span>
 <span class="co">#&gt; # A tibble: 39 x 5</span>
