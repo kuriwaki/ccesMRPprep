@@ -26,7 +26,7 @@ Formats a post-strat table from ACS and district-level data
  acs_tab <- get_acs_cces(
               varlist = acscodes_age_sex_educ,
               varlab_df = acscodes_df,
-             .year = 2018)
+             year = 2018)
 
 poststrat <-  get_poststrat(acs_tab, cd_info_2018, fm_brm)
 head(poststrat)

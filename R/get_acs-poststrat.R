@@ -111,7 +111,7 @@ get_acs_cces <- function(varlist,
 #'  acs_tab <- get_acs_cces(
 #'               varlist = acscodes_age_sex_educ,
 #'               varlab_df = acscodes_df,
-#'              .year = 2018)
+#'              year = 2018)
 #'
 #' poststrat <-  get_poststrat(acs_tab, cd_info_2018, fm_brm)
 #' head(poststrat)
@@ -134,8 +134,8 @@ get_poststrat <- function(cleaned_acs, dist_data = NULL, model_ff) {
     cleaned_acs <- left_join(dist_data, cleaned_acs)
 
   cleaned_acs %>%
-    filter_at(vars(matches(xvar_regex)), ~all_vars(!is.na(.x))) %>%
-    group_by(!!!syms(xvars), add = TRUE) %>%
+    filter(across(matches(xvar_regex), ~!is.na(.x))) %>%
+    group_by(!!!syms(xvars), .add = TRUE) %>%
     summarize(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
     filter(count > 0)
 }
