@@ -73,9 +73,9 @@ ccc_samp_out
 
 ## **Step 5.** Prepare ACS data and Poststratification Table
 
-We provide wrappers around the great [tidycensus](https://walker-data.com/tidycensus/) package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/
+We provide wrappers around the great [tidycensus](https://walker-data.com/tidycensus/) package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well. 
 
-```{r, eval = FALSE}
+```{r}
 
  acs_tab <- get_acs_cces(
               varlist = acscodes_age_sex_educ,
@@ -83,7 +83,11 @@ We provide wrappers around the great [tidycensus](https://walker-data.com/tidyce
              year = 2018)
 
  poststrat <-  get_poststrat(acs_tab, cd_info_2018, fm_brm)
+ 
+ poststrat
 ```
+
+You need to get a API key from the census website to run this command.
 
 ## **Final Output**
 

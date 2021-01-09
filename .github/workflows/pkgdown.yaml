@@ -60,6 +60,10 @@ jobs:
       - name: Install package
         run: R CMD INSTALL .
 
+      - name: Add CENSUS API KEY
+        run: |
+          Sys.setenv($CENSUS_API_KEY)
+
       - name: Deploy package
         run: pkgdown::deploy_to_branch(new_process = FALSE)
         shell: Rscript {0}
