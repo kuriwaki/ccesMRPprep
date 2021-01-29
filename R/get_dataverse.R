@@ -79,7 +79,7 @@ get_cces_dataverse <- function(name = "cumulative",
   if (filetype == ".tab" | filetype == ".dta")
     fun <- haven::read_dta
 
-  if (filetype == ".dta" & yr == 2009)
+  if (filetype == ".dta" & isTRUE(yr == 2009))
     fun <- function(x) haven::read_dta(x, encoding = "latin1")
 
   if (filetype == ".sav")
@@ -89,11 +89,11 @@ get_cces_dataverse <- function(name = "cumulative",
     fun <- readr::read_rds
 
   # read tempfile -----
-  cces_raw <- get_file(file = glue("{y_info$filename}"),
-                      dataset = glue("doi:{doi}"),
-                      server = svr,
-                      original = TRUE,
-                      .f = fun)
+  cces_raw <- get_dataframe_by_name(file = glue("{y_info$filename}"),
+                                    dataset = glue("doi:{doi}"),
+                                    server = svr,
+                                    original = TRUE,
+                                    .f = fun)
 
   # subset ---
   if (name == "cumulative") {
