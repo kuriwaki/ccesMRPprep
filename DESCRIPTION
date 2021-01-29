@@ -26,11 +26,9 @@ Imports:
     stringr,
     readr,
     glue,
-    dataverse,
+    dataverse (>= 0.3.0),
     tidycensus,
     purrr
-Remotes:
-    IQSS/dataverse-client-r
 RoxygenNote: 7.1.1
 Language: en-US
 Roxygen: list(markdown = TRUE)

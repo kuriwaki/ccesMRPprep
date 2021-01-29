@@ -74,31 +74,33 @@ get_cces_dataverse <- function(name = "cumulative",
   if (yr %% 2 == 0 | doi == "10.7910/DVN/II2DB6")
     cat("Downloading and reading large dataset, can take about 3-5 minutes to complete.", "\n")
 
-    # read tempfile
-  cces_dv <- get_file(file = glue("{y_info$filename}"),
-                      dataset = glue("doi:{doi}"),
-                      server = svr)
-  tmp <- tempfile(fileext = filetype)
-  writeBin(cces_dv, tmp)
 
-  # read data  into df ---
-  if (filetype == ".tab")
-    filetype <- ".dta"
+  # set function ---
+  if (filetype == ".tab" | filetype == ".dta")
+    fun <- haven::read_dta
 
-  if (filetype == ".dta")
-    cces_raw <- haven::read_dta(tmp)
+  if (filetype == ".dta" & yr == 2009)
+    fun <- function(x) haven::read_dta(x, encoding = "latin1")
 
   if (filetype == ".sav")
-    cces_raw <- haven::read_sav(tmp)
+    fun <- function(x) haven::read_sav(x, encoding = "latin1")
 
   if (filetype == ".Rds")
-    cces_raw <- readr::read_rds(tmp)
+    fun <- readr::read_rds
 
+  # read tempfile -----
+  cces_raw <- get_file(file = glue("{y_info$filename}"),
+                      dataset = glue("doi:{doi}"),
+                      server = svr,
+                      original = TRUE,
+                      .f = fun)
+
+  # subset ---
   if (name == "cumulative") {
     cces_raw <- filter(cces_raw, .data$year %in% year_subset)
   }
 
-  # rename indexing variables
+  # rename indexing variables ----
   if (std_index) {
     cces <- cces_raw %>%
       rename(case_id = !!sym(caseid_var)) %>%
