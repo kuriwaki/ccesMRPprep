@@ -10,7 +10,7 @@
 #'  by \link{yesno_to_binary} into a binary variable.
 #' @param formula the model formula used to fit the multilevel regression model.
 #' Should be of the form \code{y ~ x1 + x2 + (1|x3)} where y is a binary variable
-#' and only categorical variables should be used in the random effects notation
+#' and only categorical variables should be used in the random effects notation.
 #' @param keep_vars Variables that will be kept as a cell variable, regardless
 #'  of whether it is specified in a formula. Input as character vector.
 #' @param name_ones_as What to name the variable that represents the number of
@@ -73,7 +73,7 @@ build_counts <- function(formula,
   data$y <- data[[y_named_as]]
 
   # if character, then turn to Yes/No numeric
-  if (is.character(data$y))
+  if (is.character(data$y) | is.factor(data$y))
     data$y <- yesno_to_binary(data$y)
 
   if (!any(data$y == 0, na.rm = TRUE) | !any(data$y == 1, na.rm = TRUE) |

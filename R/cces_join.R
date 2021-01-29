@@ -19,11 +19,9 @@
 #'  this enables the join.
 #' @param keep_vars Variables that will be kept as a cell variable, regardless
 #'  of whether it is specified in a formula. Input as character vector.
-#' @param y_named_as What is the outcome variable called? defaults to `"response"`,
-#'  from \link{get_cces_question}. Input as character.
-#' @param model_ff the MRP model. Only the variables on the RHS will be kept.
 #' @param subset_dist a character for the geography of cd to subset
 #'
+#' @inheritParams build_counts
 #' @import dplyr
 #' @importFrom rlang .data
 #' @importFrom stats as.formula
@@ -38,14 +36,14 @@
 #'   cces_join_slim(ccq_df = ccq_tcja,
 #'                  ccc_df = filter(ccc_samp, year == 2018),
 #'                  cd_df = cd_info_2018,
-#'                  model_ff = "yes | trials(n_response) ~ age + educ + (1|cd)")
+#'                  formula = "response ~ age + educ + (1|cd)")
 #'
 #'   # alternative - cd and state not in the formula, but cells follow this
 #'   cces_join_slim(ccq_df = ccq_tcja,
 #'                  ccc_df = filter(ccc_samp, year == 2018),
 #'                  cd_df = cd_info_2018,
 #'                  keep_vars = c("st", "cd"),
-#'                  model_ff = "yes | trials(n_response) ~ age + educ")
+#'                  formula = "response ~ age + educ")
 #'
 #' # A tibble: 133 x 7
 #' #        year case_id   qID   response   age educ             cd
@@ -65,17 +63,18 @@
 cces_join_slim <- function(ccq_df,
                            ccc_df,
                            cd_df,
-                           model_ff,
-                           y_named_as = "response",
+                           formula,
                            coerce_to_char = TRUE,
                            keep_vars = NULL,
                            subset_dist = NA) {
 
+  y_named_as <- all.vars(as.formula(formula))[1L]
+
   vars <- c("year", "case_id", "qID",
             y_named_as,
             keep_vars,
-            # the outcome is sum(yes) | trials(n)
-            all.vars(as.formula(model_ff))[-c(1:2)])
+            # the outcome is reponse
+            all.vars(as.formula(formula))[-c(1)])
 
   if (coerce_to_char) {
     ccq_df$case_id <- as.character(ccq_df$case_id)

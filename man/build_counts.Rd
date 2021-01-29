@@ -17,7 +17,7 @@ build_counts(
 \arguments{
 \item{formula}{the model formula used to fit the multilevel regression model.
 Should be of the form \code{y ~ x1 + x2 + (1|x3)} where y is a binary variable
-and only categorical variables should be used in the random effects notation}
+and only categorical variables should be used in the random effects notation.}
 
 \item{data}{A cleaned CCES dataset, e.g. from \link{ccc_std_demographics} which is
 then combined with outcome and contextual data in \link{cces_join_slim}.

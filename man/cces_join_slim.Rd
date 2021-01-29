@@ -8,8 +8,7 @@ cces_join_slim(
   ccq_df,
   ccc_df,
   cd_df,
-  model_ff,
-  y_named_as = "response",
+  formula,
   coerce_to_char = TRUE,
   keep_vars = NULL,
   subset_dist = NA
@@ -28,10 +27,9 @@ compatible with ACS.}
 for a sample. Currently, we join this to the rest of the data on the column
 called \code{"cd"} and \code{"year"}.}
 
-\item{model_ff}{the MRP model. Only the variables on the RHS will be kept.}
-
-\item{y_named_as}{What is the outcome variable called? defaults to \code{"response"},
-from \link{get_cces_question}. Input as character.}
+\item{formula}{the model formula used to fit the multilevel regression model.
+Should be of the form \code{y ~ x1 + x2 + (1|x3)} where y is a binary variable
+and only categorical variables should be used in the random effects notation.}
 
 \item{coerce_to_char}{Whether to coerce the case identifier to character class,
 this enables the join.}
@@ -54,14 +52,14 @@ is model dependent.
   cces_join_slim(ccq_df = ccq_tcja,
                  ccc_df = filter(ccc_samp, year == 2018),
                  cd_df = cd_info_2018,
-                 model_ff = "yes | trials(n_response) ~ age + educ + (1|cd)")
+                 formula = "response ~ age + educ + (1|cd)")
 
   # alternative - cd and state not in the formula, but cells follow this
   cces_join_slim(ccq_df = ccq_tcja,
                  ccc_df = filter(ccc_samp, year == 2018),
                  cd_df = cd_info_2018,
                  keep_vars = c("st", "cd"),
-                 model_ff = "yes | trials(n_response) ~ age + educ")
+                 formula = "response ~ age + educ")
 
 # A tibble: 133 x 7
 #        year case_id   qID   response   age educ             cd
