@@ -89,9 +89,9 @@ get_acs_cces <- function(varlist,
 #' each cell must be under the variable \code{count}
 #' @param dist_data District-level (in this case congressional district-level) information
 #' to merge in
-#' @param model_ff the model formula used to fit the multilevel regression model.
-#' Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
-#' Only the RHS will be used but the LHS is necessary.
+#' @param formula the model formula used to fit the multilevel regression model, with one
+#' term on the LHS: e.g. \code{y ~ x1 + x2 + (1|x3)}.
+#' Only the RHS will be used but the LHS is necessary for now.
 #'
 #'
 #' @importFrom tidycensus get_acs
@@ -107,7 +107,7 @@ get_acs_cces <- function(varlist,
 #'
 #' @examples
 #' \dontrun{
-#'  fm_brm <- yes | responses(n_cell) ~  age + gender + educ + pct_trump + (1|cd)
+#'  fm_brm <- response ~  age + gender + educ + pct_trump + (1|cd)
 #'  acs_tab <- get_acs_cces(
 #'               varlist = acscodes_age_sex_educ,
 #'               varlab_df = acscodes_df,
@@ -125,9 +125,9 @@ get_acs_cces <- function(varlist,
 #' # 6 18 to 24 years Male   HS or Less     0.092 IL-07 18734
 #' }
 #'
-get_poststrat <- function(cleaned_acs, dist_data = NULL, model_ff) {
+get_poststrat <- function(cleaned_acs, dist_data = NULL, formula) {
 
-  xvars <- setdiff(all.vars(as.formula(model_ff))[-c(1:2)], "response")
+  xvars <- setdiff(all.vars(as.formula(formula))[-1], "response")
   xvar_regex <- glue("^({str_c(xvars, collapse = '|')})$")
 
   if (!is.null(dist_data))

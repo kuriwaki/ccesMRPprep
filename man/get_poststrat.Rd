@@ -4,7 +4,7 @@
 \alias{get_poststrat}
 \title{Formats a post-strat table from ACS and district-level data}
 \usage{
-get_poststrat(cleaned_acs, dist_data = NULL, model_ff)
+get_poststrat(cleaned_acs, dist_data = NULL, formula)
 }
 \arguments{
 \item{cleaned_acs}{An output of \link{get_acs_cces}. The count of people in
@@ -13,16 +13,16 @@ each cell must be under the variable \code{count}}
 \item{dist_data}{District-level (in this case congressional district-level) information
 to merge in}
 
-\item{model_ff}{the model formula used to fit the multilevel regression model.
-Currently only expects an binomial, of the brms form \code{y|trials(n) ~ x1 + x2 + (1|x3)}.
-Only the RHS will be used but the LHS is necessary.}
+\item{formula}{the model formula used to fit the multilevel regression model, with one
+term on the LHS: e.g. \code{y ~ x1 + x2 + (1|x3)}.
+Only the RHS will be used but the LHS is necessary for now.}
 }
 \description{
 Formats a post-strat table from ACS and district-level data
 }
 \examples{
 \dontrun{
- fm_brm <- yes | responses(n_cell) ~  age + gender + educ + pct_trump + (1|cd)
+ fm_brm <- response ~  age + gender + educ + pct_trump + (1|cd)
  acs_tab <- get_acs_cces(
               varlist = acscodes_age_sex_educ,
               varlab_df = acscodes_df,

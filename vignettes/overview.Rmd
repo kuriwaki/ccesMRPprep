@@ -47,11 +47,13 @@ ccc_std <- ccc_std_demographics(ccc_samp)
 
 ## **Step 3.** Define a Model Specification
 
-A formula represents the variables that are in the model, how they are interacted, and which variables are random effects. We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form
+A formula represents the variables that are in the model, how they are interacted, and which variables are random effects. We presume the formula will be used in brms. Currently we support binary outcomes. This can be set in the regression form
 
 ```{r}
-fm_brm <- yes | trials(n_responses) ~  age + gender + educ + pct_trump + (1|cd)
+fm_brm <- response ~  age + gender + educ + pct_trump + (1|cd)
 ```
+
+where `response` is a binary variable or a factor/character variable that can be coerced to one using `yesno_to_binary()`.
 
 A prior could be specified here as well, but this is not strictly necessary and can be defined when fitting the model.
 
@@ -77,13 +79,16 @@ We provide wrappers around the great [tidycensus](https://walker-data.com/tidyce
 
 ```{r}
 
- acs_tab <- get_acs_cces(
-              varlist = acscodes_age_sex_educ,
-              varlab_df = acscodes_df,
-             year = 2018)
+acs_tab <- get_acs_cces(
+  varlist = acscodes_age_sex_educ,
+  varlab_df = acscodes_df,
+  year = 2018)
 
- poststrat <-  get_poststrat(acs_tab, cd_info_2018, fm_brm)
- 
+poststrat <-  get_poststrat(
+  cleaned_acs = acs_tab, 
+  dist_data = cd_info_2018, 
+  formula = fm_brm)
+
  poststrat
 ```
 
