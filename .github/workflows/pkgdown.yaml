@@ -35,7 +35,7 @@ jobs:
           restore-keys: macOS-r-4.0-0-
 
       - name: "[Custom block] Add CENSUS API KEY"
-        run: echo "CENSUS_API_KEY = '{{ $secrets.CENSUS_API_KEY }}'" >> .Renviron
+        run: echo "CENSUS_API_KEY = '${{ secrets.CENSUS_API_KEY }}'" >> .Renviron
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
