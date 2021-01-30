@@ -78,6 +78,8 @@ ccc_samp_out
 We provide wrappers around the great [tidycensus](https://walker-data.com/tidycensus/) package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well. 
 
 ```{r}
+# only do this once, replacing the input with your census key
+tidycensus::census_api_key(Sys.getenv("CENSUS_API_KEY"))
 
 acs_tab <- get_acs_cces(
   varlist = acscodes_age_sex_educ,

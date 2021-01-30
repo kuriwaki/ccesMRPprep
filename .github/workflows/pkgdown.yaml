@@ -58,7 +58,6 @@ jobs:
           install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_dev("pkgdown")
-          tidycensus::census_api_key(Sys.getenv("CENSUS_API_KEY"))
         shell: Rscript {0}
 
       - name: Install package
