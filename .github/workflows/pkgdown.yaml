@@ -60,8 +60,10 @@ jobs:
       - name: Install package
         run: R CMD INSTALL .
 
+      - name: Add CENSUS API KEY
+        run: |
+          "Sys.setenv(CENSUS_API_KEY = '{{ $secrets.CENSUS_API_KEY }}')" >> ~ /.Renviron
+
       - name: Deploy package
         run: pkgdown::deploy_to_branch(new_process = FALSE)
-        with:
-          token: '${{ secrets.CENSUS_API_KEY }}'
         shell: Rscript {0}
