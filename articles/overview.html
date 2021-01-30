@@ -146,9 +146,10 @@
 <div id="step-3--define-a-model-specification" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-3--define-a-model-specification" class="anchor"></a><strong>Step 3.</strong> Define a Model Specification</h2>
-<p>A formula represents the variables that are in the model, how they are interacted, and which variables are random effects. We presume the formula will be used in brms. Currently we support binary outcomes. This can be modeled as a binomial, which in brms is of the form</p>
+<p>A formula represents the variables that are in the model, how they are interacted, and which variables are random effects. We presume the formula will be used in brms. Currently we support binary outcomes. This can be set in the regression form</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fm_brm</span> <span class="op">&lt;-</span> <span class="va">yes</span> <span class="op">|</span> <span class="fu">trials</span><span class="op">(</span><span class="va">n_responses</span><span class="op">)</span> <span class="op">~</span>  <span class="va">age</span> <span class="op">+</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">educ</span> <span class="op">+</span> <span class="va">pct_trump</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">cd</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">fm_brm</span> <span class="op">&lt;-</span> <span class="va">response</span> <span class="op">~</span>  <span class="va">age</span> <span class="op">+</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">educ</span> <span class="op">+</span> <span class="va">pct_trump</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">cd</span><span class="op">)</span></code></pre></div>
+<p>where <code>response</code> is a binary variable or a factor/character variable that can be coerced to one using <code><a href="../reference/yesno_to_binary.html">yesno_to_binary()</a></code>.</p>
 <p>A prior could be specified here as well, but this is not strictly necessary and can be defined when fitting the model.</p>
 </div>
 <div id="step-4--collapsing-the-cces-data" class="section level2">
@@ -184,15 +185,41 @@
 <div id="step-5--prepare-acs-data-and-poststratification-table" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-5--prepare-acs-data-and-poststratification-table" class="anchor"></a><strong>Step 5.</strong> Prepare ACS data and Poststratification Table</h2>
-<p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well/</p>
+<p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
- <span class="va">acs_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acs_cces.html">get_acs_cces</a></span><span class="op">(</span>
-              varlist <span class="op">=</span> <span class="va">acscodes_age_sex_educ</span>,
-              varlab_df <span class="op">=</span> <span class="va">acscodes_df</span>,
-             year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span>
+<code class="sourceCode R"><span class="co"># only do this once, replacing the input with your census key</span>
+<span class="fu">tidycensus</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidycensus/man/census_api_key.html">census_api_key</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"CENSUS_API_KEY"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; To install your API key for use in future sessions, run this function with `install = TRUE`.</span>
 
- <span class="va">poststrat</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/get_poststrat.html">get_poststrat</a></span><span class="op">(</span><span class="va">acs_tab</span>, <span class="va">cd_info_2018</span>, <span class="va">fm_brm</span><span class="op">)</span></code></pre></div>
+<span class="va">acs_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acs_cces.html">get_acs_cces</a></span><span class="op">(</span>
+  varlist <span class="op">=</span> <span class="va">acscodes_age_sex_educ</span>,
+  varlab_df <span class="op">=</span> <span class="va">acscodes_df</span>,
+  year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span>
+<span class="co">#&gt; The 1-year ACS provides data for geographies with populations of 65,000 and greater.</span>
+<span class="co">#&gt; Getting data from the 2018 1-year ACS</span>
+
+<span class="va">poststrat</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/get_poststrat.html">get_poststrat</a></span><span class="op">(</span>
+  cleaned_acs <span class="op">=</span> <span class="va">acs_tab</span>, 
+  dist_data <span class="op">=</span> <span class="va">cd_info_2018</span>, 
+  formula <span class="op">=</span> <span class="va">fm_brm</span><span class="op">)</span>
+<span class="co">#&gt; Joining, by = c("year", "cd")</span>
+
+ <span class="va">poststrat</span>
+<span class="co">#&gt; # A tibble: 17,318 x 6</span>
+<span class="co">#&gt;    age            gender educ       pct_trump cd    count</span>
+<span class="co">#&gt;    &lt;fct&gt;          &lt;fct&gt;  &lt;fct&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 18 to 24 years Male   HS or Less     0.049 NY-15 21859</span>
+<span class="co">#&gt;  2 18 to 24 years Male   HS or Less     0.054 NY-13 15491</span>
+<span class="co">#&gt;  3 18 to 24 years Male   HS or Less     0.068 CA-13 13738</span>
+<span class="co">#&gt;  4 18 to 24 years Male   HS or Less     0.07  PA-03 14171</span>
+<span class="co">#&gt;  5 18 to 24 years Male   HS or Less     0.087 CA-12  4893</span>
+<span class="co">#&gt;  6 18 to 24 years Male   HS or Less     0.092 IL-07 15820</span>
+<span class="co">#&gt;  7 18 to 24 years Male   HS or Less     0.096 CA-37 13440</span>
+<span class="co">#&gt;  8 18 to 24 years Male   HS or Less     0.104 NY-07 12768</span>
+<span class="co">#&gt;  9 18 to 24 years Male   HS or Less     0.107 CA-34 19439</span>
+<span class="co">#&gt; 10 18 to 24 years Male   HS or Less     0.119 GA-05 16741</span>
+<span class="co">#&gt; # … with 17,308 more rows</span></code></pre></div>
+<p>You need to get a API key from the census website to run this command.</p>
 </div>
 <div id="final-output" class="section level2">
 <h2 class="hasAnchor">
