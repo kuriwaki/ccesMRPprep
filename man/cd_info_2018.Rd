@@ -3,9 +3,11 @@
 \docType{data}
 \name{cd_info_2018}
 \alias{cd_info_2018}
-\title{Sample district level data}
+\alias{elec_NY}
+\title{Congressional District level information}
 \format{
-A dataframe with the 435 Congressional Districts, one row per cd.
+\code{cd_info_2018} is a dataframe with the 435 Congressional
+Districts, one row per cd.
 \describe{
 \item{year}{The year for the district line. A congressional district's
 actual geography can change year to year, and significantly so in different
@@ -23,6 +25,8 @@ See Source for full citation.}
 \item{largest_place}{The largest place in the district given by Daily Kos. Multiple districts may
 have the largest place.}
 }
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 27 rows and 6 columns.
 }
 \source{
 The Daily Kos Elections naming guide to the nation's congressional districts.
@@ -33,6 +37,8 @@ Daily Kos, "2008, 2012, & 2016 results for districts used in 2018."
 }
 \usage{
 cd_info_2018
+
+elec_NY
 }
 \description{
 Some of the most consequential variables to include in MRP are at the
@@ -41,5 +47,6 @@ is collected by Daily Kos.
 }
 \examples{
 head(cd_info_2018)
+head(elec_NY)
 }
 \keyword{datasets}

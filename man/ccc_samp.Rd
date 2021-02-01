@@ -30,7 +30,7 @@ for how it is and should be standardized.}
 }
 }
 \source{
-Kuriwaki, Shiro, 2018, "Cumulative CCES Common Content (2006-2018)",
+Kuriwaki, Shiro, 2018, "Cumulative CCES Common Content (2006-2019)",
 \url{https://doi.org/10.7910/DVN/II2DB6}, Harvard Dataverse
 }
 \usage{
