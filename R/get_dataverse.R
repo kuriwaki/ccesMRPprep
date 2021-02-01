@@ -34,7 +34,7 @@
 #' @importFrom tibble add_column
 #' @importFrom magrittr `%>%`
 #' @importFrom rlang sym `!!` .data
-#' @importFrom dataverse get_file
+#' @importFrom dataverse get_file get_dataframe_by_name
 #'
 #' @examples
 #'
