@@ -31,7 +31,7 @@
 #'   \item{voted_pres_16}{Self-reported vote choice for 2016}
 #'   \item{economy_retro}{Opinion on retrospective economy}
 #' }
-#' @source Kuriwaki, Shiro, 2018, "Cumulative CCES Common Content (2006-2018)",
+#' @source Kuriwaki, Shiro, 2018, "Cumulative CCES Common Content (2006-2019)",
 #' <https://doi.org/10.7910/DVN/II2DB6>, Harvard Dataverse
 #'
 #' @examples
@@ -66,3 +66,15 @@
 #' cc18_samp
 #'
 "cc18_samp"
+
+
+#' Sample 2018 New York CCES
+#'
+#' Unlike `cc18_samp`, this dataset is not a sample and takes all the respondents
+#' from New York in the 2018 CCES. It has `r nrow(cc18_NY)` rows with `r ncol(cc18_NY)`
+#' columns.
+#'
+#' @source Kuriwaki, Shiro, 2018, "Cumulative CCES Common Content (2006-2019)",
+#' <https://doi.org/10.7910/DVN/II2DB6>, Harvard Dataverse
+#'
+"cc18_NY"

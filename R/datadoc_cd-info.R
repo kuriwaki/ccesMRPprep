@@ -1,11 +1,12 @@
-#' Sample district level data
+#' Congressional District level information
 #'
 #'
 #' Some of the most consequential variables to include in MRP are at the
 #' district-level. We include one such data for congressional districts. All data
 #' is collected by Daily Kos.
 #'
-#' @format A dataframe with the `r nrow(cd_info_2018)` Congressional Districts, one row per cd.
+#' @format `cd_info_2018` is a dataframe with the `r nrow(cd_info_2018)` Congressional
+#'  Districts, one row per cd.
 #'  \describe{
 #'    \item{year}{The year for the district line. A congressional district's
 #'    actual geography can change year to year, and significantly so in different
@@ -37,4 +38,9 @@
 #'
 #' @examples
 #' head(cd_info_2018)
+#' head(elec_NY)
 "cd_info_2018"
+
+
+#' @rdname cd_info_2018
+"elec_NY"
