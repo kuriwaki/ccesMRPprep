@@ -1,5 +1,8 @@
 # ccesMRPprep 0.1.8++
 
+* Introduce `impute_cells()`. 
+* Add New York data as a third sample
+
 # ccesMRPprep 0.1.7
 
 * Rename `get_cces_dv` to  `get_cces_dataverse`

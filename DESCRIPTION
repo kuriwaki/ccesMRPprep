@@ -20,6 +20,8 @@ Imports:
     magrittr,
     fs,
     rlang,
+    Formula,
+    emlogit,
     dplyr (>= 1.0.0),
     tidyr,
     haven (>= 2.1.0),
@@ -29,6 +31,8 @@ Imports:
     dataverse (>= 0.3.0),
     tidycensus,
     purrr
+Remotes:
+    soichiroy/emlogit
 RoxygenNote: 7.1.1
 Language: en-US
 Roxygen: list(markdown = TRUE)

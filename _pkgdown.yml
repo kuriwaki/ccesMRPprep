@@ -40,7 +40,10 @@ reference:
 - contents:
   - ccc_samp
   - cc18_samp
+  - cc18_NY
+  - acs_NY
   - cd_info_2018
+  - elec_NY
   - questions_samp
 - title: Data recoding and cleaning
   desc: Functions that standardize and clean variable names and formats
@@ -54,6 +57,10 @@ reference:
   desc: Wrangling cleaned data for apporpriate modeling
 - contents:
   - build_counts
+- title: Advanced
+  desc: Additional modeling functions in preparation
+- contents:
+  - impute_cells
 
 
 articles:
