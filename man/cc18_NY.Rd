@@ -5,7 +5,7 @@
 \alias{cc18_NY}
 \title{Sample 2018 New York CCES}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 3455 rows and 23 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 3455 rows and 24 columns.
 }
 \source{
 Kuriwaki, Shiro, 2018, "Cumulative CCES Common Content (2006-2019)",
@@ -16,7 +16,7 @@ cc18_NY
 }
 \description{
 Unlike \code{cc18_samp}, this dataset is not a sample and takes all the respondents
-from New York in the 2018 CCES. It has 3455 rows with 23
+from New York in the 2018 CCES. It has 3455 rows with 24
 columns.
 }
 \keyword{datasets}
