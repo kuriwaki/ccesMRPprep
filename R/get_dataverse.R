@@ -89,7 +89,7 @@ get_cces_dataverse <- function(name = "cumulative",
     fun <- readr::read_rds
 
   # read tempfile -----
-  cces_raw <- get_dataframe_by_name(file = glue("{y_info$filename}"),
+  cces_raw <- get_dataframe_by_name(filename = glue("{y_info$filename}"),
                                     dataset = glue("doi:{doi}"),
                                     server = svr,
                                     original = TRUE,
