@@ -10,3 +10,5 @@
 ^mwe_slurm.R$
 
 ^simulate.R$
+^\.ccache$
+^tic\.R$
