@@ -99,8 +99,7 @@ jobs:
 
       - name: "[Custom block] [Linux] Install spatial libraries"
         if: runner.os == 'Linux'
-        run: |
-          apt-get install libudunits2-dev libgdal-dev libproj-dev libgeos-dev
+        run: sudo apt-get install libudunits2-dev libgdal-dev libproj-dev libgeos-dev
 
       - name: "[Custom block] Add CENSUS API KEY"
         run: echo "CENSUS_API_KEY = '${{ secrets.CENSUS_API_KEY }}'" >> .Renviron
