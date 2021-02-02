@@ -4,7 +4,7 @@ author: "Shiro Kuriwaki"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Question Metadata}
+  %\VignetteIndexEntry{Deriving Variables from Question Metadata}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

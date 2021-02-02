@@ -1,5 +1,5 @@
 ---
-title: "ACS Tables to Use for CCES and MRP"
+title: "ACS Tables for CCES and MRP"
 author: "Shiro Kuriwaki"
 output: rmarkdown::html_vignette
 vignette: >
