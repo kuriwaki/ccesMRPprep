@@ -48,12 +48,14 @@ is the main output of the multinomial model.
 }
 \description{
 Imputes the counts of a joint distribution of count variables for small areas
-based on microdata. In this setup, the population distribution table (\code{poptable})
+based on microdata. See Details.
+}
+\details{
+In this setup, the population distribution table (\code{poptable})
 has the joint distribution of \verb{(A, X_\{1\}, ..., X_\{K - 1\})} categorical variables where
 \code{A} denotes a categorical small area, \code{X}s denote categorical covariates, and
 the missing covariate is \verb{X_\{K\}}.
-}
-\details{
+
 Now, the survey data (\code{microdata}) has a sample joint distribution of
 \verb{(X_\{1\}, .., X_\{K - 1\}, X_\{K\})} categorical variables but the sample size is too small
 for small areas. Therefore, the function models a multinomial outcome model roughly of the

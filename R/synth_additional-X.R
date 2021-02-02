@@ -1,7 +1,11 @@
 #' Model synthetic joint distribution of categorical variables
 #'
 #' Imputes the counts of a joint distribution of count variables for small areas
-#' based on microdata. In this setup, the population distribution table (`poptable`)
+#' based on microdata. See Details.
+#'
+#' @details
+#'
+#' In this setup, the population distribution table (`poptable`)
 #' has the joint distribution of `(A, X_{1}, ..., X_{K - 1})` categorical variables where
 #' `A` denotes a categorical small area, `X`s denote categorical covariates, and
 #' the missing covariate is `X_{K}`.
