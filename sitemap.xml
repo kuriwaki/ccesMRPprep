@@ -55,9 +55,6 @@
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/get_poststrat.html</loc>
   </url>
   <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/impute_cells.html</loc>
-  </url>
-  <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/namevalue.html</loc>
   </url>
   <url>
@@ -65,6 +62,9 @@
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/std_acs_cdformat.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/synth_mlogit.html</loc>
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/yesno_to_binary.html</loc>
