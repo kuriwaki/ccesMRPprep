@@ -97,6 +97,11 @@ jobs:
         if: runner.os == 'Linux' && matrix.config.pkgdown != ''
         run: sudo apt install libharfbuzz-dev libfribidi-dev
 
+      - name: "[Custom block] [Linux] Install spatial libraries"
+        if: runner.os == 'Linux'
+        run: |
+          brew install libudunits2-dev libgdal-dev libproj-dev libgeos-dev
+
       - name: "[Custom block] Add CENSUS API KEY"
         run: echo "CENSUS_API_KEY = '${{ secrets.CENSUS_API_KEY }}'" >> .Renviron
 
