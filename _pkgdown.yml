@@ -60,7 +60,7 @@ reference:
 - title: Advanced
   desc: Additional modeling functions in preparation
 - contents:
-  - impute_cells
+  - synth_mlogit
 
 
 articles:
