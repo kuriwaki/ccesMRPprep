@@ -2,7 +2,7 @@
 % Please edit documentation in R/synth_additional-X.R
 \name{synth_mlogit}
 \alias{synth_mlogit}
-\title{Impute joint distribution of categorical variables}
+\title{Model synthetic joint distribution of categorical variables}
 \source{
 Soichiro Yamauchi (2021). emlogit: Implementing the ECM algorithm for multinomial logit
 model. R package version 0.1.1. \url{https://github.com/soichiroy/emlogit}
@@ -29,6 +29,23 @@ all variables in the RHS of \code{formula}, as well as the variables specified i
 \item{count_var}{A character variable that specifies which variable in \code{poptable}
 indicates the count}
 }
+\value{
+A dataframe with a similar format as the \code{poptarget} table
+but with rows expanded to serve as a joint distribution. In general,
+if the variable of interest has \code{L} values, the final dataset will have
+\code{L} times more rows than \code{poptarget}. The data will have additional variables:
+\itemize{
+\item \code{n_aggregate}: The sum of counts known in the aggregate. i.e., the number of
+trials the multinomial will consider. This is the sum of the original
+\code{count} variables.
+\item The outcome variable of interest. For example if the LHS of the formula
+was \code{party_id}, then there would be a column called \code{party_id} containing the
+values of that variable in long form.
+\item \code{pr_pred}: The predicted probability of taking the value of the outcome. This
+is the main output of the multinomial model.
+\item \code{count}: A new count variable. Simply the product of \code{n_aggregate} and \code{pr_pred}.
+}
+}
 \description{
 Imputes the counts of a joint distribution of count variables for small areas
 based on microdata. In this setup, the population distribution table (\code{poptable})
@@ -42,6 +59,10 @@ Now, the survey data (\code{microdata}) has a sample joint distribution of
 for small areas. Therefore, the function models a multinomial outcome model roughly of the
 form \verb{X_\{K\} ~ X_\{1\} + ... X_\{K\}} and predicts onto \code{poptable} to estimate the
 joint distribution of \verb{(A, X_\{1\}, .., X_\{K\})}
+
+Currently, this function does not support post-stratifiation based on a known aggregate
+distribution -- that is, further adjusting the probabilities based on
+a known population distribution (see e.g. Leeman and Wasserfallen AJPS \url{https://doi.org/10.1111/ajps.12319})
 }
 \examples{
  library(dplyr)
