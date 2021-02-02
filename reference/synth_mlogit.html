@@ -47,10 +47,7 @@
 
 <meta property="og:title" content="Model synthetic joint distribution of categorical variables — synth_mlogit" />
 <meta property="og:description" content="Imputes the counts of a joint distribution of count variables for small areas
-based on microdata. In this setup, the population distribution table (poptable)
-has the joint distribution of (A, X_{1}, ..., X_{K - 1}) categorical variables where
-A denotes a categorical small area, Xs denote categorical covariates, and
-the missing covariate is X_{K}." />
+based on microdata. See Details." />
 
 
 
@@ -111,7 +108,7 @@ the missing covariate is X_{K}." />
       <a href="../articles/derived.html">Deriving Variables from Question Metadata</a>
     </li>
     <li>
-      <a href="../articles/acs.html">ACS Tables to Use for CCES and MRP</a>
+      <a href="../articles/acs.html">ACS Tables for CCES and MRP</a>
     </li>
     <li>
       <a href="../articles/cps.html">CPS Overview</a>
@@ -155,10 +152,7 @@ the missing covariate is X_{K}." />
 
     <div class="ref-description">
     <p>Imputes the counts of a joint distribution of count variables for small areas
-based on microdata. In this setup, the population distribution table (<code>poptable</code>)
-has the joint distribution of <code>(A, X_{1}, ..., X_{K - 1})</code> categorical variables where
-<code>A</code> denotes a categorical small area, <code>X</code>s denote categorical covariates, and
-the missing covariate is <code>X_{K}</code>.</p>
+based on microdata. See Details.</p>
     </div>
 
     <pre class="usage"><span class='fu'>synth_mlogit</span><span class='op'>(</span><span class='va'>formula</span>, <span class='va'>microdata</span>, <span class='va'>poptable</span>, <span class='va'>area_var</span>, count_var <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span></pre>
@@ -218,7 +212,11 @@ is the main output of the multinomial model.</p></li>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Now, the survey data (<code>microdata</code>) has a sample joint distribution of
+    <p>In this setup, the population distribution table (<code>poptable</code>)
+has the joint distribution of <code>(A, X_{1}, ..., X_{K - 1})</code> categorical variables where
+<code>A</code> denotes a categorical small area, <code>X</code>s denote categorical covariates, and
+the missing covariate is <code>X_{K}</code>.</p>
+<p>Now, the survey data (<code>microdata</code>) has a sample joint distribution of
 <code>(X_{1}, .., X_{K - 1}, X_{K})</code> categorical variables but the sample size is too small
 for small areas. Therefore, the function models a multinomial outcome model roughly of the
 form <code>X_{K} ~ X_{1} + ... X_{K}</code> and predicts onto <code>poptable</code> to estimate the
