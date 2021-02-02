@@ -3,6 +3,10 @@ title: "Portable Routines for Preparing CCES and ACS data for MRP"
 output: github_document
 ---
 
+<!-- badges: start -->
+[![tic](https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=master)](https://github.com/kuriwaki/ccesMRPprep/actions)
+<!-- badges: end -->
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```

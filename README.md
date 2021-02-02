@@ -1,9 +1,14 @@
 Portable Routines for Preparing CCES and ACS data for MRP
 ================
 
+<!-- badges: start -->
+
+[![tic](https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=master)](https://github.com/kuriwaki/ccesMRPprep/actions)
+<!-- badges: end -->
+
 Cite as:
 
-  - Shiro Kuriwaki (2020). ccesMRPprep: Functions and Data to Prepare
+-   Shiro Kuriwaki (2020). ccesMRPprep: Functions and Data to Prepare
     CCES data for MRP. R package.
     <https://www.github.com/kuriwaki/ccesMRPprep>
 
@@ -68,7 +73,7 @@ Function-specific pages will detail the documentation used in each
 function. Here is a manual compilaiton:
 
 | Information                                 | Source                         | Citation and URL (if public)                                                                                                                                                                      |
-| :------------------------------------------ | :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|:--------------------------------------------|:-------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | CCES Covariates                             | Cumulative CCES                | Shiro Kuriwaki, “Cumulative CCES Common Content”. <https://doi.org/10.7910/DVN/II2DB6>                                                                                                            |
 | CCES Outcomes                               | Each Year’s CCES               | Stephen Ansolabehere, Sam Luks, and Brian Schaffner. “CCES Common Content” (varies by year). <https://cces.gov.harvard.edu/>                                                                      |
 | Poststratification                          | Census Bureau ACS              | American Community Survey. Extracted via [tidycensus package](https://github.com/walkerke/tidycensus). See [ACS vignette](https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html)            |
@@ -78,11 +83,11 @@ function. Here is a manual compilaiton:
 
 ## Related Packages
 
-  - [kuriwaki/rcces](https://github.com/kuriwaki/rcces) has another set
+-   [kuriwaki/rcces](https://github.com/kuriwaki/rcces) has another set
     of CCES related functions, but these are either my own personal
     functions in development (not for production), or specific to
     non-MRP projects.
-  - [kuriwaki/CCES\_district-opinion](https://github.com/kuriwaki/CCES_district-opinion)
+-   [kuriwaki/CCES\_district-opinion](https://github.com/kuriwaki/CCES_district-opinion)
     is a private package that uses (among others) this package to
     process large CCES data for MRP at scale.
 
