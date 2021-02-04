@@ -4,7 +4,7 @@
 \alias{synth_prod}
 \title{Model synthetic joint distribution with simple product}
 \usage{
-synth_prod(formula, poptable, rake_to, area_var, count_var = "count")
+synth_prod(formula, poptable, newtable, area_var, count_var = "count")
 }
 \arguments{
 \item{formula}{A representation of the aggregate imputation or "outcome" model,
@@ -14,7 +14,7 @@ of the form \verb{X_\{K\} ~ X_1 + ... X_\{K - 1\}}}
 all variables in the RHS of \code{formula}, as well as the variables specified in
 \code{area_var} and \code{count_var} below.}
 
-\item{rake_to}{A dataset that contains marginal counts or proportions. Will be
+\item{newtable}{A dataset that contains marginal counts or proportions. Will be
 collapsed internally to get simple proportions.}
 
 \item{area_var}{A character vector of the area of interest.}
@@ -42,7 +42,7 @@ race_agg <- count(acs_NY, cd, race, wt = count, name = "count")
 
 pop_prod <- synth_prod(race ~ age + female,
                        poptable = acs_NY,
-                       rake_to = race_agg,
+                       newtable = race_agg,
                        area_var = "cd")
 
 # In this example, we know the true joint. Does it match?

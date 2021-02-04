@@ -1,11 +1,11 @@
 # ccesMRPprep 0.1.8++
 
-* Introduce `synth_prod()` and `synth_mlogit()`. 
-* Add New York data as a third sample
+* Introduce `synth_prod()`, `synth_mlogit()`, `synth_smoothfix()`
+* Add New York data as a third sample (`acs_NY`, `cc18_NY`, `elec_NY`)
 
 # ccesMRPprep 0.1.7
 
-* Rename `get_cces_dv` to  `get_cces_dataverse`
+* Rename `get_cces_dv` to  `get_cces_dataverse()`
 * Use CRAN version of dataverse (#3)
 * Change formula notation in `build_counts` and `cces_join_slim` to (y ~ x) instead of `yes | trials(n_response)`
 

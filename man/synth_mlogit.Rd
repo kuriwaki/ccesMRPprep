@@ -2,6 +2,7 @@
 % Please edit documentation in R/synth_additional-X.R
 \name{synth_mlogit}
 \alias{synth_mlogit}
+\alias{synth_smoothfix}
 \title{Model synthetic joint distribution with multinomial logit}
 \source{
 Soichiro Yamauchi (2021). emlogit: Implementing the ECM algorithm for multinomial logit
@@ -12,6 +13,15 @@ Working Paper. \url{https://github.com/Catalist-LLC/unemployment}
 }
 \usage{
 synth_mlogit(formula, microdata, poptable, area_var, count_var = "count")
+
+synth_smoothfix(
+  formula,
+  microdata,
+  poptable,
+  fix_to,
+  area_var,
+  count_var = "count"
+)
 }
 \arguments{
 \item{formula}{A representation of the aggregate imputation or "outcome" model,
@@ -48,7 +58,8 @@ is the main output of the multinomial model.
 }
 \description{
 Imputes the counts of a joint distribution of count variables for small areas
-based on microdata. See Details.
+based on microdata. \code{synth_smoothfix()} is basically \code{synth_mlogit()()} which is then corrected by
+if one knows the marginals.See Details.
 }
 \details{
 In this setup, the population distribution table (\code{poptable})
@@ -72,16 +83,16 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS \url{http
  # Impute the joint distribution of party ID with race, sex, and age, using
  # survey data in NY.
 
- imputed_acs <- synth_mlogit(pid3 ~ race + age + female,
-                             microdata = cc18_NY,
-                             poptable = acs_NY,
-                             area_var = "cd")
+ synth_acs <- synth_mlogit(pid3 ~ race + age + female,
+                           microdata = cc18_NY,
+                           poptable = acs_NY,
+                           area_var = "cd")
 
  # original (27 districts x 2 sex x 5 age x 6 race categories)
  count(acs_NY, cd, female, age, race, wt = count)
 
  # new, modeled (original x 5 party categories)
- imputed_acs
+ synth_acs
 
  # See the data elec_NY to see if these numbers look reasonable.
 
@@ -95,4 +106,30 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS \url{http
               area_var = "cd")
 }
 
+
+# synth_mlogit WITH MARGINS CORRECTION -----
+
+library(dplyr)
+# suppose we want know the distribution of (age x female) and we know the
+# distribution of (race), by CD, but we don't know the joint of the two.
+
+race_agg <- count(acs_NY, cd, race, wt = count, name = "count")
+pop_syn <- synth_smoothfix(race ~ age + female,
+                   microdata = cc18_NY,
+                   fix_to = race_agg,
+                   poptable = acs_NY,
+                   area_var = "cd")
+
+
+
+# In this example, we know the true joint. Does it match?
+pop_val <- left_join(pop_syn,
+                     count(acs_NY,  cd, age, female, race, wt = count, name = "count"),
+                     by = c("cd", "age", "female", "race"),
+                     suffix = c("_est", "_truth"))
+
+# AOC's district in the bronx
+pop_val \%>\%
+  filter(cd == "NY-14", age == "35 to 44 years", female == 0) \%>\%
+  select(cd, race, count_est, count_truth)
 }
