@@ -57,8 +57,8 @@ reference:
   desc: Wrangling cleaned data for apporpriate modeling
   contents:
    - build_counts
-- title: Advanced
-  desc: Additional modeling functions in preparation
+- title: Synthetic joint distributions
+  desc: Estimating poststratfication tables with partial data
   contents:
     - starts_with("synth_")
     - collapse_table

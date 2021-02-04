@@ -5,6 +5,10 @@
 \alias{synth_smoothfix}
 \title{Model synthetic joint distribution with multinomial logit}
 \source{
+Jonathan P. Kastellec, Jeffrey R. Lax, Michael Malecki, and Justin H.
+Phillips (2015). Polarizing the electoral connection: Partisan representation in
+Supreme Court confirmation politics. \emph{The Journal of Politics} 77:3 \url{http://dx.doi.org/10.1086/681261}
+
 Soichiro Yamauchi (2021). emlogit: Implementing the ECM algorithm for multinomial logit
 model. R package version 0.1.1. \url{https://github.com/soichiroy/emlogit}
 

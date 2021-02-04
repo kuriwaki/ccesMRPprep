@@ -218,6 +218,10 @@ synth_prod <- function(formula,
 #' @importFrom stats complete.cases
 #'
 #' @source
+#'  Jonathan P. Kastellec, Jeffrey R. Lax, Michael Malecki, and Justin H.
+#'   Phillips (2015). Polarizing the electoral connection: Partisan representation in
+#'   Supreme Court confirmation politics. _The Journal of Politics_ 77:3 <http://dx.doi.org/10.1086/681261>
+#'
 #'  Soichiro Yamauchi (2021). emlogit: Implementing the ECM algorithm for multinomial logit
 #'   model. R package version 0.1.1. <https://github.com/soichiroy/emlogit>
 #'
