@@ -40,7 +40,13 @@
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/cd_info_2018.html</loc>
   </url>
   <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/collapse_table.html</loc>
+  </url>
+  <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/cps_onewaytabs.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/formula_parts.html</loc>
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/get_acs_cces.html</loc>
@@ -65,6 +71,9 @@
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/synth_mlogit.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/synth_prod.html</loc>
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/yesno_to_binary.html</loc>

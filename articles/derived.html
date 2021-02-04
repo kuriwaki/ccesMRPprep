@@ -102,7 +102,7 @@
       <h1 data-toc-skip>Deriving Variables from Question Metadata</h1>
                         <h4 class="author">Shiro Kuriwaki</h4>
             
-            <h4 class="date">2021-02-02</h4>
+            <h4 class="date">2021-02-04</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/master/vignettes/derived.Rmd"><code>vignettes/derived.Rmd</code></a></small>
       <div class="hidden name"><code>derived.Rmd</code></div>
@@ -179,9 +179,8 @@
 <code class="sourceCode R"><span class="va">gov_approval_fct</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">CC18_308d</span> <span class="op">&lt;=</span> <span class="st">"Somewhat approve"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span>
-<span class="co">#&gt; Warning: Problem with `mutate()` input `outcome`.</span>
-<span class="co">#&gt; ℹ '&lt;=' not meaningful for factors</span>
-<span class="co">#&gt; ℹ Input `outcome` is `CC18_308d &lt;= "Somewhat approve"`.</span>
+<span class="co">#&gt; Warning in Ops.factor(CC18_308d, "Somewhat approve"): '&lt;=' not meaningful for</span>
+<span class="co">#&gt; factors</span>
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;   outcome     n</span>
 <span class="co">#&gt; * &lt;lgl&gt;   &lt;int&gt;</span>

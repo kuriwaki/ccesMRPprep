@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • ccesMRPprep</title>
+<title>Decompose formula into parts useful for subsequent analyses — formula_parts • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,9 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Decompose formula into parts useful for subsequent analyses — formula_parts" />
+<meta property="og:description" content="Outputs a list. You can use base::list2env on the output to release
+the items of the list on your environment." />
 
 
 
@@ -64,7 +66,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -143,88 +145,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Decompose formula into parts useful for subsequent analyses</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/synth_additional-X.R'><code>R/synth_additional-X.R</code></a></small>
+    <div class="hidden name"><code>formula_parts.Rd</code></div>
     </div>
 
-    <div id="ccesmrpprep-018" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.8">
-<a href="#ccesmrpprep-018" class="anchor"></a>ccesMRPprep 0.1.8++</h1>
-<ul>
-<li>Introduce <code><a href="../reference/synth_prod.html">synth_prod()</a></code>, <code><a href="../reference/synth_mlogit.html">synth_mlogit()</a></code>, <code><a href="../reference/synth_mlogit.html">synth_smoothfix()</a></code>
-</li>
-<li>Add New York data as a third sample (<code>acs_NY</code>, <code>cc18_NY</code>, <code>elec_NY</code>)</li>
-</ul>
-</div>
-    <div id="ccesmrpprep-017" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.7">
-<a href="#ccesmrpprep-017" class="anchor"></a>ccesMRPprep 0.1.7</h1>
-<ul>
-<li>Rename <code>get_cces_dv</code> to <code><a href="../reference/get_cces_dataverse.html">get_cces_dataverse()</a></code>
-</li>
-<li>Use CRAN version of dataverse (<a href='http://github.com/kuriwaki/ccesMRPprep/issues/3'>#3</a>)</li>
-<li>Change formula notation in <code>build_counts</code> and <code>cces_join_slim</code> to (y ~ x) instead of <code>yes | trials(n_response)</code>
-</li>
-</ul>
-</div>
-    <div id="ccesmrpprep-016" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.6">
-<a href="#ccesmrpprep-016" class="anchor"></a>ccesMRPprep 0.1.6</h1>
-<ul>
-<li>Update <code>cces_dv_ids</code> link to new Dataverse versions (1ac26f993aa88e343ad686175d885c88f393e3ca)</li>
-<li>Make Native American a proper category (1f6d8d0b08d5b2e5afb196150b8f79cc54209957)</li>
-<li>Add a CPS vignette (c64528ee96f136b592c128e7424eab2bea0e9fc8)</li>
-</ul>
-</div>
-    <div id="ccesmrpprep-015" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.5">
-<a href="#ccesmrpprep-015" class="anchor"></a>ccesMRPprep 0.1.5</h1>
-<ul>
-<li>Change default to ACS-1yr instead of ACS-5yr, since the Census ACS-5 yr should not be used if we want to prioritize recent values (ad30b4c6e181833801ab0604da69849e493e7c57). I guess ACS-5yrs do not up weight more recent years.</li>
-<li>Use Crunch terminology of names and values for the labels (ce08f874d211bcc89c9ad9a379b039144d50dbba)</li>
-</ul>
-</div>
-    <div id="ccesmrpprep-014" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.4">
-<a href="#ccesmrpprep-014" class="anchor"></a>ccesMRPprep 0.1.4</h1>
-<ul>
-<li>allow for different names and additional variables in count, get_cces_question, cces_join_slim (a59ad9b105255927365cd59162fc1a4ba4ec1188, a59ad9b105255927365cd59162fc1a4ba4ec1188)</li>
-</ul>
-</div>
-    <div id="ccesmrpprep-013" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.3">
-<a href="#ccesmrpprep-013" class="anchor"></a>ccesMRPprep 0.1.3</h1>
-<ul>
-<li>Change default so that age gets replaced to bins in <code>ccc_std_demographics</code>
-</li>
-<li>treat Don’t knows as NA in <code>yesno_to_binary</code>
-</li>
-</ul>
-</div>
-    <div id="ccesmrpprep-012" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.2">
-<a href="#ccesmrpprep-012" class="anchor"></a>ccesMRPprep 0.1.2</h1>
-<ul>
-<li>Sample CCES 2018</li>
-<li>Derived Variables Vignette</li>
-<li>More sample questions</li>
-</ul>
-</div>
-    <div id="ccesmrpprep-011" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.1">
-<a href="#ccesmrpprep-011" class="anchor"></a>ccesMRPprep 0.1.1</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Outputs a list. You can use <code><a href='https://rdrr.io/r/base/list2env.html'>base::list2env</a></code> on the output to release
+the items of the list on your environment.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>formula_parts</span><span class='op'>(</span><span class='va'>formula</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>formula</th>
+      <td><p>A representation of the aggregate imputation or "outcome" model,
+of the form <code>X_{K} ~ X_1 + ... X_{K - 1}</code></p></td>
+    </tr>
+    </table>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 
