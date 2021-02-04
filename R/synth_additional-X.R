@@ -318,6 +318,10 @@ synth_mlogit <- function(formula,
 
 #' @rdname synth_mlogit
 #'
+#' @param fix_to A dataset with only marginal counts or proportions of the outcome
+#'  in question, by each area. Proportions will be corrected so that the margins
+#'  of the synthetic joint will match these, with a simple ratio.
+#'
 #' @examples
 #'
 #' # synth_mlogit WITH MARGINS CORRECTION -----

@@ -38,6 +38,10 @@ all variables in the RHS of \code{formula}, as well as the variables specified i
 
 \item{count_var}{A character variable that specifies which variable in \code{poptable}
 indicates the count}
+
+\item{fix_to}{A dataset with only marginal counts or proportions of the outcome
+in question, by each area. Proportions will be corrected so that the margins
+of the synthetic joint will match these, with a simple ratio.}
 }
 \value{
 A dataframe with a similar format as the \code{poptarget} table
