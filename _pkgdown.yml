@@ -60,7 +60,8 @@ reference:
 - title: Advanced
   desc: Additional modeling functions in preparation
 - contents:
-  - synth_mlogit
+  - starts_with("synth_")
+  - collapse_table
 
 
 articles:

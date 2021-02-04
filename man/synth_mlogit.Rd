@@ -2,7 +2,7 @@
 % Please edit documentation in R/synth_additional-X.R
 \name{synth_mlogit}
 \alias{synth_mlogit}
-\title{Model synthetic joint distribution of categorical variables}
+\title{Model synthetic joint distribution with multinomial logit}
 \source{
 Soichiro Yamauchi (2021). emlogit: Implementing the ECM algorithm for multinomial logit
 model. R package version 0.1.1. \url{https://github.com/soichiroy/emlogit}

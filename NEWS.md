@@ -1,6 +1,6 @@
 # ccesMRPprep 0.1.8++
 
-* Introduce `impute_cells()`. 
+* Introduce `synth_prod()` and `synth_mlogit()`. 
 * Add New York data as a third sample
 
 # ccesMRPprep 0.1.7
