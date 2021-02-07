@@ -10,7 +10,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -18,16 +17,20 @@ knitr::opts_chunk$set(
 )
 ```
 
-
 ```{r setup, message = FALSE}
 library(ccesMRPprep)
 library(tidyverse)
 ```
 
+| Type                   | Functions | Examples |
+|------------------------|-----------|----------|
+| Use Population Margins | `synth_prod()` | Leemann and Wasserfallen (2017) |
+| Use Microdata          | `synth_mlogit()` | Kastellec et al. (2015)|
+| Combine both           | `synth_smoothfix()` | Ghitza and Steiz (2020) |
 
-## Estimating the Synthetic Joint
+## Validation of Multiple Methods
 
-We provide a simple set of functions to implement this. We extend the ACS table assisted by a survey model using a function called `synth_mlogit()`. 
+We provide a simple set of functions to implement this. We extend the ACS table assisted by a survey model using a function called `synth_mlogit()`.
 
 ```{r}
 acs_syn_mlogit <- synth_mlogit(race ~ female + age,
@@ -36,8 +39,7 @@ acs_syn_mlogit <- synth_mlogit(race ~ female + age,
                                area_var = "cd")
 ```
 
-
-The ccesMRPprep package provide two other approaches to estimating the joint -- these incorporate another source of information, which is the margins that are available. 
+The ccesMRPprep package provide two other approaches to estimating the joint -- these incorporate another source of information, which is the margins that are available.
 
 ```{r}
 race_margins <- collapse_table(acs_NY, area_var = "cd", X_vars = "race", 
@@ -54,7 +56,7 @@ acs_syn_prod <- synth_prod(race ~ female + age,
                            area_var = "cd")
 ```
 
-and another is to first comibine the survey modeling then fix _those_ margins to the known population margins. 
+and another is to first comibine the survey modeling then fix *those* margins to the known population margins.
 
 ```{r}
 acs_syn_fix <- synth_smoothfix(race ~ female + age, 
@@ -64,7 +66,7 @@ acs_syn_fix <- synth_smoothfix(race ~ female + age,
                                area_var = "cd")
 ```
 
-The benefit of this example is that we can examine how our estimated counts of this synthetic table compared with the actual values of the joint distribution. Here is a scatterplot comparing the counts. Each point represents a cell: [14 congressional districts] x [2 gender categories] x [5 age categories] x  [6 race categories].
+The benefit of this example is that we can examine how our estimated counts of this synthetic table compared with the actual values of the joint distribution. Here is a scatterplot comparing the counts. Each point represents a cell: [14 congressional districts] x [2 gender categories] x [5 age categories] x [6 race categories].
 
 ```{r, echo = FALSE, message=FALSE,warning=FALSE}
 library(scales)
