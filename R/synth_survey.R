@@ -205,31 +205,10 @@ synth_smoothfix <- function(formula,
   # estimate cells
   smooth_tbl <- synth_mlogit(formula, microdata, poptable, area_var, count_var)
 
-
-  # aggregate this to the estimated X_{K}s
-  smooth_agg <- collapse_table(smooth_tbl,
-                               area_var = area_var,
-                               X_vars = outcome_var,
-                               count_var = count_var,
-                               report = "proportions",
-                               new_name = "pr_outcome_mlogit")
-
-  target_agg <- collapse_table(fix_to,
-                               area_var = area_var,
-                               X_vars = outcome_var,
-                               count_var = count_var,
-                               report = "proportions",
-                               new_name = "pr_outcome_tgt")
-
-  # correction factor
-  change_agg <- left_join(smooth_agg,
-                          target_agg,
-                          by = c(area_var, outcome_var)) %>%
-    transmute(
-      !!!syms(area_var),
-      !!sym(outcome_var),
-      correction = pr_outcome_tgt / pr_outcome_mlogit
-      )
+  change_agg <- rake_spf(outcome_var = outcome_var,
+                         data = smooth_tbl,
+                         fix_to = fix_to,
+                         area_var, count_var)
 
   # back to estimates
   smooth_tbl %>%
@@ -244,5 +223,4 @@ synth_smoothfix <- function(formula,
   #                         newtable = fix_to,
   #                         area_var,
   #                         count_var = "n_aggregate")
-
 }

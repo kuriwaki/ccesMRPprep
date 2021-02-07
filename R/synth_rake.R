@@ -141,3 +141,43 @@ rake_target <- function(formula,
   tgt_stacked
 }
 
+#' Single Proportional Fitting (as opposed to Iterative) with microdata
+#'
+#' With microdata or a table that includes both
+#'
+#' @param outcome_var A string for the variable to match the proportion to
+#' @param data Data of microdata or tables whose margin on `outcom_var` must be fixed
+#'
+#'
+#' @inheritParams synth_mlogit
+#' @export
+rake_spf <- function(outcome_var,
+                     data,
+                     fix_to,
+                     area_var,
+                     count_var = "count") {
+
+  data_agg <- collapse_table(data,
+                             area_var = area_var,
+                             X_vars = outcome_var,
+                             count_var = count_var,
+                             report = "proportions",
+                             new_name = "pr_outcome_data")
+
+  target_agg <- collapse_table(fix_to,
+                               area_var = area_var,
+                               X_vars = outcome_var,
+                               count_var = count_var,
+                               report = "proportions",
+                               new_name = "pr_outcome_tgt")
+
+  # correction factor
+  left_join(data_agg,
+            target_agg,
+            by = c(area_var, outcome_var)) %>%
+    transmute(
+      !!!syms(area_var),
+      !!sym(outcome_var),
+      correction = pr_outcome_tgt / pr_outcome_data
+    )
+}
