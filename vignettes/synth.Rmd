@@ -1,0 +1,107 @@
+---
+title: "Synthetic Target Estimation"
+output: 
+  rmarkdown::html_vignette:
+    fig_width: 8
+    fig_height: 4
+vignette: >
+  %\VignetteIndexEntry{Synthetic Target Estimation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r setup, message = FALSE}
+library(ccesMRPprep)
+library(tidyverse)
+```
+
+
+## Estimating the Synthetic Joint
+
+We provide a simple set of functions to implement this. We extend the ACS table assisted by a survey model using a function called `synth_mlogit()`. 
+
+```{r}
+acs_syn_mlogit <- synth_mlogit(race ~ female + age,
+                               microdata = cc18_NY,
+                               poptable = acs_NY,  
+                               area_var = "cd")
+```
+
+
+The ccesMRPprep package provide two other approaches to estimating the joint -- these incorporate another source of information, which is the margins that are available. 
+
+```{r}
+race_margins <- collapse_table(acs_NY, area_var = "cd", X_vars = "race", 
+                               count_var = "count", new_name = "count")
+race_margins
+```
+
+Given this data that is simply the marginal distribution of race in each CD, one option is to simply take the product assuming independence
+
+```{r}
+acs_syn_prod <- synth_prod(race ~ female + age,
+                           poptable = acs_NY,
+                           newtable = race_margins,
+                           area_var = "cd")
+```
+
+and another is to first comibine the survey modeling then fix _those_ margins to the known population margins. 
+
+```{r}
+acs_syn_fix <- synth_smoothfix(race ~ female + age, 
+                               microdata = cc18_NY,
+                               poptable = acs_NY, 
+                               fix_to = race_margins,
+                               area_var = "cd")
+```
+
+The benefit of this example is that we can examine how our estimated counts of this synthetic table compared with the actual values of the joint distribution. Here is a scatterplot comparing the counts. Each point represents a cell: [14 congressional districts] x [2 gender categories] x [5 age categories] x  [6 race categories].
+
+```{r, echo = FALSE, message=FALSE,warning=FALSE}
+library(scales)
+
+syn_val <- select(acs_syn_prod, cd, female, age, race, count_rake = count) %>% 
+  left_join(rename(acs_syn_mlogit, count_smooth = count),
+            by = c("cd", "female", "age", "race")) %>%
+  left_join(rename(acs_syn_fix, count_smoothfix = count),
+            by = c("cd", "female", "age", "race")) %>%
+  left_join(count(acs_NY, cd, female, race, age, wt = count, name = "count_truth"),
+            by = c("cd", "female", "age", "race")) %>% 
+  select(cd, female, age, race, matches("count_"))
+
+syn_val_long <- syn_val %>% 
+  pivot_longer(c(count_rake, count_smooth, count_smoothfix), 
+               names_to = "method",
+               values_to = "estimate",
+               names_prefix = "count_") %>% 
+  mutate(method = recode_factor(method, 
+                                smooth = "Survey Model\n(synth_mlogit)", 
+                                rake = "Simple Product\n(synth_prod)",
+                                smoothfix = "Survey + Fix to Outcome\n(synth_smoothfix)"))
+
+syn_val_long %>% 
+  ggplot(aes(count_truth, estimate, color = race)) +
+  facet_wrap(~ method) +
+  geom_abline(linetype = "dashed") +
+  geom_point(size = 0.5, alpha = 0.5) +
+  theme_bw() +
+  coord_equal() +
+  scale_x_continuous(labels = comma) +
+  scale_y_continuous(labels = comma) +
+  labs(x = "True Joint Table Count",
+       y = "Estimate",
+       color = "Race/Ethnicity of Cell") +
+  theme(legend.position = "bottom", 
+        panel.grid = element_blank())
+```
+
+The first plot does not look great. The simple product does surprisingly well. It is after all perhaps not surprising that it is hard to estimate education from age bins and gender.
