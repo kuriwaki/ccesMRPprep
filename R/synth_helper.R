@@ -88,8 +88,11 @@ collapse_table <- function(poptable,
 }
 
 
-#' Internal function to predict from a emlogit/bmlogit object, then reshape to
-#' the population of interest
+#' Tidy joint probabilities
+#'
+#'
+#' @details Internal function to predict from a emlogit/bmlogit object, then reshape to
+#' the population of interest. See `synth_mlogit()` and `synth_bmlogit()`
 #'
 #' @param fit A model of class bmlogit/emlogit
 #' @param outcome_names A character vector of names that correspond to each level
@@ -100,23 +103,40 @@ collapse_table <- function(poptable,
 #' @keywords internal
 predict_longer <- function(fit, poptable, microdata, X_form, X_vars, area_var, count_var, outcome_var) {
 
-  X_p_mat <- model.matrix(X_form, poptable)
+  # Data for area var {A, X_{1}, ..., X_{K-1}}
+  X_pred_df  <- collapse_table(
+    poptable,
+    area_var = area_var, X_vars = X_vars, count_var = count_var,
+    new_name = count_var
+  ) %>%
+    group_by(!!sym(area_var)) %>%
+    mutate(prX = !!sym(count_var) / sum(!!sym(count_var))) %>%
+    ungroup()
 
+  X_p_mat <- model.matrix(X_form, X_pred_df)
+
+  # weird required difference -- try to fix in emlogit or bmlogit
+  if (inherits(fit, "emlogit"))
+    X_p_mat <- X_p_mat[, -1]
+
+  # predicted values
   pred_X_p <- predict(fit, newdata = X_p_mat)
 
   out <- as_tibble(pred_X_p) %>%
-    bind_cols(poptable) %>%
+    bind_cols(X_pred_df) %>%
     pivot_longer(cols = -c(X_vars, area_var, count_var, "prX"),
                  names_to = outcome_var,
                  names_prefix = outcome_var,
-                 values_to = "prZ_given_X") %>%
-    mutate(pr_XZ = prX * prZ_given_X)
+                 values_to = "prZ_givenX") %>%
+    mutate(prXZ = prX * prZ_givenX,
+           !!sym(count_var) := !!sym(count_var)*prZ_givenX) %>%
+    relocate(!!sym(count_var), .after = last_col())
 
   # if original factor, make it back into a factor
   # (it was deconstructed in model.matrix)
   if (inherits(microdata[[outcome_var]], "factor")) {
     out[[outcome_var]] <- factor(out[[outcome_var]],
-                                       levels = levels(microdata[[outcome_var]]))
+                                 levels = levels(microdata[[outcome_var]]))
 
   }
   out

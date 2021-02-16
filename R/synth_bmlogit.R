@@ -5,15 +5,17 @@
 #'  of the synthetic joint will match these, with a simple ratio.
 #' @param tol Tolerance for balance
 #'
+#' @seealso `synth_mlogit()`
+#'
 #' @importFrom bmlogit bmlogit
 #' @examples
 #'
 #' educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
-#' pop_syn <- synth_onestep(educ ~ race + age + female,
-#'                            microdata = cc18_NY,
-#'                            fix_to = educ_target,
-#'                            poptable = acs_race_NY,
-#'                            area_var = "cd")
+#' pop_syn <- synth_bmlogit(educ ~ race + age + female,
+#'                          microdata = cc18_NY,
+#'                          fix_to = educ_target,
+#'                          poptable = acs_race_NY,
+#'                          area_var = "cd")
 #'
 #' @keywords internal
 synth_bmlogit <- function(formula,
@@ -62,8 +64,6 @@ synth_bmlogit <- function(formula,
      count_var = count_var,
      report = "proportions",
      new_name = "pr_outcome_tgt")
-
-   outcome_names  <- pull(outcome_df, !!sym(outcome_var))
    pr_outcome_tgt <- pull(outcome_df, pr_outcome_tgt)
 
   # fit model
@@ -76,19 +76,9 @@ synth_bmlogit <- function(formula,
     control = list(intercept = FALSE, tol_pred = tol)
   )
 
-  # Data for areavar {A, X_{1}, ..., X_{K-1}}
-  X_pred_df  <- collapse_table(
-    poptable,
-    area_var = area_var, X_vars = X_vars, count_var = count_var,
-    new_name = count_var
-  ) %>%
-    group_by(!!sym(area_var)) %>%
-    mutate(prX = !!sym(count_var) / sum(!!sym(count_var))) %>%
-    ungroup()
-
   # predict
   predict_longer(fit,
-                 poptable = X_pred_df,
+                 poptable = poptable,
                  microdata = microdata,
                  X_form = X_form,
                  X_vars = X_vars,

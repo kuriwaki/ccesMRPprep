@@ -34,4 +34,7 @@ pop_syn <- synth_onestep(educ ~ race + age + female,
                            area_var = "cd")
 
 }
+\seealso{
+\code{synth_mlogit()}
+}
 \keyword{internal}

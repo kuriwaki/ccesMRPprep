@@ -2,8 +2,7 @@
 % Please edit documentation in R/synth_helper.R
 \name{predict_longer}
 \alias{predict_longer}
-\title{Internal function to predict from a emlogit/bmlogit object, then reshape to
-the population of interest}
+\title{Tidy joint probabilities}
 \usage{
 predict_longer(
   fit,
@@ -36,7 +35,10 @@ of the outcome of the multinomial. Must be manually set to the same ordering as
 the fitted objects.}
 }
 \description{
+Tidy joint probabilities
+}
+\details{
 Internal function to predict from a emlogit/bmlogit object, then reshape to
-the population of interest
+the population of interest. See \code{synth_mlogit()} and \code{synth_bmlogit()}
 }
 \keyword{internal}

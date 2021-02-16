@@ -38,14 +38,16 @@
 #'  if the variable of interest has `L` values, the final dataset will have
 #'  `L` times more rows than `poptarget`. The data will have additional variables:
 #'
-#'  * `n_aggregate`: The sum of counts known in the aggregate. i.e., the number of
-#'   trials the multinomial will consider. This is the sum of the original
-#'   `count` variables.
-#'  * The outcome variable of interest. For example if the LHS of the formula
+#'  * The outcome variable of interest (`Z`). For example if the LHS of the formula
 #'     was `party_id`, then there would be a column called `party_id` containing the
 #'     values of that variable in long form.
-#'  * `pr_pred`: The predicted probability of taking the value of the outcome. This
-#'   is the main output of the multinomial model.
+#'  * `prX`: The known distribution of the covriates (RHS) within the area, i.e.
+#'     `Pr(X | A)`.
+#'  * `prZ_givenX`: The main estimate from the multinomial logit model. Formally,
+#'     `Pr(Z | X, A)`, although this is usually the same value for every `A`
+#'     and thus equal to `Pr(Z | X)` unless `A` is on the RHS as well.
+#'  * `prXZ`: A new estimate for the joint distribution within the area, i.e.
+#'     `Pr(Z, X | A)`. Computed by `prX * prZ_givenX`.
 #'  * `count`: A new count variable. Simply the product of `n_aggregate` and `pr_pred`.
 #'
 #'
@@ -77,11 +79,11 @@
 #'
 #'  synth_acs <- synth_mlogit(pid3 ~ race + age + female,
 #'                            microdata = cc18_NY,
-#'                            poptable = acs_NY,
+#'                            poptable = acs_race_NY,
 #'                            area_var = "cd")
 #'
 #'  # original (27 districts x 2 sex x 5 age x 6 race categories)
-#'  count(acs_NY, cd, female, age, race, wt = count)
+#'  count(acs_race_NY, cd, female, age, race, wt = count)
 #'
 #'  # new, modeled (original x 5 party categories)
 #'  synth_acs
@@ -131,30 +133,17 @@ synth_mlogit <- function(formula,
 
 
   # fit model
-  mlogit_fit <- emlogit(Y = y_m_mat, X = X_m_mat)
+  fit <- emlogit(Y = y_m_mat, X = X_m_mat)
 
-  # predict onto table
-  pred_df <- as_tibble(predict(mlogit_fit, newdata = X_p_mat))
-  pred_df <- bind_cols(X_p_df, pred_df)
-
-  # tidy
-  pred_long <- pred_df %>%
-    pivot_longer(
-      cols = -c(area_var, X_vars, "n_aggregate"),
-      names_prefix = outcome_var, # because model.matrix will put these in prefix
-      names_to = outcome_var, # name them as that
-      values_to = "pr_pred") %>%
-    mutate(!!sym(count_var) := n_aggregate*pr_pred)
-
-  # if original factor, make it back into a factor
-  # (it was deconstructed in model.matrix)
-  if (inherits(microdata[[outcome_var]], "factor")) {
-    pred_long[[outcome_var]] <- factor(pred_long[[outcome_var]],
-                                       levels = levels(microdata[[outcome_var]]))
-
-  }
-
-  pred_long
+  # predict and get predictions, formats
+  predict_longer(fit,
+                 poptable = poptable,
+                 microdata = microdata,
+                 X_form = X_form,
+                 X_vars = X_vars,
+                 area_var = area_var,
+                 count_var = count_var,
+                 outcome_var = outcome_var)
 }
 
 
@@ -224,3 +213,5 @@ synth_smoothfix <- function(formula,
   #                         area_var,
   #                         count_var = "n_aggregate")
 }
+
+
