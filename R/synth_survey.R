@@ -162,25 +162,14 @@ synth_mlogit <- function(formula,
 #' # suppose we want know the distribution of (age x female) and we know the
 #' # distribution of (race), by CD, but we don't know the joint of the two.
 #'
-#' race_agg <- count(acs_NY, cd, race, wt = count, name = "count")
-#' pop_syn <- synth_smoothfix(race ~ age + female,
-#'                    microdata = cc18_NY,
-#'                    fix_to = race_agg,
-#'                    poptable = acs_NY,
-#'                    area_var = "cd")
+#' educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
+#' pop_syn <- synth_smoothfix(educ ~ race + age + female,
+#'                          microdata = cc18_NY,
+#'                          fix_to = educ_target,
+#'                          poptable = acs_race_NY,
+#'                          area_var = "cd")
 #'
 #'
-#'
-#' # In this example, we know the true joint. Does it match?
-#' pop_val <- left_join(pop_syn,
-#'                      count(acs_NY,  cd, age, female, race, wt = count, name = "count"),
-#'                      by = c("cd", "age", "female", "race"),
-#'                      suffix = c("_est", "_truth"))
-#'
-#' # AOC's district in the bronx
-#' pop_val %>%
-#'   filter(cd == "NY-14", age == "35 to 44 years", female == 0) %>%
-#'   select(cd, race, count_est, count_truth)
 #' @export
 synth_smoothfix <- function(formula,
                             microdata,
@@ -203,7 +192,8 @@ synth_smoothfix <- function(formula,
   smooth_tbl %>%
     left_join(change_agg, by = c(area_var, outcome_var)) %>%
     mutate(!!sym(count_var) := !!sym(count_var)*correction) %>%
-    select(-pr_pred, -correction) # pr_pred is outdated. correction is redudant with count.
+    select(-correction) %>%
+    select(-matches("prZ"), -matches("prXZ"))
 
   # fix margins
   # WHY DOES THIS GIVE SAME ANSWER AS THE PROD without survey
