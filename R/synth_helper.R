@@ -86,3 +86,38 @@ collapse_table <- function(poptable,
 
   out
 }
+
+
+#' Internal function to predict from a emlogit/bmlogit object, then reshape to
+#' the population of interest
+#'
+#' @param fit A model of class bmlogit/emlogit
+#' @param outcome_names A character vector of names that correspond to each level
+#'  of the outcome of the multinomial. Must be manually set to the same ordering as
+#'  the fitted objects.
+#'
+#' @inheritParams collapse_table
+#' @keywords internal
+predict_longer <- function(fit, poptable, microdata, X_form, X_vars, area_var, count_var, outcome_var) {
+
+  X_p_mat <- model.matrix(X_form, poptable)
+
+  pred_X_p <- predict(fit, newdata = X_p_mat)
+
+  out <- as_tibble(pred_X_p) %>%
+    bind_cols(poptable) %>%
+    pivot_longer(cols = -c(X_vars, area_var, count_var, "prX"),
+                 names_to = outcome_var,
+                 names_prefix = outcome_var,
+                 values_to = "prZ_given_X") %>%
+    mutate(pr_XZ = prX * prZ_given_X)
+
+  # if original factor, make it back into a factor
+  # (it was deconstructed in model.matrix)
+  if (inherits(microdata[[outcome_var]], "factor")) {
+    out[[outcome_var]] <- factor(out[[outcome_var]],
+                                       levels = levels(microdata[[outcome_var]]))
+
+  }
+  out
+}
