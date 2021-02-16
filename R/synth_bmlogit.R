@@ -16,8 +16,7 @@
 #'                          fix_to = educ_target,
 #'                          poptable = acs_race_NY,
 #'                          area_var = "cd")
-#'
-#' @keywords internal
+#' @export
 synth_bmlogit <- function(formula,
                           microdata,
                           poptable,

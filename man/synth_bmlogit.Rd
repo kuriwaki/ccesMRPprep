@@ -27,14 +27,12 @@ Synthetic joint estimation with balancing
 \examples{
 
 educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
-pop_syn <- synth_onestep(educ ~ race + age + female,
-                           microdata = cc18_NY,
-                           fix_to = educ_target,
-                           poptable = acs_race_NY,
-                           area_var = "cd")
-
+pop_syn <- synth_bmlogit(educ ~ race + age + female,
+                         microdata = cc18_NY,
+                         fix_to = educ_target,
+                         poptable = acs_race_NY,
+                         area_var = "cd")
 }
 \seealso{
 \code{synth_mlogit()}
 }
-\keyword{internal}
