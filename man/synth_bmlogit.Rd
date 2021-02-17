@@ -9,15 +9,20 @@ synth_bmlogit(
   microdata,
   poptable,
   fix_to,
+  fix_by_area = any(area_var \%in\% colnames(fix_to)),
   area_var,
   count_var = "count",
-  tol = 0.01
+  tol = 0.05
 )
 }
 \arguments{
 \item{fix_to}{A dataset with only marginal counts or proportions of the outcome
 in question, by each area. Proportions will be corrected so that the margins
 of the synthetic joint will match these, with a simple ratio.}
+
+\item{fix_by_area}{logical, whether to fix to targets area by area. Defaults to
+TRUE if \code{area_var} is a variable in \code{fix_to}. If \code{FALSE}, collapses the
+input to a single target.}
 
 \item{tol}{Tolerance for balance}
 }

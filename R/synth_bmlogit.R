@@ -3,11 +3,15 @@
 #' @param fix_to A dataset with only marginal counts or proportions of the outcome
 #'  in question, by each area. Proportions will be corrected so that the margins
 #'  of the synthetic joint will match these, with a simple ratio.
+#' @param fix_by_area logical, whether to fix to targets area by area. Defaults to
+#'  TRUE if `area_var` is a variable in `fix_to`. If `FALSE`, collapses the
+#'  input to a single target.
 #' @param tol Tolerance for balance
 #'
 #' @seealso `synth_mlogit()`
 #'
 #' @importFrom bmlogit bmlogit
+#' @importFrom purrr map_dfr
 #' @examples
 #'
 #' educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
@@ -21,9 +25,10 @@ synth_bmlogit <- function(formula,
                           microdata,
                           poptable,
                           fix_to,
+                          fix_by_area = any(area_var %in% colnames(fix_to)),
                           area_var,
                           count_var = "count",
-                          tol = 0.01) {
+                          tol = 0.05) {
   # formula setup
   list2env(formula_parts(formula), envir = environment())
 
@@ -47,42 +52,94 @@ synth_bmlogit <- function(formula,
 
   # population ----
   # Xs setup population table -- aggregate up to {X_1, ..., X_{K -1 }}
-  X_p_df  <- collapse_table(poptable, area_var = NULL, X_vars, count_var)
+  X_p_df  <- collapse_table(poptable, area_var, X_vars, count_var, new_name = "N_X")
   X_p_mat <- model.matrix(X_form, X_p_df)
 
-  # N_Area
-  X_counts_vec <- collapse_table(poptable, area_var = NULL, X_vars, count_var,
-                                 new_name = "N_X") %>%
-    pull(N_X)
+  # Ns of the Xs
+  X_counts_vec <- X_p_df[["N_X"]]
 
-  # Targets --
-   outcome_df <- collapse_table(
-     fix_to,
-     area_var = NULL,
-     X_vars = outcome_var,
-     count_var = count_var,
-     report = "proportions",
-     new_name = "pr_outcome_tgt")
-   pr_outcome_tgt <- pull(outcome_df, pr_outcome_tgt)
 
-  # fit model
-  fit <- bmlogit(
-    Y = y_m_mat,
-    X = X_m_mat,
-    target_Y = pr_outcome_tgt, # vector
-    pop_X = X_p_mat, # matrix
-    count_X = X_counts_vec, # vector
-    control = list(intercept = FALSE, tol_pred = tol)
-  )
 
-  # predict
-  predict_longer(fit,
-                 poptable = poptable,
-                 microdata = microdata,
-                 X_form = X_form,
-                 X_vars = X_vars,
-                 area_var = area_var,
-                 count_var = count_var,
-                 outcome_var = outcome_var)
+   # when you wait to the aggregate thing
+
+   if (isFALSE(fix_by_area)) {
+     outcome_df <- collapse_table(
+       fix_to,
+       area_var = NULL, # only place that differs from other case
+       X_vars = outcome_var,
+       count_var = count_var,
+       report = "proportions",
+       new_name = "pr_outcome_tgt")
+     pr_outcome_tgt <- pull(outcome_df, pr_outcome_tgt)
+
+     fit <- bmlogit(
+       Y = y_m_mat,
+       X = X_m_mat,
+       target_Y = pr_outcome_tgt, # vector
+       pop_X = X_p_mat, # matrix
+       count_X = X_counts_vec, # vector
+       control = list(intercept = FALSE, tol_pred = tol)
+     )
+
+     out <- predict_longer(fit,
+                           poptable = poptable,
+                           microdata = microdata,
+                           X_form = X_form,
+                           X_vars = X_vars,
+                           area_var = area_var,
+                           count_var = count_var,
+                           outcome_var = outcome_var)
+   }
+
+
+   # area by area, loop
+   if (isTRUE(fix_by_area)) {
+     out <- map_dfr(
+       .x = unique(outcome_df[[area_var]]),
+
+       .f = function(a) {
+         outcome_df <- collapse_table(
+           fix_to,
+           area_var = area_var, # only place that differs from other case
+           X_vars = outcome_var,
+           count_var = count_var,
+           report = "proportions",
+           new_name = "pr_outcome_tgt")
+
+         # overwrite
+         outcome_A <- filter(outcome_df, !!sym(area_var) == a)
+         pr_outcome_tgt <- pull(outcome_A, pr_outcome_tgt)
+
+         # overwrite this to area subset
+         X_p_df  <- filter(X_p_df, !!sym(area_var) == a)
+         X_p_mat <- model.matrix(X_form, X_p_df)
+         X_counts_vec <- X_p_df[["N_X"]]
+
+         # fit the model
+         fit <- bmlogit(
+           Y = y_m_mat,
+           X = X_m_mat,
+           target_Y = pr_outcome_tgt,
+           pop_X   = X_p_mat,
+           count_X = X_counts_vec,
+           control = list(intercept = FALSE, tol_pred = tol)
+         )
+
+         cat(a, ", ")
+
+         # give it only the area population
+         out <- predict_longer(fit,
+                               poptable = filter(poptable, !!sym(area_var) == a),
+                               microdata = microdata,
+                               X_form = X_form,
+                               X_vars = X_vars,
+                               area_var = area_var,
+                               count_var = count_var,
+                               outcome_var = outcome_var)
+       }
+     ) # end map_dfr
+   }
+
+   out
 }
 
