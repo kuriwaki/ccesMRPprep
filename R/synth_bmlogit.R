@@ -12,6 +12,7 @@
 #'
 #' @importFrom bmlogit bmlogit
 #' @importFrom purrr map_dfr
+#' @importFrom dplyr progress_estimated
 #' @examples
 #'
 #' educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
@@ -94,8 +95,11 @@ synth_bmlogit <- function(formula,
 
    # area by area, loop
    if (isTRUE(fix_by_area)) {
+     areas <- unique(outcome_df[[area_var]])
+     pb <- progress_estimated(length(areas))
+
      out <- map_dfr(
-       .x = unique(outcome_df[[area_var]]),
+       .x = areas,
 
        .f = function(a) {
          outcome_df <- collapse_table(
@@ -124,8 +128,7 @@ synth_bmlogit <- function(formula,
            count_X = X_counts_vec,
            control = list(intercept = FALSE, tol_pred = tol)
          )
-
-         cat(a, ", ")
+         pb$tick()$print()
 
          # give it only the area population
          out <- predict_longer(fit,
