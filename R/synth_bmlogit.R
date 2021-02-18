@@ -11,7 +11,7 @@
 #' @seealso `synth_mlogit()`
 #'
 #' @importFrom bmlogit bmlogit
-#' @importFrom purrr map_dfr
+#' @importFrom furrr future_map_dfr
 #' @importFrom dplyr progress_estimated
 #' @examples
 #'
@@ -95,10 +95,17 @@ synth_bmlogit <- function(formula,
 
    # area by area, loop
    if (isTRUE(fix_by_area)) {
+     outcome_df <- collapse_table(
+       fix_to,
+       area_var = area_var,
+       X_vars = outcome_var,
+       count_var = count_var,
+       report = "proportions",
+       new_name = "pr_outcome_tgt")
      areas <- unique(outcome_df[[area_var]])
      pb <- progress_estimated(length(areas))
 
-     out <- map_dfr(
+     out <- future_map_dfr(
        .x = areas,
 
        .f = function(a) {

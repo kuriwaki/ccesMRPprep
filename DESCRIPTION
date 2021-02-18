@@ -30,7 +30,7 @@ Imports:
     glue,
     dataverse (>= 0.3.0),
     tidycensus,
-    purrr
+    furrr
 Remotes:
     soichiroy/emlogit,
     soichiroy/bmlogit
