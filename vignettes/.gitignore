@@ -1,2 +1,5 @@
 *.html
 *.R
+
+synth_files
+synth_cache
