@@ -31,6 +31,7 @@ Synthetic joint estimation with balancing
 }
 \examples{
 
+# can take a few minutes if fix_by_area = TRUE (the default)
 educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
 pop_syn <- synth_bmlogit(educ ~ race + age + female,
                          microdata = cc18_NY,

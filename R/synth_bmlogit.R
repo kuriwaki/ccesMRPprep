@@ -15,6 +15,7 @@
 #' @importFrom dplyr progress_estimated
 #' @examples
 #'
+#' # can take a few minutes if fix_by_area = TRUE (the default)
 #' educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
 #' pop_syn <- synth_bmlogit(educ ~ race + age + female,
 #'                          microdata = cc18_NY,
@@ -47,6 +48,7 @@ synth_bmlogit <- function(formula,
   # microdata ----
   # ys (in microdata)
   y_m_mat <- model.matrix(outcome_form, microdata)
+  colnames(y_m_mat) <- levels(microdata[[outcome_var]])
 
   # Xs setup microdata
   X_m_mat <- model.matrix(X_form, microdata)[, -1]
@@ -129,7 +131,7 @@ synth_bmlogit <- function(formula,
 
          # overwrite this to area subset
          X_p_df  <- filter(X_p_df, !!sym(area_var) == a)
-         X_p_mat <- model.matrix(X_form, X_p_df)
+         X_p_mat <- model.matrix(X_form, X_p_df)[, -1]
          X_counts_vec <- X_p_df[["N_X"]]
 
          # fit the model

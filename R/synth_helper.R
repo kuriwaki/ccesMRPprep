@@ -115,11 +115,7 @@ predict_longer <- function(fit, poptable, microdata, X_form, X_vars, area_var, c
     mutate(prX = !!sym(count_var) / sum(!!sym(count_var))) %>%
     ungroup()
 
-  X_p_mat <- model.matrix(X_form, X_pred_df)
-
-  # weird required difference -- try to fix in emlogit or bmlogit
-  if (inherits(fit, "emlogit"))
-    X_p_mat <- X_p_mat[, -1]
+  X_p_mat <- model.matrix(X_form, X_pred_df)[, -1]
 
   # predicted values
   pred_X_p <- predict(fit, newdata = X_p_mat)
@@ -128,7 +124,6 @@ predict_longer <- function(fit, poptable, microdata, X_form, X_vars, area_var, c
     bind_cols(X_pred_df) %>%
     pivot_longer(cols = -c(X_vars, area_var, count_var, "prX"),
                  names_to = outcome_var,
-                 names_prefix = outcome_var,
                  values_to = "prZ_givenX") %>%
     mutate(prXZ = prX * prZ_givenX,
            !!sym(count_var) := !!sym(count_var)*prZ_givenX) %>%

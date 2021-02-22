@@ -176,7 +176,7 @@ plot_tiles <- function(tbl, tit, show_cd = "NY-01") {
          age = fct_rev(age)) %>%  
   ggplot(aes(y = age, x = educ, fill = prZ_givenX)) +
   facet_wrap(~ race) + 
-  geom_tile(color = "white") + 
+  geom_tile(color = "white", size = 1) + 
   scale_fill_viridis_b(end = 0.8) +
   guides(fill = guide_bins(title.position = "top", keywidth = unit(2, "cm"))) +
   geom_text(aes(label = pct_fmt), color = "white", size = 2) + 

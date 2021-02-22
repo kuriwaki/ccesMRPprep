@@ -122,6 +122,7 @@ synth_mlogit <- function(formula,
 
   # ys (in microdata)
   y_m_mat <- model.matrix(outcome_form, microdata)
+  colnames(y_m_mat) <- levels(microdata[[outcome_var]])
 
   # Xs setup microdata
   X_m_mat <- model.matrix(X_form, microdata)[, -1]
