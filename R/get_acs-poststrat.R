@@ -9,6 +9,8 @@
 #'  capped to 2010-2018.
 #' @param dataset Which type of ACS to get. Defaults to `"acs1"` for ACS-5 year.
 #'  Use `"acs5"` for 5-year.
+#' @param states A vector of states to subset to. Gets passed onto the new `state`
+#'  argument in `tidycensus::get_acs()`, which defaults to NULL.
 #' @param geography the type of geography to pull. Currently only supports
 #'  \code{"congressional district"}.
 #'
@@ -51,6 +53,7 @@
 get_acs_cces <- function(varlist,
                          varlab_df = ccesMRPprep::acscodes_df,
                          year = 2018,
+                         states = NULL,
                          dataset = "acs1",
                          geography =  "congressional district") {
 
@@ -58,6 +61,7 @@ get_acs_cces <- function(varlist,
                     year = min(max(year, 2010), 2018),
                     survey = dataset,
                     variables = varlist,
+                    state = states,
                     geometry = FALSE) %>%
     filter(!str_detect(.data$NAME, "Puerto Rico")) %>%
     rename(
