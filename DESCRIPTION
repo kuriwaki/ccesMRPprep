@@ -22,6 +22,7 @@ Imports:
     rlang,
     Formula,
     emlogit,
+    bmlogit(>= 0.0.3),
     dplyr (>= 1.0.0),
     tidyr,
     haven (>= 2.1.0),

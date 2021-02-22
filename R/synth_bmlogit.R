@@ -49,12 +49,12 @@ synth_bmlogit <- function(formula,
   y_m_mat <- model.matrix(outcome_form, microdata)
 
   # Xs setup microdata
-  X_m_mat <- model.matrix(X_form, microdata)
+  X_m_mat <- model.matrix(X_form, microdata)[, -1]
 
   # population ----
   # Xs setup population table -- aggregate up to {X_1, ..., X_{K -1 }}
   X_p_df  <- collapse_table(poptable, area_var, X_vars, count_var, new_name = "N_X")
-  X_p_mat <- model.matrix(X_form, X_p_df)
+  X_p_mat <- model.matrix(X_form, X_p_df)[, -1]
 
   # Ns of the Xs
   X_counts_vec <- X_p_df[["N_X"]]
@@ -71,7 +71,10 @@ synth_bmlogit <- function(formula,
        count_var = count_var,
        report = "proportions",
        new_name = "pr_outcome_tgt")
-     pr_outcome_tgt <- pull(outcome_df, pr_outcome_tgt)
+
+     pr_outcome_tgt <- outcome_df %>%
+       select(!!sym(outcome_var), pr_outcome_tgt) %>%
+       deframe()
 
      fit <- bmlogit(
        Y = y_m_mat,
@@ -79,7 +82,7 @@ synth_bmlogit <- function(formula,
        target_Y = pr_outcome_tgt, # vector
        pop_X = X_p_mat, # matrix
        count_X = X_counts_vec, # vector
-       control = list(intercept = FALSE, tol_pred = tol)
+       control = list(tol_pred = tol)
      )
 
      out <- predict_longer(fit,
@@ -102,6 +105,7 @@ synth_bmlogit <- function(formula,
        count_var = count_var,
        report = "proportions",
        new_name = "pr_outcome_tgt")
+
      areas <- unique(outcome_df[[area_var]])
      pb <- progress_estimated(length(areas))
 
@@ -119,7 +123,9 @@ synth_bmlogit <- function(formula,
 
          # overwrite
          outcome_A <- filter(outcome_df, !!sym(area_var) == a)
-         pr_outcome_tgt <- pull(outcome_A, pr_outcome_tgt)
+         pr_outcome_tgt <- outcome_A %>%
+           select(!!sym(outcome_var), pr_outcome_tgt) %>%
+           deframe()
 
          # overwrite this to area subset
          X_p_df  <- filter(X_p_df, !!sym(area_var) == a)
@@ -133,7 +139,7 @@ synth_bmlogit <- function(formula,
            target_Y = pr_outcome_tgt,
            pop_X   = X_p_mat,
            count_X = X_counts_vec,
-           control = list(intercept = FALSE, tol_pred = tol)
+           control = list(tol_pred = tol)
          )
          pb$tick()$print()
 

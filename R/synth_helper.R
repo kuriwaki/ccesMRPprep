@@ -6,6 +6,8 @@
 #' @inheritParams synth_mlogit
 #' @importFrom Formula as.Formula
 #' @keywords internal
+#' @examples
+#'  ccesMRPprep:::formula_parts(race ~ female + age + edu)
 formula_parts <- function(formula) {
   Form         <- as.Formula(formula)
   outcome_var  <- all.vars(formula(Form, lhs = 1, rhs = 0))

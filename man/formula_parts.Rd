@@ -14,4 +14,7 @@ of the form \verb{X_\{K\} ~ X_1 + ... X_\{K - 1\}}}
 Outputs a list. You can use \code{base::list2env} on the output to release
 the items of the list on your environment.
 }
+\examples{
+ ccesMRPprep:::formula_parts(race ~ female + age + edu)
+}
 \keyword{internal}
