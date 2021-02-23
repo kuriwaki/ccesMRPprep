@@ -48,7 +48,15 @@ synth_bmlogit <- function(formula,
   # microdata ----
   # ys (in microdata)
   y_m_mat <- model.matrix(outcome_form, microdata)
-  colnames(y_m_mat) <- levels(microdata[[outcome_var]])
+
+  # binary data
+  if (all(microdata[[outcome_var]] %in% c(0, 1))) {
+    y_m_mat <- cbind(1 - y_m_mat, y_m_mat)
+    colnames(y_m_mat) <- c("0", "1")
+  }
+
+  if (is.factor(microdata[[outcome_var]]))
+    colnames(y_m_mat) <- levels(microdata[[outcome_var]])
 
   # Xs setup microdata
   X_m_mat <- model.matrix(X_form, microdata)[, -1]

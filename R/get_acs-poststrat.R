@@ -149,7 +149,7 @@ get_poststrat <- function(cleaned_acs, dist_data = NULL, formula) {
 #' @param vec a vector of strings from the ACS congressional district naming
 #'
 #' @importFrom stringr str_extract str_replace str_pad
-#' @importFrom purrr map_chr
+#' @importFrom furrr future_map_chr
 #' @importFrom tibble tibble
 #' @importFrom dplyr add_row
 #' @importFrom glue glue
@@ -171,7 +171,7 @@ std_acs_cdformat <- function(vec) {
 
   cong <- vec %>% str_extract("1[01][0-9]")
   states <- vec %>% str_extract("(?<=,\\s)[A-z\\s]+")
-  st <- map_chr(states, function(x) st_to_state$st[x == st_to_state$state])
+  st <- future_map_chr(states, function(x) st_to_state$st[x == st_to_state$state])
 
   as.character(glue("{st}-{distnum}"))
 }
