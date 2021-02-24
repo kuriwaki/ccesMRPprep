@@ -44,11 +44,11 @@ formula_parts <- function(formula) {
 #' @examples
 #'
 #'  # If you want to estimate education by female and age
-#'  collapse_table(acs_NY, area_var = "cd", X_vars = c("female", "age"),
+#'  collapse_table(acs_race_NY, area_var = "cd", X_vars = c("female", "age"),
 #'                 count_var = "count")
 #'
 #'  # Report proportions
-#'  collapse_table(acs_NY, area_var = "cd", X_vars = c("female", "age"),
+#'  collapse_table(acs_race_NY, area_var = "cd", X_vars = c("female", "age"),
 #'                 count_var = "count",
 #'                 report = "proportions", new_name = "prop_in_cd")
 #'

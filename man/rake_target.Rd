@@ -40,7 +40,7 @@ library(dplyr)
 race_agg <- count(acs_NY, cd, race, wt = count, name = "count")
 
 rake_target(race ~ age + female,
-            poptable = acs_NY,
+            poptable = acs_race_NY,
             newtable = race_agg,
             area_var = "cd")
 
