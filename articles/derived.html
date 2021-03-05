@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8</span>
       </span>
     </div>
 
@@ -102,7 +102,7 @@
       <h1 data-toc-skip>Deriving Variables from Question Metadata</h1>
                         <h4 class="author">Shiro Kuriwaki</h4>
             
-            <h4 class="date">2021-02-16</h4>
+            <h4 class="date">2021-03-05</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/master/vignettes/derived.Rmd"><code>vignettes/derived.Rmd</code></a></small>
       <div class="hidden name"><code>derived.Rmd</code></div>
@@ -183,7 +183,7 @@
 <span class="co">#&gt; factors</span>
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;   outcome     n</span>
-<span class="co">#&gt; * &lt;lgl&gt;   &lt;int&gt;</span>
+<span class="co">#&gt;   &lt;lgl&gt;   &lt;int&gt;</span>
 <span class="co">#&gt; 1 NA       1000</span></code></pre></div>
 <p>That means, with factors, we would need to figure out all the labels and type them up exactly as they appear. In surveys, the labels can be long and contain punctuation which is easy to miss. Of course we can extract these from attributes and save the trouble of hand-entering them, but the same information is available in the haven_labelled class too.</p>
 <p>On the other hand, <code>haven_labelled</code> is a bit inconvenient because the raw number is not immediately informative. A quick way to transform the numerical data to its labels is <code><a href="https://haven.tidyverse.org/reference/as_factor.html">haven::as_factor</a></code> (notice this is different from <code><a href="https://rdrr.io/r/base/factor.html">base::as.factor</a></code>). Or, for metadata, we can look at its attributes:</p>

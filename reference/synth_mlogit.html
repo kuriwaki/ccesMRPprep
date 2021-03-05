@@ -80,7 +80,7 @@ if one knows the marginals.See Details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8</span>
       </span>
     </div>
 
@@ -258,10 +258,36 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS <a href='
 </div><div class='output co'>#&gt; <span class='warning'>Warning: NAs in the microdata -- dropping data</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='input'>
  <span class='co'># original (27 districts x 2 sex x 5 age x 6 race categories)</span>
  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_NY</span>, <span class='va'>cd</span>, <span class='va'>female</span>, <span class='va'>age</span>, <span class='va'>race</span>, wt <span class='op'>=</span> <span class='va'>count</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in gsub(finish, start, ..., fixed = TRUE): zero-length pattern</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,620 x 5</span><span>
+#&gt;    cd    female age            race                n
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> NY-01      0 18 to 24 years White           </span><span style='text-decoration: underline;'>20</span><span>604
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> NY-01      0 18 to 24 years Black            </span><span style='text-decoration: underline;'>2</span><span>654
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> NY-01      0 18 to 24 years Hispanic         </span><span style='text-decoration: underline;'>6</span><span>264
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> NY-01      0 18 to 24 years Asian            </span><span style='text-decoration: underline;'>3</span><span>121
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> NY-01      0 18 to 24 years Native American     0
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> NY-01      0 18 to 24 years All Other        </span><span style='text-decoration: underline;'>1</span><span>480
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> NY-01      0 25 to 34 years White           </span><span style='text-decoration: underline;'>27</span><span>437
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> NY-01      0 25 to 34 years Black            </span><span style='text-decoration: underline;'>2</span><span>425
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> NY-01      0 25 to 34 years Hispanic        </span><span style='text-decoration: underline;'>10</span><span>730
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> NY-01      0 25 to 34 years Asian            </span><span style='text-decoration: underline;'>3</span><span>168
+#&gt; </span><span style='color: #949494;'># … with 1,610 more rows</span><span></div><div class='input'>
  <span class='co'># new, modeled (original x 5 party categories)</span>
  <span class='va'>synth_acs</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in gsub(finish, start, ..., fixed = TRUE): zero-length pattern</span></div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 8,100 x 8</span><span>
+#&gt;    cd    race  age            female n_aggregate pid3        pr_pred count
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Democrat     0.365  </span><span style='text-decoration: underline;'>7</span><span>516.
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Republican   0.253  </span><span style='text-decoration: underline;'>5</span><span>206.
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Independent  0.251  </span><span style='text-decoration: underline;'>5</span><span>180.
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Other        0.061</span><span style='text-decoration: underline;'>2</span><span> </span><span style='text-decoration: underline;'>1</span><span>261.
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Not Sure     0.070</span><span style='text-decoration: underline;'>0</span><span> </span><span style='text-decoration: underline;'>1</span><span>441.
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Democrat     0.391  </span><span style='text-decoration: underline;'>8</span><span>013.
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Republican   0.220  </span><span style='text-decoration: underline;'>4</span><span>504.
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Independent  0.186  </span><span style='text-decoration: underline;'>3</span><span>800.
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Other        0.038</span><span style='text-decoration: underline;'>4</span><span>  786.
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Not Sure     0.165  </span><span style='text-decoration: underline;'>3</span><span>378.
+#&gt; </span><span style='color: #949494;'># … with 8,090 more rows</span><span></div><div class='input'>
  <span class='co'># See the data elec_NY to see if these numbers look reasonable.</span>
 
 
@@ -300,7 +326,15 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS <a href='
 <span class='va'>pop_val</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>cd</span> <span class='op'>==</span> <span class='st'>"NY-14"</span>, <span class='va'>age</span> <span class='op'>==</span> <span class='st'>"35 to 44 years"</span>, <span class='va'>female</span> <span class='op'>==</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>cd</span>, <span class='va'>race</span>, <span class='va'>count_est</span>, <span class='va'>count_truth</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in gsub(finish, start, ..., fixed = TRUE): zero-length pattern</span></div></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 6 x 4</span><span>
+#&gt;   cd    race            count_est count_truth
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> NY-14 White              </span><span style='text-decoration: underline;'>13</span><span>691.       </span><span style='text-decoration: underline;'>11</span><span>312
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> NY-14 Black               </span><span style='text-decoration: underline;'>7</span><span>558.        </span><span style='text-decoration: underline;'>6</span><span>578
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> NY-14 Hispanic           </span><span style='text-decoration: underline;'>43</span><span>951.       </span><span style='text-decoration: underline;'>34</span><span>668
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> NY-14 Asian              </span><span style='text-decoration: underline;'>16</span><span>017.       </span><span style='text-decoration: underline;'>11</span><span>373
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> NY-14 Native American        0            0
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> NY-14 All Other          </span><span style='text-decoration: underline;'>17</span><span>010.       </span><span style='text-decoration: underline;'>18</span><span>239</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

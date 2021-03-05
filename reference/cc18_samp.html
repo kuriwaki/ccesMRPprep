@@ -81,7 +81,7 @@ questionr::lookfor (or rcces::vartab) is a useful option (see example)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8</span>
       </span>
     </div>
 
@@ -181,11 +181,87 @@ in this package as <code><a href='ccc_samp.html'>?ccc_samp</a></code>.</p>
     <pre class="examples"><div class='input'>
 <span class='co'># use questionr::lookfor to search the label and labels</span>
 <span class='fu'>questionr</span><span class='fu'>::</span><span class='fu'><a href='http://larmarange.github.io/labelled/reference/look_for.html'>lookfor</a></span><span class='op'>(</span><span class='va'>cc18_samp</span>, <span class='st'>"Trump"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in gsub(finish, start, ..., fixed = TRUE): zero-length pattern</span></div><div class='input'>
+</div><div class='output co'>#&gt; pos   variable         label                        col_type values             
+#&gt; <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              
+#&gt; 91    CC18_308a        Job approval -- President T… dbl+lbl  [1] Strongly appro…
+#&gt; ​      ​                 ​                             ​         [2] Somewhat appro…
+#&gt; ​      ​                 ​                             ​         [3] Somewhat disap…
+#&gt; ​      ​                 ​                             ​         [4] Strongly disap…
+#&gt; ​      ​                 ​                             ​         [5] Not sure       
+#&gt; ​      ​                 ​                             ​         [8] skipped        
+#&gt; ​      ​                 ​                             ​         [9] not asked      
+#&gt; 149   CC18_334C        Ideological Placement -- Do… dbl+lbl  [1] Very Liberal   
+#&gt; ​      ​                 ​                             ​         [2] Liberal        
+#&gt; ​      ​                 ​                             ​         [3] Somewhat Liber…
+#&gt; ​      ​                 ​                             ​         [4] Middle of the …
+#&gt; ​      ​                 ​                             ​         [5] Somewhat Conse…
+#&gt; ​      ​                 ​                             ​         [6] Conservative   
+#&gt; ​      ​                 ​                             ​         [7] Very Conservat…
+#&gt; ​      ​                 ​                             ​         [8] Not sure       
+#&gt; ​      ​                 ​                             ​         [98] skipped       
+#&gt; ​      ​                 ​                             ​         [99] not asked     
+#&gt; 162   CC18_335         Trump Russia collusion       dbl+lbl  [1] Yes            
+#&gt; ​      ​                 ​                             ​         [2] No             
+#&gt; ​      ​                 ​                             ​         [3] Not sure       
+#&gt; ​      ​                 ​                             ​         [8] skipped        
+#&gt; ​      ​                 ​                             ​         [9] not asked      
+#&gt; 430   CC18_app_dtrmp_… President Trump Job Approval dbl+lbl  [1] Strongly appro…
+#&gt; ​      ​                 ​                             ​         [2] Somewhat appro…
+#&gt; ​      ​                 ​                             ​         [3] Somewhat disap…
+#&gt; ​      ​                 ​                             ​         [4] Strongly disap…
+#&gt; ​      ​                 ​                             ​         [5] Not sure       
+#&gt; ​      ​                 ​                             ​         [8] skipped        
+#&gt; ​      ​                 ​                             ​         [9] not asked      </div><div class='input'>
 <span class='co'># all data</span>
 <span class='va'>cc18_samp</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in gsub(finish, start, ..., fixed = TRUE): zero-length pattern</span></div><div class='input'>
-</div></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1,000 x 526</span><span>
+#&gt;     year   case_id commonweight commonpostweight vvweight vvweight_post tookpost
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl+lb&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 415</span><span style='text-decoration: underline;'>395</span><span>741        1.47             1.48    </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>      2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 414</span><span style='text-decoration: underline;'>164</span><span>923        1.33             1.22     1.51          1.29   2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 412</span><span style='text-decoration: underline;'>379</span><span>892        0.641            0.559    0.602         0.594  2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 414</span><span style='text-decoration: underline;'>203</span><span>529        1.35             1.19     1.18          1.17   2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 412</span><span style='text-decoration: underline;'>148</span><span>048        0.870            0.762    0.842         0.742  2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 412</span><span style='text-decoration: underline;'>329</span><span>835        0.949            0.789    1.07          0.983  2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 417</span><span style='text-decoration: underline;'>352</span><span>072        0.688            0.585    0.717         0.716  2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 414</span><span style='text-decoration: underline;'>614</span><span>677        0.814            0.616   </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>      2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 416</span><span style='text-decoration: underline;'>797</span><span>006        1.12             0.926    0.991         0.929  2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 412</span><span style='text-decoration: underline;'>962</span><span>561        1.05             0.877    0.346         0.372  2</span><span style='color: #949494;'> [Yes]</span><span>
+#&gt; </span><span style='color: #949494;'># … with 990 more rows, and 519 more variables: CCEStake &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   birthyr &lt;dbl&gt;, gender &lt;dbl+lbl&gt;, educ &lt;dbl+lbl&gt;, race &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   race_other &lt;chr&gt;, hispanic &lt;dbl+lbl&gt;, marstat &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   multrace_1 &lt;dbl+lbl&gt;, multrace_2 &lt;dbl+lbl&gt;, multrace_3 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   multrace_4 &lt;dbl+lbl&gt;, multrace_5 &lt;dbl+lbl&gt;, multrace_8 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   multrace_97 &lt;dbl+lbl&gt;, multrace_98 &lt;dbl+lbl&gt;, multrace_99 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354a_1 &lt;dbl+lbl&gt;, CC18_354a_2 &lt;dbl+lbl&gt;, CC18_354a_3 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354a_4 &lt;dbl+lbl&gt;, CC18_354a_5 &lt;dbl+lbl&gt;, CC18_354a_6 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354a_7 &lt;dbl+lbl&gt;, CC18_354a_8 &lt;dbl+lbl&gt;, CC18_354a_9 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354a_10 &lt;dbl+lbl&gt;, CC18_354a_11 &lt;dbl+lbl&gt;, CC18_354a_12 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354a_t &lt;chr&gt;, CC18_354b_1 &lt;dbl+lbl&gt;, CC18_354b_2 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354b_3 &lt;dbl+lbl&gt;, CC18_354b_4 &lt;dbl+lbl&gt;, CC18_354b_5 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354b_6 &lt;dbl+lbl&gt;, CC18_354b_7 &lt;dbl+lbl&gt;, CC18_354b_8 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354b_9 &lt;dbl+lbl&gt;, CC18_354b_10 &lt;dbl+lbl&gt;, CC18_354b_11 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354b_12 &lt;dbl+lbl&gt;, CC18_354b_13 &lt;dbl+lbl&gt;, CC18_354b_14 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_354b_15 &lt;dbl+lbl&gt;, CC17_3534_t &lt;chr&gt;, comptype &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   add_confirm &lt;dbl+lbl&gt;, inputzip &lt;dbl+lbl&gt;, votereg &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   votereg_f &lt;dbl+lbl&gt;, regzip &lt;dbl+lbl&gt;, OScode &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CompRating &lt;dbl+lbl&gt;, region &lt;dbl+lbl&gt;, sample_group &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   ccesmodule &lt;dbl+lbl&gt;, CC18_300_1 &lt;dbl+lbl&gt;, CC18_300_2 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_300_3 &lt;dbl+lbl&gt;, CC18_300_4 &lt;dbl+lbl&gt;, CC18_300_5 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_300_6 &lt;dbl+lbl&gt;, CC18_300b &lt;dbl+lbl&gt;, CC18_300c &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_300d_1 &lt;dbl+lbl&gt;, CC18_300d_2 &lt;dbl+lbl&gt;, CC18_300d_3 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_300d_4 &lt;dbl+lbl&gt;, CC18_300d_5 &lt;dbl+lbl&gt;, CC18_301 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_302 &lt;dbl+lbl&gt;, CC18_303_1 &lt;dbl+lbl&gt;, CC18_303_2 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_303_3 &lt;dbl+lbl&gt;, CC18_303_4 &lt;dbl+lbl&gt;, CC18_303_5 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_303_6 &lt;dbl+lbl&gt;, CC18_303_7 &lt;dbl+lbl&gt;, CC18_303_8 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_303_9 &lt;dbl+lbl&gt;, CC18_303_10 &lt;dbl+lbl&gt;, CC18_303_11 &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_308a &lt;dbl+lbl&gt;, CC18_308b &lt;dbl+lbl&gt;, CC18_308c &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_308d &lt;dbl+lbl&gt;, CC18_308e &lt;dbl+lbl&gt;, CC18_309a &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_309b &lt;dbl+lbl&gt;, CC18_309c &lt;dbl+lbl&gt;, CC18_309d &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_310a &lt;dbl+lbl&gt;, CC18_310b &lt;dbl+lbl&gt;, CC18_310c &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_310d &lt;dbl+lbl&gt;, CC18_311a &lt;dbl+lbl&gt;, CC18_311b &lt;dbl+lbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   CC18_311c &lt;dbl+lbl&gt;, CC18_316 &lt;dbl+lbl&gt;, …</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

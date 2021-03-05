@@ -79,7 +79,7 @@ renames some variables to later merge with CCES-based regression models." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8</span>
       </span>
     </div>
 
@@ -159,6 +159,7 @@ renames some variables to later merge with CCES-based regression models.</p>
   <span class='va'>varlist</span>,
   varlab_df <span class='op'>=</span> <span class='fu'>ccesMRPprep</span><span class='fu'>::</span><span class='va'><a href='acscodes_df.html'>acscodes_df</a></span>,
   year <span class='op'>=</span> <span class='fl'>2018</span>,
+  states <span class='op'>=</span> <span class='cn'>NULL</span>,
   dataset <span class='op'>=</span> <span class='st'>"acs1"</span>,
   geography <span class='op'>=</span> <span class='st'>"congressional district"</span>
 <span class='op'>)</span></pre>
@@ -178,6 +179,11 @@ renames some variables to later merge with CCES-based regression models.</p>
       <th>year</th>
       <td><p>The year of the ACS to get. Because of data availability limitations, this is
 capped to 2010-2018.</p></td>
+    </tr>
+    <tr>
+      <th>states</th>
+      <td><p>A vector of states to subset to. Gets passed onto the new <code>state</code>
+argument in <code><a href='https://rdrr.io/pkg/tidycensus/man/get_acs.html'>tidycensus::get_acs()</a></code>, which defaults to NULL.</p></td>
     </tr>
     <tr>
       <th>dataset</th>
