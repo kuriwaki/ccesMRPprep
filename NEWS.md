@@ -1,7 +1,8 @@
-# ccesMRPprep 0.1.8++
+# ccesMRPprep 0.1.8
 
 * Introduce `synth_prod()`, `synth_mlogit()`, `synth_smoothfix()`
 * Add New York data as a third sample (`acs_NY`, `cc18_NY`, `elec_NY`)
+* Add option for states in `get_acs()`
 
 # ccesMRPprep 0.1.7
 
