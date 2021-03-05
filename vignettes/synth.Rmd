@@ -27,7 +27,7 @@ library(furrr)
 plan(multisession, workers = 6)
 ```
 
-Almost all survey weighting, whether MRP or not, face a data limitation that direct knowledge of the joint distributions of predictors (such as race, partisanship, and geography) are limited. There is a long tradition of statistical and applied work that seeks to expand the set of available interactions to poststratify on. These techniques can roughly be called synthetic population imputation. Again, there is a long tradition of this; iterative proportional fitting (Deming and Stephan), ecological inference, and latent factorization methods can be thought of as being related.
+Almost all survey weighting, whether MRP or not, face a data limitation that direct knowledge of the joint distributions of predictors (such as race, partisanship, and geography) are limited. There is a long tradition of statistical and applied work that can be grouped under the umbrella of synthetic population imputation: it seeks to expand the set of available interactions to poststratify on. The core idea has parallels in iterative proportional fitting (Deming and Stephan), ecological inference, and latent factorization methods.
 
 We can classify the main approaches by what outside data they leverage:
 
@@ -37,6 +37,7 @@ We can classify the main approaches by what outside data they leverage:
 | Use Microdata          | `synth_mlogit()` | Kastellec et al. (2015)|
 | Combine both           | `synth_smoothfix()` | Ghitza and Steiz (2020)|
 |                        | `synth_bmlogit()` |  Yamauchi (2021) |
+
 
 
 ## Validation of Multiple Methods
@@ -77,7 +78,7 @@ acs_syn_fix1 <- synth_smoothfix(race ~ female + age,
                                area_var = "cd")
 ```
 
-Yamauchi developed a multinomial logit that simultaneously imposes the same sort of balancing constraint. The benefit of this method is that the rake weighting does not nullify the survey data, and the tolerance range can be controlled.
+Yamauchi [developed](https://github.com/soichiroy/bmlogit) a multinomial logit that simultaneously imposes the same sort of balancing constraint. The benefit of this method is that the constraint is applied simultaneously with the estimation: the rake weighting does not nullify the survey data, and the tolerance range can be controlled.
 
 ```{r, warning=FALSE}
 acs_syn_fix2 <- synth_bmlogit(race ~ female + age, 
@@ -130,7 +131,7 @@ syn_val_long %>%
         panel.grid = element_blank())
 ```
 
-The first plot does not look great. The simple product does surprisingly well. It is after all perhaps not surprising that it is hard to estimate education from age bins and gender. The main difference seems to be that in all the other three cases, we are fixing outcomes to _CD-level_ education margins. _`bmlogit`_ would do worse, for example, if we only fixed to the _State-level_ margins.
+The first plot does not look great. The simple product does surprisingly well. It is after all perhaps not surprising that it is hard to estimate education from age bins and gender. The main difference seems to be that in all the other three cases, we are fixing outcomes to _CD-level_ education margins. `synth_bmlogit()` would do worse, for example, if we only fixed to the less granular _State-level_ margins.
 
 
 
@@ -206,8 +207,4 @@ plot_tiles(pop_bm, show_cd = "NY-14", "CCES fixed to CD Education Margins, NY-14
 ```
 
 
-Whereas the values would be the same regardless of district in the mlogit implemenation.
-
-```{r, echo=FALSE, fig.height=5, fig.width=6.2}
-plot_tiles(pop_svy, show_cd = "NY-14", "CCES Estimates (synth_mlogit), NY-14")
-```
+Whereas the values would be the same regardless of district in the mlogit implementation.
