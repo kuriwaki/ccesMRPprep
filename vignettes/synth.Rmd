@@ -38,6 +38,7 @@ We can classify the main approaches by what outside data they leverage:
 | Combine both           | `synth_smoothfix()` | Ghitza and Steiz (2020)|
 |                        | `synth_bmlogit()` |  Yamauchi (2021) |
 
+
 ## Validation of Multiple Methods
 
 We provide a simple set of functions to implement this. We extend the ACS table assisted by a survey model using a function called `synth_mlogit()`.

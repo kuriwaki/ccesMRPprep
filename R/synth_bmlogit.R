@@ -1,4 +1,6 @@
-#' Synthetic joint estimation with balancing
+#' Synthetic joint estimation with balancing constraint
+#'
+#' Imputes cells with a balancing constraint, using Yamauchi's algorithm.
 #'
 #' @param fix_to A dataset with only marginal counts or proportions of the outcome
 #'  in question, by each area. Proportions will be corrected so that the margins
@@ -8,7 +10,12 @@
 #'  input to a single target.
 #' @param tol Tolerance for balance
 #'
+#' @inheritParams synth_mlogit
 #' @seealso `synth_mlogit()`
+#'
+#' @source
+#'   Soichiro Yamauchi and Shiro Kuriwaki (2021). bmlogit: Multinomial logit with
+#'   balancing constraints. R package version 0.0.3.
 #'
 #' @importFrom bmlogit bmlogit
 #' @importFrom furrr future_map_dfr

@@ -2,7 +2,11 @@
 % Please edit documentation in R/synth_bmlogit.R
 \name{synth_bmlogit}
 \alias{synth_bmlogit}
-\title{Synthetic joint estimation with balancing}
+\title{Synthetic joint estimation with balancing constraint}
+\source{
+Soichiro Yamauchi and Shiro Kuriwaki (2021). bmlogit: Multinomial logit with
+balancing constraints. R package version 0.0.3.
+}
 \usage{
 synth_bmlogit(
   formula,
@@ -16,6 +20,16 @@ synth_bmlogit(
 )
 }
 \arguments{
+\item{formula}{A representation of the aggregate imputation or "outcome" model,
+of the form \verb{X_\{K\} ~ X_1 + ... X_\{K - 1\}}}
+
+\item{microdata}{The survey table that the multinomial model will be built off.
+Must contain all variables in the LHS and RHS of \code{formula}.}
+
+\item{poptable}{The population table, collapsed in terms of counts. Must contain
+all variables in the RHS of \code{formula}, as well as the variables specified in
+\code{area_var} and \code{count_var} below.}
+
 \item{fix_to}{A dataset with only marginal counts or proportions of the outcome
 in question, by each area. Proportions will be corrected so that the margins
 of the synthetic joint will match these, with a simple ratio.}
@@ -24,10 +38,15 @@ of the synthetic joint will match these, with a simple ratio.}
 TRUE if \code{area_var} is a variable in \code{fix_to}. If \code{FALSE}, collapses the
 input to a single target.}
 
+\item{area_var}{A character vector of the area of interest.}
+
+\item{count_var}{A character variable that specifies which variable in \code{poptable}
+indicates the count}
+
 \item{tol}{Tolerance for balance}
 }
 \description{
-Synthetic joint estimation with balancing
+Imputes cells with a balancing constraint, using Yamauchi's algorithm.
 }
 \examples{
 
