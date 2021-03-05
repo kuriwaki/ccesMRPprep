@@ -24,11 +24,11 @@
 #' # suppose we want know the distribution of (age x female) and we know the
 #' # distribution of (race), by CD, but we don't know the joint of the two.
 #'
-#' race_agg <- count(acs_race_NY, cd, race, wt = count, name = "count")
+#' race_target <- count(acs_race_NY, cd, race, wt = count, name = "count")
 #'
 #' pop_prod <- synth_prod(race ~ age + female,
 #'                        poptable = acs_race_NY,
-#'                        newtable = race_agg,
+#'                        newtable = race_target,
 #'                        area_var = "cd")
 #'
 #' # In this example, we know the true joint. Does it match?
@@ -90,11 +90,11 @@ synth_prod <- function(formula,
 #' # suppose we want know the distribution of (age x female) and we know the
 #' # distribution of (race), by CD, but we don't know the joint of the two.
 #'
-#' race_agg <- count(acs_race_NY, cd, race, wt = count, name = "count")
+#' race_target <- count(acs_race_NY, cd, race, wt = count, name = "count")
 #'
 #' rake_target(race ~ age + female,
 #'             poptable = acs_race_NY,
-#'             newtable = race_agg,
+#'             newtable = race_target,
 #'             area_var = "cd")
 #'
 rake_target <- function(formula,

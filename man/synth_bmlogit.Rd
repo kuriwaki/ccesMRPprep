@@ -49,7 +49,7 @@ indicates the count}
 Imputes cells with a balancing constraint, using Yamauchi's algorithm.
 }
 \examples{
-
+library(dplyr)
 # can take a few minutes if fix_by_area = TRUE (the default)
 educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
 pop_syn <- synth_bmlogit(educ ~ race + age + female,
