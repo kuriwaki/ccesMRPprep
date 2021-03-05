@@ -37,7 +37,7 @@ library(dplyr)
 # suppose we want know the distribution of (age x female) and we know the
 # distribution of (race), by CD, but we don't know the joint of the two.
 
-race_agg <- count(acs_NY, cd, race, wt = count, name = "count")
+race_agg <- count(acs_race_NY, cd, race, wt = count, name = "count")
 
 rake_target(race ~ age + female,
             poptable = acs_race_NY,
