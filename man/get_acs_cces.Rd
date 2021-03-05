@@ -8,6 +8,7 @@ get_acs_cces(
   varlist,
   varlab_df = ccesMRPprep::acscodes_df,
   year = 2018,
+  states = NULL,
   dataset = "acs1",
   geography = "congressional district"
 )
@@ -19,6 +20,9 @@ get_acs_cces(
 
 \item{year}{The year of the ACS to get. Because of data availability limitations, this is
 capped to 2010-2018.}
+
+\item{states}{A vector of states to subset to. Gets passed onto the new \code{state}
+argument in \code{tidycensus::get_acs()}, which defaults to NULL.}
 
 \item{dataset}{Which type of ACS to get. Defaults to \code{"acs1"} for ACS-5 year.
 Use \code{"acs5"} for 5-year.}
