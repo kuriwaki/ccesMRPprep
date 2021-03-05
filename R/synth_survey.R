@@ -38,14 +38,16 @@
 #'  if the variable of interest has `L` values, the final dataset will have
 #'  `L` times more rows than `poptarget`. The data will have additional variables:
 #'
-#'  * `n_aggregate`: The sum of counts known in the aggregate. i.e., the number of
-#'   trials the multinomial will consider. This is the sum of the original
-#'   `count` variables.
-#'  * The outcome variable of interest. For example if the LHS of the formula
+#'  * The outcome variable of interest (`Z`). For example if the LHS of the formula
 #'     was `party_id`, then there would be a column called `party_id` containing the
 #'     values of that variable in long form.
-#'  * `pr_pred`: The predicted probability of taking the value of the outcome. This
-#'   is the main output of the multinomial model.
+#'  * `prX`: The known distribution of the covriates (RHS) within the area, i.e.
+#'     `Pr(X | A)`.
+#'  * `prZ_givenX`: The main estimate from the multinomial logit model. Formally,
+#'     `Pr(Z | X, A)`, although this is usually the same value for every `A`
+#'     and thus equal to `Pr(Z | X)` unless `A` is on the RHS as well.
+#'  * `prXZ`: A new estimate for the joint distribution within the area, i.e.
+#'     `Pr(Z, X | A)`. Computed by `prX * prZ_givenX`.
 #'  * `count`: A new count variable. Simply the product of `n_aggregate` and `pr_pred`.
 #'
 #'
@@ -77,11 +79,11 @@
 #'
 #'  synth_acs <- synth_mlogit(pid3 ~ race + age + female,
 #'                            microdata = cc18_NY,
-#'                            poptable = acs_NY,
+#'                            poptable = acs_race_NY,
 #'                            area_var = "cd")
 #'
 #'  # original (27 districts x 2 sex x 5 age x 6 race categories)
-#'  count(acs_NY, cd, female, age, race, wt = count)
+#'  count(acs_race_NY, cd, female, age, race, wt = count)
 #'
 #'  # new, modeled (original x 5 party categories)
 #'  synth_acs
@@ -120,6 +122,7 @@ synth_mlogit <- function(formula,
 
   # ys (in microdata)
   y_m_mat <- model.matrix(outcome_form, microdata)
+  colnames(y_m_mat) <- levels(microdata[[outcome_var]])
 
   # Xs setup microdata
   X_m_mat <- model.matrix(X_form, microdata)[, -1]
@@ -131,30 +134,17 @@ synth_mlogit <- function(formula,
 
 
   # fit model
-  mlogit_fit <- emlogit(Y = y_m_mat, X = X_m_mat)
+  fit <- emlogit(Y = y_m_mat, X = X_m_mat)
 
-  # predict onto table
-  pred_df <- as_tibble(predict(mlogit_fit, newdata = X_p_mat))
-  pred_df <- bind_cols(X_p_df, pred_df)
-
-  # tidy
-  pred_long <- pred_df %>%
-    pivot_longer(
-      cols = -c(area_var, X_vars, "n_aggregate"),
-      names_prefix = outcome_var, # because model.matrix will put these in prefix
-      names_to = outcome_var, # name them as that
-      values_to = "pr_pred") %>%
-    mutate(!!sym(count_var) := n_aggregate*pr_pred)
-
-  # if original factor, make it back into a factor
-  # (it was deconstructed in model.matrix)
-  if (inherits(microdata[[outcome_var]], "factor")) {
-    pred_long[[outcome_var]] <- factor(pred_long[[outcome_var]],
-                                       levels = levels(microdata[[outcome_var]]))
-
-  }
-
-  pred_long
+  # predict and get predictions, formats
+  predict_longer(fit,
+                 poptable = poptable,
+                 microdata = microdata,
+                 X_form = X_form,
+                 X_vars = X_vars,
+                 area_var = area_var,
+                 count_var = count_var,
+                 outcome_var = outcome_var)
 }
 
 
@@ -173,25 +163,14 @@ synth_mlogit <- function(formula,
 #' # suppose we want know the distribution of (age x female) and we know the
 #' # distribution of (race), by CD, but we don't know the joint of the two.
 #'
-#' race_agg <- count(acs_NY, cd, race, wt = count, name = "count")
-#' pop_syn <- synth_smoothfix(race ~ age + female,
-#'                    microdata = cc18_NY,
-#'                    fix_to = race_agg,
-#'                    poptable = acs_NY,
-#'                    area_var = "cd")
+#' educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
+#' pop_syn <- synth_smoothfix(educ ~ race + age + female,
+#'                          microdata = cc18_NY,
+#'                          fix_to = educ_target,
+#'                          poptable = acs_race_NY,
+#'                          area_var = "cd")
 #'
 #'
-#'
-#' # In this example, we know the true joint. Does it match?
-#' pop_val <- left_join(pop_syn,
-#'                      count(acs_NY,  cd, age, female, race, wt = count, name = "count"),
-#'                      by = c("cd", "age", "female", "race"),
-#'                      suffix = c("_est", "_truth"))
-#'
-#' # AOC's district in the bronx
-#' pop_val %>%
-#'   filter(cd == "NY-14", age == "35 to 44 years", female == 0) %>%
-#'   select(cd, race, count_est, count_truth)
 #' @export
 synth_smoothfix <- function(formula,
                             microdata,
@@ -205,37 +184,17 @@ synth_smoothfix <- function(formula,
   # estimate cells
   smooth_tbl <- synth_mlogit(formula, microdata, poptable, area_var, count_var)
 
-
-  # aggregate this to the estimated X_{K}s
-  smooth_agg <- collapse_table(smooth_tbl,
-                               area_var = area_var,
-                               X_vars = outcome_var,
-                               count_var = count_var,
-                               report = "proportions",
-                               new_name = "pr_outcome_mlogit")
-
-  target_agg <- collapse_table(fix_to,
-                               area_var = area_var,
-                               X_vars = outcome_var,
-                               count_var = count_var,
-                               report = "proportions",
-                               new_name = "pr_outcome_tgt")
-
-  # correction factor
-  change_agg <- left_join(smooth_agg,
-                          target_agg,
-                          by = c(area_var, outcome_var)) %>%
-    transmute(
-      !!!syms(area_var),
-      !!sym(outcome_var),
-      correction = pr_outcome_tgt / pr_outcome_mlogit
-      )
+  change_agg <- rake_spf(outcome_var = outcome_var,
+                         data = smooth_tbl,
+                         fix_to = fix_to,
+                         area_var, count_var)
 
   # back to estimates
   smooth_tbl %>%
     left_join(change_agg, by = c(area_var, outcome_var)) %>%
     mutate(!!sym(count_var) := !!sym(count_var)*correction) %>%
-    select(-pr_pred, -correction) # pr_pred is outdated. correction is redudant with count.
+    select(-correction) %>%
+    select(-matches("prZ"), -matches("prXZ"))
 
   # fix margins
   # WHY DOES THIS GIVE SAME ANSWER AS THE PROD without survey
@@ -244,5 +203,6 @@ synth_smoothfix <- function(formula,
   #                         newtable = fix_to,
   #                         area_var,
   #                         count_var = "n_aggregate")
-
 }
+
+

@@ -38,16 +38,16 @@ library(dplyr)
 # suppose we want know the distribution of (age x female) and we know the
 # distribution of (race), by CD, but we don't know the joint of the two.
 
-race_agg <- count(acs_NY, cd, race, wt = count, name = "count")
+race_target <- count(acs_race_NY, cd, race, wt = count, name = "count")
 
 pop_prod <- synth_prod(race ~ age + female,
-                       poptable = acs_NY,
-                       newtable = race_agg,
+                       poptable = acs_race_NY,
+                       newtable = race_target,
                        area_var = "cd")
 
 # In this example, we know the true joint. Does it match?
 pop_val <- left_join(pop_prod,
-                     count(acs_NY,  cd, age, female, race, wt = count, name = "count"),
+                     count(acs_race_NY,  cd, age, female, race, wt = count, name = "count"),
                      by = c("cd", "age", "female", "race"),
                      suffix = c("_est", "_truth"))
 

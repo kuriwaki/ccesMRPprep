@@ -24,16 +24,16 @@
 #' # suppose we want know the distribution of (age x female) and we know the
 #' # distribution of (race), by CD, but we don't know the joint of the two.
 #'
-#' race_agg <- count(acs_NY, cd, race, wt = count, name = "count")
+#' race_target <- count(acs_race_NY, cd, race, wt = count, name = "count")
 #'
 #' pop_prod <- synth_prod(race ~ age + female,
-#'                        poptable = acs_NY,
-#'                        newtable = race_agg,
+#'                        poptable = acs_race_NY,
+#'                        newtable = race_target,
 #'                        area_var = "cd")
 #'
 #' # In this example, we know the true joint. Does it match?
 #' pop_val <- left_join(pop_prod,
-#'                      count(acs_NY,  cd, age, female, race, wt = count, name = "count"),
+#'                      count(acs_race_NY,  cd, age, female, race, wt = count, name = "count"),
 #'                      by = c("cd", "age", "female", "race"),
 #'                      suffix = c("_est", "_truth"))
 #'
@@ -70,3 +70,114 @@ synth_prod <- function(formula,
 }
 
 
+
+#' Create long table for rake weighitng
+#'
+#'
+#' @inheritParams synth_prod
+#'
+#' @importFrom dplyr full_join mutate
+#'
+#' @returns A long table that, for each districts, list the target distribution
+#'  of the outcome (`variable = "outcome"`) and the cell of the known Xs (`variable = "Xs`).
+#'  This is consistent with the dataframe format for targets in the
+#'  `autumn` package <https://github.com/aaronrudkin/autumn>
+#'
+#' @export
+#' @examples
+#' library(dplyr)
+#'
+#' # suppose we want know the distribution of (age x female) and we know the
+#' # distribution of (race), by CD, but we don't know the joint of the two.
+#'
+#' race_target <- count(acs_race_NY, cd, race, wt = count, name = "count")
+#'
+#' rake_target(race ~ age + female,
+#'             poptable = acs_race_NY,
+#'             newtable = race_target,
+#'             area_var = "cd")
+#'
+rake_target <- function(formula,
+                       poptable,
+                       newtable,
+                       area_var,
+                       count_var = "count") {
+  # formula setup
+  list2env(formula_parts(formula), envir = environment())
+
+
+  # aggregate this to the estimated X_{K}s
+  Xs_agg <- collapse_table(poptable,
+                           area_var = area_var,
+                           X_vars = X_vars,
+                           count_var = count_var,
+                           report = "proportions",
+                           new_name = "proportion") %>%
+    transmute(!!sym(area_var),
+              variable = "Xs",
+              label = str_c(!!!syms(X_vars), sep = "_"),
+              proportion
+              )
+
+
+  outcome_agg <- collapse_table(newtable,
+                                area_var = area_var,
+                                X_vars = outcome_var,
+                                count_var = count_var,
+                                report = "proportions",
+                                new_name = "proportion") %>%
+    transmute(!!sym(area_var),
+              variable = "outcome",
+              label = !!sym(outcome_var),
+              proportion
+              )
+
+  # target
+  tgt_stacked <- bind_rows(Xs_agg, outcome_agg) %>%
+    arrange(!!sym(area_var), variable)
+
+
+  # rake
+  tgt_stacked
+}
+
+#' Single Proportional Fitting (as opposed to Iterative) with microdata
+#'
+#' With microdata or a table that includes both
+#'
+#' @param outcome_var A string for the variable to match the proportion to
+#' @param data Data of microdata or tables whose margin on `outcom_var` must be fixed
+#'
+#'
+#' @inheritParams synth_mlogit
+#' @export
+rake_spf <- function(outcome_var,
+                     data,
+                     fix_to,
+                     area_var,
+                     count_var = "count") {
+
+  data_agg <- collapse_table(data,
+                             area_var = area_var,
+                             X_vars = outcome_var,
+                             count_var = count_var,
+                             report = "proportions",
+                             new_name = "pr_outcome_data")
+
+  target_agg <- collapse_table(fix_to,
+                               area_var = area_var,
+                               X_vars = outcome_var,
+                               count_var = count_var,
+                               report = "proportions",
+                               new_name = "pr_outcome_tgt")
+
+  # correction factor
+  left_join(data_agg,
+            target_agg,
+            by = c(area_var, outcome_var)) %>%
+    transmute(
+      !!!syms(area_var),
+      !!sym(outcome_var),
+      correction = pr_outcome_tgt / pr_outcome_data
+    )
+}

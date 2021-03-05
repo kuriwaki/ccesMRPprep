@@ -53,14 +53,16 @@ but with rows expanded to serve as a joint distribution. In general,
 if the variable of interest has \code{L} values, the final dataset will have
 \code{L} times more rows than \code{poptarget}. The data will have additional variables:
 \itemize{
-\item \code{n_aggregate}: The sum of counts known in the aggregate. i.e., the number of
-trials the multinomial will consider. This is the sum of the original
-\code{count} variables.
-\item The outcome variable of interest. For example if the LHS of the formula
+\item The outcome variable of interest (\code{Z}). For example if the LHS of the formula
 was \code{party_id}, then there would be a column called \code{party_id} containing the
 values of that variable in long form.
-\item \code{pr_pred}: The predicted probability of taking the value of the outcome. This
-is the main output of the multinomial model.
+\item \code{prX}: The known distribution of the covriates (RHS) within the area, i.e.
+\code{Pr(X | A)}.
+\item \code{prZ_givenX}: The main estimate from the multinomial logit model. Formally,
+\code{Pr(Z | X, A)}, although this is usually the same value for every \code{A}
+and thus equal to \code{Pr(Z | X)} unless \code{A} is on the RHS as well.
+\item \code{prXZ}: A new estimate for the joint distribution within the area, i.e.
+\code{Pr(Z, X | A)}. Computed by \code{prX * prZ_givenX}.
 \item \code{count}: A new count variable. Simply the product of \code{n_aggregate} and \code{pr_pred}.
 }
 }
@@ -93,11 +95,11 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS \url{http
 
  synth_acs <- synth_mlogit(pid3 ~ race + age + female,
                            microdata = cc18_NY,
-                           poptable = acs_NY,
+                           poptable = acs_race_NY,
                            area_var = "cd")
 
  # original (27 districts x 2 sex x 5 age x 6 race categories)
- count(acs_NY, cd, female, age, race, wt = count)
+ count(acs_race_NY, cd, female, age, race, wt = count)
 
  # new, modeled (original x 5 party categories)
  synth_acs
@@ -121,23 +123,12 @@ library(dplyr)
 # suppose we want know the distribution of (age x female) and we know the
 # distribution of (race), by CD, but we don't know the joint of the two.
 
-race_agg <- count(acs_NY, cd, race, wt = count, name = "count")
-pop_syn <- synth_smoothfix(race ~ age + female,
-                   microdata = cc18_NY,
-                   fix_to = race_agg,
-                   poptable = acs_NY,
-                   area_var = "cd")
+educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
+pop_syn <- synth_smoothfix(educ ~ race + age + female,
+                         microdata = cc18_NY,
+                         fix_to = educ_target,
+                         poptable = acs_race_NY,
+                         area_var = "cd")
 
 
-
-# In this example, we know the true joint. Does it match?
-pop_val <- left_join(pop_syn,
-                     count(acs_NY,  cd, age, female, race, wt = count, name = "count"),
-                     by = c("cd", "age", "female", "race"),
-                     suffix = c("_est", "_truth"))
-
-# AOC's district in the bronx
-pop_val \%>\%
-  filter(cd == "NY-14", age == "35 to 44 years", female == 0) \%>\%
-  select(cd, race, count_est, count_truth)
 }

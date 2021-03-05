@@ -11,3 +11,6 @@ R/my_API_tokens.R
 inst/doc
 data/input
 docs/
+
+
+vignettes/synth_cache
