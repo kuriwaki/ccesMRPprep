@@ -1,8 +1,9 @@
 #' Recode CCES variables so that they merge to ACS variables
 #'
-#' @param tbl A subset of the cumulative common content. Must include variables
+#' @param tbl The cumulative common content. It can be any subset but must include variables
 #'  \code{age}, \code{race}, \code{educ}, \code{gender}, \code{st}, \code{state},
-#'  and \code{cd}. See \link{ccc_samp} for an example.
+#'  and \code{cd}. Factor variables must a haven_labelled class variable as is
+#'  the output of \code{get_cces_dataverse("cumulative")}. See \link{ccc_samp} for an example.
 #' @param only_demog Drop variables besides demographics? Defaults to FALSE
 #' @param age_key The vector key to use to bin age. Can be `deframe(age5_key)` or `deframe(age10_key)`
 #'
@@ -104,6 +105,8 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(cces
     # age
     mutate(age_orig = .data$age,
            age = ccc_bin_age(.data$age, agelbl = age_key)) %>%
+    # gender
+    mutate(female = as.numeric(.data$gender == 2)) %>%
     # race
     rename(race_cces_chr = .data$race) %>%
     mutate(race_cces_chr = as.character(as_factor(.data$race_cces_chr))) %>%
@@ -119,6 +122,7 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(cces
            matches("weight"),
            matches("(state|st|cd|dist)"),
            matches("gender"),
+           female,
            matches("pid3$"),
            matches("age"),
            matches("educ"),
