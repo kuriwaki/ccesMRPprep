@@ -114,6 +114,9 @@ if one knows the marginals.See Details." />
     <li>
       <a href="../articles/cps.html">CPS Overview</a>
     </li>
+    <li>
+      <a href="../articles/synth.html">Synthetic Target Estimation</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -219,14 +222,16 @@ Working Paper. <a href='https://github.com/Catalist-LLC/unemployment'>https://gi
 but with rows expanded to serve as a joint distribution. In general,
 if the variable of interest has <code>L</code> values, the final dataset will have
 <code>L</code> times more rows than <code>poptarget</code>. The data will have additional variables:</p><ul>
-<li><p><code>n_aggregate</code>: The sum of counts known in the aggregate. i.e., the number of
-trials the multinomial will consider. This is the sum of the original
-<code>count</code> variables.</p></li>
-<li><p>The outcome variable of interest. For example if the LHS of the formula
+<li><p>The outcome variable of interest (<code>Z</code>). For example if the LHS of the formula
 was <code>party_id</code>, then there would be a column called <code>party_id</code> containing the
 values of that variable in long form.</p></li>
-<li><p><code>pr_pred</code>: The predicted probability of taking the value of the outcome. This
-is the main output of the multinomial model.</p></li>
+<li><p><code>prX</code>: The known distribution of the covriates (RHS) within the area, i.e.
+<code>Pr(X | A)</code>.</p></li>
+<li><p><code>prZ_givenX</code>: The main estimate from the multinomial logit model. Formally,
+<code>Pr(Z | X, A)</code>, although this is usually the same value for every <code>A</code>
+and thus equal to <code>Pr(Z | X)</code> unless <code>A</code> is on the RHS as well.</p></li>
+<li><p><code>prXZ</code>: A new estimate for the joint distribution within the area, i.e.
+<code>Pr(Z, X | A)</code>. Computed by <code>prX * prZ_givenX</code>.</p></li>
 <li><p><code>count</code>: A new count variable. Simply the product of <code>n_aggregate</code> and <code>pr_pred</code>.</p></li>
 </ul>
 
@@ -253,11 +258,11 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS <a href='
 
  <span class='va'>synth_acs</span> <span class='op'>&lt;-</span> <span class='fu'>synth_mlogit</span><span class='op'>(</span><span class='va'>pid3</span> <span class='op'>~</span> <span class='va'>race</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>female</span>,
                            microdata <span class='op'>=</span> <span class='va'>cc18_NY</span>,
-                           poptable <span class='op'>=</span> <span class='va'>acs_NY</span>,
+                           poptable <span class='op'>=</span> <span class='va'>acs_race_NY</span>,
                            area_var <span class='op'>=</span> <span class='st'>"cd"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: NAs in the microdata -- dropping data</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: NAs in the microdata -- dropping data</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='input'>
  <span class='co'># original (27 districts x 2 sex x 5 age x 6 race categories)</span>
- <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_NY</span>, <span class='va'>cd</span>, <span class='va'>female</span>, <span class='va'>age</span>, <span class='va'>race</span>, wt <span class='op'>=</span> <span class='va'>count</span><span class='op'>)</span>
+ <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_race_NY</span>, <span class='va'>cd</span>, <span class='va'>female</span>, <span class='va'>age</span>, <span class='va'>race</span>, wt <span class='op'>=</span> <span class='va'>count</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,620 x 5</span><span>
 #&gt;    cd    female age            race                n
 #&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -274,19 +279,19 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS <a href='
 #&gt; </span><span style='color: #949494;'># … with 1,610 more rows</span><span></div><div class='input'>
  <span class='co'># new, modeled (original x 5 party categories)</span>
  <span class='va'>synth_acs</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 8,100 x 8</span><span>
-#&gt;    cd    race  age            female n_aggregate pid3        pr_pred count
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Democrat     0.365  </span><span style='text-decoration: underline;'>7</span><span>516.
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Republican   0.253  </span><span style='text-decoration: underline;'>5</span><span>206.
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Independent  0.251  </span><span style='text-decoration: underline;'>5</span><span>180.
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Other        0.061</span><span style='text-decoration: underline;'>2</span><span> </span><span style='text-decoration: underline;'>1</span><span>261.
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> NY-01 White 18 to 24 years      0       </span><span style='text-decoration: underline;'>20</span><span>604 Not Sure     0.070</span><span style='text-decoration: underline;'>0</span><span> </span><span style='text-decoration: underline;'>1</span><span>441.
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Democrat     0.391  </span><span style='text-decoration: underline;'>8</span><span>013.
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Republican   0.220  </span><span style='text-decoration: underline;'>4</span><span>504.
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Independent  0.186  </span><span style='text-decoration: underline;'>3</span><span>800.
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Other        0.038</span><span style='text-decoration: underline;'>4</span><span>  786.
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> NY-01 White 18 to 24 years      1       </span><span style='text-decoration: underline;'>20</span><span>481 Not Sure     0.165  </span><span style='text-decoration: underline;'>3</span><span>378.
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 8,100 x 9</span><span>
+#&gt;    cd    race  age            female    prX pid3        prZ_givenX    prXZ count
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Democrat        0.365  0.013</span><span style='text-decoration: underline;'>0</span><span>  </span><span style='text-decoration: underline;'>7</span><span>516.
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Republican      0.253  0.009</span><span style='text-decoration: underline;'>03</span><span> </span><span style='text-decoration: underline;'>5</span><span>206.
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Independent     0.251  0.008</span><span style='text-decoration: underline;'>99</span><span> </span><span style='text-decoration: underline;'>5</span><span>180.
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Other           0.061</span><span style='text-decoration: underline;'>2</span><span> 0.002</span><span style='text-decoration: underline;'>19</span><span> </span><span style='text-decoration: underline;'>1</span><span>261.
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Not Sure        0.070</span><span style='text-decoration: underline;'>0</span><span> 0.002</span><span style='text-decoration: underline;'>50</span><span> </span><span style='text-decoration: underline;'>1</span><span>441.
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Democrat        0.391  0.013</span><span style='text-decoration: underline;'>9</span><span>  </span><span style='text-decoration: underline;'>8</span><span>013.
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Republican      0.220  0.007</span><span style='text-decoration: underline;'>82</span><span> </span><span style='text-decoration: underline;'>4</span><span>504.
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Independent     0.186  0.006</span><span style='text-decoration: underline;'>59</span><span> </span><span style='text-decoration: underline;'>3</span><span>800.
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Other           0.038</span><span style='text-decoration: underline;'>4</span><span> 0.001</span><span style='text-decoration: underline;'>36</span><span>  786.
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Not Sure        0.165  0.005</span><span style='text-decoration: underline;'>86</span><span> </span><span style='text-decoration: underline;'>3</span><span>378.
 #&gt; </span><span style='color: #949494;'># … with 8,090 more rows</span><span></div><div class='input'>
  <span class='co'># See the data elec_NY to see if these numbers look reasonable.</span>
 
@@ -307,34 +312,15 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS <a href='
 <span class='co'># suppose we want know the distribution of (age x female) and we know the</span>
 <span class='co'># distribution of (race), by CD, but we don't know the joint of the two.</span>
 
-<span class='va'>race_agg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_NY</span>, <span class='va'>cd</span>, <span class='va'>race</span>, wt <span class='op'>=</span> <span class='va'>count</span>, name <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>
-<span class='va'>pop_syn</span> <span class='op'>&lt;-</span> <span class='fu'>synth_smoothfix</span><span class='op'>(</span><span class='va'>race</span> <span class='op'>~</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>female</span>,
-                   microdata <span class='op'>=</span> <span class='va'>cc18_NY</span>,
-                   fix_to <span class='op'>=</span> <span class='va'>race_agg</span>,
-                   poptable <span class='op'>=</span> <span class='va'>acs_NY</span>,
-                   area_var <span class='op'>=</span> <span class='st'>"cd"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='input'>
+<span class='va'>educ_target</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_educ_NY</span>, <span class='va'>cd</span>, <span class='va'>educ</span>, wt <span class='op'>=</span> <span class='va'>count</span>, name <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>
+<span class='va'>pop_syn</span> <span class='op'>&lt;-</span> <span class='fu'>synth_smoothfix</span><span class='op'>(</span><span class='va'>educ</span> <span class='op'>~</span> <span class='va'>race</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>female</span>,
+                         microdata <span class='op'>=</span> <span class='va'>cc18_NY</span>,
+                         fix_to <span class='op'>=</span> <span class='va'>educ_target</span>,
+                         poptable <span class='op'>=</span> <span class='va'>acs_race_NY</span>,
+                         area_var <span class='op'>=</span> <span class='st'>"cd"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='input'>
 
-
-<span class='co'># In this example, we know the true joint. Does it match?</span>
-<span class='va'>pop_val</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>pop_syn</span>,
-                     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_NY</span>,  <span class='va'>cd</span>, <span class='va'>age</span>, <span class='va'>female</span>, <span class='va'>race</span>, wt <span class='op'>=</span> <span class='va'>count</span>, name <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>,
-                     by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cd"</span>, <span class='st'>"age"</span>, <span class='st'>"female"</span>, <span class='st'>"race"</span><span class='op'>)</span>,
-                     suffix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"_est"</span>, <span class='st'>"_truth"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># AOC's district in the bronx</span>
-<span class='va'>pop_val</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>cd</span> <span class='op'>==</span> <span class='st'>"NY-14"</span>, <span class='va'>age</span> <span class='op'>==</span> <span class='st'>"35 to 44 years"</span>, <span class='va'>female</span> <span class='op'>==</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>cd</span>, <span class='va'>race</span>, <span class='va'>count_est</span>, <span class='va'>count_truth</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 6 x 4</span><span>
-#&gt;   cd    race            count_est count_truth
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> NY-14 White              </span><span style='text-decoration: underline;'>13</span><span>691.       </span><span style='text-decoration: underline;'>11</span><span>312
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> NY-14 Black               </span><span style='text-decoration: underline;'>7</span><span>558.        </span><span style='text-decoration: underline;'>6</span><span>578
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> NY-14 Hispanic           </span><span style='text-decoration: underline;'>43</span><span>951.       </span><span style='text-decoration: underline;'>34</span><span>668
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> NY-14 Asian              </span><span style='text-decoration: underline;'>16</span><span>017.       </span><span style='text-decoration: underline;'>11</span><span>373
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> NY-14 Native American        0            0
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> NY-14 All Other          </span><span style='text-decoration: underline;'>17</span><span>010.       </span><span style='text-decoration: underline;'>18</span><span>239</div></span></pre>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

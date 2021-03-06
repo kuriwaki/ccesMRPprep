@@ -64,10 +64,22 @@
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/namevalue.html</loc>
   </url>
   <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/predict_longer.html</loc>
+  </url>
+  <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/questions_samp.html</loc>
   </url>
   <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/rake_spf.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/rake_target.html</loc>
+  </url>
+  <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/std_acs_cdformat.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/synth_bmlogit.html</loc>
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/synth_mlogit.html</loc>
@@ -89,5 +101,8 @@
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/articles/overview.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/synth.html</loc>
   </url>
 </urlset>

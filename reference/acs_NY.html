@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample cumulative CCES data — acs_NY • ccesMRPprep</title>
+<title>Three-way ACS Tables for New York — acs_educ_NY • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,10 +45,11 @@
 
 
 
-<meta property="og:title" content="Sample cumulative CCES data — acs_NY" />
+<meta property="og:title" content="Three-way ACS Tables for New York — acs_educ_NY" />
 <meta property="og:description" content="Table of counts by CD from the 2018 one-year ACS in New York. We load the
-variables that roughly partition gender, age, and sex. That is, this is the
-output of get_acs_cces(acscodes_age_sex_race)." />
+variables that roughly partition gender, age, and race. We get another
+three way table of gender, age, and education. That is, this is the
+output of get_acs_cces(acscodes_age_sex_race) and get_acs_cces(acscodes_age_sex_educ)." />
 
 
 
@@ -114,6 +115,9 @@ output of get_acs_cces(acscodes_age_sex_race)." />
     <li>
       <a href="../articles/cps.html">CPS Overview</a>
     </li>
+    <li>
+      <a href="../articles/synth.html">Synthetic Target Estimation</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -146,23 +150,27 @@ output of get_acs_cces(acscodes_age_sex_race)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample cumulative CCES data</h1>
+    <h1>Three-way ACS Tables for New York</h1>
     <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/datadoc_acs-tables.R'><code>R/datadoc_acs-tables.R</code></a></small>
     <div class="hidden name"><code>acs_NY.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Table of counts by CD from the 2018 one-year ACS in New York. We load the
-variables that roughly partition gender, age, and sex. That is, this is the
-output of <code><a href='get_acs_cces.html'>get_acs_cces(acscodes_age_sex_race)</a></code>.</p>
+variables that roughly partition gender, age, and race. We get another
+three way table of gender, age, and education. That is, this is the
+output of <code><a href='get_acs_cces.html'>get_acs_cces(acscodes_age_sex_race)</a></code> and <code><a href='get_acs_cces.html'>get_acs_cces(acscodes_age_sex_educ)</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='va'>acs_NY</span></pre>
+    <pre class="usage"><span class='va'>acs_educ_NY</span>
+
+<span class='va'>acs_race_NY</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 4320 rows and 6 columns.</p>
+    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 1890 rows and 6 columns.</p>
+<p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 4320 rows and 6 columns.</p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>Kyle Walker and Matt Herman (2021). tidycensus: Load US Census Boundary and Attribute Data as
@@ -171,7 +179,7 @@ output of <code><a href='get_acs_cces.html'>get_acs_cces(acscodes_age_sex_race)<
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'> <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tibble.tidyverse.org/'>tibble</a></span><span class='op'>)</span>
- <span class='va'>acs_NY</span>
+ <span class='va'>acs_race_NY</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4,320 x 6</span><span>
 #&gt;     year cd    female race  age               count
 #&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -185,7 +193,21 @@ output of <code><a href='get_acs_cces.html'>get_acs_cces(acscodes_age_sex_race)<
 #&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 Black 65 years and over   781
 #&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 Black 65 years and over   624
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 Black 65 years and over   133
-#&gt; </span><span style='color: #949494;'># … with 4,310 more rows</span><span></div><div class='input'>
+#&gt; </span><span style='color: #949494;'># … with 4,310 more rows</span><span></div><div class='input'> <span class='va'>acs_educ_NY</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1,890 x 6</span><span>
+#&gt;     year cd    female educ         age            count
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 HS or Less   18 to 24 years   394
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 HS or Less   18 to 24 years  </span><span style='text-decoration: underline;'>2</span><span>066
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 HS or Less   18 to 24 years </span><span style='text-decoration: underline;'>10</span><span>330
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 Some College 18 to 24 years </span><span style='text-decoration: underline;'>13</span><span>334
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 Some College 18 to 24 years  </span><span style='text-decoration: underline;'>2</span><span>064
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 4-Year       18 to 24 years  </span><span style='text-decoration: underline;'>4</span><span>584
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 Post-Grad    18 to 24 years   155
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 HS or Less   25 to 34 years  </span><span style='text-decoration: underline;'>1</span><span>718
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 HS or Less   25 to 34 years  </span><span style='text-decoration: underline;'>1</span><span>349
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 NY-01      0 HS or Less   25 to 34 years </span><span style='text-decoration: underline;'>10</span><span>853
+#&gt; </span><span style='color: #949494;'># … with 1,880 more rows</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

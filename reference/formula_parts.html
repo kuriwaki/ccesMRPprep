@@ -113,6 +113,9 @@ the items of the list on your environment." />
     <li>
       <a href="../articles/cps.html">CPS Overview</a>
     </li>
+    <li>
+      <a href="../articles/synth.html">Synthetic Target Estimation</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -168,6 +171,26 @@ of the form <code>X_{K} ~ X_1 + ... X_{K - 1}</code></p></td>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'> <span class='fu'>ccesMRPprep</span><span class='fu'>:::</span><span class='fu'>formula_parts</span><span class='op'>(</span><span class='va'>race</span> <span class='op'>~</span> <span class='va'>female</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>edu</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $Form
+#&gt; race ~ female + age + edu
+#&gt; &lt;environment: 0x7fc9736522b0&gt;
+#&gt; 
+#&gt; $outcome_var
+#&gt; [1] "race"
+#&gt; 
+#&gt; $outcome_form
+#&gt; ~race - 1
+#&gt; &lt;environment: 0x7fc9735f8dd8&gt;
+#&gt; 
+#&gt; $X_form
+#&gt; ~female + age + edu
+#&gt; &lt;environment: 0x7fc9736522b0&gt;
+#&gt; 
+#&gt; $X_vars
+#&gt; [1] "female" "age"    "edu"   
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

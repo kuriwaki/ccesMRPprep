@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Model synthetic joint distribution with simple product — synth_prod • ccesMRPprep</title>
+<title>Synthetic joint estimation with balancing constraint — synth_bmlogit • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,8 @@
 
 
 
-<meta property="og:title" content="Model synthetic joint distribution with simple product — synth_prod" />
-<meta property="og:description" content="Estimates joint distribution by simply assuming independence and multiplying
-proportions." />
+<meta property="og:title" content="Synthetic joint estimation with balancing constraint — synth_bmlogit" />
+<meta property="og:description" content="Imputes cells with a balancing constraint, using Yamauchi's algorithm." />
 
 
 
@@ -148,17 +147,25 @@ proportions." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Model synthetic joint distribution with simple product</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/synth_rake.R'><code>R/synth_rake.R</code></a></small>
-    <div class="hidden name"><code>synth_prod.Rd</code></div>
+    <h1>Synthetic joint estimation with balancing constraint</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/synth_bmlogit.R'><code>R/synth_bmlogit.R</code></a></small>
+    <div class="hidden name"><code>synth_bmlogit.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Estimates joint distribution by simply assuming independence and multiplying
-proportions.</p>
+    <p>Imputes cells with a balancing constraint, using Yamauchi's algorithm.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>synth_prod</span><span class='op'>(</span><span class='va'>formula</span>, <span class='va'>poptable</span>, <span class='va'>newtable</span>, <span class='va'>area_var</span>, count_var <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>synth_bmlogit</span><span class='op'>(</span>
+  <span class='va'>formula</span>,
+  <span class='va'>microdata</span>,
+  <span class='va'>poptable</span>,
+  <span class='va'>fix_to</span>,
+  fix_by_area <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/any.html'>any</a></span><span class='op'>(</span><span class='va'>area_var</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>fix_to</span><span class='op'>)</span><span class='op'>)</span>,
+  <span class='va'>area_var</span>,
+  count_var <span class='op'>=</span> <span class='st'>"count"</span>,
+  tol <span class='op'>=</span> <span class='fl'>0.05</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,15 +176,27 @@ proportions.</p>
 of the form <code>X_{K} ~ X_1 + ... X_{K - 1}</code></p></td>
     </tr>
     <tr>
+      <th>microdata</th>
+      <td><p>The survey table that the multinomial model will be built off.
+Must contain all variables in the LHS and RHS of <code>formula</code>.</p></td>
+    </tr>
+    <tr>
       <th>poptable</th>
       <td><p>The population table, collapsed in terms of counts. Must contain
 all variables in the RHS of <code>formula</code>, as well as the variables specified in
 <code>area_var</code> and <code>count_var</code> below.</p></td>
     </tr>
     <tr>
-      <th>newtable</th>
-      <td><p>A dataset that contains marginal counts or proportions. Will be
-collapsed internally to get simple proportions.</p></td>
+      <th>fix_to</th>
+      <td><p>A dataset with only marginal counts or proportions of the outcome
+in question, by each area. Proportions will be corrected so that the margins
+of the synthetic joint will match these, with a simple ratio.</p></td>
+    </tr>
+    <tr>
+      <th>fix_by_area</th>
+      <td><p>logical, whether to fix to targets area by area. Defaults to
+TRUE if <code>area_var</code> is a variable in <code>fix_to</code>. If <code>FALSE</code>, collapses the
+input to a single target.</p></td>
     </tr>
     <tr>
       <th>area_var</th>
@@ -188,52 +207,30 @@ collapsed internally to get simple proportions.</p></td>
       <td><p>A character variable that specifies which variable in <code>poptable</code>
 indicates the count</p></td>
     </tr>
+    <tr>
+      <th>tol</th>
+      <td><p>Tolerance for balance</p></td>
+    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>That is, we already know <code>p(X_{1}, ..., X_{K - 1}, A)</code> from <code>poptable</code>
-and a marginal <code>p(X_{K}, A)</code>from the additional distribution to weight to. Then
-<code>p(X_{1}, .., X_{K - 1}, X_{K}, A) = p(X_{1}, ..., X_{K - 1}, A) x p(X_{K}, A)</code>.</p>
+    <p>Soichiro Yamauchi and Shiro Kuriwaki (2021). bmlogit: Multinomial logit with
+balancing constraints. R package version 0.0.3.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='synth_mlogit.html'>synth_mlogit()</a></code> for a more nuanced model that uses survey data as
-the basis of the joint estimation.</p></div>
+    <div class='dont-index'><p><code><a href='synth_mlogit.html'>synth_mlogit()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-
-<span class='co'># suppose we want know the distribution of (age x female) and we know the</span>
-<span class='co'># distribution of (race), by CD, but we don't know the joint of the two.</span>
-
-<span class='va'>race_target</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_race_NY</span>, <span class='va'>cd</span>, <span class='va'>race</span>, wt <span class='op'>=</span> <span class='va'>count</span>, name <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>
-
-<span class='va'>pop_prod</span> <span class='op'>&lt;-</span> <span class='fu'>synth_prod</span><span class='op'>(</span><span class='va'>race</span> <span class='op'>~</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>female</span>,
-                       poptable <span class='op'>=</span> <span class='va'>acs_race_NY</span>,
-                       newtable <span class='op'>=</span> <span class='va'>race_target</span>,
-                       area_var <span class='op'>=</span> <span class='st'>"cd"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='input'>
-<span class='co'># In this example, we know the true joint. Does it match?</span>
-<span class='va'>pop_val</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>pop_prod</span>,
-                     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_race_NY</span>,  <span class='va'>cd</span>, <span class='va'>age</span>, <span class='va'>female</span>, <span class='va'>race</span>, wt <span class='op'>=</span> <span class='va'>count</span>, name <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>,
-                     by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cd"</span>, <span class='st'>"age"</span>, <span class='st'>"female"</span>, <span class='st'>"race"</span><span class='op'>)</span>,
-                     suffix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"_est"</span>, <span class='st'>"_truth"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># AOC's district in the bronx</span>
-<span class='va'>pop_val</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>cd</span> <span class='op'>==</span> <span class='st'>"NY-14"</span>, <span class='va'>age</span> <span class='op'>==</span> <span class='st'>"35 to 44 years"</span>, <span class='va'>female</span> <span class='op'>==</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>cd</span>, <span class='va'>race</span>, <span class='va'>count_est</span>, <span class='va'>count_truth</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 4</span><span>
-#&gt;   cd    race            count_est count_truth
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> NY-14 White              </span><span style='text-decoration: underline;'>15</span><span>269.       </span><span style='text-decoration: underline;'>11</span><span>312
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> NY-14 Black               </span><span style='text-decoration: underline;'>7</span><span>444.        </span><span style='text-decoration: underline;'>6</span><span>578
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> NY-14 Hispanic           </span><span style='text-decoration: underline;'>30</span><span>824.       </span><span style='text-decoration: underline;'>34</span><span>668
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> NY-14 Asian              </span><span style='text-decoration: underline;'>11</span><span>730.       </span><span style='text-decoration: underline;'>11</span><span>373
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> NY-14 Native American        0            0
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> NY-14 All Other          </span><span style='text-decoration: underline;'>16</span><span>904.       </span><span style='text-decoration: underline;'>18</span><span>239</div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='co'># can take a few minutes if fix_by_area = TRUE (the default)</span>
+<span class='va'>educ_target</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_educ_NY</span>, <span class='va'>cd</span>, <span class='va'>educ</span>, wt <span class='op'>=</span> <span class='va'>count</span>, name <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>
+<span class='va'>pop_syn</span> <span class='op'>&lt;-</span> <span class='fu'>synth_bmlogit</span><span class='op'>(</span><span class='va'>educ</span> <span class='op'>~</span> <span class='va'>race</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>female</span>,
+                         microdata <span class='op'>=</span> <span class='va'>cc18_NY</span>,
+                         fix_to <span class='op'>=</span> <span class='va'>educ_target</span>,
+                         poptable <span class='op'>=</span> <span class='va'>acs_race_NY</span>,
+                         area_var <span class='op'>=</span> <span class='st'>"cd"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some population combinations have zero people</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

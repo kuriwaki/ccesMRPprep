@@ -6,7 +6,8 @@ articles:
   cps: cps.html
   derived: derived.html
   overview: overview.html
-last_built: 2021-03-05T19:38Z
+  synth: synth.html
+last_built: 2021-03-06T00:17Z
 urls:
   reference: https://kuriwaki.github.io/ccesMRPprep/reference
   article: https://kuriwaki.github.io/ccesMRPprep/articles
