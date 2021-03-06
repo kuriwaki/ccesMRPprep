@@ -68,7 +68,7 @@ and thus equal to \code{Pr(Z | X)} unless \code{A} is on the RHS as well.
 }
 \description{
 Imputes the counts of a joint distribution of count variables for small areas
-based on microdata. \code{synth_smoothfix()} is basically \code{synth_mlogit()()} which is then corrected by
+based on microdata. \code{synth_smoothfix()} is basically \code{synth_mlogit()} which is then corrected by
 if one knows the marginals.See Details.
 }
 \details{

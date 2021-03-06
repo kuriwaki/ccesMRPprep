@@ -2,7 +2,7 @@
 #' Model synthetic joint distribution with multinomial logit
 #'
 #' Imputes the counts of a joint distribution of count variables for small areas
-#' based on microdata. `synth_smoothfix()` is basically `synth_mlogit()()` which is then corrected by
+#' based on microdata. `synth_smoothfix()` is basically `synth_mlogit()` which is then corrected by
 #' if one knows the marginals.See Details.
 #'
 #' @details
