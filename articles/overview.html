@@ -119,7 +119,7 @@
 <div id="step-1--downloading-cces-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-1--downloading-cces-data" class="anchor"></a><strong>Step 1.</strong> Downloading CCES data</h2>
-<p>All CCES data can be downloaded directly from dataverse, using the development version of the <a href="https://github.com/IQSS/dataverse-client-r"><code>dataverse</code></a> R package. The function <code><a href="../reference/get_cces_dataverse.html">get_cces_dataverse()</a></code> will make this quick and simple - you only need to specify the name of the dataset, given in <code><a href="../reference/cces_dv_ids.html">?cces_dv_ids</a></code>.</p>
+<p>All CCES data can be downloaded directly from dataverse, using the <a href="https://cran.r-project.org/package=dataverse"><code>dataverse</code></a> R package. The function <code><a href="../reference/get_cces_dataverse.html">get_cces_dataverse()</a></code> will make this quick and simple - you only need to specify the name of the dataset, given in <code><a href="../reference/cces_dv_ids.html">?cces_dv_ids</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># may take about 30 seconds to download</span>
 <span class="va">ccc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_cces_dataverse.html">get_cces_dataverse</a></span><span class="op">(</span><span class="st">"cumulative"</span><span class="op">)</span></code></pre></div>
@@ -150,7 +150,16 @@
 <p>See <code><a href="../reference/get_cces_question.html">get_cces_question()</a></code> for how to get the <em>outcome</em> data, which is a single column from another CCES dataset. This still relies on a flat file being pre-downloaded (via <code><a href="../reference/get_cces_dataverse.html">get_cces_dataverse()</a></code>).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ccc_std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ccc_std_demographics.html">ccc_std_demographics</a></span><span class="op">(</span><span class="va">ccc_samp</span><span class="op">)</span>
-<span class="co">#&gt; age variable modified to bins. Original age variable is now in age_orig.</span></code></pre></div>
+<span class="co">#&gt; age variable modified to bins. Original age variable is now in age_orig.</span>
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">ccc_std</span>, <span class="va">age</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 5 x 2</span>
+<span class="co">#&gt;                     age     n</span>
+<span class="co">#&gt;               &lt;int+lbl&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1 1 [18 to 24 years]       75</span>
+<span class="co">#&gt; 2 2 [25 to 34 years]      160</span>
+<span class="co">#&gt; 3 3 [35 to 44 years]      145</span>
+<span class="co">#&gt; 4 4 [45 to 64 years]      426</span>
+<span class="co">#&gt; 5 5 [65 years and over]   194</span></code></pre></div>
 </div>
 <div id="step-3--define-a-model-specification" class="section level2">
 <h2 class="hasAnchor">
@@ -161,41 +170,11 @@
 <p>where <code>response</code> is a binary variable or a factor/character variable that can be coerced to one using <code><a href="../reference/yesno_to_binary.html">yesno_to_binary()</a></code>.</p>
 <p>A prior could be specified here as well, but this is not strictly necessary and can be defined when fitting the model.</p>
 </div>
-<div id="step-4--collapsing-the-cces-data" class="section level2">
+<div id="step-4--download-acs-census-datasets-for-post-stratification" class="section level2">
 <h2 class="hasAnchor">
-<a href="#step-4--collapsing-the-cces-data" class="anchor"></a><strong>Step 4.</strong> Collapsing the CCES data</h2>
-<p>For speed, we collapse the individual-level data where each outcome is binary to a count dataset where each row is a cell (with a trial and success value). This form also makes drawing posteriors much easier in the next step. We use <code><a href="../reference/build_counts.html">build_counts()</a></code> for this, which takes a individual-level dataset (built from <code><a href="../reference/ccc_std_demographics.html">ccc_std_demographics()</a></code>, or further passed through <code><a href="../reference/cces_join_slim.html">cces_join_slim()</a></code> for all relevant outcomes and predictors).</p>
+<a href="#step-4--download-acs-census-datasets-for-post-stratification" class="anchor"></a><strong>Step 4.</strong> Download ACS (Census) datasets for post-stratification</h2>
+<p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. Tailored lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">02138</span><span class="op">)</span>
-<span class="va">ccc_samp_std</span> <span class="op">&lt;-</span> <span class="va">ccc_samp</span> <span class="op">%&gt;%</span> 
-   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"For"</span>, <span class="st">"Against"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-   <span class="fu"><a href="../reference/ccc_std_demographics.html">ccc_std_demographics</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; age variable modified to bins. Original age variable is now in age_orig.</span>
-
-<span class="va">ccc_samp_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_counts.html">build_counts</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">educ</span>,
-                             <span class="va">ccc_samp_std</span><span class="op">)</span>
-
-<span class="va">ccc_samp_out</span>
-<span class="co">#&gt; # A tibble: 39 x 5</span>
-<span class="co">#&gt;    age            gender educ         n_response   yes</span>
-<span class="co">#&gt;    &lt;fct&gt;          &lt;fct&gt;  &lt;fct&gt;             &lt;int&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 18 to 24 years Male   HS or Less            9     5</span>
-<span class="co">#&gt;  2 18 to 24 years Male   Some College         12     6</span>
-<span class="co">#&gt;  3 18 to 24 years Male   4-Year                3     0</span>
-<span class="co">#&gt;  4 18 to 24 years Female HS or Less           19    12</span>
-<span class="co">#&gt;  5 18 to 24 years Female Some College         26    11</span>
-<span class="co">#&gt;  6 18 to 24 years Female 4-Year                5     2</span>
-<span class="co">#&gt;  7 18 to 24 years Female Post-Grad             1     1</span>
-<span class="co">#&gt;  8 25 to 34 years Male   HS or Less           10     4</span>
-<span class="co">#&gt;  9 25 to 34 years Male   Some College         11     7</span>
-<span class="co">#&gt; 10 25 to 34 years Male   4-Year               23    14</span>
-<span class="co">#&gt; # … with 29 more rows</span></code></pre></div>
-</div>
-<div id="step-5--prepare-acs-data-and-poststratification-table" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-5--prepare-acs-data-and-poststratification-table" class="anchor"></a><strong>Step 5.</strong> Prepare ACS data and Poststratification Table</h2>
-<p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. A considerable amount of lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># only do this once, replacing the input with your census key</span>
 <span class="fu">tidycensus</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidycensus/man/census_api_key.html">census_api_key</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"CENSUS_API_KEY"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; To install your API key for use in future sessions, run this function with `install = TRUE`.</span>
@@ -228,7 +207,12 @@
 <span class="co">#&gt;  9 18 to 24 years Male   HS or Less     0.107 CA-34 19439</span>
 <span class="co">#&gt; 10 18 to 24 years Male   HS or Less     0.119 GA-05 16741</span>
 <span class="co">#&gt; # … with 17,308 more rows</span></code></pre></div>
-<p>You need to get a API key from the census website to run this command.</p>
+<p>You need to get a API key from the census website to run this command. See <code><a href="https://rdrr.io/r/utils/vignette.html">vignettes("acs")</a></code>.</p>
+</div>
+<div id="step-5--optional-expand-population-tables" class="section level2">
+<h2 class="hasAnchor">
+<a href="#step-5--optional-expand-population-tables" class="anchor"></a><strong>Step 5.</strong> (Optional) Expand Population Tables</h2>
+<p>Often, the census alone does not provide nearly all the variables one would want to post-stratify (i.e. adjust for non-representativeness). Party affiliation in Census variables is a prominent examples. The package provides open-source software to implement this expansion. See <code><a href="https://rdrr.io/r/utils/vignette.html">vignettes("synth")</a></code> .</p>
 </div>
 <div id="final-output" class="section level2">
 <h2 class="hasAnchor">
@@ -236,12 +220,11 @@
 </h2>
 <p>Under this workflow, only three objects are needed to conduct MRP with a brms model:</p>
 <ol style="list-style-type: decimal">
-<li>The model specification which can be a plain text line of a brms formula (in Step 3)</li>
-<li>The survey data that is formatted via <code><a href="../reference/build_counts.html">build_counts()</a></code> at the end (in Step 4)</li>
-<li>The poststratification table via <code><a href="../reference/get_poststrat.html">get_poststrat()</a></code> (in Step 5).</li>
+<li>The model specification which can be a plain text line of a brms formula (in Step 3). All variables specified in the RHS should be in both the survey data and poststratification.</li>
+<li>The survey data</li>
+<li>The poststratification table via <code><a href="../reference/get_poststrat.html">get_poststrat()</a></code> and possibly expanded via synthetic methods (in Step 5).</li>
 </ol>
 <p>Together, these uniquely define one MRP model for one operationalization of one question with a particular set of covariates.</p>
-<p>Another way to draw the data would be to use <code><a href="../reference/get_cces_dataverse.html">get_cces_dataverse()</a></code>, use the demographics from the cumulative passed into <code><a href="../reference/ccc_std_demographics.html">ccc_std_demographics()</a></code>, and then merge the outcome from each year’s CCES (e.g. <code><a href="../reference/get_cces_dataverse.html">get_cces_dataverse("2016")</a></code>) using <code><a href="../reference/get_cces_question.html">get_cces_question()</a></code>. The year-specific CCES does come with demographics too, but they are not guaranteed to be standardized by this package’s procedures. Use the formula, the standardized cumulative CCES, and a column of outcomes, and the ACS.</p>
 </div>
   </div>
 

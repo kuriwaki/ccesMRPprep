@@ -242,6 +242,7 @@ to recode CCES variable</p><dl>
 <dl>
 <dt>st</dt><dd><p>State two-letter abbreviation <code>state.abb</code></p></dd>
 <dt>state</dt><dd><p>State full name via <code>state.name</code></p></dd>
+<dt>st_trad</dt><dd><p>State traditional abbreviation following AP style</p></dd>
 <dt>st_fips</dt><dd><p>Integer, state FIPS code</p></dd>
 <dt>region</dt><dd><p>Census region (Northeast, Midwest, South, West)</p></dd>
 <dt>division</dt><dd><p>Census division (New England, Middle Atlantic,
@@ -312,19 +313,19 @@ use the <code><a href='https://dplyr.tidyverse.org/reference/distinct.html'>dply
 #&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 65 to 74 years          5 5</span><span style='color: #949494;'> [65 years and over]</span><span>
 #&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 75 to 84 years          5 5</span><span style='color: #949494;'> [65 years and over]</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> 85 years and over       5 5</span><span style='color: #949494;'> [65 years and over]</span><span></div><div class='input'> <span class='va'>states_key</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 50 x 5</span><span>
-#&gt;    st    state       st_fips region    division          
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>             
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> AL    Alabama           1 South     East South Central
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> AK    Alaska            2 West      Pacific           
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> AZ    Arizona           4 West      Mountain          
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> AR    Arkansas          5 South     West South Central
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> CA    California        6 West      Pacific           
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> CO    Colorado          8 West      Mountain          
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> CT    Connecticut       9 Northeast New England       
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> DE    Delaware         10 South     South Atlantic    
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> FL    Florida          12 South     South Atlantic    
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> GA    Georgia          13 South     South Atlantic    
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 50 x 6</span><span>
+#&gt;    st    state       st_trad st_fips region    division          
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>             
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> AL    Alabama     Ala.          1 South     East South Central
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> AK    Alaska      Alaska        2 West      Pacific           
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> AZ    Arizona     Ariz.         4 West      Mountain          
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> AR    Arkansas    Ark.          5 South     West South Central
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> CA    California  Calif.        6 West      Pacific           
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> CO    Colorado    Colo.         8 West      Mountain          
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> CT    Connecticut Conn.         9 Northeast New England       
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> DE    Delaware    Del.         10 South     South Atlantic    
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> FL    Florida     Fla.         12 South     South Atlantic    
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> GA    Georgia     Ga.          13 South     South Atlantic    
 #&gt; </span><span style='color: #949494;'># … with 40 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
