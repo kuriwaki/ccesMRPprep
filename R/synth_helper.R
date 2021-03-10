@@ -31,6 +31,8 @@ formula_parts <- function(formula) {
 #' @param report Should the output be in simple counts (the default, `"counts"`) or
 #'  the proportion that count represents in the area (`"proportions"`)?
 #' @param new_name What should the new count (or proportion) variable be called?
+#' @param warnings Show some warnings about zero cells in the original data?
+#'  Defaults to `FALSE`
 #'
 #' @inheritParams synth_mlogit
 #'
@@ -72,7 +74,7 @@ collapse_table <- function(poptable,
 
   # change into proportions
   if (report == "proportions") {
-    if (grepl("(n_|count_|_n$|_count)", new_name) & warnings) {
+    if (grepl("(n_|count_|_n$|_count)", new_name)) {
       warning("You asked for proporitons but the value of `new_name` looks more appropriate for a count.")
     }
 

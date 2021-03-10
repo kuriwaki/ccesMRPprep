@@ -31,6 +31,9 @@ indicates the count}
 the proportion that count represents in the area (\code{"proportions"})?}
 
 \item{new_name}{What should the new count (or proportion) variable be called?}
+
+\item{warnings}{Show some warnings about zero cells in the original data?
+Defaults to \code{FALSE}}
 }
 \value{
 A dataframe of counts or proportions. By design, it will include the
