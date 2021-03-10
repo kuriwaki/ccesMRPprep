@@ -132,6 +132,7 @@
 <ul>
 <li>There are three are three-way interactions of some demographic variables but not more than that.</li>
 <li>The ACS provides thousands of cell counts, but only a subset of them are useful for MRP because cells for MRP must form a partition of the population (i.e., exclusive and exhaustive categories). I describe several important combinations below.</li>
+<li>See the synthetic imputation page (<code><a href="../articles/synth.html">vignette("synth")</a></code>) in this package to see how this restriction could be relaxed.</li>
 </ul>
 </li>
 <li>Some of the partition counts are <strong>not perfect partitions</strong>. For example, some of the variable codes I define below <em>exclude</em> people aged 18-24, include non-citizens, or double-count African Americans who also identify as Hispanic/Latino. These introduce some error into the post-stratification.</li>
@@ -141,6 +142,7 @@
 <div id="three-types-of-acs-tables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#three-types-of-acs-tables" class="anchor"></a>Three types of ACS Tables</h3>
+<p>If you are in a hurry or want something to start with, here are three partitions this package provides:</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Age x Sex x Education</strong>. These variable codes are encoded in <code><a href="../reference/acscodes_partitions.html">?acscodes_age_sex_educ</a></code>.</li>
@@ -150,7 +152,7 @@
 <strong>Sex x Education x Race </strong>. These variable codes are encoded in <code><a href="../reference/acscodes_partitions.html">?acscodes_sex_educ_race</a></code>
 </li>
 </ol>
-<p>See their help pages for more information. A detailed list of limitations to come.</p>
+<p>See their help pages for more information and their limitations.</p>
 </div>
 <div id="collapsing-variable-codes" class="section level3">
 <h3 class="hasAnchor">
