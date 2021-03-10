@@ -4,7 +4,7 @@ Title: Functions and Data to Prepare CCES data for MRP
 Version: 0.1.8
 Authors@R: person(given = "Shiro",
              family = "Kuriwaki",
-             role = c("aut", "cre"),
+             role = c("aut", "cre", "cph"),
              email = "shirokuriwaki@gmail.com",
              comment = c(ORCID = "0000-0002-5687-2647"))
 Description: This provides data loading, processing, and formatting functions for
@@ -39,7 +39,7 @@ Remotes:
 RoxygenNote: 7.1.1
 Language: en-US
 Roxygen: list(markdown = TRUE)
-License: GPL (>= 3)
+License: MIT + file LICENSE
 URL: https://www.github.com/kuriwaki/ccesMRPprep
 BugReports: http://github.com/kuriwaki/ccesMRPprep/issues
 Suggests: 

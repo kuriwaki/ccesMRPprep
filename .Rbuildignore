@@ -12,3 +12,4 @@
 ^simulate.R$
 ^\.ccache$
 ^tic\.R$
+^LICENSE\.md$
