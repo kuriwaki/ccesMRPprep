@@ -10,7 +10,8 @@ collapse_table(
   X_vars,
   count_var,
   report = "counts",
-  new_name = "n_aggregate"
+  new_name = "n_aggregate",
+  warnings = FALSE
 )
 }
 \arguments{

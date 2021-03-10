@@ -57,7 +57,8 @@ collapse_table <- function(poptable,
                            X_vars,
                            count_var,
                            report = "counts",
-                           new_name = "n_aggregate") {
+                           new_name = "n_aggregate",
+                           warnings = FALSE) {
 
   # collapse
   out <- count(poptable,
@@ -66,12 +67,12 @@ collapse_table <- function(poptable,
                name = "new_count") %>%
     complete(!!!syms(c(area_var, X_vars)), fill = list(new_count = 0))
 
-  if (any(out$new_count == 0))
+  if (any(out$new_count == 0) & warnings)
     warning("Some population combinations have zero people")
 
   # change into proportions
   if (report == "proportions") {
-    if (grepl("(n_|count_|_n$|_count)", new_name)) {
+    if (grepl("(n_|count_|_n$|_count)", new_name) & warnings) {
       warning("You asked for proporitons but the value of `new_name` looks more appropriate for a count.")
     }
 
