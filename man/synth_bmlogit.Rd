@@ -52,11 +52,17 @@ Imputes cells with a balancing constraint, using Yamauchi's algorithm.
 library(dplyr)
 # can take a few minutes if fix_by_area = TRUE (the default)
 educ_target <- count(acs_educ_NY, cd, educ, wt = count, name = "count")
+
+educ_target
+acs_race_NY
+
 pop_syn <- synth_bmlogit(educ ~ race + age + female,
                          microdata = cc18_NY,
                          fix_to = educ_target,
                          poptable = acs_race_NY,
                          area_var = "cd")
+pop_syn
+
 }
 \seealso{
 \code{synth_mlogit()}
