@@ -22,30 +22,30 @@ Several helpful tutorials give introductions with sample R code
 [2019](https://scholar.princeton.edu/sites/default/files/jkastellec/files/mrp_primer.pdf);
 Hanretty, [2019](https://doi.org/10.1177%2F1478929919864773)),
 
-But despite its increasingly popularity, *doing* your own MRP entails
-considerable upfront costs specific to the data: downloading the
-appropriate survey and contextual, recoding values and generating
-post-stratification frames so the survey and census datasets can be
-joined. While there already exist some attempts to make a “MRP package”
+But despite its increasingly popularity, *doing* one’s own MRP entails
+considerable upfront costs: downloading the appropriate survey and
+contextual data, recoding survey values to match with their Census
+counterparts, and generating population frames to post-stratify on,
+potentially by merging different datasets. While there already exist
+some packages for MRP
 (e.g. [`gelman/mrp`](https://github.com/gelman/mrp),
 [`stan-dev/rstanarm`](https://mc-stan.org/rstanarm/articles/mrp.html),
 [`kuriwaki/sparseregMRP`](https://github.com/kuriwaki/sparseregMRP)),
-often these packages define general functions with specific input
-requirements and not enough on data cleaning and data loading in order
-to use those functions.
+these often define generic functions and leave users to prepare the
+cleaned data to use those functions with specific requirements.
 
-This package instead provides data loading, processing, and formatting
-functions for a particular task: using *CCES data* for MRP. Limiting its
-usage to a fixed (but fairly widespread) set of survey data has several
-benefits. Its key contributions are functions that are calibrated to a
-consistent syntax, pre-built lookup tables and value-key pairs of data
-that are based upon a careful reading of data sources, and data loading
-functions that use APIs
+The **ccesMRPprep** package instead provides data loading, processing,
+and formatting functions for a particular task: using *CCES data* for
+MRP. Limiting its usage to a fixed (but fairly widespread) set of survey
+data has several benefits. Its key contributions are functions that are
+calibrated to a consistent syntax, pre-built lookup tables and value-key
+pairs of data that are based upon a careful reading of data sources, and
+data loading functions that use APIs
 ([`IQSS/dataverse-client-r`](https://github.com/IQSS/dataverse-client-r)
 and [`walkerke/tidycensus`](https://github.com/walkerke/tidycensus)) to
 reduce the dependency on downloading large files. *Model fitting and
-visualization of MRP itself is handled elsewhere* (See
-[`kuriwaki/ccesMRPrun`](https://www.github.com/kuriwaki/ccesMRPrun)).
+visualization of MRP itself* is handled in the companion package,
+[**`kuriwaki/ccesMRPrun`**](https://www.github.com/kuriwaki/ccesMRPrun).
 This package is focused on the preparation to get there.
 
 ## Installation
@@ -55,12 +55,17 @@ This package is focused on the preparation to get there.
 library(ccesMRPprep)
 ```
 
-## Vignettes
+## Getting Started
 
-See the vignettes for more long-form workflow overviews
-(`vignette("overview")`) and documentation and explanation of the nature
-of the data (`vignette("acs")`). Otherwise, each function and built-in
-data provides documentation as well.
+See `vignette("overview")` for a overview of the steps involved.
+
+For documentation of the data sources, see `vignette("acs")` for the
+Census and `vignette("derived")` for CCES variables.
+
+This vignette also covers more advanced techniques to expand population
+tables. See `vignette("synth")` for an overview and demonstration.
+
+Each function and built-in data provides documentation as well.
 
 ## Workflow
 
@@ -97,5 +102,6 @@ This package is a part of the CCES MRP project, supported by NSF Grant
 1926424: [Bayesian analytical tools to improve survey estimates for
 subpopulations and small
 areas](https://nsf.gov/awardsearch/showAward?AWD_ID=1926424). The
-contents are based on collaborations with Ben Bales, Lauren Kennedy,
-Mitzi Morris, and Soichiro Yamauchi.
+contents are based on collaborations and discussions with Ben Bales,
+[Lauren Kennedy](https://jazzystats.com/about/), Mitzi Morris, and
+[Soichiro Yamauchi](https://soichiroy.github.io/).
