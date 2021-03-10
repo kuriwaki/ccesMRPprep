@@ -83,6 +83,7 @@ NULL
 #' \describe{
 #' \item{st}{State two-letter abbreviation `state.abb`}
 #' \item{state}{State full name via `state.name`}
+#' \item{st_trad}{State traditional abbreviation following AP style}
 #' \item{st_fips}{Integer, state FIPS code}
 #' \item{region}{Census region (Northeast, Midwest, South, West)}
 #' \item{division}{Census division (New England, Middle Atlantic,

@@ -68,6 +68,7 @@ to recode CCES variable
 \describe{
 \item{st}{State two-letter abbreviation \code{state.abb}}
 \item{state}{State full name via \code{state.name}}
+\item{st_trad}{State traditional abbreviation following AP style}
 \item{st_fips}{Integer, state FIPS code}
 \item{region}{Census region (Northeast, Midwest, South, West)}
 \item{division}{Census division (New England, Middle Atlantic,
