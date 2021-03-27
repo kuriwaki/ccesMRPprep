@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Decompose formula into parts useful for subsequent analyses — formula_parts • ccesMRPprep</title>
+<title>Obtain CVAP proportions by race — get_acs_cvap • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,11 @@
 
 
 
-<meta property="og:title" content="Decompose formula into parts useful for subsequent analyses — formula_parts" />
-<meta property="og:description" content="Outputs a list. You can use base::list2env on the output to release
-the items of the list on your environment." />
+<meta property="og:title" content="Obtain CVAP proportions by race — get_acs_cvap" />
+<meta property="og:description" content="Returns the Citizen Voting Age Population by Congressional District. A custom
+call to get_acs_cces. In the output, cvap_total is the total CVAP of
+all races, cvap_race is the count of CVAP for the given race, and cvap_frac
+is the fraction." />
 
 
 
@@ -148,49 +150,77 @@ the items of the list on your environment." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Decompose formula into parts useful for subsequent analyses</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/synth_helper.R'><code>R/synth_helper.R</code></a></small>
-    <div class="hidden name"><code>formula_parts.Rd</code></div>
+    <h1>Obtain CVAP proportions by race</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/get_acs-poststrat.R'><code>R/get_acs-poststrat.R</code></a></small>
+    <div class="hidden name"><code>get_acs_cvap.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Outputs a list. You can use <code><a href='https://rdrr.io/r/base/list2env.html'>base::list2env</a></code> on the output to release
-the items of the list on your environment.</p>
+    <p>Returns the Citizen Voting Age Population by Congressional District. A custom
+call to <code>get_acs_cces</code>. In the output, <code>cvap_total</code> is the total CVAP of
+all races, <code>cvap_race</code> is the count of CVAP for the given race, and <code>cvap_frac</code>
+is the fraction.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>formula_parts</span><span class='op'>(</span><span class='va'>formula</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_acs_cvap</span><span class='op'>(</span>
+  race <span class='op'>=</span> <span class='st'>"white"</span>,
+  varlab_df <span class='op'>=</span> <span class='fu'>ccesMRPprep</span><span class='fu'>::</span><span class='va'><a href='acscodes_df.html'>acscodes_df</a></span>,
+  year <span class='op'>=</span> <span class='fl'>2018</span>,
+  states <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dataset <span class='op'>=</span> <span class='st'>"acs1"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>formula</th>
-      <td><p>A representation of the aggregate imputation or "outcome" model,
-of the form <code>X_{K} ~ X_1 + ... X_{K - 1}</code></p></td>
+      <th>race</th>
+      <td><p>Race of interest. Either <code>"white"</code> (for non-Hispanic Whites),
+<code>"hispanic"</code>, <code>"black"</code>, <code>"native"</code> (for Native Americans including American
+Indians and Alaskan Natives), <code>"asian"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>varlab_df</th>
+      <td><p>a dataframe that appends the categories based on the varcode</p></td>
+    </tr>
+    <tr>
+      <th>year</th>
+      <td><p>The year of the ACS to get. Because of data availability limitations, this is
+capped to 2010-2018.</p></td>
+    </tr>
+    <tr>
+      <th>states</th>
+      <td><p>A vector of states to subset to. Gets passed onto the new <code>state</code>
+argument in <code><a href='https://rdrr.io/pkg/tidycensus/man/get_acs.html'>tidycensus::get_acs()</a></code>, which defaults to NULL.</p></td>
+    </tr>
+    <tr>
+      <th>dataset</th>
+      <td><p>Which type of ACS to get. Defaults to <code>"acs1"</code> for ACS-5 year.
+Use <code>"acs5"</code> for 5-year.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='get_acs_cces.html'>get_acs_cces</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='fu'>ccesMRPprep</span><span class='fu'>:::</span><span class='fu'>formula_parts</span><span class='op'>(</span><span class='va'>race</span> <span class='op'>~</span> <span class='va'>female</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>edu</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $Form
-#&gt; race ~ female + age + edu
-#&gt; &lt;environment: 0x7fddbf963060&gt;
-#&gt; 
-#&gt; $outcome_var
-#&gt; [1] "race"
-#&gt; 
-#&gt; $outcome_form
-#&gt; ~race - 1
-#&gt; &lt;environment: 0x7fddbf8fb200&gt;
-#&gt; 
-#&gt; $X_form
-#&gt; ~female + age + edu
-#&gt; &lt;environment: 0x7fddbf963060&gt;
-#&gt; 
-#&gt; $X_vars
-#&gt; [1] "female" "age"    "edu"   
-#&gt; </div></pre>
+    <pre class="examples"><div class='input'> <span class='fu'>get_acs_cvap</span><span class='op'>(</span><span class='st'>"white"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>The 1-year ACS provides data for geographies with populations of 65,000 and greater.</span></div><div class='output co'>#&gt; <span class='message'>Getting data from the 2018 1-year ACS</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 436 x 6</span><span>
+#&gt;     year cd    cvap_total race  cvap_race cvap_frac
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AK-01     </span><span style='text-decoration: underline;'>180</span><span>685 white     </span><span style='text-decoration: underline;'>89</span><span>359     0.495
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AL-01     </span><span style='text-decoration: underline;'>160</span><span>896 white     </span><span style='text-decoration: underline;'>92</span><span>442     0.575
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AL-02     </span><span style='text-decoration: underline;'>152</span><span>593 white     </span><span style='text-decoration: underline;'>78</span><span>385     0.514
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AL-03     </span><span style='text-decoration: underline;'>153</span><span>377 white     </span><span style='text-decoration: underline;'>94</span><span>484     0.616
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AL-04     </span><span style='text-decoration: underline;'>153</span><span>268 white    </span><span style='text-decoration: underline;'>115</span><span>869     0.756
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AL-05     </span><span style='text-decoration: underline;'>157</span><span>118 white    </span><span style='text-decoration: underline;'>101</span><span>892     0.649
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AL-06     </span><span style='text-decoration: underline;'>159</span><span>836 white    </span><span style='text-decoration: underline;'>112</span><span>357     0.703
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AL-07     </span><span style='text-decoration: underline;'>143</span><span>134 white     </span><span style='text-decoration: underline;'>30</span><span>198     0.211
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AR-01     </span><span style='text-decoration: underline;'>166</span><span>408 white    </span><span style='text-decoration: underline;'>112</span><span>967     0.679
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  </span><span style='text-decoration: underline;'>2</span><span>018 AR-02     </span><span style='text-decoration: underline;'>174</span><span>629 white    </span><span style='text-decoration: underline;'>100</span><span>968     0.578
+#&gt; </span><span style='color: #949494;'># … with 426 more rows</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
