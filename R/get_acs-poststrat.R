@@ -86,6 +86,50 @@ get_acs_cces <- function(varlist,
   acs_lbl
 }
 
+
+#' Obtain CVAP proportions by race
+#'
+#' Returns the Citizen Voting Age Population by Congressional District. A custom
+#'  call to `get_acs_cces`. In the output, `cvap_total` is the total CVAP of
+#'  all races, `cvap_race` is the count of CVAP for the given race, and `cvap_frac`
+#'  is the fraction.
+#'
+#' @param race Race of interest. Either `"white"` (for non-Hispanic Whites),
+#'  `"hispanic"`, `"black"`, `"native"` (for Native Americans including American
+#'   Indians and Alaskan Natives), `"asian"`.
+#' @inheritParams get_acs_cces
+#' @seealso \link{get_acs_cces}
+#'
+#'
+#' @examples
+#'  get_acs_cvap("white")
+#'
+#' @importFrom stringr str_c
+#' @import dplyr
+#' @export
+get_acs_cvap <- function(race = "white",
+                         varlab_df = ccesMRPprep::acscodes_df,
+                         year = 2018,
+                         states = NULL,
+                         dataset = "acs1") {
+
+  race_v <- switch(race, white = "H", hispanic = "I", asian = "D", black = "B", native = "C")
+  v_denom <- str_c("B05003", c("004", "006", "015", "017"), sep = "_")
+  v_numer <- str_c(str_c("B05003", race_v), c("004", "006", "015", "017"),
+                   sep = "_")
+  df_acs <- get_acs_cces(c(v_denom, v_numer),
+                         varlab_df, year, states, dataset, geography = "congressional district")
+
+  df_denom <- filter(df_acs, acscode %in% v_denom) %>% group_by(year, cd) %>% summarize(cvap_total = sum(count), .groups = "drop")
+  df_numer <- filter(df_acs, acscode %in% v_numer) %>% group_by(year, cd) %>% summarize(cvap_race = sum(count), .groups = "drop")
+
+  left_join(df_numer, df_denom, by = c("year", "cd")) %>%
+    ungroup() %>%
+    mutate(race = race,
+           cvap_frac = cvap_race / cvap_total) %>%
+    relocate(year, cd, cvap_total, race, cvap_race, cvap_frac)
+}
+
 #' Formats a post-strat table from ACS and district-level data
 #'
 #'
