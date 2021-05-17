@@ -105,7 +105,7 @@
       <h1 data-toc-skip>Deriving Variables from Question Metadata</h1>
                         <h4 class="author">Shiro Kuriwaki</h4>
             
-            <h4 class="date">2021-05-16</h4>
+            <h4 class="date">2021-05-17</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/master/vignettes/derived.Rmd"><code>vignettes/derived.Rmd</code></a></small>
       <div class="hidden name"><code>derived.Rmd</code></div>
@@ -124,18 +124,18 @@
 <code class="sourceCode R"><span class="va">gov_approval_lbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">cc18_samp</span>, <span class="va">case_id</span>, <span class="va">CC18_308d</span><span class="op">)</span>
 <span class="va">gov_approval_lbl</span>
 <span class="co">#&gt; # A tibble: 1,000 x 2</span>
-<span class="co">#&gt;      case_id CC18_308d</span>
-<span class="co">#&gt;        &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 415395741         4</span>
-<span class="co">#&gt;  2 414164923         4</span>
-<span class="co">#&gt;  3 412379892         2</span>
-<span class="co">#&gt;  4 414203529         3</span>
-<span class="co">#&gt;  5 412148048         1</span>
-<span class="co">#&gt;  6 412329835         2</span>
-<span class="co">#&gt;  7 417352072         4</span>
-<span class="co">#&gt;  8 414614677         1</span>
-<span class="co">#&gt;  9 416797006         1</span>
-<span class="co">#&gt; 10 412962561         1</span>
+<span class="co">#&gt;      case_id               CC18_308d</span>
+<span class="co">#&gt;        &lt;dbl&gt;               &lt;dbl+lbl&gt;</span>
+<span class="co">#&gt;  1 415395741 4 [Strongly disapprove]</span>
+<span class="co">#&gt;  2 414164923 4 [Strongly disapprove]</span>
+<span class="co">#&gt;  3 412379892 2 [Somewhat approve]   </span>
+<span class="co">#&gt;  4 414203529 3 [Somewhat disapprove]</span>
+<span class="co">#&gt;  5 412148048 1 [Strongly approve]   </span>
+<span class="co">#&gt;  6 412329835 2 [Somewhat approve]   </span>
+<span class="co">#&gt;  7 417352072 4 [Strongly disapprove]</span>
+<span class="co">#&gt;  8 414614677 1 [Strongly approve]   </span>
+<span class="co">#&gt;  9 416797006 1 [Strongly approve]   </span>
+<span class="co">#&gt; 10 412962561 1 [Strongly approve]   </span>
 <span class="co">#&gt; # … with 990 more rows</span></code></pre></div>
 <p>Recent versions of <code>haven</code> (&gt;= 2.1.0) will display the labels in square brackets if the dataset is a tibble, but we can see that the values are basically doubles. If we had used factors, these numerical values would be obscured, though the levels and labels will be kept.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -169,14 +169,14 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">CC18_308d</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">CC18_308d</span>, <span class="va">outcome</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 3</span>
-<span class="co">#&gt;   CC18_308d outcome     n</span>
-<span class="co">#&gt;       &lt;dbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1         1 TRUE      144</span>
-<span class="co">#&gt; 2         2 TRUE      307</span>
-<span class="co">#&gt; 3         3 FALSE     170</span>
-<span class="co">#&gt; 4         4 FALSE     265</span>
-<span class="co">#&gt; 5         5 FALSE     112</span>
-<span class="co">#&gt; 6        NA NA          2</span></code></pre></div>
+<span class="co">#&gt;                  CC18_308d outcome     n</span>
+<span class="co">#&gt;                  &lt;dbl+lbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
+<span class="co">#&gt; 1  1 [Strongly approve]    TRUE      144</span>
+<span class="co">#&gt; 2  2 [Somewhat approve]    TRUE      307</span>
+<span class="co">#&gt; 3  3 [Somewhat disapprove] FALSE     170</span>
+<span class="co">#&gt; 4  4 [Strongly disapprove] FALSE     265</span>
+<span class="co">#&gt; 5  5 [Not sure]            FALSE     112</span>
+<span class="co">#&gt; 6 NA                       NA          2</span></code></pre></div>
 <p>But this will not work with factors,</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gov_approval_fct</span> <span class="op">%&gt;%</span> 
@@ -248,18 +248,18 @@
 <code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">case_id</span>, <span class="va">CC18_322c</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1,000 x 2</span>
-<span class="co">#&gt;      case_id CC18_322c</span>
-<span class="co">#&gt;        &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 415395741         2</span>
-<span class="co">#&gt;  2 414164923         1</span>
-<span class="co">#&gt;  3 412379892         2</span>
-<span class="co">#&gt;  4 414203529         1</span>
-<span class="co">#&gt;  5 412148048         2</span>
-<span class="co">#&gt;  6 412329835         2</span>
-<span class="co">#&gt;  7 417352072         2</span>
-<span class="co">#&gt;  8 414614677         2</span>
-<span class="co">#&gt;  9 416797006         1</span>
-<span class="co">#&gt; 10 412962561         1</span>
+<span class="co">#&gt;      case_id   CC18_322c</span>
+<span class="co">#&gt;        &lt;dbl&gt;   &lt;dbl+lbl&gt;</span>
+<span class="co">#&gt;  1 415395741 2 [Oppose] </span>
+<span class="co">#&gt;  2 414164923 1 [Support]</span>
+<span class="co">#&gt;  3 412379892 2 [Oppose] </span>
+<span class="co">#&gt;  4 414203529 1 [Support]</span>
+<span class="co">#&gt;  5 412148048 2 [Oppose] </span>
+<span class="co">#&gt;  6 412329835 2 [Oppose] </span>
+<span class="co">#&gt;  7 417352072 2 [Oppose] </span>
+<span class="co">#&gt;  8 414614677 2 [Oppose] </span>
+<span class="co">#&gt;  9 416797006 1 [Support]</span>
+<span class="co">#&gt; 10 412962561 1 [Support]</span>
 <span class="co">#&gt; # … with 990 more rows</span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op">%&gt;%</span> 
@@ -267,11 +267,11 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="fu"><a href="../reference/yesno_to_binary.html">yesno_to_binary</a></span><span class="op">(</span><span class="fu">as_factor</span><span class="op">(</span><span class="va">CC18_322c</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">CC18_322c</span>, <span class="va">outcome</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 3 x 3</span>
-<span class="co">#&gt;   CC18_322c outcome     n</span>
-<span class="co">#&gt;       &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1         1       1   466</span>
-<span class="co">#&gt; 2         2       0   533</span>
-<span class="co">#&gt; 3        NA      NA     1</span></code></pre></div>
+<span class="co">#&gt;      CC18_322c outcome     n</span>
+<span class="co">#&gt;      &lt;dbl+lbl&gt;   &lt;dbl&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1  1 [Support]       1   466</span>
+<span class="co">#&gt; 2  2 [Oppose]        0   533</span>
+<span class="co">#&gt; 3 NA                NA     1</span></code></pre></div>
 </div>
 <div id="categorical-variables" class="section level2">
 <h2 class="hasAnchor">
@@ -290,13 +290,13 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">pid3</span> <span class="op">%in%</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">pid3</span>, <span class="va">outcome</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
-<span class="co">#&gt;    pid3 outcome     n</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1     1 FALSE     353</span>
-<span class="co">#&gt; 2     2 FALSE     272</span>
-<span class="co">#&gt; 3     3 TRUE      279</span>
-<span class="co">#&gt; 4     4 FALSE      43</span>
-<span class="co">#&gt; 5     5 FALSE      53</span></code></pre></div>
+<span class="co">#&gt;              pid3 outcome     n</span>
+<span class="co">#&gt;         &lt;dbl+lbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
+<span class="co">#&gt; 1 1 [Democrat]    FALSE     353</span>
+<span class="co">#&gt; 2 2 [Republican]  FALSE     272</span>
+<span class="co">#&gt; 3 3 [Independent] TRUE      279</span>
+<span class="co">#&gt; 4 4 [Other]       FALSE      43</span>
+<span class="co">#&gt; 5 5 [Not sure]    FALSE      53</span></code></pre></div>
 <p>because <code>3</code> stands for independent in this case, as can be seen from the metadata.</p>
 <p>Clearly, “Yes/No” variable type can be considered a type of categorical variable type. I still distinguish these between because in the former, the analyst does not need to make a decision about what consists as a success, whereas in <code>pid3</code> for example, three reasonable operations can exist and the what is a success as opposed to a failure is ambiguous from the name <code>pid3</code>.</p>
 </div>
@@ -312,14 +312,14 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">CC18_308d</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">CC18_308d</span>, <span class="va">outcome</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 3</span>
-<span class="co">#&gt;   CC18_308d outcome     n</span>
-<span class="co">#&gt;       &lt;dbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1         1 TRUE      144</span>
-<span class="co">#&gt; 2         2 TRUE      307</span>
-<span class="co">#&gt; 3         3 FALSE     170</span>
-<span class="co">#&gt; 4         4 FALSE     265</span>
-<span class="co">#&gt; 5         5 FALSE     112</span>
-<span class="co">#&gt; 6        NA NA          2</span></code></pre></div>
+<span class="co">#&gt;                  CC18_308d outcome     n</span>
+<span class="co">#&gt;                  &lt;dbl+lbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
+<span class="co">#&gt; 1  1 [Strongly approve]    TRUE      144</span>
+<span class="co">#&gt; 2  2 [Somewhat approve]    TRUE      307</span>
+<span class="co">#&gt; 3  3 [Somewhat disapprove] FALSE     170</span>
+<span class="co">#&gt; 4  4 [Strongly disapprove] FALSE     265</span>
+<span class="co">#&gt; 5  5 [Not sure]            FALSE     112</span>
+<span class="co">#&gt; 6 NA                       NA          2</span></code></pre></div>
 </div>
 </div>
 <div id="other-considerations" class="section level1">
