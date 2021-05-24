@@ -14,7 +14,9 @@ ccc_std_demographics(
 \item{tbl}{The cumulative common content. It can be any subset but must include variables
 \code{age}, \code{race}, \code{educ}, \code{gender}, \code{st}, \code{state},
 and \code{cd}. Factor variables must a haven_labelled class variable as is
-the output of \code{get_cces_dataverse("cumulative")}. See \link{ccc_samp} for an example.}
+the output of \code{get_cces_dataverse("cumulative")}. See \link{ccc_samp} for an example.
+Any other file (for example, year-specific common contents) are not compatible with
+this function.}
 
 \item{only_demog}{Drop variables besides demographics? Defaults to FALSE}
 

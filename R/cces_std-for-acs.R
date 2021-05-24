@@ -4,6 +4,8 @@
 #'  \code{age}, \code{race}, \code{educ}, \code{gender}, \code{st}, \code{state},
 #'  and \code{cd}. Factor variables must a haven_labelled class variable as is
 #'  the output of \code{get_cces_dataverse("cumulative")}. See \link{ccc_samp} for an example.
+#'  Any other file (for example, year-specific common contents) are not compatible with
+#'  this function.
 #' @param only_demog Drop variables besides demographics? Defaults to FALSE
 #' @param age_key The vector key to use to bin age. Can be `deframe(age5_key)` or `deframe(age10_key)`
 #'
