@@ -215,39 +215,39 @@ variables <code>area_var</code>, <code>X_vars</code>, and whatever is specified 
  <span class='co'># If you want to estimate education by female and age</span>
  <span class='fu'>collapse_table</span><span class='op'>(</span><span class='va'>acs_race_NY</span>, area_var <span class='op'>=</span> <span class='st'>"cd"</span>, X_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"female"</span>, <span class='st'>"age"</span><span class='op'>)</span>,
                 count_var <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 270 x 4</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 270 x 4</span>
 #&gt;    cd    female age               n_aggregate
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>                   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> NY-01      0 18 to 24 years          </span><span style='text-decoration: underline;'>34</span><span>123
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> NY-01      0 25 to 34 years          </span><span style='text-decoration: underline;'>45</span><span>361
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> NY-01      0 35 to 44 years          </span><span style='text-decoration: underline;'>41</span><span>146
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> NY-01      0 45 to 64 years         </span><span style='text-decoration: underline;'>104</span><span>998
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> NY-01      0 65 years and over       </span><span style='text-decoration: underline;'>57</span><span>557
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> NY-01      1 18 to 24 years          </span><span style='text-decoration: underline;'>32</span><span>579
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> NY-01      1 25 to 34 years          </span><span style='text-decoration: underline;'>42</span><span>309
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> NY-01      1 35 to 44 years          </span><span style='text-decoration: underline;'>42</span><span>232
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> NY-01      1 45 to 64 years         </span><span style='text-decoration: underline;'>104</span><span>236
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> NY-01      1 65 years and over       </span><span style='text-decoration: underline;'>71</span><span>758
-#&gt; </span><span style='color: #949494;'># … with 260 more rows</span><span></div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>                   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> NY-01      0 18 to 24 years          <span style='text-decoration: underline;'>34</span>123
+#&gt; <span style='color: #BCBCBC;'> 2</span> NY-01      0 25 to 34 years          <span style='text-decoration: underline;'>45</span>361
+#&gt; <span style='color: #BCBCBC;'> 3</span> NY-01      0 35 to 44 years          <span style='text-decoration: underline;'>41</span>146
+#&gt; <span style='color: #BCBCBC;'> 4</span> NY-01      0 45 to 64 years         <span style='text-decoration: underline;'>104</span>998
+#&gt; <span style='color: #BCBCBC;'> 5</span> NY-01      0 65 years and over       <span style='text-decoration: underline;'>57</span>557
+#&gt; <span style='color: #BCBCBC;'> 6</span> NY-01      1 18 to 24 years          <span style='text-decoration: underline;'>32</span>579
+#&gt; <span style='color: #BCBCBC;'> 7</span> NY-01      1 25 to 34 years          <span style='text-decoration: underline;'>42</span>309
+#&gt; <span style='color: #BCBCBC;'> 8</span> NY-01      1 35 to 44 years          <span style='text-decoration: underline;'>42</span>232
+#&gt; <span style='color: #BCBCBC;'> 9</span> NY-01      1 45 to 64 years         <span style='text-decoration: underline;'>104</span>236
+#&gt; <span style='color: #BCBCBC;'>10</span> NY-01      1 65 years and over       <span style='text-decoration: underline;'>71</span>758
+#&gt; <span style='color: #949494;'># … with 260 more rows</span></div><div class='input'>
  <span class='co'># Report proportions</span>
  <span class='fu'>collapse_table</span><span class='op'>(</span><span class='va'>acs_race_NY</span>, area_var <span class='op'>=</span> <span class='st'>"cd"</span>, X_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"female"</span>, <span class='st'>"age"</span><span class='op'>)</span>,
                 count_var <span class='op'>=</span> <span class='st'>"count"</span>,
                 report <span class='op'>=</span> <span class='st'>"proportions"</span>, new_name <span class='op'>=</span> <span class='st'>"prop_in_cd"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: You asked for proporitons but the value of `new_name` looks more appropriate for a count.</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 270 x 4</span><span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: You asked for proporitons but the value of `new_name` looks more appropriate for a count.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 270 x 4</span>
 #&gt;    cd    female age               prop_in_cd
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>                  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> NY-01      0 18 to 24 years        0.059</span><span style='text-decoration: underline;'>2</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> NY-01      0 25 to 34 years        0.078</span><span style='text-decoration: underline;'>7</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> NY-01      0 35 to 44 years        0.071</span><span style='text-decoration: underline;'>4</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> NY-01      0 45 to 64 years        0.182 
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> NY-01      0 65 years and over     0.099</span><span style='text-decoration: underline;'>9</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> NY-01      1 18 to 24 years        0.056</span><span style='text-decoration: underline;'>5</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> NY-01      1 25 to 34 years        0.073</span><span style='text-decoration: underline;'>4</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> NY-01      1 35 to 44 years        0.073</span><span style='text-decoration: underline;'>3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> NY-01      1 45 to 64 years        0.181 
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> NY-01      1 65 years and over     0.125 
-#&gt; </span><span style='color: #949494;'># … with 260 more rows</span><span></div><div class='input'>
-</div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> NY-01      0 18 to 24 years        0.059<span style='text-decoration: underline;'>2</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span> NY-01      0 25 to 34 years        0.078<span style='text-decoration: underline;'>7</span>
+#&gt; <span style='color: #BCBCBC;'> 3</span> NY-01      0 35 to 44 years        0.071<span style='text-decoration: underline;'>4</span>
+#&gt; <span style='color: #BCBCBC;'> 4</span> NY-01      0 45 to 64 years        0.182 
+#&gt; <span style='color: #BCBCBC;'> 5</span> NY-01      0 65 years and over     0.099<span style='text-decoration: underline;'>9</span>
+#&gt; <span style='color: #BCBCBC;'> 6</span> NY-01      1 18 to 24 years        0.056<span style='text-decoration: underline;'>5</span>
+#&gt; <span style='color: #BCBCBC;'> 7</span> NY-01      1 25 to 34 years        0.073<span style='text-decoration: underline;'>4</span>
+#&gt; <span style='color: #BCBCBC;'> 8</span> NY-01      1 35 to 44 years        0.073<span style='text-decoration: underline;'>3</span>
+#&gt; <span style='color: #BCBCBC;'> 9</span> NY-01      1 45 to 64 years        0.181 
+#&gt; <span style='color: #BCBCBC;'>10</span> NY-01      1 65 years and over     0.125 
+#&gt; <span style='color: #949494;'># … with 260 more rows</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

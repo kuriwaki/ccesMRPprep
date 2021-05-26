@@ -263,36 +263,36 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS <a href='
 </div><div class='output co'>#&gt; <span class='warning'>Warning: NAs in the microdata -- dropping data</span></div><div class='input'>
  <span class='co'># original (27 districts x 2 sex x 5 age x 6 race categories)</span>
  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_race_NY</span>, <span class='va'>cd</span>, <span class='va'>female</span>, <span class='va'>age</span>, <span class='va'>race</span>, wt <span class='op'>=</span> <span class='va'>count</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,620 x 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,620 x 5</span>
 #&gt;    cd    female age            race                n
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> NY-01      0 18 to 24 years White           </span><span style='text-decoration: underline;'>20</span><span>604
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> NY-01      0 18 to 24 years Black            </span><span style='text-decoration: underline;'>2</span><span>654
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> NY-01      0 18 to 24 years Hispanic         </span><span style='text-decoration: underline;'>6</span><span>264
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> NY-01      0 18 to 24 years Asian            </span><span style='text-decoration: underline;'>3</span><span>121
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> NY-01      0 18 to 24 years Native American     0
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> NY-01      0 18 to 24 years All Other        </span><span style='text-decoration: underline;'>1</span><span>480
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> NY-01      0 25 to 34 years White           </span><span style='text-decoration: underline;'>27</span><span>437
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> NY-01      0 25 to 34 years Black            </span><span style='text-decoration: underline;'>2</span><span>425
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> NY-01      0 25 to 34 years Hispanic        </span><span style='text-decoration: underline;'>10</span><span>730
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> NY-01      0 25 to 34 years Asian            </span><span style='text-decoration: underline;'>3</span><span>168
-#&gt; </span><span style='color: #949494;'># … with 1,610 more rows</span><span></div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> NY-01      0 18 to 24 years White           <span style='text-decoration: underline;'>20</span>604
+#&gt; <span style='color: #BCBCBC;'> 2</span> NY-01      0 18 to 24 years Black            <span style='text-decoration: underline;'>2</span>654
+#&gt; <span style='color: #BCBCBC;'> 3</span> NY-01      0 18 to 24 years Hispanic         <span style='text-decoration: underline;'>6</span>264
+#&gt; <span style='color: #BCBCBC;'> 4</span> NY-01      0 18 to 24 years Asian            <span style='text-decoration: underline;'>3</span>121
+#&gt; <span style='color: #BCBCBC;'> 5</span> NY-01      0 18 to 24 years Native American     0
+#&gt; <span style='color: #BCBCBC;'> 6</span> NY-01      0 18 to 24 years All Other        <span style='text-decoration: underline;'>1</span>480
+#&gt; <span style='color: #BCBCBC;'> 7</span> NY-01      0 25 to 34 years White           <span style='text-decoration: underline;'>27</span>437
+#&gt; <span style='color: #BCBCBC;'> 8</span> NY-01      0 25 to 34 years Black            <span style='text-decoration: underline;'>2</span>425
+#&gt; <span style='color: #BCBCBC;'> 9</span> NY-01      0 25 to 34 years Hispanic        <span style='text-decoration: underline;'>10</span>730
+#&gt; <span style='color: #BCBCBC;'>10</span> NY-01      0 25 to 34 years Asian            <span style='text-decoration: underline;'>3</span>168
+#&gt; <span style='color: #949494;'># … with 1,610 more rows</span></div><div class='input'>
  <span class='co'># new, modeled (original x 5 party categories)</span>
  <span class='va'>synth_acs</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 8,100 x 9</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8,100 x 9</span>
 #&gt;    cd    race  age            female    prX pid3        prZ_givenX    prXZ count
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Democrat        0.365  0.013</span><span style='text-decoration: underline;'>0</span><span>  </span><span style='text-decoration: underline;'>7</span><span>516.
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Republican      0.253  0.009</span><span style='text-decoration: underline;'>03</span><span> </span><span style='text-decoration: underline;'>5</span><span>206.
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Independent     0.251  0.008</span><span style='text-decoration: underline;'>99</span><span> </span><span style='text-decoration: underline;'>5</span><span>180.
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Other           0.061</span><span style='text-decoration: underline;'>2</span><span> 0.002</span><span style='text-decoration: underline;'>19</span><span> </span><span style='text-decoration: underline;'>1</span><span>261.
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> NY-01 White 18 to 24 years      0 0.035</span><span style='text-decoration: underline;'>8</span><span> Not Sure        0.070</span><span style='text-decoration: underline;'>0</span><span> 0.002</span><span style='text-decoration: underline;'>50</span><span> </span><span style='text-decoration: underline;'>1</span><span>441.
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Democrat        0.391  0.013</span><span style='text-decoration: underline;'>9</span><span>  </span><span style='text-decoration: underline;'>8</span><span>013.
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Republican      0.220  0.007</span><span style='text-decoration: underline;'>82</span><span> </span><span style='text-decoration: underline;'>4</span><span>504.
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Independent     0.186  0.006</span><span style='text-decoration: underline;'>59</span><span> </span><span style='text-decoration: underline;'>3</span><span>800.
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Other           0.038</span><span style='text-decoration: underline;'>4</span><span> 0.001</span><span style='text-decoration: underline;'>36</span><span>  786.
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> NY-01 White 18 to 24 years      1 0.035</span><span style='text-decoration: underline;'>5</span><span> Not Sure        0.165  0.005</span><span style='text-decoration: underline;'>86</span><span> </span><span style='text-decoration: underline;'>3</span><span>378.
-#&gt; </span><span style='color: #949494;'># … with 8,090 more rows</span><span></div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> NY-01 White 18 to 24 years      0 0.035<span style='text-decoration: underline;'>8</span> Democrat        0.365  0.013<span style='text-decoration: underline;'>0</span>  <span style='text-decoration: underline;'>7</span>516.
+#&gt; <span style='color: #BCBCBC;'> 2</span> NY-01 White 18 to 24 years      0 0.035<span style='text-decoration: underline;'>8</span> Republican      0.253  0.009<span style='text-decoration: underline;'>03</span> <span style='text-decoration: underline;'>5</span>206.
+#&gt; <span style='color: #BCBCBC;'> 3</span> NY-01 White 18 to 24 years      0 0.035<span style='text-decoration: underline;'>8</span> Independent     0.251  0.008<span style='text-decoration: underline;'>99</span> <span style='text-decoration: underline;'>5</span>180.
+#&gt; <span style='color: #BCBCBC;'> 4</span> NY-01 White 18 to 24 years      0 0.035<span style='text-decoration: underline;'>8</span> Other           0.061<span style='text-decoration: underline;'>2</span> 0.002<span style='text-decoration: underline;'>19</span> <span style='text-decoration: underline;'>1</span>261.
+#&gt; <span style='color: #BCBCBC;'> 5</span> NY-01 White 18 to 24 years      0 0.035<span style='text-decoration: underline;'>8</span> Not Sure        0.070<span style='text-decoration: underline;'>0</span> 0.002<span style='text-decoration: underline;'>50</span> <span style='text-decoration: underline;'>1</span>441.
+#&gt; <span style='color: #BCBCBC;'> 6</span> NY-01 White 18 to 24 years      1 0.035<span style='text-decoration: underline;'>5</span> Democrat        0.391  0.013<span style='text-decoration: underline;'>9</span>  <span style='text-decoration: underline;'>8</span>013.
+#&gt; <span style='color: #BCBCBC;'> 7</span> NY-01 White 18 to 24 years      1 0.035<span style='text-decoration: underline;'>5</span> Republican      0.220  0.007<span style='text-decoration: underline;'>82</span> <span style='text-decoration: underline;'>4</span>504.
+#&gt; <span style='color: #BCBCBC;'> 8</span> NY-01 White 18 to 24 years      1 0.035<span style='text-decoration: underline;'>5</span> Independent     0.186  0.006<span style='text-decoration: underline;'>59</span> <span style='text-decoration: underline;'>3</span>800.
+#&gt; <span style='color: #BCBCBC;'> 9</span> NY-01 White 18 to 24 years      1 0.035<span style='text-decoration: underline;'>5</span> Other           0.038<span style='text-decoration: underline;'>4</span> 0.001<span style='text-decoration: underline;'>36</span>  786.
+#&gt; <span style='color: #BCBCBC;'>10</span> NY-01 White 18 to 24 years      1 0.035<span style='text-decoration: underline;'>5</span> Not Sure        0.165  0.005<span style='text-decoration: underline;'>86</span> <span style='text-decoration: underline;'>3</span>378.
+#&gt; <span style='color: #949494;'># … with 8,090 more rows</span></div><div class='input'>
  <span class='co'># See the data elec_NY to see if these numbers look reasonable.</span>
 
 
@@ -320,7 +320,7 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS <a href='
                          area_var <span class='op'>=</span> <span class='st'>"cd"</span><span class='op'>)</span>
 
 
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
