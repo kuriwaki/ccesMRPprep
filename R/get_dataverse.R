@@ -58,7 +58,7 @@
 #'
 #'
 get_cces_dataverse <- function(name = "cumulative",
-                        year_subset = 2006:2019,
+                        year_subset = 2006:2020,
                         std_index = TRUE,
                         dataverse_paths = ccesMRPprep::cces_dv_ids) {
 
