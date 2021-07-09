@@ -34,6 +34,9 @@ call to \code{get_acs_cces}. In the output, \code{cvap_total} is the total CVAP 
 all races, \code{cvap_race} is the count of CVAP for the given race, and \code{cvap_frac}
 is the fraction.
 }
+\details{
+Future versions will allow CVAP race fractions by geographies other than CD.
+}
 \examples{
  get_acs_cvap("white")
 

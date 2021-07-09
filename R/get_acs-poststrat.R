@@ -94,6 +94,8 @@ get_acs_cces <- function(varlist,
 #'  all races, `cvap_race` is the count of CVAP for the given race, and `cvap_frac`
 #'  is the fraction.
 #'
+#' Future versions will allow CVAP race fractions by geographies other than CD.
+#'
 #' @param race Race of interest. Either `"white"` (for non-Hispanic Whites),
 #'  `"hispanic"`, `"black"`, `"native"` (for Native Americans including American
 #'   Indians and Alaskan Natives), `"asian"`.
@@ -114,11 +116,17 @@ get_acs_cvap <- function(race = "white",
                          dataset = "acs1") {
 
   race_v <- switch(race, white = "H", hispanic = "I", asian = "D", black = "B", native = "C")
-  v_denom <- str_c("B05003", c("004", "006", "015", "017"), sep = "_")
-  v_numer <- str_c(str_c("B05003", race_v), c("004", "006", "015", "017"),
+  # 9 is Native, 11 is foreign born naturalized. 9, 11 is Male, 20, 22 is Female
+  v_denom <- str_c("B05003", c("009", "011", "020", "022"), sep = "_")
+  # same but for a specific race. numerator
+  v_numer <- str_c(str_c("B05003", race_v), c("009", "011", "020", "022"),
                    sep = "_")
   df_acs <- get_acs_cces(c(v_denom, v_numer),
-                         varlab_df, year, states, dataset, geography = "congressional district")
+                         varlab_df,
+                         year,
+                         states,
+                         dataset,
+                         geography = "congressional district")
 
   df_denom <- filter(df_acs, acscode %in% v_denom) %>% group_by(year, cd) %>% summarize(cvap_total = sum(count), .groups = "drop")
   df_numer <- filter(df_acs, acscode %in% v_numer) %>% group_by(year, cd) %>% summarize(cvap_race = sum(count), .groups = "drop")

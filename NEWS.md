@@ -1,3 +1,9 @@
+# ccesMRPprep 0.1.9
+
+# ccesMRPprep 0.1.8.1
+
+* Fix to wrong values in get_acs_cvap (#7)
+
 # ccesMRPprep 0.1.8
 
 * Introduce `synth_prod()`, `synth_mlogit()`, `synth_smoothfix()`
