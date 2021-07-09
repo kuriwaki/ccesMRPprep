@@ -81,7 +81,7 @@ is the fraction." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.1</span>
       </span>
     </div>
 
@@ -200,6 +200,9 @@ Use <code>"acs5"</code> for 5-year.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Future versions will allow CVAP race fractions by geographies other than CD.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='get_acs_cces.html'>get_acs_cces</a></p></div>
@@ -209,16 +212,16 @@ Use <code>"acs5"</code> for 5-year.</p></td>
 </div><div class='output co'>#&gt; <span class='message'>The 1-year ACS provides data for geographies with populations of 65,000 and greater.</span></div><div class='output co'>#&gt; <span class='message'>Getting data from the 2018 1-year ACS</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 436 x 6</span>
 #&gt;     year cd    cvap_total race  cvap_race cvap_frac
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span>  <span style='text-decoration: underline;'>2</span>018 AK-01     <span style='text-decoration: underline;'>180</span>685 white     <span style='text-decoration: underline;'>89</span>359     0.495
-#&gt; <span style='color: #BCBCBC;'> 2</span>  <span style='text-decoration: underline;'>2</span>018 AL-01     <span style='text-decoration: underline;'>160</span>896 white     <span style='text-decoration: underline;'>92</span>442     0.575
-#&gt; <span style='color: #BCBCBC;'> 3</span>  <span style='text-decoration: underline;'>2</span>018 AL-02     <span style='text-decoration: underline;'>152</span>593 white     <span style='text-decoration: underline;'>78</span>385     0.514
-#&gt; <span style='color: #BCBCBC;'> 4</span>  <span style='text-decoration: underline;'>2</span>018 AL-03     <span style='text-decoration: underline;'>153</span>377 white     <span style='text-decoration: underline;'>94</span>484     0.616
-#&gt; <span style='color: #BCBCBC;'> 5</span>  <span style='text-decoration: underline;'>2</span>018 AL-04     <span style='text-decoration: underline;'>153</span>268 white    <span style='text-decoration: underline;'>115</span>869     0.756
-#&gt; <span style='color: #BCBCBC;'> 6</span>  <span style='text-decoration: underline;'>2</span>018 AL-05     <span style='text-decoration: underline;'>157</span>118 white    <span style='text-decoration: underline;'>101</span>892     0.649
-#&gt; <span style='color: #BCBCBC;'> 7</span>  <span style='text-decoration: underline;'>2</span>018 AL-06     <span style='text-decoration: underline;'>159</span>836 white    <span style='text-decoration: underline;'>112</span>357     0.703
-#&gt; <span style='color: #BCBCBC;'> 8</span>  <span style='text-decoration: underline;'>2</span>018 AL-07     <span style='text-decoration: underline;'>143</span>134 white     <span style='text-decoration: underline;'>30</span>198     0.211
-#&gt; <span style='color: #BCBCBC;'> 9</span>  <span style='text-decoration: underline;'>2</span>018 AR-01     <span style='text-decoration: underline;'>166</span>408 white    <span style='text-decoration: underline;'>112</span>967     0.679
-#&gt; <span style='color: #BCBCBC;'>10</span>  <span style='text-decoration: underline;'>2</span>018 AR-02     <span style='text-decoration: underline;'>174</span>629 white    <span style='text-decoration: underline;'>100</span>968     0.578
+#&gt; <span style='color: #BCBCBC;'> 1</span>  <span style='text-decoration: underline;'>2</span>018 AK-01     <span style='text-decoration: underline;'>532</span>244 white    <span style='text-decoration: underline;'>349</span>058     0.656
+#&gt; <span style='color: #BCBCBC;'> 2</span>  <span style='text-decoration: underline;'>2</span>018 AL-01     <span style='text-decoration: underline;'>544</span>464 white    <span style='text-decoration: underline;'>370</span>443     0.680
+#&gt; <span style='color: #BCBCBC;'> 3</span>  <span style='text-decoration: underline;'>2</span>018 AL-02     <span style='text-decoration: underline;'>516</span>295 white    <span style='text-decoration: underline;'>331</span>192     0.641
+#&gt; <span style='color: #BCBCBC;'> 4</span>  <span style='text-decoration: underline;'>2</span>018 AL-03     <span style='text-decoration: underline;'>543</span>854 white    <span style='text-decoration: underline;'>381</span>547     0.702
+#&gt; <span style='color: #BCBCBC;'> 5</span>  <span style='text-decoration: underline;'>2</span>018 AL-04     <span style='text-decoration: underline;'>515</span>701 white    <span style='text-decoration: underline;'>451</span>856     0.876
+#&gt; <span style='color: #BCBCBC;'> 6</span>  <span style='text-decoration: underline;'>2</span>018 AL-05     <span style='text-decoration: underline;'>551</span>968 white    <span style='text-decoration: underline;'>420</span>181     0.761
+#&gt; <span style='color: #BCBCBC;'> 7</span>  <span style='text-decoration: underline;'>2</span>018 AL-06     <span style='text-decoration: underline;'>535</span>753 white    <span style='text-decoration: underline;'>423</span>727     0.791
+#&gt; <span style='color: #BCBCBC;'> 8</span>  <span style='text-decoration: underline;'>2</span>018 AL-07     <span style='text-decoration: underline;'>504</span>177 white    <span style='text-decoration: underline;'>175</span>060     0.347
+#&gt; <span style='color: #BCBCBC;'> 9</span>  <span style='text-decoration: underline;'>2</span>018 AR-01     <span style='text-decoration: underline;'>548</span>710 white    <span style='text-decoration: underline;'>431</span>129     0.786
+#&gt; <span style='color: #BCBCBC;'>10</span>  <span style='text-decoration: underline;'>2</span>018 AR-02     <span style='text-decoration: underline;'>570</span>220 white    <span style='text-decoration: underline;'>413</span>714     0.726
 #&gt; <span style='color: #949494;'># … with 426 more rows</span></div><div class='input'>
 </div></pre>
   </div>
