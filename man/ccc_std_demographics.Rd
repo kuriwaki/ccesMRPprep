@@ -7,7 +7,9 @@
 ccc_std_demographics(
   tbl,
   only_demog = FALSE,
-  age_key = deframe(ccesMRPprep::age5_key)
+  age_key = deframe(ccesMRPprep::age5_key),
+  wh_as_hisp = TRUE,
+  bh_as_hisp = TRUE
 )
 }
 \arguments{
@@ -21,6 +23,12 @@ this function.}
 \item{only_demog}{Drop variables besides demographics? Defaults to FALSE}
 
 \item{age_key}{The vector key to use to bin age. Can be \code{deframe(age5_key)} or \code{deframe(age10_key)}}
+
+\item{wh_as_hisp}{Should people who identify as both White and Hispanic be
+coded as "Hispanic",  thereby leaving all remaining "Whites" as Non-Hispanic Whites
+by definition? For more information, see https://twitter.com/A_agadjanian/status/1385760354953662466}
+
+\item{bh_as_hisp}{Same as \code{wh_as_hisp} but for Black Hispanics. Defaults to TRUE.}
 }
 \value{
 The output is of the same dimensions as the input (unless \code{only_demog = TRUE})
@@ -59,6 +67,8 @@ the cumulative content.
 \examples{
 
  ccc_std_demographics(ccc_samp)
+ cc_std_demographics(ccc_samp, wh_as_hisp = FALSE) \%>\% count(race)
+ cc_std_demographics(ccc_samp, bh_as_hisp = FALSE, wh_as_hisp = FALSE) \%>\% count(race)
 
 \dontrun{
  # For full data (takes a while)

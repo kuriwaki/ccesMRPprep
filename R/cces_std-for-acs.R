@@ -8,6 +8,10 @@
 #'  this function.
 #' @param only_demog Drop variables besides demographics? Defaults to FALSE
 #' @param age_key The vector key to use to bin age. Can be `deframe(age5_key)` or `deframe(age10_key)`
+#' @param wh_as_hisp Should people who identify as both White and Hispanic be
+#'  coded as "Hispanic",  thereby leaving all remaining "Whites" as Non-Hispanic Whites
+#'  by definition? For more information, see https://twitter.com/A_agadjanian/status/1385760354953662466
+#' @param bh_as_hisp Same as `wh_as_hisp` but for Black Hispanics. Defaults to TRUE.
 #'
 #' @section Input Requirements:
 #'  This function requires data to have the following columns:
@@ -46,6 +50,8 @@
 #' @examples
 #'
 #'  ccc_std_demographics(ccc_samp)
+#'  cc_std_demographics(ccc_samp, wh_as_hisp = FALSE) %>% count(race)
+#'  cc_std_demographics(ccc_samp, bh_as_hisp = FALSE, wh_as_hisp = FALSE) %>% count(race)
 #'
 #' \dontrun{
 #'  # For full data (takes a while)
@@ -66,7 +72,11 @@
 #' @export
 #'
 #'
-ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(ccesMRPprep::age5_key)) {
+ccc_std_demographics <- function(tbl,
+                                 only_demog = FALSE,
+                                 age_key = deframe(ccesMRPprep::age5_key),
+                                 wh_as_hisp = TRUE,
+                                 bh_as_hisp = TRUE) {
 
   race_cces_to_acs <- ccesMRPprep::race_key %>% distinct(.data$race_cces_chr, .data$race)
   educ_cces_to_acs <- ccesMRPprep::educ_key %>% distinct(.data$educ_cces_chr, .data$educ)
@@ -117,6 +127,17 @@ ccc_std_demographics <- function(tbl, only_demog = FALSE, age_key = deframe(cces
     rename(educ_cces_chr = .data$educ) %>%
     mutate(educ_cces_chr = as.character(as_factor(.data$educ_cces_chr))) %>%
     left_join(educ_cces_to_acs, by = "educ_cces_chr")
+
+  # hispanic conversion
+  if (wh_as_hisp) {
+    tbl_mod <- tbl_mod %>%
+      mutate(race = replace(race, race_cces_chr  == "White" & hispanic == 1, race_cces_to_acs$race[3]))
+  }
+
+  if (bh_as_hisp) {
+    tbl_mod <- tbl_mod %>%
+      mutate(race = replace(race, race_cces_chr  == "Black" & hispanic == 1, race_cces_to_acs$race[3]))
+  }
 
     tbl_out <- tbl_mod %>%
       select(matches("year"),
