@@ -1,5 +1,7 @@
 # ccesMRPprep 0.1.9
 
+* Add option to make White Hispanics as "Hispanics" and make it a default; same for Black Hispanics (806beb2)
+
 # ccesMRPprep 0.1.8.1
 
 * Fix to wrong values in get_acs_cvap (#7)
