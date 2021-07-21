@@ -131,16 +131,16 @@ ccc_std_demographics <- function(tbl,
   # hispanic conversion
   if (wh_as_hisp) {
     tbl_mod <- tbl_mod %>%
-      mutate(race = replace(race, race_cces_chr  == "White" & hispanic == 1, race_cces_to_acs$race[3]))
+      mutate(race = replace(race, race_cces_chr == "White" & hispanic == 1, race_cces_to_acs$race[3]))
   }
 
   if (bh_as_hisp) {
     tbl_mod <- tbl_mod %>%
-      mutate(race = replace(race, race_cces_chr  == "Black" & hispanic == 1, race_cces_to_acs$race[3]))
+      mutate(race = replace(race, race_cces_chr == "Black" & hispanic == 1, race_cces_to_acs$race[3]))
   }
 
-    tbl_out <- tbl_mod %>%
-      select(matches("year"),
+  tbl_out <- tbl_mod %>%
+    select(matches("year"),
            matches("case_id"),
            matches("weight"),
            matches("(state|st|cd|dist)"),
@@ -156,15 +156,15 @@ ccc_std_demographics <- function(tbl,
            matches("vv"),
            everything())
 
-    if (!identical(age_vec, tbl_mod$age))
-      cat("age variable modified to bins. Original age variable is now in age_orig.", "\n")
+  if (!identical(age_vec, tbl_mod$age))
+    cat("age variable modified to bins. Original age variable is now in age_orig.", "\n")
 
-    if (only_demog)
-      tbl_out <- select(tbl_out, .data$year:.data$marstat, matches("vv"))
+  if (only_demog)
+    tbl_out <- select(tbl_out, .data$year:.data$marstat, matches("vv"))
 
-    tbl_out %>%
-      select_if(~any(!is.na(.x))) %>%
-      distinct()
+  tbl_out %>%
+    select_if(~any(!is.na(.x))) %>%
+    distinct()
 }
 
 
