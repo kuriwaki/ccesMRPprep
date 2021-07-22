@@ -10,7 +10,8 @@
 #' @param age_key The vector key to use to bin age. Can be `deframe(age5_key)` or `deframe(age10_key)`
 #' @param wh_as_hisp Should people who identify as both White and Hispanic be
 #'  coded as "Hispanic",  thereby leaving all remaining "Whites" as Non-Hispanic Whites
-#'  by definition? For more information, see https://twitter.com/A_agadjanian/status/1385760354953662466
+#'  by definition? Could be `NULL` if you know the column `hispanic` is not in the
+#'  data. For more information, see <https://bit.ly/3hZ6mz4>.
 #' @param bh_as_hisp Same as `wh_as_hisp` but for Black Hispanics. Defaults to TRUE.
 #'
 #' @section Input Requirements:
@@ -48,6 +49,8 @@
 #' @importFrom stringr str_c str_pad
 #'
 #' @examples
+#'
+#' library(dplyr)
 #'
 #'  ccc_std_demographics(ccc_samp)
 #'  cc_std_demographics(ccc_samp, wh_as_hisp = FALSE) %>% count(race)
@@ -129,15 +132,19 @@ ccc_std_demographics <- function(tbl,
     left_join(educ_cces_to_acs, by = "educ_cces_chr")
 
   # hispanic conversion
-  if (wh_as_hisp) {
+  if (wh_as_hisp && ("hispanic" %in% colnames(tbl_mod))) {
     tbl_mod <- tbl_mod %>%
       mutate(race = replace(race, race_cces_chr == "White" & hispanic == 1, race_cces_to_acs$race[3]))
   }
 
-  if (bh_as_hisp) {
+  if (bh_as_hisp && ("hispanic" %in% colnames(tbl_mod))) {
     tbl_mod <- tbl_mod %>%
       mutate(race = replace(race, race_cces_chr == "Black" & hispanic == 1, race_cces_to_acs$race[3]))
   }
+
+  if ((!is.null(wh_as_hisp) | !is.null(bh_as_hisp)) &
+      !("hispanic" %in% colnames(tbl_mod)))
+    warning("The column `hispanic` is not in the data, even though you asked to consider it")
 
   tbl_out <- tbl_mod %>%
     select(matches("year"),

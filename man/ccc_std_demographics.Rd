@@ -26,7 +26,8 @@ this function.}
 
 \item{wh_as_hisp}{Should people who identify as both White and Hispanic be
 coded as "Hispanic",  thereby leaving all remaining "Whites" as Non-Hispanic Whites
-by definition? For more information, see https://twitter.com/A_agadjanian/status/1385760354953662466}
+by definition? Could be \code{NULL} if you know the column \code{hispanic} is not in the
+data. For more information, see \url{https://bit.ly/3hZ6mz4}.}
 
 \item{bh_as_hisp}{Same as \code{wh_as_hisp} but for Black Hispanics. Defaults to TRUE.}
 }
@@ -65,6 +66,8 @@ the cumulative content.
 }
 
 \examples{
+
+library(dplyr)
 
  ccc_std_demographics(ccc_samp)
  cc_std_demographics(ccc_samp, wh_as_hisp = FALSE) \%>\% count(race)
