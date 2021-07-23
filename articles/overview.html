@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.900</span>
       </span>
     </div>
 
@@ -126,7 +126,7 @@
 <p>Here we will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">ccc_samp()</a></code>). In production, you will want to download all 14 datasets to your local directory via a script like <a href="https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R">initialize-cces-downloads.R</a> (still private).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ccc_samp</span>
-<span class="co">#&gt; # A tibble: 1,000 x 18</span>
+<span class="co">#&gt; # A tibble: 1,000 × 18</span>
 <span class="co">#&gt;     year case_id state    st    cd    zipcode county_fips  gender   age     race</span>
 <span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl+l&gt; &lt;dbl&gt; &lt;dbl+lb&gt;</span>
 <span class="co">#&gt;  1  2006 1005058 Michigan MI    MI-04 48603   26145       2 [Fem…    36 1 [Whit…</span>
@@ -152,7 +152,7 @@
 <code class="sourceCode R"><span class="va">ccc_std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ccc_std_demographics.html">ccc_std_demographics</a></span><span class="op">(</span><span class="va">ccc_samp</span><span class="op">)</span>
 <span class="co">#&gt; age variable modified to bins. Original age variable is now in age_orig.</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">ccc_std</span>, <span class="va">age</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 5 x 2</span>
+<span class="co">#&gt; # A tibble: 5 × 2</span>
 <span class="co">#&gt;                     age     n</span>
 <span class="co">#&gt;               &lt;int+lbl&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1 1 [18 to 24 years]       75</span>
@@ -193,7 +193,7 @@
 <span class="co">#&gt; Joining, by = c("year", "cd")</span>
 
  <span class="va">poststrat</span>
-<span class="co">#&gt; # A tibble: 17,318 x 6</span>
+<span class="co">#&gt; # A tibble: 17,318 × 6</span>
 <span class="co">#&gt;    age            gender educ       pct_trump cd    count</span>
 <span class="co">#&gt;    &lt;fct&gt;          &lt;fct&gt;  &lt;fct&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 18 to 24 years Male   HS or Less     0.049 NY-15 21859</span>

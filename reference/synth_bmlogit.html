@@ -78,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.900</span>
       </span>
     </div>
 
@@ -227,7 +227,7 @@ balancing constraints. R package version 0.0.3.</p>
 <span class='va'>educ_target</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_educ_NY</span>, <span class='va'>cd</span>, <span class='va'>educ</span>, wt <span class='op'>=</span> <span class='va'>count</span>, name <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span>
 
 <span class='va'>educ_target</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 108 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 108 × 3</span>
 #&gt;    cd    educ          count
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> NY-01 HS or Less   <span style='text-decoration: underline;'>202</span>298
@@ -241,7 +241,7 @@ balancing constraints. R package version 0.0.3.</p>
 #&gt; <span style='color: #BCBCBC;'> 9</span> NY-03 HS or Less   <span style='text-decoration: underline;'>138</span>929
 #&gt; <span style='color: #BCBCBC;'>10</span> NY-03 Some College <span style='text-decoration: underline;'>127</span>003
 #&gt; <span style='color: #949494;'># … with 98 more rows</span></div><div class='input'><span class='va'>acs_race_NY</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4,320 x 6</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4,320 × 6</span>
 #&gt;     year cd    female race  age               count
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>  <span style='text-decoration: underline;'>2</span>018 NY-01      0 Black 18 to 24 years      826
@@ -261,7 +261,7 @@ balancing constraints. R package version 0.0.3.</p>
                          poptable <span class='op'>=</span> <span class='va'>acs_race_NY</span>,
                          area_var <span class='op'>=</span> <span class='st'>"cd"</span><span class='op'>)</span>
 <span class='va'>pop_syn</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6,480 x 9</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6,480 × 9</span>
 #&gt;    cd    race  age           female    prX educ        prZ_givenX    prXZ  count
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> NY-01 White 18 to 24 yea…      0 0.035<span style='text-decoration: underline;'>8</span> HS or Less      0.294  1.05<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span>  <span style='text-decoration: underline;'>6</span>060.

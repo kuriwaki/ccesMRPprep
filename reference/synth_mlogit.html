@@ -80,7 +80,7 @@ if one knows the marginals.See Details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.900</span>
       </span>
     </div>
 
@@ -263,7 +263,7 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS <a href='
 </div><div class='output co'>#&gt; <span class='warning'>Warning: NAs in the microdata -- dropping data</span></div><div class='input'>
  <span class='co'># original (27 districts x 2 sex x 5 age x 6 race categories)</span>
  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>acs_race_NY</span>, <span class='va'>cd</span>, <span class='va'>female</span>, <span class='va'>age</span>, <span class='va'>race</span>, wt <span class='op'>=</span> <span class='va'>count</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,620 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,620 × 5</span>
 #&gt;    cd    female age            race                n
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> NY-01      0 18 to 24 years White           <span style='text-decoration: underline;'>20</span>604
@@ -279,7 +279,7 @@ a known population distribution (see e.g. Leeman and Wasserfallen AJPS <a href='
 #&gt; <span style='color: #949494;'># … with 1,610 more rows</span></div><div class='input'>
  <span class='co'># new, modeled (original x 5 party categories)</span>
  <span class='va'>synth_acs</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8,100 x 9</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8,100 × 9</span>
 #&gt;    cd    race  age            female    prX pid3        prZ_givenX    prXZ count
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> NY-01 White 18 to 24 years      0 0.035<span style='text-decoration: underline;'>8</span> Democrat        0.365  0.013<span style='text-decoration: underline;'>0</span>  <span style='text-decoration: underline;'>7</span>516.

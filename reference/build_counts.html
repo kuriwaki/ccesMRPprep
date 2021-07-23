@@ -78,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.900</span>
       </span>
     </div>
 
@@ -237,7 +237,7 @@ of trials.</p></li>
                              <span class='va'>ccc_samp_std</span><span class='op'>)</span>
 
 <span class='va'>ccc_samp_out</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 945 x 6</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 945 × 6</span>
 #&gt;    age            gender educ         cd    n_response   yes
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> 18 to 24 years Male   HS or Less   CA-39          1     1
@@ -254,7 +254,7 @@ of trials.</p></li>
 <span class='co'># alternative options</span>
 <span class='fu'>build_counts</span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>educ</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>|</span><span class='va'>cd</span><span class='op'>)</span>, <span class='va'>ccc_samp_std</span>,
              name_ones_as <span class='op'>=</span> <span class='st'>"success"</span>, name_trls_as <span class='op'>=</span> <span class='st'>"trials"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 716 x 4</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 716 × 4</span>
 #&gt;    educ       cd    trials success
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> HS or Less AK-01      1       0
@@ -269,7 +269,7 @@ of trials.</p></li>
 #&gt; <span style='color: #BCBCBC;'>10</span> HS or Less CA-06      2       1
 #&gt; <span style='color: #949494;'># … with 706 more rows</span></div><div class='input'><span class='fu'>build_counts</span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>educ</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>|</span><span class='va'>cd</span><span class='op'>)</span>, <span class='va'>ccc_samp_std</span>,
              keep_vars <span class='op'>=</span> <span class='st'>"state"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 716 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 716 × 5</span>
 #&gt;    educ       cd    state      n_response   yes
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> HS or Less AK-01 Alaska              1     0
