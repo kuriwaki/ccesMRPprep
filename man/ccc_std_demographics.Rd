@@ -70,8 +70,8 @@ the cumulative content.
 library(dplyr)
 
  ccc_std_demographics(ccc_samp)
- cc_std_demographics(ccc_samp, wh_as_hisp = FALSE) \%>\% count(race)
- cc_std_demographics(ccc_samp, bh_as_hisp = FALSE, wh_as_hisp = FALSE) \%>\% count(race)
+ ccc_std_demographics(ccc_samp, wh_as_hisp = FALSE) \%>\% count(race)
+ ccc_std_demographics(ccc_samp, bh_as_hisp = FALSE, wh_as_hisp = FALSE) \%>\% count(race)
 
 \dontrun{
  # For full data (takes a while)
