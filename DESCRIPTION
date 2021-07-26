@@ -34,8 +34,7 @@ Imports:
     furrr
 Remotes:
     soichiroy/emlogit,
-    soichiroy/bmlogit,
-    IQSS/dataverse-client-r
+    soichiroy/bmlogit
 RoxygenNote: 7.1.1
 Language: en-US
 Roxygen: list(markdown = TRUE)
