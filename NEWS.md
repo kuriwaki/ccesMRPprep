@@ -1,5 +1,6 @@
 # ccesMRPprep 0.1.9
 
+* Overwrite cd_info so it uses two party vote (it makes a big difference in Utah in 2016). Add 2016 lines too.
 * Add option to make White Hispanics as "Hispanics" and make it a default; same for Black Hispanics (806beb2)
 
 # ccesMRPprep 0.1.8.1
