@@ -1,6 +1,8 @@
 # ccesMRPprep 0.1.9
 
-* Overwrite cd_info so it uses two party vote (it makes a big difference in Utah in 2016). Add 2016 lines too.
+* Overwrite cd_info so it uses two party vote (it makes a big difference in Utah in 2016). Add 2016 and 2020 lines too.
+* Allow ACS up to 2019 or error out on unavailable years
+* Update get_cces_dataverse to 2020 CES with validated vote
 * Add option to make White Hispanics as "Hispanics" and make it a default; same for Black Hispanics (806beb2)
 
 # ccesMRPprep 0.1.8.1
