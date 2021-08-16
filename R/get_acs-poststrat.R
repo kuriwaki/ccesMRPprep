@@ -23,7 +23,7 @@
 #' @importFrom stats as.formula
 #' @importFrom magrittr `%>%`
 #' @importFrom rlang .data
-#' @importFrom stringr str_detect
+#' @importFrom stringr str_detect str_sub
 #' @importFrom tidyr replace_na
 #' @importFrom haven is.labelled as_factor
 #' @import dplyr
@@ -58,7 +58,7 @@ get_acs_cces <- function(varlist,
                          geography =  "congressional district") {
 
   acs_df <- get_acs(geography = geography,
-                    year = min(max(year, 2010), 2018),
+                    year = min(max(year, 2010), as.numeric(str_sub(Sys.time(), 1, 4))),
                     survey = dataset,
                     variables = varlist,
                     state = states,
