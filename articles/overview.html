@@ -178,20 +178,17 @@
 <code class="sourceCode R"><span class="co"># only do this once, replacing the input with your census key</span>
 <span class="fu">tidycensus</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidycensus/man/census_api_key.html">census_api_key</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"CENSUS_API_KEY"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; To install your API key for use in future sessions, run this function with `install = TRUE`.</span>
-
 <span class="va">acs_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acs_cces.html">get_acs_cces</a></span><span class="op">(</span>
   varlist <span class="op">=</span> <span class="va">acscodes_age_sex_educ</span>,
   varlab_df <span class="op">=</span> <span class="va">acscodes_df</span>,
   year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span>
 <span class="co">#&gt; The 1-year ACS provides data for geographies with populations of 65,000 and greater.</span>
 <span class="co">#&gt; Getting data from the 2018 1-year ACS</span>
-
 <span class="va">poststrat</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/get_poststrat.html">get_poststrat</a></span><span class="op">(</span>
   cleaned_acs <span class="op">=</span> <span class="va">acs_tab</span>, 
   dist_data <span class="op">=</span> <span class="va">cd_info_2018</span>, 
   formula <span class="op">=</span> <span class="va">fm_brm</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = c("year", "cd")</span>
-
  <span class="va">poststrat</span>
 <span class="co">#&gt; # A tibble: 17,318 × 6</span>
 <span class="co">#&gt;    age            gender educ       pct_trump cd    count</span>
