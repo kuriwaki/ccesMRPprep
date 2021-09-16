@@ -1,31 +1,3 @@
-#' Decompose formula into parts useful for subsequent analyses
-#'
-#' Outputs a list. You can use `base::list2env` on the output to release
-#'  the items of the list on your environment.
-#'
-#' @param formula A representation of the aggregate imputation or "outcome" model,
-#'  of the form `X_{K} ~ X_1 + ... X_{K - 1}`
-#'
-#' @importFrom Formula as.Formula
-#' @keywords internal
-#' @examples
-#'  ccesMRPprep:::formula_parts(race ~ female + age + edu)
-formula_parts <- function(formula) {
-  Form         <- as.Formula(formula)
-  outcome_var  <- all.vars(formula(Form, lhs = 1, rhs = 0))
-  outcome_form <- as.formula(paste0("~ ", outcome_var, "- 1")) # ~ X_{K} - 1
-
-  X_form       <- formula(Form, lhs = 0, rhs = 1) # ~ X1 + .... X_{K - 1}
-  X_vars       <- all.vars(X_form)
-
-  list(Form = Form,
-       outcome_var = outcome_var,
-       outcome_form = outcome_form,
-       X_form = X_form,
-       X_vars = X_vars)
-}
-
-
 #' Reduce the dimensionality of the table
 #'
 #' @param poptable The population table, collapsed in terms of counts. Must contain

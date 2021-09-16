@@ -27,7 +27,14 @@ library(furrr)
 plan(multisession, workers = 6)
 ```
 
-Almost all survey weighting, whether MRP or not, face a data limitation that direct knowledge of the joint distributions of predictors (such as race, partisanship, and geography) are limited. There is a long tradition of statistical and applied work that can be grouped under the umbrella of synthetic population imputation: it seeks to expand the set of available interactions to poststratify on. The core idea has parallels in iterative proportional fitting (Deming and Stephan), ecological inference, and latent factorization methods.
+Almost all survey weighting, whether MRP or not, face a data limitation that direct knowledge of the joint distributions of predictors (such as race, partisanship, and geography) are limited. There is a long tradition of statistical and applied work that can be grouped under the umbrella of synthetic population imputation: it seeks to expand the set of available interactions to poststratify on. The core idea has parallels in iterative proportional fitting (Deming and Stephan), ecological inference, and latent factorization methods. 
+
+The package synthjoint (Kuriwaki and Yamauchi, https://github.com/kuriwaki/synthjoint) implements key methods.
+
+```{r}
+library(synthjoint)
+```
+
 
 We can classify the main approaches by what outside data they leverage:
 
