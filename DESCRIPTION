@@ -30,6 +30,8 @@ Imports:
     dataverse (>= 0.3.0),
     tidycensus (>= 0.11.4),
     furrr
+Remotes:
+    kuriwaki/syntjoint
 RoxygenNote: 7.1.1
 Language: en-US
 Roxygen: list(markdown = TRUE)
@@ -41,5 +43,6 @@ Suggests:
     rmarkdown,
     tidyverse,
     questionr,
-    testthat
+    testthat,
+    synthjoint
 VignetteBuilder: knitr
