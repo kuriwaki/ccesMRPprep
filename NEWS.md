@@ -1,3 +1,7 @@
+# ccesMRPprep 0.1.10
+
+* Separate out the synth_functions to synthjoint package (#9)
+
 # ccesMRPprep 0.1.9
 
 * Overwrite cd_info so it uses two party vote (it makes a big difference in Utah in 2016). Add 2016 and 2020 lines too.

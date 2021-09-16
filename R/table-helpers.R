@@ -3,7 +3,9 @@
 #' Outputs a list. You can use `base::list2env` on the output to release
 #'  the items of the list on your environment.
 #'
-#' @inheritParams synth_mlogit
+#' @param formula A representation of the aggregate imputation or "outcome" model,
+#'  of the form `X_{K} ~ X_1 + ... X_{K - 1}`
+#'
 #' @importFrom Formula as.Formula
 #' @keywords internal
 #' @examples
@@ -26,6 +28,12 @@ formula_parts <- function(formula) {
 
 #' Reduce the dimensionality of the table
 #'
+#' @param poptable The population table, collapsed in terms of counts. Must contain
+#'  all variables in the RHS of `formula`, as well as the variables specified in
+#'   `area_var` and `count_var` below.
+#' @param area_var A character vector of the area of interest.
+#' @param count_var A character variable that specifies which variable in `poptable`
+#'  indicates the count
 #' @param X_vars A character vector of the variables to keep. By design, this
 #'  should be fewer variables than what is available in `poptable`.
 #' @param report Should the output be in simple counts (the default, `"counts"`) or
@@ -33,8 +41,6 @@ formula_parts <- function(formula) {
 #' @param new_name What should the new count (or proportion) variable be called?
 #' @param warnings Show some warnings about zero cells in the original data?
 #'  Defaults to `FALSE`
-#'
-#' @inheritParams synth_mlogit
 #'
 #' @returns A dataframe of counts or proportions. By design, it will include the
 #'  variables `area_var`, `X_vars`, and whatever is specified in `new_name`.
@@ -89,55 +95,5 @@ collapse_table <- function(poptable,
   if (report == "counts")
     out <- rename(out, !!sym(new_name) := "new_count")
 
-  out
-}
-
-
-#' Tidy joint probabilities
-#'
-#'
-#' @details Internal function to predict from a emlogit/bmlogit object, then reshape to
-#' the population of interest. See `synth_mlogit()` and `synth_bmlogit()`
-#'
-#' @param fit A model of class bmlogit/emlogit
-#' @param outcome_names A character vector of names that correspond to each level
-#'  of the outcome of the multinomial. Must be manually set to the same ordering as
-#'  the fitted objects.
-#'
-#' @inheritParams collapse_table
-#' @keywords internal
-predict_longer <- function(fit, poptable, microdata, X_form, X_vars, area_var, count_var, outcome_var) {
-
-  # Data for area var {A, X_{1}, ..., X_{K-1}}
-  X_pred_df  <- collapse_table(
-    poptable,
-    area_var = area_var, X_vars = X_vars, count_var = count_var,
-    new_name = count_var
-  ) %>%
-    group_by(!!sym(area_var)) %>%
-    mutate(prX = !!sym(count_var) / sum(!!sym(count_var))) %>%
-    ungroup()
-
-  X_p_mat <- model.matrix(X_form, X_pred_df)[, -1]
-
-  # predicted values
-  pred_X_p <- predict(fit, newdata = X_p_mat)
-
-  out <- as_tibble(pred_X_p) %>%
-    bind_cols(X_pred_df) %>%
-    pivot_longer(cols = -c(X_vars, area_var, count_var, "prX"),
-                 names_to = outcome_var,
-                 values_to = "prZ_givenX") %>%
-    mutate(prXZ = prX * prZ_givenX,
-           !!sym(count_var) := !!sym(count_var)*prZ_givenX) %>%
-    relocate(!!sym(count_var), .after = last_col())
-
-  # if original factor, make it back into a factor
-  # (it was deconstructed in model.matrix)
-  if (inherits(microdata[[outcome_var]], "factor")) {
-    out[[outcome_var]] <- factor(out[[outcome_var]],
-                                 levels = levels(microdata[[outcome_var]]))
-
-  }
   out
 }
