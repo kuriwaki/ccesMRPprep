@@ -7,7 +7,10 @@
 to_cd(state, num)
 }
 \arguments{
-\item{state}{A vector of state names, preferably abbreviations}
+\item{state}{A vector of state names, preferably abbreviations.
+If it is numeric, the function will assume they are FIPS codes
+and translate them accordingly. If they have full names like "California"
+instead of "CA", it will trnslate that too.}
 
 \item{num}{A vector of district codes}
 }
@@ -16,5 +19,12 @@ Concatenate to Congressional District code
 }
 \examples{
  to_cd(c("AL", "AK"), c("5", "AL"))
+ to_cd(c(1, 2), c("5", "AL"))
+ to_cd(c("Alabama", "Alaska"), c("5", "AL"))
+
+ cc18_samp \%>\%
+  transmute(inputstate,
+            cdid115,
+            cd = to_cd(inputstate, cdid115))
 
 }
