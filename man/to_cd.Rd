@@ -18,13 +18,15 @@ instead of "CA", it will trnslate that too.}
 Concatenate to Congressional District code
 }
 \examples{
+library(dplyr)
+
  to_cd(c("AL", "AK"), c("5", "AL"))
  to_cd(c(1, 2), c("5", "AL"))
  to_cd(c("Alabama", "Alaska"), c("5", "AL"))
 
- cc18_samp \%>\%
-  transmute(inputstate,
-            cdid115,
-            cd = to_cd(inputstate, cdid115))
+ transmute(cc18_samp,
+           inputstate,
+           cdid115,
+           cd = to_cd(inputstate, cdid115))
 
 }
