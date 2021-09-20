@@ -31,7 +31,7 @@ Imports:
     tidycensus (>= 0.11.4),
     furrr
 Remotes:
-    kuriwaki/syntjoint
+    kuriwaki/synthjoint
 RoxygenNote: 7.1.1
 Language: en-US
 Roxygen: list(markdown = TRUE)
