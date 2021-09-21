@@ -29,7 +29,7 @@ The ACS is the main dataset used for post-stratification in MRP because of its w
 5. Of the variables that are available, __only certain variable combinations__ of them are available at the district level:
    * There are three are three-way interactions of some demographic variables but not more than that. 
    * The ACS provides thousands of cell counts, but only a subset of them are useful for MRP because cells for MRP must form a partition of the population (i.e., exclusive and exhaustive categories). I describe several important combinations below.
-   * See the synthetic imputation page  (`vignette("synth")`) in this package to see how this restriction could be relaxed.
+   * See the synthetic imputation page  (`vignette("synth", package = "synthjoint")`) in this package to see how this restriction could be relaxed.
 6. Some of the partition counts are __not perfect partitions__. For example, some of the variable codes I define below _exclude_ people aged 18-24, include non-citizens, or double-count African Americans who also identify as Hispanic/Latino. These introduce some error into the post-stratification.
 
 This package and vignette goes into more detail about these limitations and the nature of the data that is available.

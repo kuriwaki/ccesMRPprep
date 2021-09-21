@@ -4,7 +4,7 @@ output: github_document
 ---
 
 <!-- badges: start -->
-[![tic](https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=master)](https://github.com/kuriwaki/ccesMRPprep/actions)
+[![tic](https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=master)](https://github.com/kuriwaki/ccesMRPprep/actions)    
 <!-- badges: end -->
 
 ```{r setup, include=FALSE}
@@ -38,7 +38,7 @@ See `vignette("overview")` for a overview of the steps involved.
 
 For documentation of the data sources, see  `vignette("acs")` for the Census and `vignette("derived")` for CCES variables.  
 
-This vignette also covers more advanced techniques to expand population tables. See `vignette("synth")` for an overview and demonstration.
+A related package also covers more advanced techniques to expand population tables. See [`kuriwaki/synthjoint`](https://www.github.com/kuriwaki/synthjoint) for an overview and demonstration.
 
 
 Each function and built-in data provides documentation as well. 
