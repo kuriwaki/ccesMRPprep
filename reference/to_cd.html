@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Single Proportional Fitting (as opposed to Iterative) with microdata — rake_spf • ccesMRPprep</title>
+<title>Concatenate to Congressional District code — to_cd • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,8 @@
 
 
 
-<meta property="og:title" content="Single Proportional Fitting (as opposed to Iterative) with microdata — rake_spf" />
-<meta property="og:description" content="With microdata or a table that includes both" />
+<meta property="og:title" content="Concatenate to Congressional District code — to_cd" />
+<meta property="og:description" content="Concatenate to Congressional District code" />
 
 
 
@@ -78,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
       </span>
     </div>
 
@@ -112,9 +112,6 @@
     <li>
       <a href="../articles/cps.html">CPS Overview</a>
     </li>
-    <li>
-      <a href="../articles/synth.html">Synthetic Target Estimation</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -147,46 +144,60 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Single Proportional Fitting (as opposed to Iterative) with microdata</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/synth_rake.R'><code>R/synth_rake.R</code></a></small>
-    <div class="hidden name"><code>rake_spf.Rd</code></div>
+    <h1>Concatenate to Congressional District code</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/district-coding.R'><code>R/district-coding.R</code></a></small>
+    <div class="hidden name"><code>to_cd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>With microdata or a table that includes both</p>
+    <p>Concatenate to Congressional District code</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rake_spf</span><span class='op'>(</span><span class='va'>outcome_var</span>, <span class='va'>data</span>, <span class='va'>fix_to</span>, <span class='va'>area_var</span>, count_var <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>to_cd</span><span class='op'>(</span><span class='va'>state</span>, <span class='va'>num</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>outcome_var</th>
-      <td><p>A string for the variable to match the proportion to</p></td>
+      <th>state</th>
+      <td><p>A vector of state names, preferably abbreviations.
+If it is numeric, the function will assume they are FIPS codes
+and translate them accordingly. If they have full names like "California"
+instead of "CA", it will trnslate that too.</p></td>
     </tr>
     <tr>
-      <th>data</th>
-      <td><p>Data of microdata or tables whose margin on <code>outcom_var</code> must be fixed</p></td>
-    </tr>
-    <tr>
-      <th>fix_to</th>
-      <td><p>A dataset with only marginal counts or proportions of the outcome
-in question, by each area. Proportions will be corrected so that the margins
-of the synthetic joint will match these, with a simple ratio.</p></td>
-    </tr>
-    <tr>
-      <th>area_var</th>
-      <td><p>A character vector of the area of interest.</p></td>
-    </tr>
-    <tr>
-      <th>count_var</th>
-      <td><p>A character variable that specifies which variable in <code>poptable</code>
-indicates the count</p></td>
+      <th>num</th>
+      <td><p>A vector of district codes</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+
+ <span class='fu'>to_cd</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AL"</span>, <span class='st'>"AK"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"5"</span>, <span class='st'>"AL"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "AL-05" "AK-01"</div><div class='input'> <span class='fu'>to_cd</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"5"</span>, <span class='st'>"AL"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "AL-05" "AK-01"</div><div class='input'> <span class='fu'>to_cd</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Alabama"</span>, <span class='st'>"Alaska"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"5"</span>, <span class='st'>"AL"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "AL-05" "AK-01"</div><div class='input'>
+ <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>transmute</a></span><span class='op'>(</span><span class='va'>cc18_samp</span>,
+           <span class='va'>inputstate</span>,
+           <span class='va'>cdid115</span>,
+           cd <span class='op'>=</span> <span class='fu'>to_cd</span><span class='op'>(</span><span class='va'>inputstate</span>, <span class='va'>cdid115</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Unreplaced values treated as NA as .x is not compatible. Please specify replacements exhaustively or supply .default</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,000 × 3</span>
+#&gt;             inputstate cdid115 cd   
+#&gt;              <span style='color: #949494; font-style: italic;'>&lt;dbl+lbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span>  6<span style='color: #949494;'> [California]</span>     13      CA-13
+#&gt; <span style='color: #BCBCBC;'> 2</span> 27<span style='color: #949494;'> [Minnesota]</span>      7       MN-07
+#&gt; <span style='color: #BCBCBC;'> 3</span> 37<span style='color: #949494;'> [North Carolina]</span> 2       NC-02
+#&gt; <span style='color: #BCBCBC;'> 4</span> 26<span style='color: #949494;'> [Michigan]</span>       2       MI-02
+#&gt; <span style='color: #BCBCBC;'> 5</span> 51<span style='color: #949494;'> [Virginia]</span>       7       VA-07
+#&gt; <span style='color: #BCBCBC;'> 6</span> 36<span style='color: #949494;'> [New York]</span>       19      NY-19
+#&gt; <span style='color: #BCBCBC;'> 7</span> 54<span style='color: #949494;'> [West Virginia]</span>  2       WV-02
+#&gt; <span style='color: #BCBCBC;'> 8</span> 36<span style='color: #949494;'> [New York]</span>       15      NY-15
+#&gt; <span style='color: #BCBCBC;'> 9</span> 48<span style='color: #949494;'> [Texas]</span>          3       TX-03
+#&gt; <span style='color: #BCBCBC;'>10</span> 25<span style='color: #949494;'> [Massachusetts]</span>  6       MA-06
+#&gt; <span style='color: #949494;'># … with 990 more rows</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

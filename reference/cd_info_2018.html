@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Congressional District level information — cd_info_2018 • ccesMRPprep</title>
+<title>Congressional District level information by Daily Kos — cd_info_2018 • ccesMRPprep</title>
 
 
 <!-- jquery -->
@@ -45,10 +45,11 @@
 
 
 
-<meta property="og:title" content="Congressional District level information — cd_info_2018" />
+<meta property="og:title" content="Congressional District level information by Daily Kos — cd_info_2018" />
 <meta property="og:description" content="Some of the most consequential variables to include in MRP are at the
 district-level. We include one such data for congressional districts. All data
-is collected by Daily Kos." />
+is collected by Daily Kos. cd_info_2018 is data on 2018 boundaries, cd_info_2016
+uses 2016 boundaries and cd_info_2020 uses 2020 (but with place descriptions currently at 2016)." />
 
 
 
@@ -80,7 +81,7 @@ is collected by Daily Kos." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
       </span>
     </div>
 
@@ -114,9 +115,6 @@ is collected by Daily Kos." />
     <li>
       <a href="../articles/cps.html">CPS Overview</a>
     </li>
-    <li>
-      <a href="../articles/synth.html">Synthetic Target Estimation</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -149,7 +147,7 @@ is collected by Daily Kos." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Congressional District level information</h1>
+    <h1>Congressional District level information by Daily Kos</h1>
     <small class="dont-index">Source: <a href='http://github.com/kuriwaki/ccesMRPprep/blob/master/R/datadoc_cd-info.R'><code>R/datadoc_cd-info.R</code></a></small>
     <div class="hidden name"><code>cd_info_2018.Rd</code></div>
     </div>
@@ -157,10 +155,15 @@ is collected by Daily Kos." />
     <div class="ref-description">
     <p>Some of the most consequential variables to include in MRP are at the
 district-level. We include one such data for congressional districts. All data
-is collected by Daily Kos.</p>
+is collected by Daily Kos. <code>cd_info_2018</code> is data on 2018 boundaries, <code>cd_info_2016</code>
+uses 2016 boundaries and <code>cd_info_2020</code> uses 2020 (but with place descriptions currently at 2016).</p>
     </div>
 
     <pre class="usage"><span class='va'>cd_info_2018</span>
+
+<span class='va'>cd_info_2016</span>
+
+<span class='va'>cd_info_2020</span>
 
 <span class='va'>elec_NY</span></pre>
 
@@ -168,7 +171,7 @@ is collected by Daily Kos.</p>
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p><code>cd_info_2018</code> is a dataframe with the 435 Congressional
-Districts, one row per cd.</p><dl>
+Districts with 2018 boundaries, one row per cd.</p><dl>
 <dt>year</dt><dd><p>The year for the district line. A congressional district's
 actual geography can change year to year, and significantly so in different
 redistricting cycles. 2019 indicates the data about voteshare and place names
@@ -177,16 +180,19 @@ corresponds to district lines as of 2019.</p></dd>
 coding of <code>cd</code>: a two-letter abbreviation for the state followed by
 a dash, and the district number padded with zeros to the left to be of length
 2. At-large districts like Delaware are given a "-01" for the district number.</p></dd>
-<dt>pct_trump, pct_romney, pct_mccain</dt><dd><p>The voteshare of presidential candidates
+<dt>pct_trump, pct_romney, pct_mccain</dt><dd><p>The two-party voteshare of Republican presidential candidates
 in that district for the given year. E.g. the <code>pct_mccain</code> data when <code>cd_year == 2018</code>
-represents the percent of the vote by McCain in 2008 for that district <em>under 2018 lines.</em></p></dd>
-<dt>dailykos_name</dt><dd><p>The unique descriptive name for the district given by Daily Kos.
+represents the percent of the vote by McCain in 2008 for that district <em>under 2018 lines.</em>
+The Trump value is for 2016 for <code>cd_info_2018</code> and ``cd_info_2020<code>but not for 2020 where we use Trump's 2020 vote against Biden and denote as</code>pct_trump16` the 2016 result.</p></dd>
+<dt>dailykos_name</dt><dd><p>The unique descriptive name for the district code in 2018 given by Daily Kos.
 See Source for full citation.</p></dd>
-<dt>largest_place</dt><dd><p>The largest place in the district given by Daily Kos. Multiple districts may
+<dt>largest_place</dt><dd><p>The largest place in the district code in 2018 given by Daily Kos. Multiple districts may
 have the largest place.</p></dd>
 
 </dl>
 
+<p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 435 rows and 7 columns.</p>
+<p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 435 rows and 7 columns.</p>
 <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 27 rows and 6 columns.</p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 

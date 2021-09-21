@@ -46,9 +46,6 @@
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/cps_onewaytabs.html</loc>
   </url>
   <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/formula_parts.html</loc>
-  </url>
-  <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/get_acs_cces.html</loc>
   </url>
   <url>
@@ -67,28 +64,13 @@
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/namevalue.html</loc>
   </url>
   <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/predict_longer.html</loc>
-  </url>
-  <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/questions_samp.html</loc>
-  </url>
-  <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/rake_spf.html</loc>
-  </url>
-  <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/rake_target.html</loc>
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/std_acs_cdformat.html</loc>
   </url>
   <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/synth_bmlogit.html</loc>
-  </url>
-  <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/synth_mlogit.html</loc>
-  </url>
-  <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/synth_prod.html</loc>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/to_cd.html</loc>
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/yesno_to_binary.html</loc>
@@ -104,8 +86,5 @@
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/articles/overview.html</loc>
-  </url>
-  <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/synth.html</loc>
   </url>
 </urlset>

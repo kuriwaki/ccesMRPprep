@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.8.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
       </span>
     </div>
 
@@ -66,9 +66,6 @@
     </li>
     <li>
       <a href="../articles/cps.html">CPS Overview</a>
-    </li>
-    <li>
-      <a href="../articles/synth.html">Synthetic Target Estimation</a>
     </li>
   </ul>
 </li>
@@ -132,7 +129,7 @@
 <ul>
 <li>There are three are three-way interactions of some demographic variables but not more than that.</li>
 <li>The ACS provides thousands of cell counts, but only a subset of them are useful for MRP because cells for MRP must form a partition of the population (i.e., exclusive and exhaustive categories). I describe several important combinations below.</li>
-<li>See the synthetic imputation page (<code><a href="../articles/synth.html">vignette("synth")</a></code>) in this package to see how this restriction could be relaxed.</li>
+<li>See the synthetic imputation page (<code>vignette("synth", package = "synthjoint")</code>) in this package to see how this restriction could be relaxed.</li>
 </ul>
 </li>
 <li>Some of the partition counts are <strong>not perfect partitions</strong>. For example, some of the variable codes I define below <em>exclude</em> people aged 18-24, include non-citizens, or double-count African Americans who also identify as Hispanic/Latino. These introduce some error into the post-stratification.</li>
