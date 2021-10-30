@@ -202,25 +202,27 @@ have the largest place.</p></dd>
 <a href='https://bit.ly/3bXtAPB'>https://bit.ly/3bXtAPB</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>cd_info_2018</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 7</span>
-#&gt;    year cd    dailykos_name        largest_place pct_trump pct_romney pct_mccain
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>  <span style='text-decoration: underline;'>2</span>018 AK-01 All of Alaska        Anchorage         0.528      0.553      0.597
-#&gt; <span style='color: #BCBCBC;'>2</span>  <span style='text-decoration: underline;'>2</span>018 AL-01 Greater Mobile       Mobile            0.635      0.618      0.609
-#&gt; <span style='color: #BCBCBC;'>3</span>  <span style='text-decoration: underline;'>2</span>018 AL-02 Southeastern Alabama Montgomery        0.649      0.629      0.645
-#&gt; <span style='color: #BCBCBC;'>4</span>  <span style='text-decoration: underline;'>2</span>018 AL-03 Eastern Alabama      Auburn            0.653      0.623      0.626
-#&gt; <span style='color: #BCBCBC;'>5</span>  <span style='text-decoration: underline;'>2</span>018 AL-04 North-central Alaba… Gadsden           0.804      0.748      0.733
-#&gt; <span style='color: #BCBCBC;'>6</span>  <span style='text-decoration: underline;'>2</span>018 AL-05 Northern Alabama     Huntsville        0.647      0.639      0.626</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>elec_NY</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 × 6</span>
-#&gt;   cd    dailykos_name          largest_place pct_trump pct_romney pct_mccain
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> NY-01 Eastern Suffolk County Coram             0.545      0.491       0.48
-#&gt; <span style='color: #BCBCBC;'>2</span> NY-02 Southern Long Island   Brentwood         0.53       0.472       0.48
-#&gt; <span style='color: #BCBCBC;'>3</span> NY-03 Northern Long Island   New York City     0.455      0.482       0.46
-#&gt; <span style='color: #BCBCBC;'>4</span> NY-04 Long Island            Hempstead         0.438      0.428       0.44
-#&gt; <span style='color: #BCBCBC;'>5</span> NY-05 Southeastern Queens    New York City     0.127      0.091       0.14
-#&gt; <span style='color: #BCBCBC;'>6</span> NY-06 Northeastern Queens    New York City     0.321      0.31        0.36</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>cd_info_2018</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 6 × 7</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    year cd    dailykos_name        largest_place pct_trump pct_romney pct_mccain</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>  <span style='text-decoration: underline;'>2</span>018 AK-01 All of Alaska        Anchorage         0.528      0.553      0.597</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span>  <span style='text-decoration: underline;'>2</span>018 AL-01 Greater Mobile       Mobile            0.635      0.618      0.609</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>  <span style='text-decoration: underline;'>2</span>018 AL-02 Southeastern Alabama Montgomery        0.649      0.629      0.645</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span>  <span style='text-decoration: underline;'>2</span>018 AL-03 Eastern Alabama      Auburn            0.653      0.623      0.626</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span>  <span style='text-decoration: underline;'>2</span>018 AL-04 North-central Alaba… Gadsden           0.804      0.748      0.733</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span>  <span style='text-decoration: underline;'>2</span>018 AL-05 Northern Alabama     Huntsville        0.647      0.639      0.626</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>elec_NY</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 6 × 6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   cd    dailykos_name          largest_place pct_trump pct_romney pct_mccain</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> NY-01 Eastern Suffolk County Coram             0.545      0.491       0.48</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> NY-02 Southern Long Island   Brentwood         0.53       0.472       0.48</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> NY-03 Northern Long Island   New York City     0.455      0.482       0.46</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> NY-04 Long Island            Hempstead         0.438      0.428       0.44</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> NY-05 Southeastern Queens    New York City     0.127      0.091       0.14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>6</span> NY-06 Northeastern Queens    New York City     0.321      0.31        0.36</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

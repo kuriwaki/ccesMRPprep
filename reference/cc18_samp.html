@@ -178,62 +178,71 @@ common content, of which 2018 is a subset. A sample of the cumulative is contain
 in this package as <code><a href='ccc_samp.html'>?ccc_samp</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># use questionr::lookfor to search the label and labels</span>
-<span class='fu'>questionr</span><span class='fu'>::</span><span class='fu'><a href='http://larmarange.github.io/labelled/reference/look_for.html'>lookfor</a></span><span class='op'>(</span><span class='va'>cc18_samp</span>, <span class='st'>"Trump"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  pos variable            label                 col_type values               
-#&gt;  91  CC18_308a           Job approval -- Pres~ dbl+lbl  [1] Strongly approve 
-#&gt;                                                         [2] Somewhat approve 
-#&gt;                                                         [3] Somewhat disappr~
-#&gt;                                                         [4] Strongly disappr~
-#&gt;                                                         [5] Not sure         
-#&gt;                                                         [8] skipped          
-#&gt;                                                         [9] not asked        
-#&gt;  149 CC18_334C           Ideological Placemen~ dbl+lbl  [1] Very Liberal     
-#&gt;                                                         [2] Liberal          
-#&gt;                                                         [3] Somewhat Liberal 
-#&gt;                                                         [4] Middle of the Ro~
-#&gt;                                                         [5] Somewhat Conserv~
-#&gt;                                                         [6] Conservative     
-#&gt;                                                         [7] Very Conservative
-#&gt;                                                         [8] Not sure         
-#&gt;                                                         [98] skipped         
-#&gt;                                                         [99] not asked       
-#&gt;  162 CC18_335            Trump Russia collusi~ dbl+lbl  [1] Yes              
-#&gt;                                                         [2] No               
-#&gt;                                                         [3] Not sure         
-#&gt;                                                         [8] skipped          
-#&gt;                                                         [9] not asked        
-#&gt;  430 CC18_app_dtrmp_post President Trump Job ~ dbl+lbl  [1] Strongly approve 
-#&gt;                                                         [2] Somewhat approve 
-#&gt;                                                         [3] Somewhat disappr~
-#&gt;                                                         [4] Strongly disappr~
-#&gt;                                                         [5] Not sure         
-#&gt;                                                         [8] skipped          
-#&gt;                                                         [9] not asked        </div><div class='input'>
-<span class='co'># all data</span>
-<span class='va'>cc18_samp</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,000 × 526</span>
-#&gt;     year   case_id commonweight commonpostweight vvweight vvweight_post tookpost
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl+lb&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span>  <span style='text-decoration: underline;'>2</span>018 415<span style='text-decoration: underline;'>395</span>741        1.47             1.48    <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>      2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span>  <span style='text-decoration: underline;'>2</span>018 414<span style='text-decoration: underline;'>164</span>923        1.33             1.22     1.51          1.29   2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #BCBCBC;'> 3</span>  <span style='text-decoration: underline;'>2</span>018 412<span style='text-decoration: underline;'>379</span>892        0.641            0.559    0.602         0.594  2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #BCBCBC;'> 4</span>  <span style='text-decoration: underline;'>2</span>018 414<span style='text-decoration: underline;'>203</span>529        1.35             1.19     1.18          1.17   2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #BCBCBC;'> 5</span>  <span style='text-decoration: underline;'>2</span>018 412<span style='text-decoration: underline;'>148</span>048        0.870            0.762    0.842         0.742  2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #BCBCBC;'> 6</span>  <span style='text-decoration: underline;'>2</span>018 412<span style='text-decoration: underline;'>329</span>835        0.949            0.789    1.07          0.983  2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #BCBCBC;'> 7</span>  <span style='text-decoration: underline;'>2</span>018 417<span style='text-decoration: underline;'>352</span>072        0.688            0.585    0.717         0.716  2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #BCBCBC;'> 8</span>  <span style='text-decoration: underline;'>2</span>018 414<span style='text-decoration: underline;'>614</span>677        0.814            0.616   <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>      2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #BCBCBC;'> 9</span>  <span style='text-decoration: underline;'>2</span>018 416<span style='text-decoration: underline;'>797</span>006        1.12             0.926    0.991         0.929  2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #BCBCBC;'>10</span>  <span style='text-decoration: underline;'>2</span>018 412<span style='text-decoration: underline;'>962</span>561        1.05             0.877    0.346         0.372  2<span style='color: #949494;'> [Yes]</span>
-#&gt; <span style='color: #949494;'># … with 990 more rows, and 519 more variables: CCEStake &lt;dbl+lbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   birthyr &lt;dbl&gt;, gender &lt;dbl+lbl&gt;, educ &lt;dbl+lbl&gt;, race &lt;dbl+lbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   race_other &lt;chr&gt;, hispanic &lt;dbl+lbl&gt;, marstat &lt;dbl+lbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   multrace_1 &lt;dbl+lbl&gt;, multrace_2 &lt;dbl+lbl&gt;, multrace_3 &lt;dbl+lbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   multrace_4 &lt;dbl+lbl&gt;, multrace_5 &lt;dbl+lbl&gt;, multrace_8 &lt;dbl+lbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   multrace_97 &lt;dbl+lbl&gt;, multrace_98 &lt;dbl+lbl&gt;, multrace_99 &lt;dbl+lbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   CC18_354a_1 &lt;dbl+lbl&gt;, CC18_354a_2 &lt;dbl+lbl&gt;, CC18_354a_3 &lt;dbl+lbl&gt;, …</span></div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># use questionr::lookfor to search the label and labels</span></span>
+<span class='r-in'><span class='fu'>questionr</span><span class='fu'>::</span><span class='fu'><a href='http://larmarange.github.io/labelled/reference/look_for.html'>lookfor</a></span><span class='op'>(</span><span class='va'>cc18_samp</span>, <span class='st'>"Trump"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  pos variable            label                 col_type values               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  91  CC18_308a           Job approval -- Pres~ dbl+lbl  [1] Strongly approve </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [2] Somewhat approve </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [3] Somewhat disappr~</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [4] Strongly disappr~</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [5] Not sure         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [8] skipped          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [9] not asked        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  108 CC18_317            President 2016        dbl+lbl  [1] Donald Trump     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [2] Hillary Clinton  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [3] Someone else     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [4] I did not cast a~</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [5] I don't recall   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [8] skipped          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [9] not asked        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  149 CC18_334C           Ideological Placemen~ dbl+lbl  [1] Very Liberal     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [2] Liberal          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [3] Somewhat Liberal </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [4] Middle of the Ro~</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [5] Somewhat Conserv~</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [6] Conservative     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [7] Very Conservative</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [8] Not sure         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [98] skipped         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [99] not asked       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  162 CC18_335            Trump Russia collusi~ dbl+lbl  [1] Yes              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [2] No               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [3] Not sure         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [8] skipped          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [9] not asked        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  430 CC18_app_dtrmp_post President Trump Job ~ dbl+lbl  [1] Strongly approve </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [2] Somewhat approve </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [3] Somewhat disappr~</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [4] Strongly disappr~</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [5] Not sure         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [8] skipped          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                         [9] not asked        </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># all data</span></span>
+<span class='r-in'><span class='va'>cc18_samp</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1,000 × 526</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     year   case_id commonweight commonpostweight vvweight vvweight_post tookpost</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl+lb&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span>  <span style='text-decoration: underline;'>2</span>018 415<span style='text-decoration: underline;'>395</span>741        1.47             1.48    <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>      2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span>  <span style='text-decoration: underline;'>2</span>018 414<span style='text-decoration: underline;'>164</span>923        1.33             1.22     1.51          1.29   2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span>  <span style='text-decoration: underline;'>2</span>018 412<span style='text-decoration: underline;'>379</span>892        0.641            0.559    0.602         0.594  2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span>  <span style='text-decoration: underline;'>2</span>018 414<span style='text-decoration: underline;'>203</span>529        1.35             1.19     1.18          1.17   2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span>  <span style='text-decoration: underline;'>2</span>018 412<span style='text-decoration: underline;'>148</span>048        0.870            0.762    0.842         0.742  2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span>  <span style='text-decoration: underline;'>2</span>018 412<span style='text-decoration: underline;'>329</span>835        0.949            0.789    1.07          0.983  2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span>  <span style='text-decoration: underline;'>2</span>018 417<span style='text-decoration: underline;'>352</span>072        0.688            0.585    0.717         0.716  2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span>  <span style='text-decoration: underline;'>2</span>018 414<span style='text-decoration: underline;'>614</span>677        0.814            0.616   <span style='color: #BB0000;'>NA</span>            <span style='color: #BB0000;'>NA</span>      2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span>  <span style='text-decoration: underline;'>2</span>018 416<span style='text-decoration: underline;'>797</span>006        1.12             0.926    0.991         0.929  2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span>  <span style='text-decoration: underline;'>2</span>018 412<span style='text-decoration: underline;'>962</span>561        1.05             0.877    0.346         0.372  2<span style='color: #949494;'> [Yes]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 990 more rows, and 519 more variables: CCEStake &lt;dbl+lbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   birthyr &lt;dbl&gt;, gender &lt;dbl+lbl&gt;, educ &lt;dbl+lbl&gt;, race &lt;dbl+lbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   race_other &lt;chr&gt;, hispanic &lt;dbl+lbl&gt;, marstat &lt;dbl+lbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   multrace_1 &lt;dbl+lbl&gt;, multrace_2 &lt;dbl+lbl&gt;, multrace_3 &lt;dbl+lbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   multrace_4 &lt;dbl+lbl&gt;, multrace_5 &lt;dbl+lbl&gt;, multrace_8 &lt;dbl+lbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   multrace_97 &lt;dbl+lbl&gt;, multrace_98 &lt;dbl+lbl&gt;, multrace_99 &lt;dbl+lbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   CC18_354a_1 &lt;dbl+lbl&gt;, CC18_354a_2 &lt;dbl+lbl&gt;, CC18_354a_3 &lt;dbl+lbl&gt;, …</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

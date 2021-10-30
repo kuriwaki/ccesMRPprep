@@ -169,7 +169,7 @@ The function also does</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>The name of the dataset as defined in <code><a href='https://rdrr.io/r/utils/data.html'>data(cces_dv_ids)</a></code>.</p></td>
+      <td><p>The name of the dataset as defined in <code>data(cces_dv_ids)</code>.</p></td>
     </tr>
     <tr>
       <th>year_subset</th>
@@ -184,7 +184,7 @@ when using the cumulative dataset for its harmonized variables.</p></td>
 have different column names in different datasets, but setting this to <code>TRUE</code>
 (the default) will all rename them <code>"case_id"</code> and also add the year of the dataset.
 This way, every dataset that gets downloaded will have the unique identifier
-defined by the variables <code><a href='https://rdrr.io/r/base/c.html'>c("year", "case_id")</a></code>.</p></td>
+defined by the variables <code>c("year", "case_id")</code>.</p></td>
     </tr>
     <tr>
       <th>dataverse_paths</th>
@@ -204,24 +204,24 @@ in total). Each dataset has slightly different formats; using <a href='get_cces_
 will standardize, for example, the name of the case ID.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># read in cumulative common content, subsetted to 2018, into environemt</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
- <span class='va'>ccc</span> <span class='op'>&lt;-</span> <span class='fu'>get_cces_dataverse</span><span class='op'>(</span><span class='st'>"cumulative"</span>, year_subset <span class='op'>=</span> <span class='fl'>2018</span><span class='op'>)</span>
- <span class='op'>}</span>
-
-<span class='co'># Example code to read _and_ write a series of common content datasets</span>
-<span class='co'># in a directory "data/input/cces/</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>dir_create</span><span class='op'>(</span><span class='st'>"data/cces"</span><span class='op'>)</span>
-<span class='kw'>for</span> <span class='op'>(</span><span class='va'>d</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cumulative"</span>, <span class='st'>"2018"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'>file_exists</span><span class='op'>(</span><span class='fu'>glue</span><span class='op'>(</span><span class='st'>"data/input/cces/cces_{d}.rds"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-    <span class='kw'>next</span>
-  <span class='fu'>write_rds</span><span class='op'>(</span><span class='fu'>get_cces_dataverse</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>, <span class='fu'>glue</span><span class='op'>(</span><span class='st'>"data/input/cces/cces_{d}.rds"</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># takes a few minutes</span>
-<span class='op'>}</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># read in cumulative common content, subsetted to 2018, into environemt</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'> <span class='va'>ccc</span> <span class='op'>&lt;-</span> <span class='fu'>get_cces_dataverse</span><span class='op'>(</span><span class='st'>"cumulative"</span>, year_subset <span class='op'>=</span> <span class='fl'>2018</span><span class='op'>)</span></span>
+<span class='r-in'> <span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Example code to read _and_ write a series of common content datasets</span></span>
+<span class='r-in'><span class='co'># in a directory "data/input/cces/</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'>dir_create</span><span class='op'>(</span><span class='st'>"data/cces"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'>for</span> <span class='op'>(</span><span class='va'>d</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cumulative"</span>, <span class='st'>"2018"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'>file_exists</span><span class='op'>(</span><span class='fu'>glue</span><span class='op'>(</span><span class='st'>"data/input/cces/cces_{d}.rds"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'>    <span class='kw'>next</span></span>
+<span class='r-in'>  <span class='fu'>write_rds</span><span class='op'>(</span><span class='fu'>get_cces_dataverse</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>, <span class='fu'>glue</span><span class='op'>(</span><span class='st'>"data/input/cces/cces_{d}.rds"</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># takes a few minutes</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

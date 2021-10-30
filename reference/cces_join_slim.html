@@ -212,37 +212,37 @@ of whether it is specified in a formula. Input as character vector.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='co'># need data/input/cces/cces_2018.rds to run this</span>
-  <span class='va'>ccq_tcja</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_cces_question.html'>get_cces_question</a></span><span class='op'>(</span><span class='st'>"CC18_326"</span>, <span class='st'>"2018"</span>, <span class='st'>"TCJA"</span><span class='op'>)</span>
-
-  <span class='fu'>cces_join_slim</span><span class='op'>(</span>ccq_df <span class='op'>=</span> <span class='va'>ccq_tcja</span>,
-                 ccc_df <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ccc_samp</span>, <span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2018</span><span class='op'>)</span>,
-                 cd_df <span class='op'>=</span> <span class='va'>cd_info_2018</span>,
-                 formula <span class='op'>=</span> <span class='st'>"response ~ age + educ + (1|cd)"</span><span class='op'>)</span>
-
-  <span class='co'># alternative - cd and state not in the formula, but cells follow this</span>
-  <span class='fu'>cces_join_slim</span><span class='op'>(</span>ccq_df <span class='op'>=</span> <span class='va'>ccq_tcja</span>,
-                 ccc_df <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ccc_samp</span>, <span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2018</span><span class='op'>)</span>,
-                 cd_df <span class='op'>=</span> <span class='va'>cd_info_2018</span>,
-                 keep_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"st"</span>, <span class='st'>"cd"</span><span class='op'>)</span>,
-                 formula <span class='op'>=</span> <span class='st'>"response ~ age + educ"</span><span class='op'>)</span>
-
-<span class='co'># A tibble: 133 x 7</span>
-<span class='co'>#        year case_id   qID   response   age educ             cd</span>
-<span class='co'>#       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;fct&gt;    &lt;dbl&gt; &lt;dbl+lbl&gt;        &lt;chr&gt;</span>
-<span class='co'>#     1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11</span>
-<span class='co'>#     2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-04</span>
-<span class='co'>#     3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-02</span>
-<span class='co'>#     4  2018 411717742 TCJA  Oppose      50 1 [No HS]        IL-03</span>
-<span class='co'>#     5  2018 412022838 TCJA  Oppose      66 5 [4-Year]       OH-08</span>
-<span class='co'>#     6  2018 412123052 TCJA  Oppose      35 3 [Some College] WA-04</span>
-<span class='co'>#     7  2018 412161131 TCJA  Support     32 3 [Some College] IN-03</span>
-<span class='co'>#     8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-01</span>
-<span class='co'>#     9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-02</span>
- <span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'> <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='co'># need data/input/cces/cces_2018.rds to run this</span></span>
+<span class='r-in'>  <span class='va'>ccq_tcja</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_cces_question.html'>get_cces_question</a></span><span class='op'>(</span><span class='st'>"CC18_326"</span>, <span class='st'>"2018"</span>, <span class='st'>"TCJA"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='fu'>cces_join_slim</span><span class='op'>(</span>ccq_df <span class='op'>=</span> <span class='va'>ccq_tcja</span>,</span>
+<span class='r-in'>                 ccc_df <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ccc_samp</span>, <span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2018</span><span class='op'>)</span>,</span>
+<span class='r-in'>                 cd_df <span class='op'>=</span> <span class='va'>cd_info_2018</span>,</span>
+<span class='r-in'>                 formula <span class='op'>=</span> <span class='st'>"response ~ age + educ + (1|cd)"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># alternative - cd and state not in the formula, but cells follow this</span></span>
+<span class='r-in'>  <span class='fu'>cces_join_slim</span><span class='op'>(</span>ccq_df <span class='op'>=</span> <span class='va'>ccq_tcja</span>,</span>
+<span class='r-in'>                 ccc_df <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ccc_samp</span>, <span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2018</span><span class='op'>)</span>,</span>
+<span class='r-in'>                 cd_df <span class='op'>=</span> <span class='va'>cd_info_2018</span>,</span>
+<span class='r-in'>                 keep_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"st"</span>, <span class='st'>"cd"</span><span class='op'>)</span>,</span>
+<span class='r-in'>                 formula <span class='op'>=</span> <span class='st'>"response ~ age + educ"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># A tibble: 133 x 7</span></span>
+<span class='r-in'><span class='co'>#        year case_id   qID   response   age educ             cd</span></span>
+<span class='r-in'><span class='co'>#       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;fct&gt;    &lt;dbl&gt; &lt;dbl+lbl&gt;        &lt;chr&gt;</span></span>
+<span class='r-in'><span class='co'>#     1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11</span></span>
+<span class='r-in'><span class='co'>#     2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-04</span></span>
+<span class='r-in'><span class='co'>#     3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-02</span></span>
+<span class='r-in'><span class='co'>#     4  2018 411717742 TCJA  Oppose      50 1 [No HS]        IL-03</span></span>
+<span class='r-in'><span class='co'>#     5  2018 412022838 TCJA  Oppose      66 5 [4-Year]       OH-08</span></span>
+<span class='r-in'><span class='co'>#     6  2018 412123052 TCJA  Oppose      35 3 [Some College] WA-04</span></span>
+<span class='r-in'><span class='co'>#     7  2018 412161131 TCJA  Support     32 3 [Some College] IN-03</span></span>
+<span class='r-in'><span class='co'>#     8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-01</span></span>
+<span class='r-in'><span class='co'>#     9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-02</span></span>
+<span class='r-in'> <span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
