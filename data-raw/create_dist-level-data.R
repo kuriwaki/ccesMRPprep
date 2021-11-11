@@ -2,6 +2,7 @@
 # This loads from an external repo. Contact Shiro Kuriwaki for more
 
 library(tidyverse)
+library(googlesheets4)
 library(fs)
 
 
@@ -22,11 +23,12 @@ cd_info_2018 <- read_rds(path(projdir, "averages/by-cd-2018_info.Rds")) %>%
          largest_place = place,
          pct_trump, pct_romney, pct_mccain)
 
+
+
 cd_info_2016 <- read_rds(path(projdir, "averages/by-cd-2016_info.Rds")) %>%
   mutate(year = 2016) %>%
   select(year, cd,
-         dailykos_name = descrip_18,
-         largest_place = place_18,
+         dailykos_name = descrip_16,
          pct_trump, pct_romney, pct_mccain)
 
 
