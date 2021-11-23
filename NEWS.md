@@ -1,3 +1,7 @@
+# ccesMRPprep 0.1.11
+
+* Add CD-level analyses
+
 # ccesMRPprep 0.1.10
 
 * Separate out the synth_functions to synthjoint package (#9)

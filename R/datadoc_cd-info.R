@@ -7,17 +7,20 @@
 #' uses 2016 boundaries and `cd_info_2020` uses 2020 (but with place descriptions
 #' currently at 2016).
 #'
-#' @format `cd_info_2018` is a dataframe with the `r nrow(cd_info_2018)` Congressional
-#'  Districts with 2018 boundaries, one row per cd.
+#' @format Each `cd_info_20**` is a dataframe with the `r nrow(cd_info_2018)` Congressional
+#'  Districts, one row per cd.
 #'  \describe{
 #'    \item{year}{The year for the district line. A congressional district's
 #'    actual geography can change year to year, and significantly so in different
-#'    redistricting cycles. 2019 indicates the data about voteshare and place names
-#'    corresponds to district lines as of 2019.}
+#'    redistricting cycles. Lines try to get the contemporaneous district map,
+#'    so that cd_info_2016 uses 2016 maps and cd_info_2020 uses 2020 maps.
+#'    However, this work relies on the hard work of assembling precinct results by Daily Kos.}
 #'    \item{cd}{District code. The formatting corresponds to the CCES cumulative
 #'    coding of \code{cd}: a two-letter abbreviation for the state followed by
 #'    a dash, and the district number padded with zeros to the left to be of length
 #'    2. At-large districts like Delaware are given a "-01" for the district number.}
+#'    \item{presvotes_total}{In presidential years, the total number of votes cast for
+#'     the office of President that year. Taken from Daily Kos estimates from precinct results.}
 #'    \item{pct_trump, pct_romney, pct_mccain}{The two-party voteshare of Republican
 #'    presidential candidates in that district for the given year. E.g. the
 #'    \code{pct_mccain} data when \code{cd_year == 2018} represents the percent
@@ -38,9 +41,16 @@
 #'   \url{https://bit.ly/2XsFI5W}
 #'
 #'   Daily Kos, "2008, 2012, & 2016 results for districts used in 2018."
+#'   \url{https://bit.ly/3DRhPcj}
+
+#'   DailyDaily Kos Elections 2012, 2016 & 2020 presidential election results for congressional districts in 2020"
 #'   \url{https://bit.ly/3bXtAPB}
 #'
 #'   Pennsylvania 2016 CD names are named by Shiro Kuriwaki and Lara Putnam.
+#'
+#'   Also see Cha, Jeremiah; Kuriwaki, Shiro; Snyder, James M. Jr., 2021,
+#'    "Candidates in American General Elections", https://doi.org/10.7910/DVN/DGDRDT,
+#'    Harvard Dataverse.
 #'
 #' @importFrom tibble tibble
 #'

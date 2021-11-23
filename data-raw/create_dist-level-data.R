@@ -14,6 +14,7 @@ cd_info_2020 <- read_rds(path(projdir, "averages/by-cd-2020_info.Rds")) %>%
   select(year, cd,
          dailykos_name = descrip_18,
          largest_place = place_18,
+         presvotes_total = pres_all_total,
          pct_trump, pct_trump16, pct_romney)
 
 cd_info_2018 <- read_rds(path(projdir, "averages/by-cd-2018_info.Rds")) %>%
@@ -29,6 +30,7 @@ cd_info_2016 <- read_rds(path(projdir, "averages/by-cd-2016_info.Rds")) %>%
   mutate(year = 2016) %>%
   select(year, cd,
          dailykos_name = descrip_16,
+         presvotes_total = pres_all_total,
          pct_trump, pct_romney, pct_mccain)
 
 
