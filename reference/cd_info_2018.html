@@ -82,7 +82,7 @@ currently at 2016)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.11</span>
       </span>
     </div>
 
@@ -172,16 +172,19 @@ currently at 2016).</p>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><code>cd_info_2018</code> is a dataframe with the 435 Congressional
-Districts with 2018 boundaries, one row per cd.</p><dl>
+    <p>Each <code>cd_info_20**</code> is a dataframe with the 435 Congressional
+Districts, one row per cd.</p><dl>
 <dt>year</dt><dd><p>The year for the district line. A congressional district's
 actual geography can change year to year, and significantly so in different
-redistricting cycles. 2019 indicates the data about voteshare and place names
-corresponds to district lines as of 2019.</p></dd>
+redistricting cycles. Lines try to get the contemporaneous district map,
+so that cd_info_2016 uses 2016 maps and cd_info_2020 uses 2020 maps.
+However, this work relies on the hard work of assembling precinct results by Daily Kos.</p></dd>
 <dt>cd</dt><dd><p>District code. The formatting corresponds to the CCES cumulative
 coding of <code>cd</code>: a two-letter abbreviation for the state followed by
 a dash, and the district number padded with zeros to the left to be of length
 2. At-large districts like Delaware are given a "-01" for the district number.</p></dd>
+<dt>presvotes_total</dt><dd><p>In presidential years, the total number of votes cast for
+the office of President that year. Taken from Daily Kos estimates from precinct results.</p></dd>
 <dt>pct_trump, pct_romney, pct_mccain</dt><dd><p>The two-party voteshare of Republican
 presidential candidates in that district for the given year. E.g. the
 <code>pct_mccain</code> data when <code>cd_year == 2018</code> represents the percent
@@ -195,16 +198,21 @@ have the largest place.</p></dd>
 
 </dl>
 
-<p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 435 rows and 6 columns.</p>
 <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 435 rows and 7 columns.</p>
+<p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 435 rows and 8 columns.</p>
 <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 27 rows and 6 columns.</p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>The Daily Kos Elections naming guide to the nation's congressional districts.
 <a href='https://bit.ly/2XsFI5W'>https://bit.ly/2XsFI5W</a></p>
 <p>Daily Kos, "2008, 2012, &amp; 2016 results for districts used in 2018."
+<a href='https://bit.ly/3DRhPcj'>https://bit.ly/3DRhPcj</a>
+DailyDaily Kos Elections 2012, 2016 &amp; 2020 presidential election results for congressional districts in 2020"
 <a href='https://bit.ly/3bXtAPB'>https://bit.ly/3bXtAPB</a></p>
 <p>Pennsylvania 2016 CD names are named by Shiro Kuriwaki and Lara Putnam.</p>
+<p>Also see Cha, Jeremiah; Kuriwaki, Shiro; Snyder, James M. Jr., 2021,
+"Candidates in American General Elections", https://doi.org/10.7910/DVN/DGDRDT,
+Harvard Dataverse.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>cd_info_2018</span><span class='op'>)</span></span>
