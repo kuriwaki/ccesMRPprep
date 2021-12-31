@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/404.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/acs.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/cps.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/derived.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/overview.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/authors.html</loc>
+  </url>
+  <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/news/index.html</loc>
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/acs_NY.html</loc>
@@ -61,6 +91,9 @@
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/get_poststrat.html</loc>
   </url>
   <url>
+    <loc>https://kuriwaki.github.io/ccesMRPprep/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/namevalue.html</loc>
   </url>
   <url>
@@ -74,17 +107,5 @@
   </url>
   <url>
     <loc>https://kuriwaki.github.io/ccesMRPprep/reference/yesno_to_binary.html</loc>
-  </url>
-  <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/acs.html</loc>
-  </url>
-  <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/cps.html</loc>
-  </url>
-  <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/derived.html</loc>
-  </url>
-  <url>
-    <loc>https://kuriwaki.github.io/ccesMRPprep/articles/overview.html</loc>
   </url>
 </urlset>

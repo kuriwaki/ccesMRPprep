@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.11</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -75,7 +71,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/kuriwaki/ccesMRPprep/">
+  <a href="http://github.com/kuriwaki/ccesMRPprep/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +98,7 @@
       <h1 data-toc-skip>Workflow Overview</h1>
             
       
-      <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/master/vignettes/overview.Rmd"><code>vignettes/overview.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/HEAD/vignettes/overview.Rmd" class="external-link"><code>vignettes/overview.Rmd</code></a></small>
       <div class="hidden name"><code>overview.Rmd</code></div>
 
     </div>
@@ -110,70 +106,74 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.github.com/kuriwaki/ccesMRPprep">ccesMRPprep</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span></code></pre></div>
-<div id="step-1--downloading-cces-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-1--downloading-cces-data" class="anchor"></a><strong>Step 1.</strong> Downloading CCES data</h2>
-<p>All CCES data can be downloaded directly from dataverse, using the <a href="https://cran.r-project.org/package=dataverse"><code>dataverse</code></a> R package. The function <code><a href="../reference/get_cces_dataverse.html">get_cces_dataverse()</a></code> will make this quick and simple - you only need to specify the name of the dataset, given in <code><a href="../reference/cces_dv_ids.html">?cces_dv_ids</a></code>.</p>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.github.com/kuriwaki/ccesMRPprep" class="external-link">ccesMRPprep</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org" class="external-link">haven</a></span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="step-1--downloading-cces-data">
+<strong>Step 1.</strong> Downloading CCES data<a class="anchor" aria-label="anchor" href="#step-1--downloading-cces-data"></a>
+</h2>
+<p>All CCES data can be downloaded directly from dataverse, using the <a href="https://cran.r-project.org/package=dataverse" class="external-link"><code>dataverse</code></a> R package. The function <code><a href="../reference/get_cces_dataverse.html">get_cces_dataverse()</a></code> will make this quick and simple - you only need to specify the name of the dataset, given in <code><a href="../reference/cces_dv_ids.html">?cces_dv_ids</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># may take about 30 seconds to download</span>
 <span class="va">ccc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_cces_dataverse.html">get_cces_dataverse</a></span><span class="op">(</span><span class="st">"cumulative"</span><span class="op">)</span></code></pre></div>
-<p>Here we will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">ccc_samp()</a></code>). In production, you will want to download all 14 datasets to your local directory via a script like <a href="https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R">initialize-cces-downloads.R</a> (still private).</p>
+<p>Here we will use a built-in sample of 1,000 observations for illustration (see <code><a href="../reference/ccc_samp.html">ccc_samp()</a></code>). In production, you will want to download all 14 datasets to your local directory via a script like <a href="https://github.com/kuriwaki/CCES_district-opinion/blob/master/R/initialize-cces-downloads.R" class="external-link">initialize-cces-downloads.R</a> (still private).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ccc_samp</span>
-<span class="co">#&gt; # A tibble: 1,000 × 18</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 18</span></span>
 <span class="co">#&gt;     year case_id state    st    cd    zipcode county_fips  gender   age     race</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl+l&gt; &lt;dbl&gt; &lt;dbl+lb&gt;</span>
-<span class="co">#&gt;  1  2006 1005058 Michigan MI    MI-04 48603   26145       2 [Fem…    36 1 [Whit…</span>
-<span class="co">#&gt;  2  2006 1006614 Texas    TX    TX-18 77040   48201       1 [Mal…    40 3 [Hisp…</span>
-<span class="co">#&gt;  3  2006 1009338 Califor… CA    CA-48 92656   06059       1 [Mal…    32 1 [Whit…</span>
-<span class="co">#&gt;  4  2006 1088898 Florida  FL    FL-13 34224   12015       2 [Fem…    52 1 [Whit…</span>
-<span class="co">#&gt;  5  2006 1090564 Pennsyl… PA    PA-19 17011   42041       2 [Fem…    25 1 [Whit…</span>
-<span class="co">#&gt;  6  2006 1093132 South C… SC    SC-02 29073   45063       2 [Fem…    48 1 [Whit…</span>
-<span class="co">#&gt;  7  2006 1093573 Utah     UT    UT-03 84118   49035       2 [Fem…    74 1 [Whit…</span>
-<span class="co">#&gt;  8  2006 1105620 Hawaii   HI    HI-01 96701   15003       1 [Mal…    37 4 [Asia…</span>
-<span class="co">#&gt;  9  2006 1116569 Texas    TX    TX-21 78610   48209       2 [Fem…    20 3 [Hisp…</span>
-<span class="co">#&gt; 10  2006 1117377 Ohio     OH    OH-07 45502   39023       2 [Fem…    49 1 [Whit…</span>
-<span class="co">#&gt; # … with 990 more rows, and 8 more variables: hispanic &lt;dbl+lbl&gt;,</span>
-<span class="co">#&gt; #   educ &lt;dbl+lbl&gt;, faminc &lt;dbl+lbl&gt;, marstat &lt;dbl+lbl&gt;, newsint &lt;dbl+lbl&gt;,</span>
-<span class="co">#&gt; #   vv_turnout_gvm &lt;dbl+lbl&gt;, voted_pres_16 &lt;dbl+lbl&gt;, economy_retro &lt;dbl+lbl&gt;</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl+l&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl+lb&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>006 1005058 Michigan MI    MI-04 48603   26145       2<span style="color: #949494;"> [Fem…</span>    36 1<span style="color: #949494;"> [Whit…</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>006 1006614 Texas    TX    TX-18 77040   48201       1<span style="color: #949494;"> [Mal…</span>    40 3<span style="color: #949494;"> [Hisp…</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>006 1009338 Califor… CA    CA-48 92656   06059       1<span style="color: #949494;"> [Mal…</span>    32 1<span style="color: #949494;"> [Whit…</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>006 1088898 Florida  FL    FL-13 34224   12015       2<span style="color: #949494;"> [Fem…</span>    52 1<span style="color: #949494;"> [Whit…</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>006 1090564 Pennsyl… PA    PA-19 17011   42041       2<span style="color: #949494;"> [Fem…</span>    25 1<span style="color: #949494;"> [Whit…</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>006 1093132 South C… SC    SC-02 29073   45063       2<span style="color: #949494;"> [Fem…</span>    48 1<span style="color: #949494;"> [Whit…</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>006 1093573 Utah     UT    UT-03 84118   49035       2<span style="color: #949494;"> [Fem…</span>    74 1<span style="color: #949494;"> [Whit…</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>006 1105620 Hawaii   HI    HI-01 96701   15003       1<span style="color: #949494;"> [Mal…</span>    37 4<span style="color: #949494;"> [Asia…</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>006 1116569 Texas    TX    TX-21 78610   48209       2<span style="color: #949494;"> [Fem…</span>    20 3<span style="color: #949494;"> [Hisp…</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>006 1117377 Ohio     OH    OH-07 45502   39023       2<span style="color: #949494;"> [Fem…</span>    49 1<span style="color: #949494;"> [Whit…</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows, and 8 more variables: hispanic &lt;dbl+lbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   educ &lt;dbl+lbl&gt;, faminc &lt;dbl+lbl&gt;, marstat &lt;dbl+lbl&gt;, newsint &lt;dbl+lbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   vv_turnout_gvm &lt;dbl+lbl&gt;, voted_pres_16 &lt;dbl+lbl&gt;, economy_retro &lt;dbl+lbl&gt;</span></span></code></pre></div>
 </div>
-<div id="step-2--cleaning-cces-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-2--cleaning-cces-data" class="anchor"></a><strong>Step 2.</strong> Cleaning CCES data</h2>
+<div class="section level2">
+<h2 id="step-2--cleaning-cces-data">
+<strong>Step 2.</strong> Cleaning CCES data<a class="anchor" aria-label="anchor" href="#step-2--cleaning-cces-data"></a>
+</h2>
 <p>The CCES cumulative dataset is already harmonized and cleaned, but values must be recoded so that they later match with the values of the ACS. I have created key-value pairings for the main demographic variables. The wrapper function expects a CCES cumulative dataset and recodes.</p>
 <p>See <code><a href="../reference/get_cces_question.html">get_cces_question()</a></code> for how to get the <em>outcome</em> data, which is a single column from another CCES dataset. This still relies on a flat file being pre-downloaded (via <code><a href="../reference/get_cces_dataverse.html">get_cces_dataverse()</a></code>).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ccc_std</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ccc_std_demographics.html">ccc_std_demographics</a></span><span class="op">(</span><span class="va">ccc_samp</span><span class="op">)</span>
 <span class="co">#&gt; age variable modified to bins. Original age variable is now in age_orig.</span>
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">ccc_std</span>, <span class="va">age</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 5 × 2</span>
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">ccc_std</span>, <span class="va">age</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span></span>
 <span class="co">#&gt;                     age     n</span>
-<span class="co">#&gt;               &lt;int+lbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 1 [18 to 24 years]       75</span>
-<span class="co">#&gt; 2 2 [25 to 34 years]      160</span>
-<span class="co">#&gt; 3 3 [35 to 44 years]      145</span>
-<span class="co">#&gt; 4 4 [45 to 64 years]      426</span>
-<span class="co">#&gt; 5 5 [65 years and over]   194</span></code></pre></div>
+<span class="co">#&gt;               <span style="color: #949494; font-style: italic;">&lt;int+lbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1<span style="color: #949494;"> [18 to 24 years]</span>       75</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2<span style="color: #949494;"> [25 to 34 years]</span>      160</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3<span style="color: #949494;"> [35 to 44 years]</span>      145</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4<span style="color: #949494;"> [45 to 64 years]</span>      426</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 5<span style="color: #949494;"> [65 years and over]</span>   194</span></code></pre></div>
 </div>
-<div id="step-3--define-a-model-specification" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-3--define-a-model-specification" class="anchor"></a><strong>Step 3.</strong> Define a Model Specification</h2>
+<div class="section level2">
+<h2 id="step-3--define-a-model-specification">
+<strong>Step 3.</strong> Define a Model Specification<a class="anchor" aria-label="anchor" href="#step-3--define-a-model-specification"></a>
+</h2>
 <p>A formula represents the variables that are in the model, how they are interacted, and which variables are random effects. We presume the formula will be used in brms. Currently we support binary outcomes. This can be set in the regression form</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fm_brm</span> <span class="op">&lt;-</span> <span class="va">response</span> <span class="op">~</span>  <span class="va">age</span> <span class="op">+</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">educ</span> <span class="op">+</span> <span class="va">pct_trump</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">cd</span><span class="op">)</span></code></pre></div>
 <p>where <code>response</code> is a binary variable or a factor/character variable that can be coerced to one using <code><a href="../reference/yesno_to_binary.html">yesno_to_binary()</a></code>.</p>
 <p>A prior could be specified here as well, but this is not strictly necessary and can be defined when fitting the model.</p>
 </div>
-<div id="step-4--download-acs-census-datasets-for-post-stratification" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-4--download-acs-census-datasets-for-post-stratification" class="anchor"></a><strong>Step 4.</strong> Download ACS (Census) datasets for post-stratification</h2>
-<p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. Tailored lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well.</p>
+<div class="section level2">
+<h2 id="step-4--download-acs-census-datasets-for-post-stratification">
+<strong>Step 4.</strong> Download ACS (Census) datasets for post-stratification<a class="anchor" aria-label="anchor" href="#step-4--download-acs-census-datasets-for-post-stratification"></a>
+</h2>
+<p>We provide wrappers around the great <a href="https://walker-data.com/tidycensus/" class="external-link">tidycensus</a> package that produces ACS data and post-stratification tables from the ACS. Tailored lookup tables internally will pull out the appropriate CD-level counts and label them so that they match up with CCES keys. District-level information, which is not necessary ACS data (e.g. election outcomes) must be supplied here as well.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># only do this once, replacing the input with your census key</span>
-<span class="fu">tidycensus</span><span class="fu">::</span><span class="fu"><a href="https://walker-data.com/tidycensus/reference/census_api_key.html">census_api_key</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"CENSUS_API_KEY"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">tidycensus</span><span class="fu">::</span><span class="fu"><a href="https://walker-data.com/tidycensus/reference/census_api_key.html" class="external-link">census_api_key</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CENSUS_API_KEY"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; To install your API key for use in future sessions, run this function with `install = TRUE`.</span>
 
 <span class="va">acs_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acs_cces.html">get_acs_cces</a></span><span class="op">(</span>
@@ -190,30 +190,31 @@
 <span class="co">#&gt; Joining, by = c("year", "cd")</span>
 
  <span class="va">poststrat</span>
-<span class="co">#&gt; # A tibble: 17,318 × 6</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 17,318 × 6</span></span>
 <span class="co">#&gt;    age            gender educ       pct_trump cd    count</span>
-<span class="co">#&gt;    &lt;fct&gt;          &lt;fct&gt;  &lt;fct&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 18 to 24 years Male   HS or Less    0.0496 NY-15 21859</span>
-<span class="co">#&gt;  2 18 to 24 years Male   HS or Less    0.0553 NY-13 15491</span>
-<span class="co">#&gt;  3 18 to 24 years Male   HS or Less    0.0715 PA-03 14171</span>
-<span class="co">#&gt;  4 18 to 24 years Male   HS or Less    0.0722 CA-13 13738</span>
-<span class="co">#&gt;  5 18 to 24 years Male   HS or Less    0.0917 CA-12  4893</span>
-<span class="co">#&gt;  6 18 to 24 years Male   HS or Less    0.0952 IL-07 15820</span>
-<span class="co">#&gt;  7 18 to 24 years Male   HS or Less    0.101  CA-37 13440</span>
-<span class="co">#&gt;  8 18 to 24 years Male   HS or Less    0.107  NY-07 12768</span>
-<span class="co">#&gt;  9 18 to 24 years Male   HS or Less    0.113  CA-34 19439</span>
-<span class="co">#&gt; 10 18 to 24 years Male   HS or Less    0.123  GA-05 16741</span>
-<span class="co">#&gt; # … with 17,308 more rows</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 18 to 24 years Male   HS or Less    0.049<span style="text-decoration: underline;">6</span> NY-15 <span style="text-decoration: underline;">21</span>859</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 18 to 24 years Male   HS or Less    0.055<span style="text-decoration: underline;">3</span> NY-13 <span style="text-decoration: underline;">15</span>491</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 18 to 24 years Male   HS or Less    0.071<span style="text-decoration: underline;">5</span> PA-03 <span style="text-decoration: underline;">14</span>171</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 18 to 24 years Male   HS or Less    0.072<span style="text-decoration: underline;">2</span> CA-13 <span style="text-decoration: underline;">13</span>738</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 18 to 24 years Male   HS or Less    0.091<span style="text-decoration: underline;">7</span> CA-12  <span style="text-decoration: underline;">4</span>893</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 18 to 24 years Male   HS or Less    0.095<span style="text-decoration: underline;">2</span> IL-07 <span style="text-decoration: underline;">15</span>820</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 18 to 24 years Male   HS or Less    0.101  CA-37 <span style="text-decoration: underline;">13</span>440</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 18 to 24 years Male   HS or Less    0.107  NY-07 <span style="text-decoration: underline;">12</span>768</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 18 to 24 years Male   HS or Less    0.113  CA-34 <span style="text-decoration: underline;">19</span>439</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 18 to 24 years Male   HS or Less    0.123  GA-05 <span style="text-decoration: underline;">16</span>741</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 17,308 more rows</span></span></code></pre></div>
 <p>You need to get a API key from the census website to run this command. See <code><a href="../articles/acs.html">vignette("acs")</a></code>.</p>
 </div>
-<div id="step-5--optional-expand-population-tables" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-5--optional-expand-population-tables" class="anchor"></a><strong>Step 5.</strong> (Optional) Expand Population Tables</h2>
+<div class="section level2">
+<h2 id="step-5--optional-expand-population-tables">
+<strong>Step 5.</strong> (Optional) Expand Population Tables<a class="anchor" aria-label="anchor" href="#step-5--optional-expand-population-tables"></a>
+</h2>
 <p>Often, the census alone does not provide nearly all the variables one would want to post-stratify (i.e. adjust for non-representativeness). Party affiliation in Census variables is a prominent examples. The package provides open-source software to implement this expansion. See <code>vignette("synth")</code> .</p>
 </div>
-<div id="final-output" class="section level2">
-<h2 class="hasAnchor">
-<a href="#final-output" class="anchor"></a><strong>Final Output</strong>
+<div class="section level2">
+<h2 id="final-output">
+<strong>Final Output</strong><a class="anchor" aria-label="anchor" href="#final-output"></a>
 </h2>
 <p>Under this workflow, only three objects are needed to conduct MRP with a brms model:</p>
 <ol style="list-style-type: decimal">
@@ -236,11 +237,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.shirokuriwaki.com">Shiro Kuriwaki</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.shirokuriwaki.com" class="external-link">Shiro Kuriwaki</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>

@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.11</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -75,7 +71,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/kuriwaki/ccesMRPprep/">
+  <a href="http://github.com/kuriwaki/ccesMRPprep/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,11 +96,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Deriving Variables from Question Metadata</h1>
-                        <h4 class="author">Shiro Kuriwaki</h4>
+                        <h4 data-toc-skip class="author">Shiro Kuriwaki</h4>
             
-            <h4 class="date">2021-11-30</h4>
+            <h4 data-toc-skip class="date">2021-12-31</h4>
       
-      <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/master/vignettes/derived.Rmd"><code>vignettes/derived.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/HEAD/vignettes/derived.Rmd" class="external-link"><code>vignettes/derived.Rmd</code></a></small>
       <div class="hidden name"><code>derived.Rmd</code></div>
 
     </div>
@@ -112,49 +108,49 @@
     
     
 <p>All survey questions are inherently discrete so the analyst must decide how to derive (or operationalize) that into a numeric indicator. This decision choice that rarely gets much spotlight is a difficult operation to represent in a general function.</p>
-<div id="factors-and-haven_labelled-variable-classes" class="section level1">
-<h1 class="hasAnchor">
-<a href="#factors-and-haven_labelled-variable-classes" class="anchor"></a>Factors and haven_labelled variable classes</h1>
-<p><code>factor</code> is a base R variable class in which values are defined by exclusive and exhaustive list of a <em>level</em> and a <em>label</em> (See <a href="http://adv-r.had.co.nz/Data-structures.html#attributes">Advanced R</a> for a brief technical overview.). Both levels and labels are necessary to track because the order in which the values were presented and what the respondent saw (the labels) matters. The levels can be thought of as fundamentally as integers, to represent the order. That said, the transformation from R factors to integers is cumbersome. <code><a href="https://rdrr.io/r/base/factor.html">?base::factor</a></code> recommends <code>as.numeric(levels(f))[f]</code> where <code>f</code> is a factor vector.</p>
-<p><code>haven_labelled</code> is a separate R class that was defined in the <code>haven</code> package to <em>represent labelled variables in Stata/SPSS without loss of information</em>. <code>haven</code> is a part of tidyverse and is designed to read Stata and SPSS files. Stata and SPSS have their own analogs to factors, but in Stata, these variables are literally integers/doubles with a <em>“labels”</em> attribute. This is a named vector where the values are the numbers and the labels are the <em>label</em> equivalent of factors (corresponding to Stata’s <code>label list [lblname]</code>). <code>haven_labelled</code> is a class that preserves this information (See <code><a href="https://haven.tidyverse.org/reference/labelled.html">?haven::labelled</a></code> help page or the <a href="https://cran.r-project.org/web/packages/labelled/vignettes/intro_labelled.html">vignette</a> from the <code>labelled</code> package for more detail). For example, look at any of the variables in the CCES 2018 sample which contains a <code>lbl</code> tag:</p>
+<div class="section level1">
+<h1 id="factors-and-haven_labelled-variable-classes">Factors and haven_labelled variable classes<a class="anchor" aria-label="anchor" href="#factors-and-haven_labelled-variable-classes"></a>
+</h1>
+<p><code>factor</code> is a base R variable class in which values are defined by exclusive and exhaustive list of a <em>level</em> and a <em>label</em> (See <a href="http://adv-r.had.co.nz/Data-structures.html#attributes" class="external-link">Advanced R</a> for a brief technical overview.). Both levels and labels are necessary to track because the order in which the values were presented and what the respondent saw (the labels) matters. The levels can be thought of as fundamentally as integers, to represent the order. That said, the transformation from R factors to integers is cumbersome. <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">?base::factor</a></code> recommends <code>as.numeric(levels(f))[f]</code> where <code>f</code> is a factor vector.</p>
+<p><code>haven_labelled</code> is a separate R class that was defined in the <code>haven</code> package to <em>represent labelled variables in Stata/SPSS without loss of information</em>. <code>haven</code> is a part of tidyverse and is designed to read Stata and SPSS files. Stata and SPSS have their own analogs to factors, but in Stata, these variables are literally integers/doubles with a <em>“labels”</em> attribute. This is a named vector where the values are the numbers and the labels are the <em>label</em> equivalent of factors (corresponding to Stata’s <code>label list [lblname]</code>). <code>haven_labelled</code> is a class that preserves this information (See <code><a href="https://haven.tidyverse.org/reference/labelled.html" class="external-link">?haven::labelled</a></code> help page or the <a href="https://cran.r-project.org/web/packages/labelled/vignettes/intro_labelled.html" class="external-link">vignette</a> from the <code>labelled</code> package for more detail). For example, look at any of the variables in the CCES 2018 sample which contains a <code>lbl</code> tag:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gov_approval_lbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">cc18_samp</span>, <span class="va">case_id</span>, <span class="va">CC18_308d</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">gov_approval_lbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">cc18_samp</span>, <span class="va">case_id</span>, <span class="va">CC18_308d</span><span class="op">)</span>
 <span class="va">gov_approval_lbl</span>
-<span class="co">#&gt; # A tibble: 1,000 × 2</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 2</span></span>
 <span class="co">#&gt;      case_id               CC18_308d</span>
-<span class="co">#&gt;        &lt;dbl&gt;               &lt;dbl+lbl&gt;</span>
-<span class="co">#&gt;  1 415395741 4 [Strongly disapprove]</span>
-<span class="co">#&gt;  2 414164923 4 [Strongly disapprove]</span>
-<span class="co">#&gt;  3 412379892 2 [Somewhat approve]   </span>
-<span class="co">#&gt;  4 414203529 3 [Somewhat disapprove]</span>
-<span class="co">#&gt;  5 412148048 1 [Strongly approve]   </span>
-<span class="co">#&gt;  6 412329835 2 [Somewhat approve]   </span>
-<span class="co">#&gt;  7 417352072 4 [Strongly disapprove]</span>
-<span class="co">#&gt;  8 414614677 1 [Strongly approve]   </span>
-<span class="co">#&gt;  9 416797006 1 [Strongly approve]   </span>
-<span class="co">#&gt; 10 412962561 1 [Strongly approve]   </span>
-<span class="co">#&gt; # … with 990 more rows</span></code></pre></div>
+<span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl+lbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 415<span style="text-decoration: underline;">395</span>741 4<span style="color: #949494;"> [Strongly disapprove]</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 414<span style="text-decoration: underline;">164</span>923 4<span style="color: #949494;"> [Strongly disapprove]</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 412<span style="text-decoration: underline;">379</span>892 2<span style="color: #949494;"> [Somewhat approve]</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 414<span style="text-decoration: underline;">203</span>529 3<span style="color: #949494;"> [Somewhat disapprove]</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 412<span style="text-decoration: underline;">148</span>048 1<span style="color: #949494;"> [Strongly approve]</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 412<span style="text-decoration: underline;">329</span>835 2<span style="color: #949494;"> [Somewhat approve]</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 417<span style="text-decoration: underline;">352</span>072 4<span style="color: #949494;"> [Strongly disapprove]</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 414<span style="text-decoration: underline;">614</span>677 1<span style="color: #949494;"> [Strongly approve]</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 416<span style="text-decoration: underline;">797</span>006 1<span style="color: #949494;"> [Strongly approve]</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 412<span style="text-decoration: underline;">962</span>561 1<span style="color: #949494;"> [Strongly approve]</span>   </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows</span></span></code></pre></div>
 <p>Recent versions of <code>haven</code> (&gt;= 2.1.0) will display the labels in square brackets if the dataset is a tibble, but we can see that the values are basically doubles. If we had used factors, these numerical values would be obscured, though the levels and labels will be kept.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gov_approval_fct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">transmute</a></span><span class="op">(</span><span class="va">cc18_samp</span>, <span class="va">case_id</span>, CC18_308d <span class="op">=</span> <span class="fu">as_factor</span><span class="op">(</span><span class="va">CC18_308d</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">gov_approval_fct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">cc18_samp</span>, <span class="va">case_id</span>, CC18_308d <span class="op">=</span> <span class="fu">as_factor</span><span class="op">(</span><span class="va">CC18_308d</span><span class="op">)</span><span class="op">)</span>
 <span class="va">gov_approval_fct</span>
-<span class="co">#&gt; # A tibble: 1,000 × 2</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 2</span></span>
 <span class="co">#&gt;      case_id CC18_308d          </span>
-<span class="co">#&gt;        &lt;dbl&gt; &lt;fct&gt;              </span>
-<span class="co">#&gt;  1 415395741 Strongly disapprove</span>
-<span class="co">#&gt;  2 414164923 Strongly disapprove</span>
-<span class="co">#&gt;  3 412379892 Somewhat approve   </span>
-<span class="co">#&gt;  4 414203529 Somewhat disapprove</span>
-<span class="co">#&gt;  5 412148048 Strongly approve   </span>
-<span class="co">#&gt;  6 412329835 Somewhat approve   </span>
-<span class="co">#&gt;  7 417352072 Strongly disapprove</span>
-<span class="co">#&gt;  8 414614677 Strongly approve   </span>
-<span class="co">#&gt;  9 416797006 Strongly approve   </span>
-<span class="co">#&gt; 10 412962561 Strongly approve   </span>
-<span class="co">#&gt; # … with 990 more rows</span></code></pre></div>
-<div id="why-haven_labelled-is-more-concise" class="section level3">
-<h3 class="hasAnchor">
-<a href="#why-haven_labelled-is-more-concise" class="anchor"></a>Why haven_labelled is more concise</h3>
+<span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 415<span style="text-decoration: underline;">395</span>741 Strongly disapprove</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 414<span style="text-decoration: underline;">164</span>923 Strongly disapprove</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 412<span style="text-decoration: underline;">379</span>892 Somewhat approve   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 414<span style="text-decoration: underline;">203</span>529 Somewhat disapprove</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 412<span style="text-decoration: underline;">148</span>048 Strongly approve   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 412<span style="text-decoration: underline;">329</span>835 Somewhat approve   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 417<span style="text-decoration: underline;">352</span>072 Strongly disapprove</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 414<span style="text-decoration: underline;">614</span>677 Strongly approve   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 416<span style="text-decoration: underline;">797</span>006 Strongly approve   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 412<span style="text-decoration: underline;">962</span>561 Strongly approve   </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="why-haven_labelled-is-more-concise">Why haven_labelled is more concise<a class="anchor" aria-label="anchor" href="#why-haven_labelled-is-more-concise"></a>
+</h3>
 <p>For using CCES outcomes, the <strong>haven_labelled</strong> class is more concise then factors, for the following reasons:</p>
 <ol style="list-style-type: decimal">
 <li>It is closer to the original format of the data as exported by YouGov (SPSS)</li>
@@ -162,35 +158,35 @@
 </ol>
 <p>The second point is consequential. For example suppose we want to model a derived variable, Governor approval, which is 1 if the respondent strongly approves or approves of the governor. With the haven_labelled class, we can do what we would do in Stata:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gov_approval_lbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">CC18_308d</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">CC18_308d</span>, <span class="va">outcome</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 3</span>
+<code class="sourceCode R"><span class="va">gov_approval_lbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">CC18_308d</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">CC18_308d</span>, <span class="va">outcome</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span>
 <span class="co">#&gt;                  CC18_308d outcome     n</span>
-<span class="co">#&gt;                  &lt;dbl+lbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1  1 [Strongly approve]    TRUE      144</span>
-<span class="co">#&gt; 2  2 [Somewhat approve]    TRUE      307</span>
-<span class="co">#&gt; 3  3 [Somewhat disapprove] FALSE     170</span>
-<span class="co">#&gt; 4  4 [Strongly disapprove] FALSE     265</span>
-<span class="co">#&gt; 5  5 [Not sure]            FALSE     112</span>
-<span class="co">#&gt; 6 NA                       NA          2</span></code></pre></div>
+<span class="co">#&gt;                  <span style="color: #949494; font-style: italic;">&lt;dbl+lbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  1<span style="color: #949494;"> [Strongly approve]</span>    TRUE      144</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  2<span style="color: #949494;"> [Somewhat approve]</span>    TRUE      307</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  3<span style="color: #949494;"> [Somewhat disapprove]</span> FALSE     170</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  4<span style="color: #949494;"> [Strongly disapprove]</span> FALSE     265</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  5<span style="color: #949494;"> [Not sure]</span>            FALSE     112</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #BB0000;">NA</span>                       <span style="color: #BB0000;">NA</span>          2</span></code></pre></div>
 <p>But this will not work with factors,</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gov_approval_fct</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">CC18_308d</span> <span class="op">&lt;=</span> <span class="st">"Somewhat approve"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">gov_approval_fct</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">CC18_308d</span> <span class="op">&lt;=</span> <span class="st">"Somewhat approve"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span>
 <span class="co">#&gt; Warning in Ops.factor(CC18_308d, "Somewhat approve"): '&lt;=' not meaningful for</span>
 <span class="co">#&gt; factors</span>
-<span class="co">#&gt; # A tibble: 1 × 2</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span>
 <span class="co">#&gt;   outcome     n</span>
-<span class="co">#&gt;   &lt;lgl&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1 NA       1000</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #BB0000;">NA</span>       <span style="text-decoration: underline;">1</span>000</span></code></pre></div>
 <p>That means, with factors, we would need to figure out all the labels and type them up exactly as they appear. In surveys, the labels can be long and contain punctuation which is easy to miss. Of course we can extract these from attributes and save the trouble of hand-entering them, but the same information is available in the haven_labelled class too.</p>
-<p>On the other hand, <code>haven_labelled</code> is a bit inconvenient because the raw number is not immediately informative. A quick way to transform the numerical data to its labels is <code><a href="https://haven.tidyverse.org/reference/as_factor.html">haven::as_factor</a></code> (notice this is different from <code><a href="https://rdrr.io/r/base/factor.html">base::as.factor</a></code>). Or, for metadata, we can look at its attributes:</p>
+<p>On the other hand, <code>haven_labelled</code> is a bit inconvenient because the raw number is not immediately informative. A quick way to transform the numerical data to its labels is <code><a href="https://haven.tidyverse.org/reference/as_factor.html" class="external-link">haven::as_factor</a></code> (notice this is different from <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">base::as.factor</a></code>). Or, for metadata, we can look at its attributes:</p>
 </div>
-<div id="metadata-contained-in-a-haven_labelled-variable" class="section level3">
-<h3 class="hasAnchor">
-<a href="#metadata-contained-in-a-haven_labelled-variable" class="anchor"></a>Metadata contained in a haven_labelled variable</h3>
+<div class="section level3">
+<h3 id="metadata-contained-in-a-haven_labelled-variable">Metadata contained in a haven_labelled variable<a class="anchor" aria-label="anchor" href="#metadata-contained-in-a-haven_labelled-variable"></a>
+</h3>
 <p>In the <code>haven_labelled</code> class, three pieces of information are stored as attributes:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -200,7 +196,7 @@
 </ol>
 <p>We can use <code>str</code> and <code>attr</code> to view and extract these metadata:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gov_approval_lbl</span><span class="op">$</span><span class="va">CC18_308d</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">gov_approval_lbl</span><span class="op">$</span><span class="va">CC18_308d</span><span class="op">)</span>
 <span class="co">#&gt;  'haven_labelled' num [1:1000] 4 4 2 3 1 2 4 1 1 1 ...</span>
 <span class="co">#&gt;  - attr(*, "label")= chr "Job approval -- The Governor of $inputstate"</span>
 <span class="co">#&gt;  - attr(*, "labels")= Named num [1:7] 1 2 3 4 5 8 9</span>
@@ -208,7 +204,7 @@
 <p>For example, this indicates that <code>CC18_308d</code> is about <code>"Job approval -- The Governor of $inputstate"</code>. This is <em>not</em> the question wording verbatim, of course. This is something that needs to be looked up in the Word Doc YouGov questionnaires each time, or in the CCES codebooks (Shiro and the CCES team has some of this in plain-text tabular form for recent years).</p>
 <p>And the possible values are</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">gov_approval_lbl</span><span class="op">$</span><span class="va">CC18_308d</span>, <span class="st">"labels"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">gov_approval_lbl</span><span class="op">$</span><span class="va">CC18_308d</span>, <span class="st">"labels"</span><span class="op">)</span>
 <span class="co">#&gt;    Strongly approve    Somewhat approve Somewhat disapprove Strongly disapprove </span>
 <span class="co">#&gt;                   1                   2                   3                   4 </span>
 <span class="co">#&gt;            Not sure             skipped           not asked </span>
@@ -217,111 +213,110 @@
 <p>As long as we retain these attributes (which is possible as long as haven is loaded), we can express derivation in a simple way.</p>
 </div>
 </div>
-<div id="classifying-questions-by-type-of-derivation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#classifying-questions-by-type-of-derivation" class="anchor"></a>Classifying Questions by Type of Derivation</h1>
+<div class="section level1">
+<h1 id="classifying-questions-by-type-of-derivation">Classifying Questions by Type of Derivation<a class="anchor" aria-label="anchor" href="#classifying-questions-by-type-of-derivation"></a>
+</h1>
 <p>Another thing this metadata <em>does not</em> include is whether the response options are binary, ordinal, or categorical (no inherent ordering). This is something we need to hand-classify, although it is usually obvious once we see the question.</p>
 <p>We consider the of the most common types below. These are from the sample question metadata (see the <code>q_type</code> variable):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">questions_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">q_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CC18_322C"</span>,<span class="st">"CC18_308d"</span>, <span class="st">"CC18_pid3"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 × 5</span>
+<code class="sourceCode R"><span class="va">questions_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">q_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CC18_322C"</span>,<span class="st">"CC18_308d"</span>, <span class="st">"CC18_pid3"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span>
 <span class="co">#&gt;   q_ID      q_label                           cces_data q_code    response_type</span>
-<span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                             &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        </span>
-<span class="co">#&gt; 1 CC18_322C Withold Sanctuary Funding         2018      CC18_322c yesno        </span>
-<span class="co">#&gt; 2 CC18_308d Governor Approval                 2018      CC18_308d ordinal      </span>
-<span class="co">#&gt; 3 CC18_pid3 Partisan Identification (3-point) 2018      pid3      categorical</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CC18_322C Withold Sanctuary Funding         2018      CC18_322c yesno        </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CC18_308d Governor Approval                 2018      CC18_308d ordinal      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> CC18_pid3 Partisan Identification (3-point) 2018      pid3      categorical</span></code></pre></div>
 <p>This classification narrows down the type of function we would use for deriving a variable.</p>
 <p><strong>All three types</strong> can be derived by the basic atomic operator:</p>
-<pre><code>outcome = lbl_var %in% c(v1, v2, v3, ...)</code></pre>
+<pre><code><span class="va">outcome</span> <span class="op">=</span> <span class="va">lbl_var</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">v2</span>, <span class="va">v3</span>, <span class="va">...</span><span class="op">)</span></code></pre>
 <p>where <code>outcome</code> is the derived variable, <code>lbl_var</code> the data vector of class <code>haven_labelled</code>, and <code>c(v1, v2, v3, ...)</code> is a vector of one or more in the data vector that that we consider a success.</p>
 <p>For this project we only consider binomial models, which is why this is sufficient. Survey data is almost never continuous, and running multinomial models in MRP is still exceedingly uncommon.</p>
-<div id="yes-no-variables---use-yesno_to_binary" class="section level2">
-<h2 class="hasAnchor">
-<a href="#yes-no-variables---use-yesno_to_binary" class="anchor"></a>1. Yes-No variables - use <code>yesno_to_binary</code>
+<div class="section level2">
+<h2 id="yes-no-variables---use-yesno_to_binary">1. Yes-No variables - use <code>yesno_to_binary</code><a class="anchor" aria-label="anchor" href="#yes-no-variables---use-yesno_to_binary"></a>
 </h2>
 <p>This is the simplest case because there are only two options and it is almost always clear which of the two is naturally corresponds to a “success” instead of a “failure” in a Bernoulli random variable. That means we currently _only- use <code><a href="../reference/yesno_to_binary.html">yesno_to_binary()</a></code> for the derivation. For example, <code>CC18_322C</code> is a question asking for people’s support of a measure to withdraw federal funding for so-called “Sanctuary Cities”:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">case_id</span>, <span class="va">CC18_322c</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 1,000 × 2</span>
+<code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">case_id</span>, <span class="va">CC18_322c</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,000 × 2</span></span>
 <span class="co">#&gt;      case_id   CC18_322c</span>
-<span class="co">#&gt;        &lt;dbl&gt;   &lt;dbl+lbl&gt;</span>
-<span class="co">#&gt;  1 415395741 2 [Oppose] </span>
-<span class="co">#&gt;  2 414164923 1 [Support]</span>
-<span class="co">#&gt;  3 412379892 2 [Oppose] </span>
-<span class="co">#&gt;  4 414203529 1 [Support]</span>
-<span class="co">#&gt;  5 412148048 2 [Oppose] </span>
-<span class="co">#&gt;  6 412329835 2 [Oppose] </span>
-<span class="co">#&gt;  7 417352072 2 [Oppose] </span>
-<span class="co">#&gt;  8 414614677 2 [Oppose] </span>
-<span class="co">#&gt;  9 416797006 1 [Support]</span>
-<span class="co">#&gt; 10 412962561 1 [Support]</span>
-<span class="co">#&gt; # … with 990 more rows</span></code></pre></div>
+<span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl+lbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 415<span style="text-decoration: underline;">395</span>741 2<span style="color: #949494;"> [Oppose]</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 414<span style="text-decoration: underline;">164</span>923 1<span style="color: #949494;"> [Support]</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 412<span style="text-decoration: underline;">379</span>892 2<span style="color: #949494;"> [Oppose]</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 414<span style="text-decoration: underline;">203</span>529 1<span style="color: #949494;"> [Support]</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 412<span style="text-decoration: underline;">148</span>048 2<span style="color: #949494;"> [Oppose]</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 412<span style="text-decoration: underline;">329</span>835 2<span style="color: #949494;"> [Oppose]</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 417<span style="text-decoration: underline;">352</span>072 2<span style="color: #949494;"> [Oppose]</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 414<span style="text-decoration: underline;">614</span>677 2<span style="color: #949494;"> [Oppose]</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 416<span style="text-decoration: underline;">797</span>006 1<span style="color: #949494;"> [Support]</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 412<span style="text-decoration: underline;">962</span>561 1<span style="color: #949494;"> [Support]</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 990 more rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">case_id</span>, <span class="va">CC18_322c</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="fu"><a href="../reference/yesno_to_binary.html">yesno_to_binary</a></span><span class="op">(</span><span class="fu">as_factor</span><span class="op">(</span><span class="va">CC18_322c</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">CC18_322c</span>, <span class="va">outcome</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 × 3</span>
+<code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">case_id</span>, <span class="va">CC18_322c</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="fu"><a href="../reference/yesno_to_binary.html">yesno_to_binary</a></span><span class="op">(</span><span class="fu">as_factor</span><span class="op">(</span><span class="va">CC18_322c</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">CC18_322c</span>, <span class="va">outcome</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="co">#&gt;      CC18_322c outcome     n</span>
-<span class="co">#&gt;      &lt;dbl+lbl&gt;   &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1  1 [Support]       1   466</span>
-<span class="co">#&gt; 2  2 [Oppose]        0   533</span>
-<span class="co">#&gt; 3 NA                NA     1</span></code></pre></div>
+<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl+lbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  1<span style="color: #949494;"> [Support]</span>       1   466</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  2<span style="color: #949494;"> [Oppose]</span>        0   533</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span>     1</span></code></pre></div>
 </div>
-<div id="categorical-variables" class="section level2">
-<h2 class="hasAnchor">
-<a href="#categorical-variables" class="anchor"></a>2. Categorical variables</h2>
+<div class="section level2">
+<h2 id="categorical-variables">2. Categorical variables<a class="anchor" aria-label="anchor" href="#categorical-variables"></a>
+</h2>
 <p>These have no inherent ordering, i.e. there is no likert scale or obvious scale. These can be vote choice for parties, race, religion, or method of voting. Here we show partisanship (on a 3 point multiple choice question).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">cc18_samp</span><span class="op">$</span><span class="va">pid3</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">cc18_samp</span><span class="op">$</span><span class="va">pid3</span><span class="op">)</span>
 <span class="co">#&gt;  'haven_labelled' num [1:1000] 3 2 1 2 3 3 1 1 2 3 ...</span>
 <span class="co">#&gt;  - attr(*, "label")= chr "3 point party ID"</span>
 <span class="co">#&gt;  - attr(*, "labels")= Named num [1:7] 1 2 3 4 5 8 9</span>
 <span class="co">#&gt;   ..- attr(*, "names")= chr [1:7] "Democrat" "Republican" "Independent" "Other" ...</span></code></pre></div>
 <p>To make a derived variable out of this, we need <strong>a function that takes an ordered vector of value(s) that counts as a success</strong> . For example, let’s say we want to measure the proportion of independents. Then the derivation will be</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">case_id</span>, <span class="va">pid3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">pid3</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">pid3</span>, <span class="va">outcome</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 5 × 3</span>
+<code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">case_id</span>, <span class="va">pid3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">pid3</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">pid3</span>, <span class="va">outcome</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="co">#&gt;              pid3 outcome     n</span>
-<span class="co">#&gt;         &lt;dbl+lbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1 1 [Democrat]    FALSE     353</span>
-<span class="co">#&gt; 2 2 [Republican]  FALSE     272</span>
-<span class="co">#&gt; 3 3 [Independent] TRUE      279</span>
-<span class="co">#&gt; 4 4 [Other]       FALSE      43</span>
-<span class="co">#&gt; 5 5 [Not sure]    FALSE      53</span></code></pre></div>
+<span class="co">#&gt;         <span style="color: #949494; font-style: italic;">&lt;dbl+lbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1<span style="color: #949494;"> [Democrat]</span>    FALSE     353</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2<span style="color: #949494;"> [Republican]</span>  FALSE     272</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3<span style="color: #949494;"> [Independent]</span> TRUE      279</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4<span style="color: #949494;"> [Other]</span>       FALSE      43</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 5<span style="color: #949494;"> [Not sure]</span>    FALSE      53</span></code></pre></div>
 <p>because <code>3</code> stands for independent in this case, as can be seen from the metadata.</p>
 <p>Clearly, “Yes/No” variable type can be considered a type of categorical variable type. I still distinguish these between because in the former, the analyst does not need to make a decision about what consists as a success, whereas in <code>pid3</code> for example, three reasonable operations can exist and the what is a success as opposed to a failure is ambiguous from the name <code>pid3</code>.</p>
 </div>
-<div id="ordinal-variables" class="section level2">
-<h2 class="hasAnchor">
-<a href="#ordinal-variables" class="anchor"></a>3. Ordinal variables</h2>
+<div class="section level2">
+<h2 id="ordinal-variables">3. Ordinal variables<a class="anchor" aria-label="anchor" href="#ordinal-variables"></a>
+</h2>
 <p>Ordinal variables have a clear ordering in their labels and their values conform to that order, for example likert scales agree-disagree, approve-disagree, as well as measures like education, income, and news interest.</p>
 <p>This means that derivation can use operators <code>&lt;</code> and <code>&gt;</code> instead of simply <code>%in%</code> – as in the Governor approval example in the beginning. We may want to lump together this with a categorical variable, but again the distinction can be meaningful because in an ordinal variable one would almost never “skip” a value, as in <code>governor_approval %in% c(1, 3, 4)</code>, whereas in a categorical variable, one might do that depending on the order of the variables.</p>
 <p><em>Note</em> one must be careful that almost all the variables considered here are not exhaustively “ordinal” because they have “Not Sure” / “Other” / “Not Asked” values as taking values of 8 or 9. For example, because <code>pid3 == 4</code> means “Other”, a derived variable defined as “pid3 &gt;= 3” is not very meaningful unless you are interested in the group of people who identify as “Independent” or “Other”.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">case_id</span>, <span class="va">CC18_308d</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">CC18_308d</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">CC18_308d</span>, <span class="va">outcome</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 3</span>
+<code class="sourceCode R"><span class="va">cc18_samp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">case_id</span>, <span class="va">CC18_308d</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">CC18_308d</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">CC18_308d</span>, <span class="va">outcome</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span>
 <span class="co">#&gt;                  CC18_308d outcome     n</span>
-<span class="co">#&gt;                  &lt;dbl+lbl&gt; &lt;lgl&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1  1 [Strongly approve]    TRUE      144</span>
-<span class="co">#&gt; 2  2 [Somewhat approve]    TRUE      307</span>
-<span class="co">#&gt; 3  3 [Somewhat disapprove] FALSE     170</span>
-<span class="co">#&gt; 4  4 [Strongly disapprove] FALSE     265</span>
-<span class="co">#&gt; 5  5 [Not sure]            FALSE     112</span>
-<span class="co">#&gt; 6 NA                       NA          2</span></code></pre></div>
+<span class="co">#&gt;                  <span style="color: #949494; font-style: italic;">&lt;dbl+lbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  1<span style="color: #949494;"> [Strongly approve]</span>    TRUE      144</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  2<span style="color: #949494;"> [Somewhat approve]</span>    TRUE      307</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  3<span style="color: #949494;"> [Somewhat disapprove]</span> FALSE     170</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  4<span style="color: #949494;"> [Strongly disapprove]</span> FALSE     265</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  5<span style="color: #949494;"> [Not sure]</span>            FALSE     112</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #BB0000;">NA</span>                       <span style="color: #BB0000;">NA</span>          2</span></code></pre></div>
 </div>
 </div>
-<div id="other-considerations" class="section level1">
-<h1 class="hasAnchor">
-<a href="#other-considerations" class="anchor"></a>Other Considerations</h1>
+<div class="section level1">
+<h1 id="other-considerations">Other Considerations<a class="anchor" aria-label="anchor" href="#other-considerations"></a>
+</h1>
 <p>Missing Values</p>
 <p>Generic versions of derivation</p>
 </div>
@@ -338,11 +333,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.shirokuriwaki.com">Shiro Kuriwaki</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.shirokuriwaki.com" class="external-link">Shiro Kuriwaki</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>

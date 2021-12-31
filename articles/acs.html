@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.11</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -75,7 +71,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/kuriwaki/ccesMRPprep/">
+  <a href="http://github.com/kuriwaki/ccesMRPprep/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,27 +96,27 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ACS Tables for CCES and MRP</h1>
-                        <h4 class="author">Shiro Kuriwaki</h4>
+                        <h4 data-toc-skip class="author">Shiro Kuriwaki</h4>
             
       
-      <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/master/vignettes/acs.Rmd"><code>vignettes/acs.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="http://github.com/kuriwaki/ccesMRPprep/blob/HEAD/vignettes/acs.Rmd" class="external-link"><code>vignettes/acs.Rmd</code></a></small>
       <div class="hidden name"><code>acs.Rmd</code></div>
 
     </div>
 
     
     
-<div id="common-misperceptions-limitations-of-the-acs-for-mrp" class="section level3">
-<h3 class="hasAnchor">
-<a href="#common-misperceptions-limitations-of-the-acs-for-mrp" class="anchor"></a>Common Misperceptions: Limitations of the ACS for MRP</h3>
+<div class="section level3">
+<h3 id="common-misperceptions-limitations-of-the-acs-for-mrp">Common Misperceptions: Limitations of the ACS for MRP<a class="anchor" aria-label="anchor" href="#common-misperceptions-limitations-of-the-acs-for-mrp"></a>
+</h3>
 <p>The ACS is the main dataset used for post-stratification in MRP because of its wide coverage of different geographies. However, there are a couple of data limitations to the ACS that make subsequent MRP diverge from the classic MRP as it is usually taught:</p>
 <ol style="list-style-type: decimal">
 <li>The ACS is conducted by the Census Bureau but it <strong>is a survey</strong>, not a population census. It is an extremely large survey, with over 3 million respondents in any given year. But it is still a sample, and therefore its counts are estimates. The ACS even provides margin of error estimates around its counts.</li>
 <li>
-<strong>Microdata is not available</strong> for some geographies like congressional districts. By microdata, we mean data where each row is an individual respondent and can be aggregated up. The Census page, tidycensus, IPUMS (<a href="https://usa.ipums.org/" class="uri">https://usa.ipums.org/</a>) has an amazing interface to download microdata, but that data does not include congressional district.
+<strong>Microdata is not available</strong> for some geographies like congressional districts. By microdata, we mean data where each row is an individual respondent and can be aggregated up. The Census page, tidycensus, IPUMS (<a href="https://usa.ipums.org/" class="external-link uri">https://usa.ipums.org/</a>) has an amazing interface to download microdata, but that data does not include congressional district.
 <ul>
 <li>The Census provides some crosswalk files but they are mainly ZCTA to CD crosswalks.</li>
-<li>PUMAs are the main unit of area for the ACS but these do not link well to CD (see <a href="https://forum.ipums.org/t/is-there-a-way-of-linking-acs-pums-data-with-voter-districts/611">here</a> for discussion and potential fractional matching). For example Cambridge Mass. is a single PUMA, but Cambridge has about 8 zipcodes and is split into parts of MA-05 (Rep. Katherine Clark) and MA-07 (Rep. Ayanna Pressley)</li>
+<li>PUMAs are the main unit of area for the ACS but these do not link well to CD (see <a href="https://forum.ipums.org/t/is-there-a-way-of-linking-acs-pums-data-with-voter-districts/611" class="external-link">here</a> for discussion and potential fractional matching). For example Cambridge Mass. is a single PUMA, but Cambridge has about 8 zipcodes and is split into parts of MA-05 (Rep. Katherine Clark) and MA-07 (Rep. Ayanna Pressley)</li>
 </ul>
 </li>
 <li>The population Census is ideal, but the Census only occurs every 10 years, and only a 5 percent sample of it (with its restrictions of its own) is given to the public with some lag time. Therefore the population Census is often not a good alternative to the ACS / CPS.</li>
@@ -136,9 +132,9 @@
 </ol>
 <p>This package and vignette goes into more detail about these limitations and the nature of the data that is available.</p>
 </div>
-<div id="three-types-of-acs-tables" class="section level3">
-<h3 class="hasAnchor">
-<a href="#three-types-of-acs-tables" class="anchor"></a>Three types of ACS Tables</h3>
+<div class="section level3">
+<h3 id="three-types-of-acs-tables">Three types of ACS Tables<a class="anchor" aria-label="anchor" href="#three-types-of-acs-tables"></a>
+</h3>
 <p>If you are in a hurry or want something to start with, here are three partitions this package provides:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -151,23 +147,23 @@
 </ol>
 <p>See their help pages for more information and their limitations.</p>
 </div>
-<div id="collapsing-variable-codes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#collapsing-variable-codes" class="anchor"></a>Collapsing variable codes</h3>
+<div class="section level3">
+<h3 id="collapsing-variable-codes">Collapsing variable codes<a class="anchor" aria-label="anchor" href="#collapsing-variable-codes"></a>
+</h3>
 <p>The survey and the post-stratification must share discrete variables the level of which match 1:1. Therefore, if race is binned 9 ways in the ACS but there are only 5 response options in the CCES, then the finer group must be collapsed to coarser groupings of the 5 levels in the CCES. That also means, for example, that the recoding must be nested – i.e., it is hard to salvage two variable codings that are not many-to-one nested mappings to each other. These judgments must be made with careful attention to the question wording and are documented to some extent in <code><a href="../reference/namevalue.html">?namevalue</a></code>.</p>
 </div>
-<div id="thanks" class="section level3">
-<h3 class="hasAnchor">
-<a href="#thanks" class="anchor"></a>Thanks</h3>
+<div class="section level3">
+<h3 id="thanks">Thanks<a class="anchor" aria-label="anchor" href="#thanks"></a>
+</h3>
 <p>The statements in this vignette benefited from many online resources and correspondence with experts including Yair Ghitza and Matto Mildenberger. I also relies on findings from several published papers:</p>
 <ul>
-<li>Howe, P. D., Mildenberger, M., Marlon, J. R., &amp; Leiserowitz, A. (2015). Geographic variation in opinions on climate change at state and local scales in the USA. <em>Nature Climate Change</em>, 5(6), 596–603. <a href="https://doi.org/10.1038/nclimate2583" class="uri">https://doi.org/10.1038/nclimate2583</a>
+<li>Howe, P. D., Mildenberger, M., Marlon, J. R., &amp; Leiserowitz, A. (2015). Geographic variation in opinions on climate change at state and local scales in the USA. <em>Nature Climate Change</em>, 5(6), 596–603. <a href="https://doi.org/10.1038/nclimate2583" class="external-link uri">https://doi.org/10.1038/nclimate2583</a>
 </li>
-<li>Kastellec, J. P., Lax, J. R., &amp; Phillips, J. H. (2010). Public Opinion and Senate Confirmation of Supreme Court Nominees. <em>Journal of Politics</em>, 72(3), 767–784. <a href="https://doi.org/10.1017/S0022381610000150" class="uri">https://doi.org/10.1017/S0022381610000150</a>
+<li>Kastellec, J. P., Lax, J. R., &amp; Phillips, J. H. (2010). Public Opinion and Senate Confirmation of Supreme Court Nominees. <em>Journal of Politics</em>, 72(3), 767–784. <a href="https://doi.org/10.1017/S0022381610000150" class="external-link uri">https://doi.org/10.1017/S0022381610000150</a>
 </li>
-<li>Walker, Kyle. (2020). tidycensus: Load US Census Boundary and Attribute Data as ‘tidyverse’ and ‘sf’-Ready Data Frames. R package version 0.9.9.2. <a href="https://CRAN.R-project.org/package=tidycensus" class="uri">https://CRAN.R-project.org/package=tidycensus</a>
+<li>Walker, Kyle. (2020). tidycensus: Load US Census Boundary and Attribute Data as ‘tidyverse’ and ‘sf’-Ready Data Frames. R package version 0.9.9.2. <a href="https://CRAN.R-project.org/package=tidycensus" class="external-link uri">https://CRAN.R-project.org/package=tidycensus</a>
 </li>
-<li>Warshaw, C., &amp; Rodden, J. (2012). How should We measure district-level public opinion on individual issues? <em>Journal of Politics</em>, 74(1), 203–219. <a href="https://doi.org/10.1017/S0022381611001204" class="uri">https://doi.org/10.1017/S0022381611001204</a>
+<li>Warshaw, C., &amp; Rodden, J. (2012). How should We measure district-level public opinion on individual issues? <em>Journal of Politics</em>, 74(1), 203–219. <a href="https://doi.org/10.1017/S0022381611001204" class="external-link uri">https://doi.org/10.1017/S0022381611001204</a>
 </li>
 </ul>
 </div>
@@ -182,11 +178,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.shirokuriwaki.com">Shiro Kuriwaki</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.shirokuriwaki.com" class="external-link">Shiro Kuriwaki</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
