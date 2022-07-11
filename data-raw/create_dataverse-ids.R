@@ -2,7 +2,7 @@ library(tibble)
 
 cces_dv_ids <- tribble(
   ~cces_name, ~year, ~doi, ~filename,  ~caseid_var, ~server,
-  "cumulative", NA,   "10.7910/DVN/II2DB6", "cumulative_2006-2020.dta", "case_id", "dataverse.harvard.edu",
+  "cumulative", NA,   "10.7910/DVN/II2DB6", "cumulative_2006-2021.dta", "case_id", "dataverse.harvard.edu",
   "2006",       2006, "10.7910/DVN/Q8HC9N", "cces_2006_common.tab", "v1000",   "dataverse.harvard.edu",
   "2007",       2007, "10.7910/DVN/OOXTJ5", "CCES07_OUTPUT.sav", "caseid",  "dataverse.harvard.edu",
   "2008",       2008, "10.7910/DVN/YUYIVB", "cces_2008_common.tab", "V100",    "dataverse.harvard.edu",
