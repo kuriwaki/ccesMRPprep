@@ -11,7 +11,8 @@ cces_join_slim(
   formula,
   coerce_to_char = TRUE,
   keep_vars = NULL,
-  subset_dist = NA
+  subset_dist = NA,
+  cd_df_joinby = NULL
 )
 }
 \arguments{
@@ -38,6 +39,10 @@ this enables the join.}
 of whether it is specified in a formula. Input as character vector.}
 
 \item{subset_dist}{a character for the geography of cd to subset}
+
+\item{dist_join_by}{an optional character vector to specify which variables
+to join the \code{cd_df} by. If left blank, it will default to the common-named
+variables.}
 }
 \description{
 Produces a person-level dataset with question-level dataset. This will only

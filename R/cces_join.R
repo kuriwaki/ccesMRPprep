@@ -20,6 +20,9 @@
 #' @param keep_vars Variables that will be kept as a cell variable, regardless
 #'  of whether it is specified in a formula. Input as character vector.
 #' @param subset_dist a character for the geography of cd to subset
+#' @param dist_join_by an optional character vector to specify which variables
+#'  to join the `cd_df` by. If left blank, it will default to the common-named
+#'  variables.
 #'
 #' @inheritParams build_counts
 #' @import dplyr
@@ -66,7 +69,8 @@ cces_join_slim <- function(ccq_df,
                            formula,
                            coerce_to_char = TRUE,
                            keep_vars = NULL,
-                           subset_dist = NA) {
+                           subset_dist = NA,
+                           cd_df_joinby = NULL) {
 
   y_named_as <- all.vars(as.formula(formula))[1L]
 
@@ -83,11 +87,11 @@ cces_join_slim <- function(ccq_df,
 
   joined_df <- ungroup(ccc_df) %>%
     inner_join(ungroup(ccq_df), by = c("case_id", "year")) %>%
-    left_join(cd_df, by = c("cd", "year"))
+    left_join(cd_df, by = cd_df_joinby)
 
-  # if party reg, also update by only giving 1s to active registrants
-  if (attr(ccq_df, "question") == "CL_party") {
-  }
+  # # if party reg, also update by only giving 1s to active registrants
+  # if (attr(ccq_df, "question") == "CL_party") {
+  # }
 
   # select only necessary models ---
   df_sel <- select(joined_df, !!!vars)
