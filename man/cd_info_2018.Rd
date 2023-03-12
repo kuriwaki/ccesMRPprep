@@ -46,6 +46,7 @@ The Daily Kos Elections naming guide to the nation's congressional districts.
 
 Daily Kos, "2008, 2012, & 2016 results for districts used in 2018."
 \url{https://bit.ly/3DRhPcj}
+
 DailyDaily Kos Elections 2012, 2016 & 2020 presidential election results for congressional districts in 2020"
 \url{https://bit.ly/3bXtAPB}
 

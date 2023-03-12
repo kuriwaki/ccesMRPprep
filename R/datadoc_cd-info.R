@@ -42,7 +42,7 @@
 #'
 #'   Daily Kos, "2008, 2012, & 2016 results for districts used in 2018."
 #'   \url{https://bit.ly/3DRhPcj}
-
+#'
 #'   DailyDaily Kos Elections 2012, 2016 & 2020 presidential election results for congressional districts in 2020"
 #'   \url{https://bit.ly/3bXtAPB}
 #'
@@ -68,3 +68,13 @@
 
 #' @rdname cd_info_2018
 "elec_NY"
+
+
+#' Presidential Voteshare by Daily Kos
+#'
+#' Similar format to `cd_info_20**` but stacked from 2006 to 2018. Focuses only on voteshare.
+#'
+#' @source
+#' Daily Kos, "2008, 2012, & 2016 results for districts used in 2018."
+#'. \url{https://bit.ly/3DRhPcj}
+"cd_presvote"
