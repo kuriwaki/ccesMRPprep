@@ -39,7 +39,8 @@ RoxygenNote: 7.1.2
 Language: en-US
 Roxygen: list(markdown = TRUE)
 License: MIT + file LICENSE
-URL: https://www.github.com/kuriwaki/ccesMRPprep
+URL: https://www.github.com/kuriwaki/ccesMRPprep,
+    https://www.shirokuriwaki.com/ccesMRPprep/
 BugReports: http://github.com/kuriwaki/ccesMRPprep/issues
 Suggests: 
     knitr,
