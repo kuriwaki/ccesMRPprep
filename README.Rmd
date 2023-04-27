@@ -4,7 +4,7 @@ output: github_document
 ---
 
 <!-- badges: start -->
-[![tic](https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=master)](https://github.com/kuriwaki/ccesMRPprep/actions)    
+[![tic](https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=main)](https://github.com/kuriwaki/ccesMRPprep/actions)    
 <!-- badges: end -->
 
 ```{r setup, include=FALSE}
@@ -14,15 +14,18 @@ knitr::opts_chunk$set(echo = TRUE)
 Cite as:
 
 * Shiro Kuriwaki (2020). ccesMRPprep: Functions and Data to Prepare CCES data for MRP. R package. <https://www.github.com/kuriwaki/ccesMRPprep>
+* Or see the related article, Kuriwaki et al., "The Geography of Racially Polarized Voting: Calibrating Surveys at the District Level." _American Political Science Review_ (2023)
 
 
 ### Purpose and Contribution
 
-Multilevel Regression and Poststratification (MRP) is an increasingly popular method for analyzing surveys, and can be implemented on public datasets such as the [CCES](https://cces.gov.harvard.edu/) and ACS.  Several helpful tutorials give introductions with sample R code  (Kastellec, Lax, and Phillips, [2019](https://scholar.princeton.edu/sites/default/files/jkastellec/files/mrp_primer.pdf); Hanretty, [2019](https://doi.org/10.1177%2F1478929919864773)),
+Multilevel Regression and Poststratification (MRP) is an increasingly popular method for analyzing surveys, and can be implemented on public datasets such as the [CES/CCES](https://cces.gov.harvard.edu/) and ACS.  Several helpful tutorials give introductions with sample R code  (Kastellec, Lax, and Phillips, [2019](https://scholar.princeton.edu/sites/default/files/jkastellec/files/mrp_primer.pdf); Hanretty, [2019](https://doi.org/10.1177%2F1478929919864773)),
 
 But despite its increasingly popularity, _doing_ one's own MRP entails considerable upfront costs: downloading the appropriate survey and contextual data, recoding survey values to match with their Census counterparts,  and generating population frames to post-stratify on, potentially by merging different datasets.  While there already exist some packages for MRP (e.g. [`gelman/mrp`](https://github.com/gelman/mrp), [`stan-dev/rstanarm`](https://mc-stan.org/rstanarm/articles/mrp.html), [`kuriwaki/sparseregMRP`](https://github.com/kuriwaki/sparseregMRP)), these often define generic functions and leave users to prepare the cleaned data to use those functions with specific requirements. 
 
-The **ccesMRPprep** package instead provides data loading, processing, and formatting functions for a particular task: using _CCES data_ for MRP. Limiting its usage to a fixed (but fairly widespread) set of survey data has several benefits. Its key contributions are functions that are calibrated to a consistent syntax, pre-built lookup tables and value-key pairs of data that are based upon a careful reading of data sources, and data loading functions that use APIs ([`IQSS/dataverse-client-r`](https://github.com/IQSS/dataverse-client-r) and [`walkerke/tidycensus`](https://github.com/walkerke/tidycensus)) to reduce the dependency on downloading large files. _Model fitting and visualization of MRP itself_ is handled in the companion package,  [**`kuriwaki/ccesMRPrun`**](https://www.github.com/kuriwaki/ccesMRPrun). This package is focused on the preparation to get there. 
+The **ccesMRPprep** package instead provides data loading, processing, and formatting functions for a particular task: using _CES/CCES data_ (Cooperative Election Study, formerly the Cooperative Congressional Election Study) for MRP. Limiting its usage to a fixed set of survey data has several benefits. Its key contributions are functions that are calibrated to a consistent syntax, pre-built lookup tables and value-key pairs of data that are based upon a careful reading of data sources, and data loading functions that use APIs ([`IQSS/dataverse-client-r`](https://github.com/IQSS/dataverse-client-r) and [`walkerke/tidycensus`](https://github.com/walkerke/tidycensus)) to reduce the dependency on downloading large files. 
+
+_Model fitting and visualization of MRP itself_ is handled in the companion package,  [**`kuriwaki/ccesMRPrun`**](https://www.github.com/kuriwaki/ccesMRPrun). This package is focused on the preparation to get there. 
    
 
 ## Installation
@@ -73,4 +76,4 @@ non-MRP projects.
 
 ## Support
 
-This package is a part of the CCES MRP project, supported by NSF Grant 1926424: [Bayesian analytical tools to improve survey estimates for subpopulations and small areas](https://nsf.gov/awardsearch/showAward?AWD_ID=1926424). The contents are based on collaborations and discussions with Ben Bales, [Lauren Kennedy](https://jazzystats.com/about/), Mitzi Morris, and [Soichiro Yamauchi](https://soichiroy.github.io/).
+This package is a part of the CCES MRP project, supported by NSF Grant 1926424: [Bayesian analytical tools to improve survey estimates for subpopulations and small areas](https://nsf.gov/awardsearch/showAward?AWD_ID=1926424). The contents are based on collaborations and discussions with Ben Bales, [Lauren Kennedy](https://jazzystats.com/about/), and Mitzi Morris.

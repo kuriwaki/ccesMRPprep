@@ -3,20 +3,22 @@ Portable Routines for Preparing CCES and ACS data for MRP
 
 <!-- badges: start -->
 
-[![tic](https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=master)](https://github.com/kuriwaki/ccesMRPprep/actions)
+[![tic](https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=main)](https://github.com/kuriwaki/ccesMRPprep/actions)  
 <!-- badges: end -->
 
 Cite as:
 
--   Shiro Kuriwaki (2020). ccesMRPprep: Functions and Data to Prepare
-    CCES data for MRP. R package.
-    <https://www.github.com/kuriwaki/ccesMRPprep>
+- Shiro Kuriwaki (2020). ccesMRPprep: Functions and Data to Prepare CCES
+  data for MRP. R package. <https://www.github.com/kuriwaki/ccesMRPprep>
+- Or see the related article, Kuriwaki et al., “The Geography of
+  Racially Polarized Voting: Calibrating Surveys at the District Level.”
+  *American Political Science Review* (2023)
 
 ### Purpose and Contribution
 
 Multilevel Regression and Poststratification (MRP) is an increasingly
 popular method for analyzing surveys, and can be implemented on public
-datasets such as the [CCES](https://cces.gov.harvard.edu/) and ACS.
+datasets such as the [CES/CCES](https://cces.gov.harvard.edu/) and ACS.
 Several helpful tutorials give introductions with sample R code
 (Kastellec, Lax, and Phillips,
 [2019](https://scholar.princeton.edu/sites/default/files/jkastellec/files/mrp_primer.pdf);
@@ -35,16 +37,19 @@ these often define generic functions and leave users to prepare the
 cleaned data to use those functions with specific requirements.
 
 The **ccesMRPprep** package instead provides data loading, processing,
-and formatting functions for a particular task: using *CCES data* for
-MRP. Limiting its usage to a fixed (but fairly widespread) set of survey
+and formatting functions for a particular task: using *CES/CCES data*
+(Cooperative Election Study, formerly the Cooperative Congressional
+Election Study) for MRP. Limiting its usage to a fixed set of survey
 data has several benefits. Its key contributions are functions that are
 calibrated to a consistent syntax, pre-built lookup tables and value-key
 pairs of data that are based upon a careful reading of data sources, and
 data loading functions that use APIs
 ([`IQSS/dataverse-client-r`](https://github.com/IQSS/dataverse-client-r)
 and [`walkerke/tidycensus`](https://github.com/walkerke/tidycensus)) to
-reduce the dependency on downloading large files. *Model fitting and
-visualization of MRP itself* is handled in the companion package,
+reduce the dependency on downloading large files.
+
+*Model fitting and visualization of MRP itself* is handled in the
+companion package,
 [**`kuriwaki/ccesMRPrun`**](https://www.github.com/kuriwaki/ccesMRPrun).
 This package is focused on the preparation to get there.
 
@@ -62,8 +67,10 @@ See `vignette("overview")` for a overview of the steps involved.
 For documentation of the data sources, see `vignette("acs")` for the
 Census and `vignette("derived")` for CCES variables.
 
-This vignette also covers more advanced techniques to expand population
-tables. See `vignette("synth")` for an overview and demonstration.
+A related package also covers more advanced techniques to expand
+population tables. See
+[`kuriwaki/synthjoint`](https://www.github.com/kuriwaki/synthjoint) for
+an overview and demonstration.
 
 Each function and built-in data provides documentation as well.
 
@@ -88,13 +95,12 @@ function. Here is a manual compilaiton:
 
 ## Related Packages
 
--   [kuriwaki/rcces](https://github.com/kuriwaki/rcces) has another set
-    of CCES related functions, but these are either my own personal
-    functions in development (not for production), or specific to
-    non-MRP projects.
--   [kuriwaki/CCES\_district-opinion](https://github.com/kuriwaki/CCES_district-opinion)
-    is a private package that uses (among others) this package to
-    process large CCES data for MRP at scale.
+- [kuriwaki/rcces](https://github.com/kuriwaki/rcces) has another set of
+  CCES related functions, but these are either my own personal functions
+  in development (not for production), or specific to non-MRP projects.
+- [kuriwaki/CCES_district-opinion](https://github.com/kuriwaki/CCES_district-opinion)
+  is a private package that uses (among others) this package to process
+  large CCES data for MRP at scale.
 
 ## Support
 
@@ -103,5 +109,4 @@ This package is a part of the CCES MRP project, supported by NSF Grant
 subpopulations and small
 areas](https://nsf.gov/awardsearch/showAward?AWD_ID=1926424). The
 contents are based on collaborations and discussions with Ben Bales,
-[Lauren Kennedy](https://jazzystats.com/about/), Mitzi Morris, and
-[Soichiro Yamauchi](https://soichiroy.github.io/).
+[Lauren Kennedy](https://jazzystats.com/about/), and Mitzi Morris.
