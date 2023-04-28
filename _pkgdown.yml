@@ -46,7 +46,6 @@ reference:
   desc: Wrangling cleaned data for apporpriate modeling
   contents:
   - build_counts
-  - collapse_table
 articles:
 - title: Get Started
   navbar: ~
