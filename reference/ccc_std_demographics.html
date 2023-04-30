@@ -77,13 +77,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ccc_std_demographics</span><span class="op">(</span>
-  <span class="va">tbl</span>,
-  only_demog <span class="op">=</span> <span class="cn">FALSE</span>,
-  age_key <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="namevalue.html">age5_key</a></span><span class="op">)</span>,
-  wh_as_hisp <span class="op">=</span> <span class="cn">TRUE</span>,
-  bh_as_hisp <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ccc_std_demographics</span><span class="op">(</span></span>
+<span>  <span class="va">tbl</span>,</span>
+<span>  only_demog <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  age_key <span class="op">=</span> <span class="fu">deframe</span><span class="op">(</span><span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="namevalue.html">age5_key</a></span><span class="op">)</span>,</span>
+<span>  wh_as_hisp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  bh_as_hisp <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -95,21 +95,32 @@ and <code>cd</code>. Factor variables must a haven_labelled class variable as is
 the output of <code>get_cces_dataverse("cumulative")</code>. See <a href="ccc_samp.html">ccc_samp</a> for an example.
 Any other file (for example, year-specific common contents) are not compatible with
 this function.</p></dd>
+
+
 <dt>only_demog</dt>
 <dd><p>Drop variables besides demographics? Defaults to FALSE</p></dd>
+
+
 <dt>age_key</dt>
 <dd><p>The vector key to use to bin age. Can be <code>deframe(age5_key)</code> or <code>deframe(age10_key)</code></p></dd>
+
+
 <dt>wh_as_hisp</dt>
 <dd><p>Should people who identify as both White and Hispanic be
 coded as "Hispanic",  thereby leaving all remaining "Whites" as Non-Hispanic Whites
 by definition? Could be <code>NULL</code> if you know the column <code>hispanic</code> is not in the
 data. For more information, see <a href="https://bit.ly/3hZ6mz4" class="external-link">https://bit.ly/3hZ6mz4</a>.</p></dd>
+
+
 <dt>bh_as_hisp</dt>
 <dd><p>Same as <code>wh_as_hisp</code> but for Black Hispanics. Defaults to TRUE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The output is of the same dimensions as the input (unless <code>only_demog = TRUE</code>)
+    
+
+<p>The output is of the same dimensions as the input (unless <code>only_demog = TRUE</code>)
 but with the following exceptions:</p><ul><li><p><code>age</code> is coded to match up with the ACS bins and the recoding occurs
 in a separate function, <code>ccc_bin_age</code>. The unbinned age is left instead to
 <code>age_orig</code>.</p></li>
@@ -137,13 +148,13 @@ the cumulative content.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">ccc_samp</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">ccc_samp</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> age variable modified to bins. Original age variable is now in age_orig. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,000 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year case_id state       st    cd    marstat  gender female     age age_orig</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     year case_id state       st    cd    marstat gender  female age     age_orig</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl+l&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl+l&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int+l&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>006 1005058 Michigan    MI    MI-04 1<span style="color: #949494;"> [Mar…</span> 2<span style="color: #949494;"> [Fem…</span>      1 3<span style="color: #949494;"> [35 …</span>       36</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>006 1006614 Texas       TX    TX-18 1<span style="color: #949494;"> [Mar…</span> 1<span style="color: #949494;"> [Mal…</span>      0 3<span style="color: #949494;"> [35 …</span>       40</span>
@@ -155,50 +166,51 @@ the cumulative content.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>006 1105620 Hawaii      HI    HI-01 5<span style="color: #949494;"> [Sin…</span> 1<span style="color: #949494;"> [Mal…</span>      0 3<span style="color: #949494;"> [35 …</span>       37</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>006 1116569 Texas       TX    TX-21 5<span style="color: #949494;"> [Sin…</span> 2<span style="color: #949494;"> [Fem…</span>      1 1<span style="color: #949494;"> [18 …</span>       20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>006 1117377 Ohio        OH    OH-07 3<span style="color: #949494;"> [Div…</span> 2<span style="color: #949494;"> [Fem…</span>      1 4<span style="color: #949494;"> [45 …</span>       49</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 990 more rows, and 12 more variables: educ_cces_chr &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   educ &lt;dbl+lbl&gt;, race_cces_chr &lt;chr&gt;, race &lt;int+lbl&gt;, faminc &lt;dbl+lbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 990 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: educ_cces_chr &lt;chr&gt;, educ &lt;dbl+lbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   race_cces_chr &lt;chr&gt;, race &lt;int+lbl&gt;, faminc &lt;dbl+lbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   vv_turnout_gvm &lt;dbl+lbl&gt;, zipcode &lt;chr&gt;, county_fips &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   hispanic &lt;dbl+lbl&gt;, newsint &lt;dbl+lbl&gt;, voted_pres_16 &lt;dbl+lbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   economy_retro &lt;dbl+lbl&gt;</span></span>
-<span class="r-in"> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">ccc_samp</span>, wh_as_hisp <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">race</span><span class="op">)</span></span>
+<span class="r-in"><span> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">ccc_samp</span>, wh_as_hisp <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">race</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> age variable modified to bins. Original age variable is now in age_orig. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  race     n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int+lbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   race                    n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int+lbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1<span style="color: #949494;"> [White]</span>             732</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2<span style="color: #949494;"> [Black]</span>             108</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3<span style="color: #949494;"> [Hispanic]</span>           81</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4<span style="color: #949494;"> [Asian]</span>              27</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5<span style="color: #949494;"> [Native American]</span>    11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6<span style="color: #949494;"> [All Other]</span>          41</span>
-<span class="r-in"> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">ccc_samp</span>, bh_as_hisp <span class="op">=</span> <span class="cn">FALSE</span>, wh_as_hisp <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">race</span><span class="op">)</span></span>
+<span class="r-in"><span> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">ccc_samp</span>, bh_as_hisp <span class="op">=</span> <span class="cn">FALSE</span>, wh_as_hisp <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">race</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> age variable modified to bins. Original age variable is now in age_orig. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  race     n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int+lbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   race                    n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int+lbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1<span style="color: #949494;"> [White]</span>             732</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2<span style="color: #949494;"> [Black]</span>             110</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3<span style="color: #949494;"> [Hispanic]</span>           79</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4<span style="color: #949494;"> [Asian]</span>              27</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5<span style="color: #949494;"> [Native American]</span>    11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6<span style="color: #949494;"> [All Other]</span>          41</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="co"># For full data (takes a while)</span></span>
-<span class="r-in"> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://iqss.github.io/dataverse-client-r/" class="external-link">dataverse</a></span><span class="op">)</span></span>
-<span class="r-in"> <span class="va">cumulative_rds</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_cces_dataverse.html">get_cces_dataverse</a></span><span class="op">(</span><span class="st">"cumulative"</span><span class="op">)</span></span>
-<span class="r-in"> <span class="va">cumulative_std</span> <span class="op">&lt;-</span> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">cumulative_rds</span><span class="op">)</span></span>
-<span class="r-in"> <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="va">wrong_cd_fmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">ccc_samp</span>, cd <span class="op">=</span> <span class="fu">str_replace_all</span><span class="op">(</span><span class="va">cd</span>, <span class="st">"01"</span>, <span class="st">"1"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"> <span class="va">wrong_cd_fmt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">st</span> <span class="op">==</span> <span class="st">"HI"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">cd</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"> <span class="co"># throws error because CD is formatted the wrong way</span></span>
-<span class="r-in"> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">wrong_cd_fmt</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="co"># For full data (takes a while)</span></span></span>
+<span class="r-in"><span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://iqss.github.io/dataverse-client-r/" class="external-link">dataverse</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">cumulative_rds</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_cces_dataverse.html">get_cces_dataverse</a></span><span class="op">(</span><span class="st">"cumulative"</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">cumulative_std</span> <span class="op">&lt;-</span> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">cumulative_rds</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="va">wrong_cd_fmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">ccc_samp</span>, cd <span class="op">=</span> <span class="fu">str_replace_all</span><span class="op">(</span><span class="va">cd</span>, <span class="st">"01"</span>, <span class="st">"1"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">wrong_cd_fmt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">st</span> <span class="op">==</span> <span class="st">"HI"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">cd</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="co"># throws error because CD is formatted the wrong way</span></span></span>
+<span class="r-in"><span> <span class="fu">ccc_std_demographics</span><span class="op">(</span><span class="va">wrong_cd_fmt</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -213,7 +225,7 @@ the cumulative content.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

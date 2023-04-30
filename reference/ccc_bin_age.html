@@ -77,17 +77,20 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ccc_bin_age</span><span class="op">(</span><span class="va">agevec</span>, agelbl <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="namevalue.html">age5_key</a></span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ccc_bin_age</span><span class="op">(</span><span class="va">agevec</span>, agelbl <span class="op">=</span> <span class="fu">deframe</span><span class="op">(</span><span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="namevalue.html">age5_key</a></span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>agevec</dt>
 <dd><p>a vector of integers</p></dd>
+
+
 <dt>agelbl</dt>
 <dd><p>a value-key pair to be passed into recode,
 with values as the things to be recoded and labels as the labels for each
 value.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -97,7 +100,7 @@ value.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu">ccc_bin_age</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span><span class="op">:</span><span class="fl">100</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu">ccc_bin_age</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span><span class="op">:</span><span class="fl">100</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;labelled&lt;integer&gt;[87]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA NA  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  2  3  3  3  3  3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [26]  3  3  3  3  3  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4  4</span>
@@ -111,7 +114,7 @@ value.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      3    35 to 44 years</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      4    45 to 64 years</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      5 65 years and over</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -126,7 +129,7 @@ value.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

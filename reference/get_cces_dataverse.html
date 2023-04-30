@@ -81,33 +81,40 @@ The function also does</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_cces_dataverse</span><span class="op">(</span>
-  name <span class="op">=</span> <span class="st">"cumulative"</span>,
-  year_subset <span class="op">=</span> <span class="fl">2006</span><span class="op">:</span><span class="fl">2020</span>,
-  std_index <span class="op">=</span> <span class="cn">TRUE</span>,
-  dataverse_paths <span class="op">=</span> <span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="cces_dv_ids.html">cces_dv_ids</a></span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_cces_dataverse</span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"cumulative"</span>,</span>
+<span>  year_subset <span class="op">=</span> <span class="fl">2006</span><span class="op">:</span><span class="fl">2020</span>,</span>
+<span>  std_index <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  dataverse_paths <span class="op">=</span> <span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="cces_dv_ids.html">cces_dv_ids</a></span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>name</dt>
 <dd><p>The name of the dataset as defined in <code>data(cces_dv_ids)</code>.</p></dd>
+
+
 <dt>year_subset</dt>
 <dd><p>The year (or years, a vector) to subset too. If <code>name</code> is a year
 specific dataset, this argument is redundant, but if <code>name == "cumulative"</code>, then
 the output will be the cumulative dataset subsetted to that year. This is useful
 when using the cumulative dataset for its harmonized variables.</p></dd>
+
+
 <dt>std_index</dt>
 <dd><p>Whether to standardize the unique case identifier. These
 have different column names in different datasets, but setting this to <code>TRUE</code>
 (the default) will all rename them <code>"case_id"</code> and also add the year of the dataset.
 This way, every dataset that gets downloaded will have the unique identifier
 defined by the variables <code>c("year", "case_id")</code>.</p></dd>
+
+
 <dt>dataverse_paths</dt>
 <dd><p>A dataframe where one row represents metadata for one
 CCES dataset. Built-in data <a href="cces_dv_ids.html">cces_dv_ids</a> is used as a default and should
 not be changed.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -121,23 +128,23 @@ will standardize, for example, the name of the case ID.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># read in cumulative common content, subsetted to 2018, into environemt</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="va">ccc</span> <span class="op">&lt;-</span> <span class="fu">get_cces_dataverse</span><span class="op">(</span><span class="st">"cumulative"</span>, year_subset <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span>
-<span class="r-in"> <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Example code to read _and_ write a series of common content datasets</span></span>
-<span class="r-in"><span class="co"># in a directory "data/input/cces/</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">dir_create</span><span class="op">(</span><span class="st">"data/cces"</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">for</span> <span class="op">(</span><span class="va">d</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cumulative"</span>, <span class="st">"2018"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu">file_exists</span><span class="op">(</span><span class="fu">glue</span><span class="op">(</span><span class="st">"data/input/cces/cces_{d}.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">    <span class="kw">next</span></span>
-<span class="r-in">  <span class="fu">write_rds</span><span class="op">(</span><span class="fu">get_cces_dataverse</span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"data/input/cces/cces_{d}.rds"</span><span class="op">)</span><span class="op">)</span> <span class="co"># takes a few minutes</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># read in cumulative common content, subsetted to 2018, into environemt</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="va">ccc</span> <span class="op">&lt;-</span> <span class="fu">get_cces_dataverse</span><span class="op">(</span><span class="st">"cumulative"</span>, year_subset <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example code to read _and_ write a series of common content datasets</span></span></span>
+<span class="r-in"><span><span class="co"># in a directory "data/input/cces/</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"data/cces"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">d</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cumulative"</span>, <span class="st">"2018"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">file_exists</span><span class="op">(</span><span class="fu">glue</span><span class="op">(</span><span class="st">"data/input/cces/cces_{d}.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="kw">next</span></span></span>
+<span class="r-in"><span>  <span class="fu">write_rds</span><span class="op">(</span><span class="fu">get_cces_dataverse</span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="fu">glue</span><span class="op">(</span><span class="st">"data/input/cces/cces_{d}.rds"</span><span class="op">)</span><span class="op">)</span> <span class="co"># takes a few minutes</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -152,7 +159,7 @@ will standardize, for example, the name of the case ID.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

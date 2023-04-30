@@ -99,29 +99,34 @@
 <div class="page-header"><h1 id="portable-routines-for-preparing-cces-and-acs-data-for-mrp">Portable Routines for Preparing CCES and ACS data for MRP<a class="anchor" aria-label="anchor" href="#portable-routines-for-preparing-cces-and-acs-data-for-mrp"></a>
 </h1></div>
 <!-- badges: start -->
+
 <p>Cite as:</p>
-<ul><li>Shiro Kuriwaki (2020). ccesMRPprep: Functions and Data to Prepare CCES data for MRP. R package. <a href="https://www.github.com/kuriwaki/ccesMRPprep" class="external-link uri">https://www.github.com/kuriwaki/ccesMRPprep</a>
-</li></ul>
+<ul>
+<li>Shiro Kuriwaki (2020). ccesMRPprep: Functions and Data to Prepare CCES data for MRP. R package. <a href="https://www.github.com/kuriwaki/ccesMRPprep" class="external-link uri">https://www.github.com/kuriwaki/ccesMRPprep</a>
+</li>
+<li>Or see the related article, Kuriwaki et al., “The Geography of Racially Polarized Voting: Calibrating Surveys at the District Level.” <em>American Political Science Review</em> (2023)</li>
+</ul>
 <div class="section level3">
 <h3 id="purpose-and-contribution">Purpose and Contribution<a class="anchor" aria-label="anchor" href="#purpose-and-contribution"></a>
 </h3>
-<p>Multilevel Regression and Poststratification (MRP) is an increasingly popular method for analyzing surveys, and can be implemented on public datasets such as the <a href="https://cces.gov.harvard.edu/" class="external-link">CCES</a> and ACS. Several helpful tutorials give introductions with sample R code (Kastellec, Lax, and Phillips, <a href="https://scholar.princeton.edu/sites/default/files/jkastellec/files/mrp_primer.pdf" class="external-link">2019</a>; Hanretty, <a href="https://doi.org/10.1177%2F1478929919864773" class="external-link">2019</a>),</p>
+<p>Multilevel Regression and Poststratification (MRP) is an increasingly popular method for analyzing surveys, and can be implemented on public datasets such as the <a href="https://cces.gov.harvard.edu/" class="external-link">CES/CCES</a> and ACS. Several helpful tutorials give introductions with sample R code (Kastellec, Lax, and Phillips, <a href="https://scholar.princeton.edu/sites/default/files/jkastellec/files/mrp_primer.pdf" class="external-link">2019</a>; Hanretty, <a href="https://doi.org/10.1177%2F1478929919864773" class="external-link">2019</a>),</p>
 <p>But despite its increasingly popularity, <em>doing</em> one’s own MRP entails considerable upfront costs: downloading the appropriate survey and contextual data, recoding survey values to match with their Census counterparts, and generating population frames to post-stratify on, potentially by merging different datasets. While there already exist some packages for MRP (e.g. <a href="https://github.com/gelman/mrp" class="external-link"><code>gelman/mrp</code></a>, <a href="https://mc-stan.org/rstanarm/articles/mrp.html" class="external-link"><code>stan-dev/rstanarm</code></a>, <a href="https://github.com/kuriwaki/sparseregMRP" class="external-link"><code>kuriwaki/sparseregMRP</code></a>), these often define generic functions and leave users to prepare the cleaned data to use those functions with specific requirements.</p>
-<p>The <strong>ccesMRPprep</strong> package instead provides data loading, processing, and formatting functions for a particular task: using <em>CCES data</em> for MRP. Limiting its usage to a fixed (but fairly widespread) set of survey data has several benefits. Its key contributions are functions that are calibrated to a consistent syntax, pre-built lookup tables and value-key pairs of data that are based upon a careful reading of data sources, and data loading functions that use APIs (<a href="https://github.com/IQSS/dataverse-client-r" class="external-link"><code>IQSS/dataverse-client-r</code></a> and <a href="https://github.com/walkerke/tidycensus" class="external-link"><code>walkerke/tidycensus</code></a>) to reduce the dependency on downloading large files. <em>Model fitting and visualization of MRP itself</em> is handled in the companion package, <a href="https://www.github.com/kuriwaki/ccesMRPrun" class="external-link"><strong><code>kuriwaki/ccesMRPrun</code></strong></a>. This package is focused on the preparation to get there.</p>
+<p>The <strong>ccesMRPprep</strong> package instead provides data loading, processing, and formatting functions for a particular task: using <em>CES/CCES data</em> (Cooperative Election Study, formerly the Cooperative Congressional Election Study) for MRP. Limiting its usage to a fixed set of survey data has several benefits. Its key contributions are functions that are calibrated to a consistent syntax, pre-built lookup tables and value-key pairs of data that are based upon a careful reading of data sources, and data loading functions that use APIs (<a href="https://github.com/IQSS/dataverse-client-r" class="external-link"><code>IQSS/dataverse-client-r</code></a> and <a href="https://github.com/walkerke/tidycensus" class="external-link"><code>walkerke/tidycensus</code></a>) to reduce the dependency on downloading large files.</p>
+<p><em>Model fitting and visualization of MRP itself</em> is handled in the companion package, <a href="https://www.github.com/kuriwaki/ccesMRPrun" class="external-link"><strong><code>kuriwaki/ccesMRPrun</code></strong></a>. This package is focused on the preparation to get there.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># remotes::install_github("kuriwaki/ccesMRPprep")</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.github.com/kuriwaki/ccesMRPprep" class="external-link">ccesMRPprep</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># remotes::install_github("kuriwaki/ccesMRPprep")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.github.com/kuriwaki/ccesMRPprep" class="external-link">ccesMRPprep</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
 <p>See <code><a href="articles/overview.html">vignette("overview")</a></code> for a overview of the steps involved.</p>
 <p>For documentation of the data sources, see <code><a href="articles/acs.html">vignette("acs")</a></code> for the Census and <code><a href="articles/derived.html">vignette("derived")</a></code> for CCES variables.</p>
-<p>This vignette also covers more advanced techniques to expand population tables. See <code>vignette("synth")</code> for an overview and demonstration.</p>
+<p>A related package also covers more advanced techniques to expand population tables. See <a href="https://www.github.com/kuriwaki/synthjoint" class="external-link"><code>kuriwaki/synthjoint</code></a> for an overview and demonstration.</p>
 <p>Each function and built-in data provides documentation as well.</p>
 </div>
 <div class="section level2">
@@ -160,7 +165,7 @@
 <tr class="odd">
 <td align="left">Poststratification</td>
 <td align="left">Census Bureau ACS</td>
-<td align="left">American Community Survey. Extracted via <a href="https://github.com/walkerke/tidycensus" class="external-link">tidycensus package</a>. See <a href="https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html" class="external-link">ACS vignette</a>
+<td align="left">American Community Survey. Extracted via <a href="https://github.com/walkerke/tidycensus" class="external-link">tidycensus package</a>. See <a href="https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html">ACS vignette</a>
 </td>
 </tr>
 <tr class="even">
@@ -196,7 +201,7 @@
 <div class="section level2">
 <h2 id="support">Support<a class="anchor" aria-label="anchor" href="#support"></a>
 </h2>
-<p>This package is a part of the CCES MRP project, supported by NSF Grant 1926424: <a href="https://nsf.gov/awardsearch/showAward?AWD_ID=1926424" class="external-link">Bayesian analytical tools to improve survey estimates for subpopulations and small areas</a>. The contents are based on collaborations and discussions with Ben Bales, <a href="https://jazzystats.com/about/" class="external-link">Lauren Kennedy</a>, Mitzi Morris, and <a href="https://soichiroy.github.io/" class="external-link">Soichiro Yamauchi</a>.</p>
+<p>This package is a part of the CCES MRP project, supported by NSF Grant 1926424: <a href="https://nsf.gov/awardsearch/showAward?AWD_ID=1926424" class="external-link">Bayesian analytical tools to improve survey estimates for subpopulations and small areas</a>. The contents are based on collaborations and discussions with Ben Bales, <a href="https://jazzystats.com/about/" class="external-link">Lauren Kennedy</a>, and Mitzi Morris.</p>
 </div>
 </div>
   </div>
@@ -238,7 +243,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/kuriwaki/ccesMRPprep/actions" class="external-link"><img src="https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=master" alt="tic"></a></li>
+<li><a href="https://github.com/kuriwaki/ccesMRPprep/actions" class="external-link"><img src="https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=main" alt="tic"></a></li>
 </ul>
 </div>
 
@@ -253,7 +258,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

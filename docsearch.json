@@ -2,21 +2,21 @@
   "index_name": "ccesmrpprep",
   "start_urls": [
     {
-      "url": "https://kuriwaki.github.io/ccesMRPprep/index.html",
+      "url": "https://www.shirokuriwaki.com/ccesMRPprep/index.html",
       "selectors_key": "homepage",
       "tags": [
         "homepage"
       ]
     },
     {
-      "url": "https://kuriwaki.github.io/ccesMRPprep/reference",
+      "url": "https://www.shirokuriwaki.com/ccesMRPprep/reference",
       "selectors_key": "reference",
       "tags": [
         "reference"
       ]
     },
     {
-      "url": "https://kuriwaki.github.io/ccesMRPprep/articles",
+      "url": "https://www.shirokuriwaki.com/ccesMRPprep/articles",
       "selectors_key": "articles",
       "tags": [
         "articles"
@@ -30,7 +30,7 @@
     "/articles/index.html"
   ],
   "sitemap_urls": [
-    "https://kuriwaki.github.io/ccesMRPprep/sitemap.xml"
+    "https://www.shirokuriwaki.com/ccesMRPprep/sitemap.xml"
   ],
   "selectors": {
     "homepage": {

@@ -83,13 +83,13 @@ is the fraction.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_acs_cvap</span><span class="op">(</span>
-  race <span class="op">=</span> <span class="st">"white"</span>,
-  varlab_df <span class="op">=</span> <span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="acscodes_df.html">acscodes_df</a></span>,
-  year <span class="op">=</span> <span class="fl">2018</span>,
-  states <span class="op">=</span> <span class="cn">NULL</span>,
-  dataset <span class="op">=</span> <span class="st">"acs1"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_acs_cvap</span><span class="op">(</span></span>
+<span>  race <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  varlab_df <span class="op">=</span> <span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="acscodes_df.html">acscodes_df</a></span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2018</span>,</span>
+<span>  states <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dataset <span class="op">=</span> <span class="st">"acs1"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -98,17 +98,26 @@ is the fraction.</p>
 <dd><p>Race of interest. Either <code>"white"</code> (for non-Hispanic Whites),
 <code>"hispanic"</code>, <code>"black"</code>, <code>"native"</code> (for Native Americans including American
 Indians and Alaskan Natives), <code>"asian"</code>.</p></dd>
+
+
 <dt>varlab_df</dt>
 <dd><p>a dataframe that appends the categories based on the varcode</p></dd>
+
+
 <dt>year</dt>
 <dd><p>The year of the ACS to get. Because of data availability limitations, this is
 capped to 2010-2018.</p></dd>
+
+
 <dt>states</dt>
 <dd><p>A vector of states to subset to. Gets passed onto the new <code>state</code>
 argument in <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html" class="external-link">tidycensus::get_acs()</a></code>, which defaults to NULL.</p></dd>
+
+
 <dt>dataset</dt>
 <dd><p>Which type of ACS to get. Defaults to <code>"acs1"</code> for ACS-5 year.
 Use <code>"acs5"</code> for 5-year.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -121,9 +130,15 @@ Use <code>"acs5"</code> for 5-year.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"> <span class="fu">get_acs_cvap</span><span class="op">(</span><span class="st">"white"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="fu">get_acs_cvap</span><span class="op">(</span><span class="st">"white"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Getting data from the 2018 1-year ACS</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The 1-year ACS provides data for geographies with populations of 65,000 and greater.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span><span style="color: #00BBBB;">•</span> You have not set a Census API key. Users without a key are limited to 500</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> queries per day and may experience performance limitations.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> For best results, get a Census API key at</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> http://api.census.gov/data/key_signup.html and then supply the key to the</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> `census_api_key()` function to use it throughout your tidycensus session.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">This warning is displayed once per session.</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 436 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     year cd    cvap_total race  cvap_race cvap_frac</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -137,8 +152,8 @@ Use <code>"acs5"</code> for 5-year.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>018 AL-07     <span style="text-decoration: underline;">504</span>177 white    <span style="text-decoration: underline;">175</span>060     0.347</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>018 AR-01     <span style="text-decoration: underline;">548</span>710 white    <span style="text-decoration: underline;">431</span>129     0.786</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>018 AR-02     <span style="text-decoration: underline;">570</span>220 white    <span style="text-decoration: underline;">413</span>714     0.726</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 426 more rows</span></span>
-<span class="r-in"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 426 more rows</span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -153,7 +168,7 @@ Use <code>"acs5"</code> for 5-year.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

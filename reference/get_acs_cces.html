@@ -79,34 +79,45 @@ renames some variables to later merge with CCES-based regression models.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_acs_cces</span><span class="op">(</span>
-  <span class="va">varlist</span>,
-  varlab_df <span class="op">=</span> <span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="acscodes_df.html">acscodes_df</a></span>,
-  year <span class="op">=</span> <span class="fl">2018</span>,
-  states <span class="op">=</span> <span class="cn">NULL</span>,
-  dataset <span class="op">=</span> <span class="st">"acs1"</span>,
-  geography <span class="op">=</span> <span class="st">"congressional district"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_acs_cces</span><span class="op">(</span></span>
+<span>  <span class="va">varlist</span>,</span>
+<span>  varlab_df <span class="op">=</span> <span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="acscodes_df.html">acscodes_df</a></span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2018</span>,</span>
+<span>  states <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dataset <span class="op">=</span> <span class="st">"acs1"</span>,</span>
+<span>  geography <span class="op">=</span> <span class="st">"congressional district"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>varlist</dt>
 <dd><p>a vector of variable codes to pull</p></dd>
+
+
 <dt>varlab_df</dt>
 <dd><p>a dataframe that appends the categories based on the varcode</p></dd>
+
+
 <dt>year</dt>
 <dd><p>The year of the ACS to get. Because of data availability limitations, this is
 capped to 2010-2018.</p></dd>
+
+
 <dt>states</dt>
 <dd><p>A vector of states to subset to. Gets passed onto the new <code>state</code>
 argument in <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html" class="external-link">tidycensus::get_acs()</a></code>, which defaults to NULL.</p></dd>
+
+
 <dt>dataset</dt>
 <dd><p>Which type of ACS to get. Defaults to <code>"acs1"</code> for ACS-5 year.
 Use <code>"acs5"</code> for 5-year.</p></dd>
+
+
 <dt>geography</dt>
 <dd><p>the type of geography to pull. Currently only supports
 <code>"congressional district"</code>.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -120,25 +131,25 @@ See <a href="https://walker-data.com/tidycensus/reference/census_api_key.html" c
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="va">fm_brm</span> <span class="op">&lt;-</span> <span class="va">yes</span> <span class="op">|</span> <span class="fu">responses</span><span class="op">(</span><span class="va">n_cell</span><span class="op">)</span> <span class="op">~</span>  <span class="va">age</span> <span class="op">+</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">educ</span> <span class="op">+</span> <span class="va">pct_trump</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">cd</span><span class="op">)</span></span>
-<span class="r-in"> <span class="va">acs_tab</span> <span class="op">&lt;-</span> <span class="fu">get_acs_cces</span><span class="op">(</span></span>
-<span class="r-in">              varlist <span class="op">=</span> <span class="va">acscodes_age_sex_educ</span>,</span>
-<span class="r-in">              varlab_df <span class="op">=</span> <span class="va">acscodes_df</span>,</span>
-<span class="r-in">              year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">#   year  cd    gender age            educ         race  count count_moe</span></span>
-<span class="r-in"><span class="co">#   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt;          &lt;fct&gt;        &lt;fct&gt; &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span class="r-in"><span class="co"># 1  2018 AL-01 Male   18 to 24 years HS or Less   NA      703       240</span></span>
-<span class="r-in"><span class="co"># 2  2018 AL-01 Male   18 to 24 years HS or Less   NA     5665       581</span></span>
-<span class="r-in"><span class="co"># 3  2018 AL-01 Male   18 to 24 years HS or Less   NA    11764       747</span></span>
-<span class="r-in"><span class="co"># 4  2018 AL-01 Male   18 to 24 years Some College NA     9528       750</span></span>
-<span class="r-in"><span class="co"># 5  2018 AL-01 Male   18 to 24 years Some College NA     1389       355</span></span>
-<span class="r-in"><span class="co"># 6  2018 AL-01 Male   18 to 24 years 4-Year       NA     1519       276</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"> <span class="va">poststrat</span> <span class="op">&lt;-</span>  <span class="fu"><a href="get_poststrat.html">get_poststrat</a></span><span class="op">(</span><span class="va">acs_tab</span>, <span class="va">cd_info_2018</span>, <span class="va">fm_brm</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="va">fm_brm</span> <span class="op">&lt;-</span> <span class="va">yes</span> <span class="op">|</span> <span class="fu">responses</span><span class="op">(</span><span class="va">n_cell</span><span class="op">)</span> <span class="op">~</span>  <span class="va">age</span> <span class="op">+</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">educ</span> <span class="op">+</span> <span class="va">pct_trump</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">cd</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">acs_tab</span> <span class="op">&lt;-</span> <span class="fu">get_acs_cces</span><span class="op">(</span></span></span>
+<span class="r-in"><span>              varlist <span class="op">=</span> <span class="va">acscodes_age_sex_educ</span>,</span></span>
+<span class="r-in"><span>              varlab_df <span class="op">=</span> <span class="va">acscodes_df</span>,</span></span>
+<span class="r-in"><span>              year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">#   year  cd    gender age            educ         race  count count_moe</span></span></span>
+<span class="r-in"><span><span class="co">#   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;  &lt;fct&gt;          &lt;fct&gt;        &lt;fct&gt; &lt;dbl&gt;     &lt;dbl&gt;</span></span></span>
+<span class="r-in"><span><span class="co"># 1  2018 AL-01 Male   18 to 24 years HS or Less   NA      703       240</span></span></span>
+<span class="r-in"><span><span class="co"># 2  2018 AL-01 Male   18 to 24 years HS or Less   NA     5665       581</span></span></span>
+<span class="r-in"><span><span class="co"># 3  2018 AL-01 Male   18 to 24 years HS or Less   NA    11764       747</span></span></span>
+<span class="r-in"><span><span class="co"># 4  2018 AL-01 Male   18 to 24 years Some College NA     9528       750</span></span></span>
+<span class="r-in"><span><span class="co"># 5  2018 AL-01 Male   18 to 24 years Some College NA     1389       355</span></span></span>
+<span class="r-in"><span><span class="co"># 6  2018 AL-01 Male   18 to 24 years 4-Year       NA     1519       276</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="va">poststrat</span> <span class="op">&lt;-</span>  <span class="fu"><a href="get_poststrat.html">get_poststrat</a></span><span class="op">(</span><span class="va">acs_tab</span>, <span class="va">cd_info_2018</span>, <span class="va">fm_brm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -153,7 +164,7 @@ See <a href="https://walker-data.com/tidycensus/reference/census_api_key.html" c
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

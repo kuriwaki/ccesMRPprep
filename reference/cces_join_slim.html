@@ -81,15 +81,15 @@ is model dependent.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cces_join_slim</span><span class="op">(</span>
-  <span class="va">ccq_df</span>,
-  <span class="va">ccc_df</span>,
-  <span class="va">cd_df</span>,
-  <span class="va">formula</span>,
-  coerce_to_char <span class="op">=</span> <span class="cn">TRUE</span>,
-  keep_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  subset_dist <span class="op">=</span> <span class="cn">NA</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cces_join_slim</span><span class="op">(</span></span>
+<span>  <span class="va">ccq_df</span>,</span>
+<span>  <span class="va">ccc_df</span>,</span>
+<span>  <span class="va">cd_df</span>,</span>
+<span>  <span class="va">formula</span>,</span>
+<span>  coerce_to_char <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  keep_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subset_dist <span class="op">=</span> <span class="cn">NA</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -98,60 +98,73 @@ is model dependent.</p>
 <dd><p>dataframe of outcomes, taken from <a href="get_cces_question.html">get_cces_question</a>. We
 currently assume the name for the outcome is named "response", although this
 can be modified with the <code>y_named_as</code> argument</p></dd>
+
+
 <dt>ccc_df</dt>
 <dd><p>dataframe of covariates, currently taken only from the cumulative
 common content. It should have passed <a href="ccc_std_demographics.html">ccc_std_demographics</a> to be
 compatible with ACS.</p></dd>
+
+
 <dt>cd_df</dt>
 <dd><p>dataframe of district-level predictors, see <a href="cd_info_2018.html">cd_info_2018</a>
 for a sample. Currently, we join this to the rest of the data on the column
 called <code>"cd"</code> and <code>"year"</code>.</p></dd>
+
+
 <dt>formula</dt>
 <dd><p>the model formula used to fit the multilevel regression model.
 Should be of the form <code>y ~ x1 + x2 + (1|x3)</code> where y is a binary variable
 and only categorical variables should be used in the random effects notation.</p></dd>
+
+
 <dt>coerce_to_char</dt>
 <dd><p>Whether to coerce the case identifier to character class,
 this enables the join.</p></dd>
+
+
 <dt>keep_vars</dt>
 <dd><p>Variables that will be kept as a cell variable, regardless
 of whether it is specified in a formula. Input as character vector.</p></dd>
+
+
 <dt>subset_dist</dt>
 <dd><p>a character for the geography of cd to subset</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"> <span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="co"># need data/input/cces/cces_2018.rds to run this</span></span>
-<span class="r-in">  <span class="va">ccq_tcja</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_cces_question.html">get_cces_question</a></span><span class="op">(</span><span class="st">"CC18_326"</span>, <span class="st">"2018"</span>, <span class="st">"TCJA"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu">cces_join_slim</span><span class="op">(</span>ccq_df <span class="op">=</span> <span class="va">ccq_tcja</span>,</span>
-<span class="r-in">                 ccc_df <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ccc_samp</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2018</span><span class="op">)</span>,</span>
-<span class="r-in">                 cd_df <span class="op">=</span> <span class="va">cd_info_2018</span>,</span>
-<span class="r-in">                 formula <span class="op">=</span> <span class="st">"response ~ age + educ + (1|cd)"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># alternative - cd and state not in the formula, but cells follow this</span></span>
-<span class="r-in">  <span class="fu">cces_join_slim</span><span class="op">(</span>ccq_df <span class="op">=</span> <span class="va">ccq_tcja</span>,</span>
-<span class="r-in">                 ccc_df <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ccc_samp</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2018</span><span class="op">)</span>,</span>
-<span class="r-in">                 cd_df <span class="op">=</span> <span class="va">cd_info_2018</span>,</span>
-<span class="r-in">                 keep_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"st"</span>, <span class="st">"cd"</span><span class="op">)</span>,</span>
-<span class="r-in">                 formula <span class="op">=</span> <span class="st">"response ~ age + educ"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># A tibble: 133 x 7</span></span>
-<span class="r-in"><span class="co">#        year case_id   qID   response   age educ             cd</span></span>
-<span class="r-in"><span class="co">#       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;fct&gt;    &lt;dbl&gt; &lt;dbl+lbl&gt;        &lt;chr&gt;</span></span>
-<span class="r-in"><span class="co">#     1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11</span></span>
-<span class="r-in"><span class="co">#     2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-04</span></span>
-<span class="r-in"><span class="co">#     3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-02</span></span>
-<span class="r-in"><span class="co">#     4  2018 411717742 TCJA  Oppose      50 1 [No HS]        IL-03</span></span>
-<span class="r-in"><span class="co">#     5  2018 412022838 TCJA  Oppose      66 5 [4-Year]       OH-08</span></span>
-<span class="r-in"><span class="co">#     6  2018 412123052 TCJA  Oppose      35 3 [Some College] WA-04</span></span>
-<span class="r-in"><span class="co">#     7  2018 412161131 TCJA  Support     32 3 [Some College] IN-03</span></span>
-<span class="r-in"><span class="co">#     8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-01</span></span>
-<span class="r-in"><span class="co">#     9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-02</span></span>
-<span class="r-in"> <span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># need data/input/cces/cces_2018.rds to run this</span></span></span>
+<span class="r-in"><span>  <span class="va">ccq_tcja</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_cces_question.html">get_cces_question</a></span><span class="op">(</span><span class="st">"CC18_326"</span>, <span class="st">"2018"</span>, <span class="st">"TCJA"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">cces_join_slim</span><span class="op">(</span>ccq_df <span class="op">=</span> <span class="va">ccq_tcja</span>,</span></span>
+<span class="r-in"><span>                 ccc_df <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ccc_samp</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2018</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 cd_df <span class="op">=</span> <span class="va">cd_info_2018</span>,</span></span>
+<span class="r-in"><span>                 formula <span class="op">=</span> <span class="st">"response ~ age + educ + (1|cd)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># alternative - cd and state not in the formula, but cells follow this</span></span></span>
+<span class="r-in"><span>  <span class="fu">cces_join_slim</span><span class="op">(</span>ccq_df <span class="op">=</span> <span class="va">ccq_tcja</span>,</span></span>
+<span class="r-in"><span>                 ccc_df <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ccc_samp</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2018</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 cd_df <span class="op">=</span> <span class="va">cd_info_2018</span>,</span></span>
+<span class="r-in"><span>                 keep_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"st"</span>, <span class="st">"cd"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 formula <span class="op">=</span> <span class="st">"response ~ age + educ"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># A tibble: 133 x 7</span></span></span>
+<span class="r-in"><span><span class="co">#        year case_id   qID   response   age educ             cd</span></span></span>
+<span class="r-in"><span><span class="co">#       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;fct&gt;    &lt;dbl&gt; &lt;dbl+lbl&gt;        &lt;chr&gt;</span></span></span>
+<span class="r-in"><span><span class="co">#     1  2018 409942960 TCJA  Support     36 4 [2-Year]       VA-11</span></span></span>
+<span class="r-in"><span><span class="co">#     2  2018 410934028 TCJA  Support     34 5 [4-Year]       UT-04</span></span></span>
+<span class="r-in"><span><span class="co">#     3  2018 410946304 TCJA  Support     62 5 [4-Year]       OK-02</span></span></span>
+<span class="r-in"><span><span class="co">#     4  2018 411717742 TCJA  Oppose      50 1 [No HS]        IL-03</span></span></span>
+<span class="r-in"><span><span class="co">#     5  2018 412022838 TCJA  Oppose      66 5 [4-Year]       OH-08</span></span></span>
+<span class="r-in"><span><span class="co">#     6  2018 412123052 TCJA  Oppose      35 3 [Some College] WA-04</span></span></span>
+<span class="r-in"><span><span class="co">#     7  2018 412161131 TCJA  Support     32 3 [Some College] IN-03</span></span></span>
+<span class="r-in"><span><span class="co">#     8  2018 412260240 TCJA  Support     66 5 [4-Year]       VA-01</span></span></span>
+<span class="r-in"><span><span class="co">#     9  2018 412274191 TCJA  Support     75 6 [Post-Grad]    OR-02</span></span></span>
+<span class="r-in"><span> <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -166,7 +179,7 @@ of whether it is specified in a formula. Input as character vector.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
