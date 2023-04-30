@@ -18,6 +18,8 @@ cces_dv_ids <- tribble(
   "2018",       2018, "10.7910/DVN/ZSBZ7K", "cces18_common_vv.dta", "caseid",  "dataverse.harvard.edu",
   "2019",       2019, "10.7910/DVN/WOT7O8", "CCES19_Common_OUTPUT.tab", "caseid",  "dataverse.harvard.edu",
   "2020",       2020, "10.7910/DVN/E9N6PH", "CES20_Common_OUTPUT_vv.dta", "caseid",  "dataverse.harvard.edu",
+  "2021",       2021, "10.7910/DVN/OPQOCU", "CES21_Common_OUTPUT.tab", "caseid",  "dataverse.harvard.edu",
+  "2022",       2022, "10.7910/DVN/PR4L8P", "CES22_Common.dta", "caseid",  "dataverse.harvard.edu",
 )
 
 
