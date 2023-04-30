@@ -1,80 +1,62 @@
-url: https://kuriwaki.github.io/ccesMRPprep
-
+url: https://www.shirokuriwaki.com/ccesMRPprep/
 destination: docs
-
 template:
   params:
     docsearch:
-      api_key: '1a2c0d939f9a70090cf27efbbac5ba52'
-      index_name: 'ccesmrpprep'
+      api_key: 1a2c0d939f9a70090cf27efbbac5ba52
+      index_name: ccesmrpprep
     bootswatch: spacelab
-
 home:
   title: Portable Routines for Preparing CCES and ACS data for MRP
-  description: >
-    Multilevel Regression and Poststratification (MRP) is a method for analyzing
-    surveys, and can be implemented on public datasets such as the CCES, ACS, and CPS.
-    This package provides data loading, processing, and formatting functions for
-    a particular task: using CCES data for MRP. It uses the dataverse and
-    tidycensus packages to load data and provide some crosswalks. Model fitting
-    and visualization of MRP itself is handled elsewhere.
-
+  description: |
+    Multilevel Regression and Poststratification (MRP) is a method for analyzing surveys, and can be implemented on public datasets such as the CCES, ACS, and CPS. This package provides data loading, processing, and formatting functions for a particular task: using CCES data for MRP. It uses the dataverse and tidycensus packages to load data and provide some crosswalks. Model fitting and visualization of MRP itself is handled elsewhere.
 authors:
   Shiro Kuriwaki:
-    href: "https://www.shirokuriwaki.com"
-
+    href: https://www.shirokuriwaki.com
 reference:
 - title: Lookup tables and variable metadata
   desc: tibbles that obtain, link, collpase, and describe ACS and CCES values
   contents:
-    - ends_with("_key")
-    - cces_dv_ids
-    - starts_with("acscodes")
-    - starts_with("cps")
+  - ends_with("_key")
+  - cces_dv_ids
+  - starts_with("acscodes")
+  - starts_with("cps")
 - title: Reading Data
   desc: Functions that read in CCES and ACS data from an API
-  contents:
-    - starts_with("get_")
+  contents: starts_with("get_")
 - title: Sample datasets
   desc: Samples of datasets one can get from the data loading functions
   contents:
-    - ccc_samp
-    - cc18_samp
-    - cc18_NY
-    - acs_NY
-    - cd_info_2018
-    - elec_NY
-    - acs_educ_NY
-    - questions_samp
+  - ccc_samp
+  - cc18_samp
+  - cc18_NY
+  - cd_info_2018
+  - elec_NY
+  - questions_samp
 - title: Data recoding and cleaning
   desc: Functions that standardize and clean variable names and formats
   contents:
-    - ccc_bin_age
-    - ccc_std_demographics
-    - to_cd
-    - std_acs_cdformat
-    - cces_join_slim
-    - yesno_to_binary
+  - ccc_bin_age
+  - ccc_std_demographics
+  - to_cd
+  - std_acs_cdformat
+  - cces_join_slim
+  - yesno_to_binary
 - title: Data collapsing and reshaping
   desc: Wrangling cleaned data for apporpriate modeling
   contents:
-    - build_counts
-    - collapse_table
-
+  - build_counts
 articles:
 - title: Get Started
   navbar: ~
-  contents:
-    - overview
+  contents: overview
 - title: Derived Variables
   navbar: ~
-  contents:
-    - derived
+  contents: derived
 - title: ACS Data
   navbar: ~
-  contents:
-    - acs
+  contents: acs
 - title: CPS Data
   navbar: ~
-  contents:
-    - cps
+  contents: cps
+

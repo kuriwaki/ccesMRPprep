@@ -33,19 +33,17 @@ Imports:
     dataverse (>= 0.3.0),
     tidycensus (>= 0.11.4),
     furrr
-Remotes:
-    kuriwaki/synthjoint
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Language: en-US
 Roxygen: list(markdown = TRUE)
 License: MIT + file LICENSE
-URL: https://www.github.com/kuriwaki/ccesMRPprep
+URL: https://www.github.com/kuriwaki/ccesMRPprep,
+    https://www.shirokuriwaki.com/ccesMRPprep/
 BugReports: http://github.com/kuriwaki/ccesMRPprep/issues
 Suggests: 
     knitr,
     rmarkdown,
     tidyverse,
     questionr,
-    testthat,
-    synthjoint
+    testthat
 VignetteBuilder: knitr

@@ -84,7 +84,7 @@ You need to get a API key from the census website to run this command. See `vign
 
 ## **Step 5.** (Optional) Expand Population Tables
 
-Often, the census alone does not provide nearly all the variables one would want to post-stratify (i.e. adjust for non-representativeness). Party affiliation in Census variables is a prominent examples. The package provides open-source software to implement this expansion. See `vignette("synth")` .
+Often, the census alone does not provide nearly all the variables one would want to post-stratify (i.e. adjust for non-representativeness). Party affiliation in Census variables is a prominent examples. The package provides open-source software to implement this expansion. See the README in <https://github.com/kuriwaki/synthjoint>.
 
 ## **Final Output**
 
