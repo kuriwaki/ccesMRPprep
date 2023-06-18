@@ -34,35 +34,55 @@ age10_key <- tibble(age_chr = ages10) %>%
 
 # Education ----
 educ_cces_lbl <- setNames(1L:7L,
-                     c("Less than 9",
-                       "No HS",
-                       "High School Graduate",
-                       "Some College",
-                       "2-Year",
-                       "4-Year",
-                       "Post-Grad"))
+                          c("Less than 9",
+                            "No HS",
+                            "High School Graduate",
+                            "Some College",
+                            "2-Year",
+                            "4-Year",
+                            "Post-Grad"))
 educ_lbl_clps <- setNames(1L:4L,
                           c("HS or Less", "Some College", "4-Year", "Post-Grad"))
+educ3_lbl_clps <- setNames(1L:3L,
+                           c("HS or Less", "Some College", "4-Year or Post-Grad"))
 
 
 ## CCES lumps the first two, and let's also lump the 2-year
 cces_edlbl <- tibble(educ_cces_chr = names(educ_cces_lbl)[2:7],
                      educ = labelled(c(1, 1, 2, 2, 3, 4), educ_lbl_clps))
 
+cces_ed3lbl <- tibble(educ_cces_chr = c("HS or Less", "Some College", "4-Year or Post-Grad"),
+                     educ_3 = labelled(c(1, 2, 3), educ3_lbl_clps))
+
+# link in CCES between the two measures
+ed_ed3_cces <- tibble(
+  educ = unique(cces_edlbl$educ),
+  educ_3 = labelled(c(1, 2, 3, 3), educ3_lbl_clps)
+)
+
 educ_key  <- tribble(
   ~educ_chr, ~educ_cces_chr, ~doc_note,
-   "Less than 9th grade", "No HS", NA,
-   "9th to 12th grade no diploma", "No HS", "ACS spelling varies",
-   "9th to 12th grade, no diploma", "No HS", "ACS spelling varies",
-   "High school graduate (includes equivalency)", "High School Graduate", NA,
-   "High school graduate, GED, or alternative", "High School Graduate", NA,
-   "Some college no degree", "Some College", "ACS spelling varies",
-   "Some college, no degree", "Some College", "ACS spelling varies",
-   "Associate's degree", "2-Year", "Lumped into Some college",
-   "Bachelor's degree", "4-Year", NA,
-   "Graduate or professional degree", "Post-Grad", NA
+  "Less than 9th grade", "No HS", NA,
+  "9th to 12th grade no diploma", "No HS", "ACS spelling varies",
+  "9th to 12th grade, no diploma", "No HS", "ACS spelling varies",
+  "High school graduate (includes equivalency)", "High School Graduate", NA,
+  "High school graduate, GED, or alternative", "High School Graduate", NA,
+  "Some college no degree", "Some College", "ACS spelling varies",
+  "Some college, no degree", "Some College", "ACS spelling varies",
+  "Associate's degree", "2-Year", "Lumped into Some college",
+  "Bachelor's degree", "4-Year", NA,
+  "Graduate or professional degree", "Post-Grad", NA,
 ) %>%
   left_join(cces_edlbl, by = "educ_cces_chr")
+
+educ3_key <- tribble(
+  ~educ_chr, ~educ_cces_chr,
+  "Less than high school diploma", "HS or Less",
+  "High school graduate (includes equivalency)", "HS or Less",
+  "Some college or associate's degree", "Some College",
+  "Bachelor's degree or higher", "4-Year or Post-Grad"
+) |>
+  left_join(cces_ed3lbl, by = "educ_cces_chr")
 
 # Gender ----
 gender_key <- tibble(gender_chr = c("Male", "Female"),
@@ -101,7 +121,9 @@ race_key <- tribble(
   left_join(race_cces_key, by = "race_cces_chr") %>%
   mutate(race = labelled(race_num, my_racelbl))
 
-usethis::use_data(age5_key, age10_key, gender_key, educ_key, race_key,
+usethis::use_data(age5_key, age10_key, gender_key,
+                  educ_key, educ3_key, ed_ed3_cces,
+                  race_key,
                   overwrite = TRUE)
 
 
@@ -113,26 +135,28 @@ if (recreate_sheet) {
 
 
 
-#' transform int+labelled to csv
-# flatten_csv <- function(rd_tbl) {
-#   rd_tbl %>%
-#     mutate(race_cces_value = zap_labels(race_cces),
-#            race_cces_name = as_factor(race_cces),
-#            race_value = zap_labels(race),
-#            race_name = as_factor(race)) %>%
-#     select(-race_cces, -race)
-# }
+  #' transform int+labelled to csv
+  # flatten_csv <- function(rd_tbl) {
+  #   rd_tbl %>%
+  #     mutate(race_cces_value = zap_labels(race_cces),
+  #            race_cces_name = as_factor(race_cces),
+  #            race_value = zap_labels(race),
+  #            race_name = as_factor(race)) %>%
+  #     select(-race_cces, -race)
+  # }
 
-educ_key_csv <- educ_key %>%
-  rename(educ_acs_name = educ_chr,
-         educ_cces_name = educ_cces_chr) %>% # shouldn't this be called ACS to begin with
-  mutate(educ_value = zap_labels(educ),
-         educ_name = as_factor(educ),
-         educ = NULL) %>%
-  relocate(doc_note, .after = -1)
+  educ_key_csv <- educ_key %>%
+    rename(educ_acs_name = educ_chr,
+           educ_cces_name = educ_cces_chr) %>% # shouldn't this be called ACS to begin with
+    mutate(educ_value = zap_labels(educ),
+           educ_name = as_factor(educ),
+           educ3_value = zap_labels(educ3),
+           educ3_name = as_factor(educ3),
+           educ = NULL) %>%
+    relocate(doc_note, .after = -1)
 
 
-sheet_write(educ_key_csv, ss = gs_cces_acs, sheet = "educ")
+  sheet_write(educ_key_csv, ss = gs_cces_acs, sheet = "educ")
 
 
 }

@@ -19,15 +19,17 @@ ages  <- c("18 to 24 years",
            "65 to 74 years",
            "75 to 84 years",
            "85 years and over")
-education <- c("Less than 9th grade",
+education <- c("Less than high school diploma",
+               "Less than 9th grade",
                "9th to 12th grade,? no diploma",
                "High school graduate \\(includes equivalency\\)",
                "High school graduate, GED, or alternative",
                "Some college,? no degree",
                "Some college or associate's degree",
                "Associate's degree",
-               "Bachelor's degree",
-               "Graduate or professional degree")
+               "Bachelor's degree$",
+               "Graduate or professional degree",
+               "Bachelor's degree or higher")
 races <- c("White alone, not Hispanic or Latino",
            "Hispanic or Latino",
            "Black or African American alone",
@@ -84,12 +86,15 @@ acscodes_df <- vars %>%
   rename(gender_chr = gender, age_chr = age, educ_chr = educ, race_acs = race) %>%
   left_join(gender_key, by = "gender_chr") %>%
   # age 10 if using race interactions consider binding while keeping the label
-  left_join(age5_key, by = "age_chr") %>%
+  left_join(age5_key, by = "age_chr", relationship = "many-to-one") %>%
   left_join(age10_key, by = "age_chr", suffix = c("_5", "_10")) %>%
-  left_join(educ_key, by = "educ_chr") %>%
-  left_join(filter(race_key, !is.na(race_acs)), by = "race_acs") %>%
+  left_join(educ_key, by = "educ_chr", relationship = "many-to-one") %>%
+  left_join(educ3_key, by = "educ_chr", relationship = "many-to-one", suffix = c("", "_3")) %>%
+  left_join(filter(race_key, !is.na(race_acs)), by = "race_acs", relationship = "many-to-one") %>%
   mutate(female = as.integer(gender == 2)) %>%
-  select(variable, gender, female, matches("age_(5|10)"), educ, race)
+  select(variable, gender, female, matches("age_(5|10)"), matches("educ($|_3)"), race)
+
+# if educ is filled, then all
 
 # Write ----
 usethis::use_data(acscodes_age_sex_educ, overwrite = TRUE)
