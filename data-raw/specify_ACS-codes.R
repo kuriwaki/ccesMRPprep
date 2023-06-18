@@ -21,6 +21,7 @@ ages  <- c("18 to 24 years",
            "85 years and over")
 education <- c("Less than high school diploma",
                "Less than 9th grade",
+               "Less than high school graduate",
                "9th to 12th grade,? no diploma",
                "High school graduate \\(includes equivalency\\)",
                "High school graduate, GED, or alternative",

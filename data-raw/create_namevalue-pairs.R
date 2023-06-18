@@ -77,6 +77,7 @@ educ_key  <- tribble(
 
 educ3_key <- tribble(
   ~educ_chr, ~educ_cces_chr,
+  "Less than high school graduate", "HS or Less",
   "Less than high school diploma", "HS or Less",
   "High school graduate (includes equivalency)", "HS or Less",
   "Some college or associate's degree", "Some College",
