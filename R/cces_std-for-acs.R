@@ -83,6 +83,7 @@ ccc_std_demographics <- function(tbl,
 
   race_cces_to_acs <- ccesMRPprep::race_key %>% distinct(.data$race_cces_chr, .data$race)
   educ_cces_to_acs <- ccesMRPprep::educ_key %>% distinct(.data$educ_cces_chr, .data$educ)
+  educ3_cces_to_acs <- ccesMRPprep::educ3_key %>% distinct(.data$educ_cces_chr, .data$educ_3)
 
   # districts
   if (inherits(tbl$st, "haven_labelled"))
@@ -116,6 +117,7 @@ ccc_std_demographics <- function(tbl,
   # demographics
   age_vec <-  tbl$age # to check
 
+  # recode
   tbl_mod <- tbl %>%
     # age
     mutate(age_orig = .data$age,
@@ -125,11 +127,17 @@ ccc_std_demographics <- function(tbl,
     # race
     rename(race_cces_chr = .data$race) %>%
     mutate(race_cces_chr = as.character(as_factor(.data$race_cces_chr))) %>%
-    left_join(race_cces_to_acs, by = "race_cces_chr") %>%
+    left_join(race_cces_to_acs, by = "race_cces_chr", relationship = "many-to-one") %>%
     # education
     rename(educ_cces_chr = .data$educ) %>%
     mutate(educ_cces_chr = as.character(as_factor(.data$educ_cces_chr))) %>%
-    left_join(educ_cces_to_acs, by = "educ_cces_chr")
+    left_join(educ_cces_to_acs, by = "educ_cces_chr", relationship = "many-to-one") %>%
+    select(-educ_cces_chr) %>%
+    # educ 3
+    left_join(ed_ed3_cces, by = "educ", relationship = "many-to-one") %>%
+    rename(educ_cces_chr = .data$educ_3) %>%
+    mutate(educ_cces_chr = as.character(as_factor(.data$educ_cces_chr))) %>%
+    left_join(educ3_cces_to_acs, by = "educ_cces_chr", relationship = "many-to-one")
 
   # hispanic conversion
   if (wh_as_hisp && ("hispanic" %in% colnames(tbl_mod))) {
