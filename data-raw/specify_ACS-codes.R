@@ -105,9 +105,22 @@ acscodes_df <- vars %>%
   left_join(educ3_key, by = "educ_chr", relationship = "many-to-one", suffix = c("", "_3")) %>%
   left_join(filter(race_key, !is.na(race_acs)), by = "race_acs", relationship = "many-to-one") %>%
   mutate(female = as.integer(gender == 2)) %>%
-  select(variable, gender, female, matches("age_(5|10)"), matches("educ($|_3)"), race)
+  select(variable, gender, female, matches("age_(5|10)"), matches("educ($|_3)"), race) |>
+  mutate(table = str_sub(variable, 1, 6), .after = variable)
 
-# if educ is filled, then all
+# Distinguish between two types of educ
+educ_type <- acscodes_df |>
+  summarize(use_educ3 = all(1:3 %in% educ_3, na.rm = TRUE) &
+              all(educ != 4, na.rm = TRUE),
+            use_educ = all(1:4 %in% educ, na.rm = TRUE),
+            .by = table)
+
+acscodes_df <- acscodes_df |>
+  left_join(educ_type, by = "table") |>
+  mutate(educ = replace(educ, use_educ3, NA),
+         educ_3 = replace(educ_3, use_educ & !use_educ3, NA)) |>
+  select(-starts_with("use_"))
+
 
 # Write ----
 usethis::use_data(acscodes_age_sex_educ, overwrite = TRUE)

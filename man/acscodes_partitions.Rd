@@ -22,10 +22,10 @@ interacting age (5 bins), sex (2 bins), and education (7 bins).
 
 \subsection{acscodes_sex_educ_race}{
 
-There are 48 codes in \code{acscodes_sex_educ_race} because they specify cells
-interacting sex (2 bins), education (3 bins), and race (8 bins). The entire partition
-is not actually exhaustive; it appears to only limit to 25 years and above
-and not include postgraduate degrees. Cross-check with \link{acscodes_df} to verify.
+There are 64 codes in \code{acscodes_sex_educ_race} because they specify cells
+interacting sex (2 bins), education (4 bins, later recoded to 3), and race (8 bins).
+The entire partition is not actually exhaustive; it appears to only limit to 25 years and above.
+Cross-check with \link{acscodes_df} to verify.
 }
 }
 \usage{
