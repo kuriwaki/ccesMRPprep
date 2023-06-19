@@ -76,13 +76,13 @@ get_acs_cces <- function(varlist,
     mutate(year = year,
            cd = std_acs_cdformat(.data$NAME)) %>%
     mutate_if(haven::is.labelled, haven::as_factor) %>%
-    mutate(age = coalesce(.data$age_5, .data$age_10),
-           educ = coalesce(.data$educ_3, .data$educ)) %>%
+    mutate(age = coalesce(.data$age_5, .data$age_10)) %>%
     select(acscode = .data$variable,
            .data$year,
            .data$cd,
            matches("(gender|female|age|educ|race)"), .data$count, .data$count_moe) %>%
-      select(-matches("age_(5|10)"), -matches("educ_3"))
+      select(-matches("age_(5|10)")) |>
+    select_if(~ any(!is.na(.x)))
 
   acs_lbl
 }
