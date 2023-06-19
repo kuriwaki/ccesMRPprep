@@ -62,15 +62,31 @@ ed_ed3_cces <- tibble(
 
 educ_key  <- tribble(
   ~educ_chr, ~educ_cces_chr, ~doc_note,
+  "Nursery to 4th grade", "No HS", NA,
+  "No schooling completed", "No HS", NA,
   "Less than 9th grade", "No HS", NA,
+  "Less than high school graduate", "No HS", NA,
+  "Less than high school diploma", "No HS", NA,
+  "5th and 6th grade", "No HS", NA,
+  "7th and 8th grade", "No HS", NA,
+  "9th grade", "No HS", NA,
+  "10th grade", "No HS", NA,
+  "11th grade", "No HS", NA,
+  "12th grade, no diploma", "No HS", NA,
   "9th to 12th grade no diploma", "No HS", "ACS spelling varies",
   "9th to 12th grade, no diploma", "No HS", "ACS spelling varies",
   "High school graduate (includes equivalency)", "High School Graduate", NA,
   "High school graduate, GED, or alternative", "High School Graduate", NA,
+  "Some college", "Some College", "ACS spelling varies",
   "Some college no degree", "Some College", "ACS spelling varies",
   "Some college, no degree", "Some College", "ACS spelling varies",
+  "Some college, 1 or more years, no degree", "Some College", NA,
+  "Some college, less than 1 year", "Some College", NA,
   "Associate's degree", "2-Year", "Lumped into Some college",
   "Bachelor's degree", "4-Year", NA,
+  "Master's degree", "4-Year", NA,
+  "Professional school degree", "4-Year", NA,
+  "Doctorate degree", "4-Year", NA,
   "Graduate or professional degree", "Post-Grad", NA,
 ) %>%
   left_join(cces_edlbl, by = "educ_cces_chr")
@@ -80,6 +96,7 @@ educ3_key <- tribble(
   "Less than high school graduate", "HS or Less",
   "Less than high school diploma", "HS or Less",
   "High school graduate (includes equivalency)", "HS or Less",
+  "Some college", "Some College",
   "Some college or associate's degree", "Some College",
   "Bachelor's degree or higher", "4-Year or Post-Grad"
 ) |>
