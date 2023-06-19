@@ -110,15 +110,24 @@ acscodes_df <- vars %>%
 
 # Distinguish between two types of educ
 educ_type <- acscodes_df |>
-  summarize(use_educ3 = all(1:3 %in% educ_3, na.rm = TRUE) &
-              all(educ != 4, na.rm = TRUE),
-            use_educ = all(1:4 %in% educ, na.rm = TRUE),
-            .by = table)
+  summarize(
+    use_educ3 = all(1:3 %in% educ_3, na.rm = TRUE) & all(educ != 4, na.rm = TRUE),
+    use_educ = all(1:4 %in% educ, na.rm = TRUE),
+    .by = table)
+
+age_type <- acscodes_df |>
+  summarize(
+    use_age5 = all(1:5 %in% age_5, na.rm = TRUE) & all(age_10 != 5, na.rm = TRUE),
+    use_age10 = all(1:5 %in% age_10, na.rm = TRUE),
+    .by = table)
 
 acscodes_df <- acscodes_df |>
   left_join(educ_type, by = "table") |>
   mutate(educ = replace(educ, use_educ3, NA),
          educ_3 = replace(educ_3, use_educ & !use_educ3, NA)) |>
+  left_join(age_type, by = "table") |>
+  mutate(age_10 = replace(age_10, use_age5, NA),
+         age_5 = replace(age_5, use_age10 & !use_age5, NA)) |>
   select(-starts_with("use_"))
 
 

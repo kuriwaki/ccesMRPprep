@@ -11,7 +11,7 @@
 \subsection{acscodes_age_sex_race}{
 
 There are 160 codes in \code{acscodes_age_sex_race} because they specify cells
-interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).
+interacting age (10 bins, later coarsened to 5), sex (2 bins), and race/ethnicity (8 bins).
 }
 
 \subsection{acscodes_age_sex_educ}{
