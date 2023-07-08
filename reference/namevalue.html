@@ -20,7 +20,7 @@ available as built in datasets."><!-- mathjax --><script src="https://cdnjs.clou
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.11.9999</span>
       </span>
     </div>
 
@@ -89,6 +89,10 @@ available as built in datasets.</p>
 <span></span>
 <span><span class="va">educ_key</span></span>
 <span></span>
+<span><span class="va">educ3_key</span></span>
+<span></span>
+<span><span class="va">ed_ed3_cces</span></span>
+<span></span>
 <span><span class="va">age5_key</span></span>
 <span></span>
 <span><span class="va">age10_key</span></span>
@@ -141,7 +145,7 @@ same class as the CCES cumulative file.</p></dd>
 <h3 id="educ-key"><code>educ_key</code><a class="anchor" aria-label="anchor" href="#educ-key"></a></h3>
 
 
-<p>For mapping ACS data values for education e.g. in <a href="get_acs_cces.html">get_acs_cces</a>:</p><dl><dt>educ_cces_chr</dt>
+<p>For mapping ACS data values for four-way education e.g. in <a href="get_acs_cces.html">get_acs_cces</a>:</p><dl><dt>educ_cces_chr</dt>
 <dd><p>Character to recode from, in CCES</p></dd>
 
 <dt>educ_chr</dt>
@@ -152,6 +156,29 @@ same class as the CCES cumulative file.</p></dd>
 
 
 </dl></div>
+
+<div class="section">
+<h3 id="educ-key-1"><code>educ3_key</code><a class="anchor" aria-label="anchor" href="#educ-key-1"></a></h3>
+
+
+<p>For mapping ACS data values for three-way education e.g. in <a href="get_acs_cces.html">get_acs_cces</a>:</p><dl><dt>educ_cces_chr</dt>
+<dd><p>Character to recode from, in CCES</p></dd>
+
+<dt>educ_chr</dt>
+<dd><p>Character to recode from, in ACS.</p></dd>
+
+<dt>educ3</dt>
+<dd><p>An labelled integer of class haven::labelled. Target variable</p></dd>
+
+
+</dl></div>
+
+<div class="section">
+<h3 id="ed-ed-cces"><code>ed_ed3_cces</code><a class="anchor" aria-label="anchor" href="#ed-ed-cces"></a></h3>
+
+
+<p>A key to link educ (4-way) and educ3</p>
+</div>
 
 <div class="section">
 <h3 id="age-key"><code>age5_key</code><a class="anchor" aria-label="anchor" href="#age-key"></a></h3>
@@ -233,19 +260,30 @@ use the <code><a href="https://dplyr.tidyverse.org/reference/distinct.html" clas
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span>        6 Other           SOME OTHER RACE ALONE               <span style="color: #BB0000;">NA</span>        6<span style="color: #949494;"> [All…</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span>        6 Middle Eastern  <span style="color: #BB0000;">NA</span>                                  <span style="color: #BB0000;">NA</span>        6<span style="color: #949494;"> [All…</span></span>
 <span class="r-in"><span> <span class="va">educ_key</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    educ_chr                                    educ_cces_chr    doc_note educ   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl+l&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Less than 9th grade                         No HS            <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS …</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 9th to 12th grade no diploma                No HS            ACS spe… 1<span style="color: #949494;"> [HS …</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 9th to 12th grade, no diploma               No HS            ACS spe… 1<span style="color: #949494;"> [HS …</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> High school graduate (includes equivalency) High School Gra… <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS …</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> High school graduate, GED, or alternative   High School Gra… <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS …</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Some college no degree                      Some College     ACS spe… 2<span style="color: #949494;"> [Som…</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Some college, no degree                     Some College     ACS spe… 2<span style="color: #949494;"> [Som…</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Associate's degree                          2-Year           Lumped … 2<span style="color: #949494;"> [Som…</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Bachelor's degree                           4-Year           <span style="color: #BB0000;">NA</span>       3<span style="color: #949494;"> [4-Y…</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Graduate or professional degree             Post-Grad        <span style="color: #BB0000;">NA</span>       4<span style="color: #949494;"> [Pos…</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 26 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    educ_chr                       educ_cces_chr doc_note educ          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl+lbl&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Nursery to 4th grade           No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> No schooling completed         No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Less than 9th grade            No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Less than high school graduate No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Less than high school diploma  No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 5th and 6th grade              No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 7th and 8th grade              No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 9th grade                      No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 10th grade                     No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 11th grade                     No HS         <span style="color: #BB0000;">NA</span>       1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16 more rows</span></span>
+<span class="r-in"><span> <span class="va">educ3_key</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   educ_chr                                    educ_cces_chr       educ_3        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl+lbl&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Less than high school graduate              HS or Less          1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Less than high school diploma               HS or Less          1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> High school graduate (includes equivalency) HS or Less          1<span style="color: #949494;"> [HS or Less]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Some college                                Some College        2<span style="color: #949494;"> [Some Colle…</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Some college or associate's degree          Some College        2<span style="color: #949494;"> [Some Colle…</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Bachelor's degree or higher                 4-Year or Post-Grad 3<span style="color: #949494;"> [4-Year or …</span></span>
 <span class="r-in"><span> <span class="va">gender_key</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   gender_chr gender    </span>

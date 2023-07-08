@@ -21,7 +21,7 @@ namevalue."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.11.9999</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@ these will be collapsed for MRP to form a common denominator with the CCES; see
 
 
 <p>There are 160 codes in <code>acscodes_age_sex_race</code> because they specify cells
-interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).</p>
+interacting age (10 bins, later coarsened to 5), sex (2 bins), and race/ethnicity (8 bins).</p>
 </div>
 
 <div class="section">
@@ -115,10 +115,10 @@ interacting age (5 bins), sex (2 bins), and education (7 bins).</p>
 <h3 id="acscodes-sex-educ-race">acscodes_sex_educ_race<a class="anchor" aria-label="anchor" href="#acscodes-sex-educ-race"></a></h3>
 
 
-<p>There are 48 codes in <code>acscodes_sex_educ_race</code> because they specify cells
-interacting sex (2 bins), education (3 bins), and race (8 bins). The entire partition
-is not actually exhaustive; it appears to only limit to 25 years and above
-and not include postgraduate degrees. Cross-check with <a href="acscodes_df.html">acscodes_df</a> to verify.</p>
+<p>There are 64 codes in <code>acscodes_sex_educ_race</code> because they specify cells
+interacting sex (2 bins), education (4 bins, later recoded to 3), and race (8 bins).
+The entire partition is not actually exhaustive; it appears to only limit to 25 years and above.
+Cross-check with <a href="acscodes_df.html">acscodes_df</a> to verify.</p>
 </div>
 
     </div>
@@ -137,8 +137,8 @@ and the <a href="https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html">Vi
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "B15001_004" "B15001_005" "B15001_006" "B15001_007" "B15001_008"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] "B15001_009"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">acscodes_sex_educ_race</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "C15002B_004" "C15002B_005" "C15002B_006" "C15002B_009" "C15002B_010"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "C15002B_011"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "C15002B_003" "C15002B_004" "C15002B_005" "C15002B_006" "C15002B_008"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "C15002B_009"</span>
 </code></pre></div>
     </div>
   </div>
