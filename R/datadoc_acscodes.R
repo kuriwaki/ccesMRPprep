@@ -23,7 +23,7 @@ NULL
 #' @format ### acscodes_age_sex_race
 #'
 #' There are `r length(acscodes_age_sex_race)` codes in \code{acscodes_age_sex_race} because they specify cells
-#' interacting age (10 bins), sex (2 bins), and race/ethnicity (8 bins).
+#' interacting age (10 bins, later coarsened to 5), sex (2 bins), and race/ethnicity (8 bins).
 #'
 "acscodes_age_sex_race"
 
@@ -44,9 +44,9 @@ NULL
 #' @format ### acscodes_sex_educ_race
 #'
 #' There are `r length(acscodes_sex_educ_race)` codes in \code{acscodes_sex_educ_race} because they specify cells
-#' interacting sex (2 bins), education (3 bins), and race (8 bins). The entire partition
-#' is not actually exhaustive; it appears to only limit to 25 years and above
-#' and not include postgraduate degrees. Cross-check with \link{acscodes_df} to verify.
+#' interacting sex (2 bins), education (4 bins, later recoded to 3), and race (8 bins).
+#' The entire partition is not actually exhaustive; it appears to only limit to 25 years and above.
+#' Cross-check with \link{acscodes_df} to verify.
 #'
 "acscodes_sex_educ_race"
 
@@ -61,13 +61,15 @@ NULL
 #' 18-24 year olds who identify as Hispanic).
 #'
 #' \describe{
-#'  \item{variable}{the ACS code (2016)}
+#'  \item{variable}{the ACS code for the variable (2016)}
+#'  \item{table}{the ACS table the variable is in (2016)}
 #'  \item{gender}{A labelled variable for gender. 1 is Male, 2 is Female. Use
 #'    the \code{labelled} or \code{haven} package to see labels.}
 #'  \item{female}{A numeric, binary version of gender}
 #'  \item{age_5}{A labelled variable specifying which 5-way age bin the variable specifies}
 #'  \item{age_10}{A labelled variable specifying which 10-way age bin the variable specifies}
-#'  \item{educ}{A labelled variable specifying which race bin the variable specifies}
+#'  \item{educ}{A labelled variable specifying which education (four-way) bin the variable specifies}
+#'  \item{educ_3}{A labelled variable specifying which education (three-way) bin the variable specifies}
 #'  \item{race}{A labelled variable specifying which education bin the variable specifies}
 #'  }
 #'

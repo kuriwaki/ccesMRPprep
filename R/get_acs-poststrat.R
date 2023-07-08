@@ -81,7 +81,8 @@ get_acs_cces <- function(varlist,
            .data$year,
            .data$cd,
            matches("(gender|female|age|educ|race)"), .data$count, .data$count_moe) %>%
-      select(-matches("age_(5|10)"))
+      select(-matches("age_(5|10)")) |>
+    select_if(~ any(!is.na(.x)))
 
   acs_lbl
 }
