@@ -6,7 +6,7 @@
 \usage{
 get_cces_dataverse(
   name = "cumulative",
-  year_subset = 2006:2020,
+  year_subset = NULL,
   std_index = TRUE,
   dataverse_paths = ccesMRPprep::cces_dv_ids
 )

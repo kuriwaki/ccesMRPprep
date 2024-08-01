@@ -3,7 +3,7 @@ Portable Routines for Preparing CCES and ACS data for MRP
 
 <!-- badges: start -->
 
-[![tic](https://github.com/kuriwaki/ccesMRPprep/workflows/tic/badge.svg?branch=main)](https://github.com/kuriwaki/ccesMRPprep/actions)  
+[![check-standard](https://github.com/kuriwaki/ccesMRPprep/actions/workflows/check-standard.yml/badge.svg)](https://github.com/kuriwaki/ccesMRPprep/actions/workflows/check-standard.yml)
 <!-- badges: end -->
 
 Cite as:

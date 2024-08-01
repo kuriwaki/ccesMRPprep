@@ -2,7 +2,7 @@ library(tibble)
 
 cces_dv_ids <- tribble(
   ~cces_name, ~year, ~doi, ~filename,  ~caseid_var, ~server,
-  "cumulative", NA,   "10.7910/DVN/II2DB6", "cumulative_2006-2021.dta", "case_id", "dataverse.harvard.edu",
+  "cumulative", NA,   "10.7910/DVN/II2DB6", "cumulative_2006-2023.dta", "case_id", "dataverse.harvard.edu",
   "2006",       2006, "10.7910/DVN/Q8HC9N", "cces_2006_common.tab", "v1000",   "dataverse.harvard.edu",
   "2007",       2007, "10.7910/DVN/OOXTJ5", "CCES07_OUTPUT.sav", "caseid",  "dataverse.harvard.edu",
   "2008",       2008, "10.7910/DVN/YUYIVB", "cces_2008_common.tab", "V100",    "dataverse.harvard.edu",
@@ -18,6 +18,9 @@ cces_dv_ids <- tribble(
   "2018",       2018, "10.7910/DVN/ZSBZ7K", "cces18_common_vv.dta", "caseid",  "dataverse.harvard.edu",
   "2019",       2019, "10.7910/DVN/WOT7O8", "CCES19_Common_OUTPUT.tab", "caseid",  "dataverse.harvard.edu",
   "2020",       2020, "10.7910/DVN/E9N6PH", "CES20_Common_OUTPUT_vv.dta", "caseid",  "dataverse.harvard.edu",
+  "2021",       2021, "10.7910/DVN/OPQOCU", "CES21_Common_OUTPUT.tab", "caseid",  "dataverse.harvard.edu",
+  "2022",       2022, "10.7910/DVN/PR4L8P", "CCES22_Common_OUTPUT_vv_topost.dta", "caseid",  "dataverse.harvard.edu",
+  "2023",       2023, "10.7910/DVN/JQJTCC", "CCES23_Common_OUTPUT.tab", "caseid",  "dataverse.harvard.edu",
 )
 
 

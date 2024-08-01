@@ -58,7 +58,7 @@
 #'
 #'
 get_cces_dataverse <- function(name = "cumulative",
-                        year_subset = 2006:2020,
+                        year_subset = NULL,
                         std_index = TRUE,
                         dataverse_paths = ccesMRPprep::cces_dv_ids) {
 
@@ -79,7 +79,7 @@ get_cces_dataverse <- function(name = "cumulative",
   if (filetype == ".tab" | filetype == ".dta")
     fun <- haven::read_dta
 
-  if (filetype == ".dta" & isTRUE(yr == 2009))
+  if (filetype == ".dta" & (yr %in% c(2009, 2022)))
     fun <- function(x) haven::read_dta(x, encoding = "latin1")
 
   if (filetype == ".sav")
@@ -96,7 +96,7 @@ get_cces_dataverse <- function(name = "cumulative",
                                     .f = fun)
 
   # subset ---
-  if (name == "cumulative") {
+  if (name == "cumulative" & !is.null(year_subset)) {
     cces_raw <- filter(cces_raw, .data$year %in% year_subset)
   }
 
