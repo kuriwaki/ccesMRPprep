@@ -33,7 +33,7 @@ Imports:
     dataverse (>= 0.3.0),
     tidycensus (>= 0.11.4),
     furrr
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Language: en-US
 Roxygen: list(markdown = TRUE)
 License: MIT + file LICENSE
