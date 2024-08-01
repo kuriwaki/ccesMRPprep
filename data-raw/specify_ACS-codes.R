@@ -19,15 +19,30 @@ ages  <- c("18 to 24 years",
            "65 to 74 years",
            "75 to 84 years",
            "85 years and over")
-education <- c("Less than 9th grade",
+education <- c("Less than high school diploma",
+               "Nursery to 4th grade",
+               "No schooling completed",
+               "Less than 9th grade",
+               "5th and 6th grade",
+               "7th and 8th grade",
+               "9th grade",
+               "10th grade",
+               "11th grade",
+               "12th grade, no diploma",
+               "Less than 9th grade",
+               "Less than high school graduate",
                "9th to 12th grade,? no diploma",
                "High school graduate \\(includes equivalency\\)",
                "High school graduate, GED, or alternative",
-               "Some college,? no degree",
+               "Some college",
                "Some college or associate's degree",
                "Associate's degree",
-               "Bachelor's degree",
-               "Graduate or professional degree")
+               "Bachelor's degree$",
+               "Doctorate degree",
+               "Master's degree",
+               "Professional school degree",
+               "Graduate or professional degree",
+               "Bachelor's degree or higher")
 races <- c("White alone, not Hispanic or Latino",
            "Hispanic or Latino",
            "Black or African American alone",
@@ -84,12 +99,37 @@ acscodes_df <- vars %>%
   rename(gender_chr = gender, age_chr = age, educ_chr = educ, race_acs = race) %>%
   left_join(gender_key, by = "gender_chr") %>%
   # age 10 if using race interactions consider binding while keeping the label
-  left_join(age5_key, by = "age_chr") %>%
+  left_join(age5_key, by = "age_chr", relationship = "many-to-one") %>%
   left_join(age10_key, by = "age_chr", suffix = c("_5", "_10")) %>%
-  left_join(educ_key, by = "educ_chr") %>%
-  left_join(filter(race_key, !is.na(race_acs)), by = "race_acs") %>%
+  left_join(educ_key, by = "educ_chr", relationship = "many-to-one") %>%
+  left_join(educ3_key, by = "educ_chr", relationship = "many-to-one", suffix = c("", "_3")) %>%
+  left_join(filter(race_key, !is.na(race_acs)), by = "race_acs", relationship = "many-to-one") %>%
   mutate(female = as.integer(gender == 2)) %>%
-  select(variable, gender, female, matches("age_(5|10)"), educ, race)
+  select(variable, gender, female, matches("age_(5|10)"), matches("educ($|_3)"), race) |>
+  mutate(table = str_sub(variable, 1, 6), .after = variable)
+
+# Distinguish between two types of educ
+educ_type <- acscodes_df |>
+  summarize(
+    use_educ3 = all(1:3 %in% educ_3, na.rm = TRUE) & all(educ != 4, na.rm = TRUE),
+    use_educ = all(1:4 %in% educ, na.rm = TRUE),
+    .by = table)
+
+age_type <- acscodes_df |>
+  summarize(
+    use_age5 = all(1:5 %in% age_5, na.rm = TRUE) & all(age_10 != 5, na.rm = TRUE),
+    use_age10 = all(1:5 %in% age_10, na.rm = TRUE),
+    .by = table)
+
+acscodes_df <- acscodes_df |>
+  left_join(educ_type, by = "table") |>
+  mutate(educ = replace(educ, use_educ3, NA),
+         educ_3 = replace(educ_3, use_educ & !use_educ3, NA)) |>
+  left_join(age_type, by = "table") |>
+  mutate(age_10 = replace(age_10, use_age5, NA),
+         age_5 = replace(age_5, use_age10 & !use_age5, NA)) |>
+  select(-starts_with("use_"))
+
 
 # Write ----
 usethis::use_data(acscodes_age_sex_educ, overwrite = TRUE)

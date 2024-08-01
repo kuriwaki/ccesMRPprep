@@ -20,6 +20,7 @@
 #'  library(ccesMRPprep)
 #'  race_key
 #'  educ_key
+#'  educ3_key
 #'  gender_key
 #'  age5_key
 #'  age10_key
@@ -51,13 +52,28 @@ NULL
 
 #' @rdname  namevalue
 #' @format ### \code{educ_key}
-#'  For mapping ACS data values for education e.g. in \link{get_acs_cces}:
+#'  For mapping ACS data values for four-way education e.g. in \link{get_acs_cces}:
 #'  \describe{
 #'  \item{educ_cces_chr}{Character to recode from, in CCES}
 #'  \item{educ_chr}{Character to recode from, in ACS.}
 #'  \item{educ}{An labelled integer of class haven::labelled. Target variable}
 #'  }
 "educ_key"
+
+#' @rdname  namevalue
+#' @format ### \code{educ3_key}
+#'  For mapping ACS data values for three-way education e.g. in \link{get_acs_cces}:
+#'  \describe{
+#'  \item{educ_cces_chr}{Character to recode from, in CCES}
+#'  \item{educ_chr}{Character to recode from, in ACS.}
+#'  \item{educ3}{An labelled integer of class haven::labelled. Target variable}
+#'  }
+"educ3_key"
+
+#' @rdname  namevalue
+#' @format ### \code{ed_ed3_cces}
+#'  A key to link educ (4-way) and educ3
+"ed_ed3_cces"
 
 
 #' @rdname  namevalue

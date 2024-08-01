@@ -31,9 +31,13 @@
 #' * \code{age} is coded to match up with the ACS bins and the recoding occurs
 #'  in a separate function, \code{ccc_bin_age}. The unbinned age is left instead to
 #'  \code{age_orig}.
-#' * \code{educ} is recoded (coarsened and relabelled) to match up with the ACS.
+#' * \code{educ} is coarsened and relabelled with 4 categories to match up with the ACS.
 #'  (the original version is left as \code{educ_cces_chr}). Recoding is governed by
-#'  the key-value pairs \link{educ_key}
+#'  the key-value pairs \link{educ_key}.
+#' * \code{educ_3} is further coarsened to 3 categories, grouping together a BA
+#'  and a higher degree into one category. This is necessary for some ACS tables
+#'  that do not make the distinction. Make sure to decide which type of education
+#'  variable to use beforehand after looking at the ACS codes
 #' * the same goes for \code{race}. These recodings are governed by the
 #'  key-value pair \link{race_key}.
 #' * \code{cd} is standardized so that at large districts are given "01" and
@@ -83,6 +87,7 @@ ccc_std_demographics <- function(tbl,
 
   race_cces_to_acs <- ccesMRPprep::race_key %>% distinct(.data$race_cces_chr, .data$race)
   educ_cces_to_acs <- ccesMRPprep::educ_key %>% distinct(.data$educ_cces_chr, .data$educ)
+  educ3_cces_to_acs <- ccesMRPprep::educ3_key %>% distinct(.data$educ_cces_chr, .data$educ_3)
 
   # districts
   if (inherits(tbl$st, "haven_labelled"))
@@ -116,6 +121,7 @@ ccc_std_demographics <- function(tbl,
   # demographics
   age_vec <-  tbl$age # to check
 
+  # recode
   tbl_mod <- tbl %>%
     # age
     mutate(age_orig = .data$age,
@@ -125,11 +131,17 @@ ccc_std_demographics <- function(tbl,
     # race
     rename(race_cces_chr = .data$race) %>%
     mutate(race_cces_chr = as.character(as_factor(.data$race_cces_chr))) %>%
-    left_join(race_cces_to_acs, by = "race_cces_chr") %>%
+    left_join(race_cces_to_acs, by = "race_cces_chr", relationship = "many-to-one") %>%
     # education
     rename(educ_cces_chr = .data$educ) %>%
     mutate(educ_cces_chr = as.character(as_factor(.data$educ_cces_chr))) %>%
-    left_join(educ_cces_to_acs, by = "educ_cces_chr")
+    left_join(educ_cces_to_acs, by = "educ_cces_chr", relationship = "many-to-one") %>%
+    select(-educ_cces_chr) %>%
+    # educ 3
+    left_join(ed_ed3_cces, by = "educ", relationship = "many-to-one") %>%
+    rename(educ_cces_chr = .data$educ_3) %>%
+    mutate(educ_cces_chr = as.character(as_factor(.data$educ_cces_chr))) %>%
+    left_join(educ3_cces_to_acs, by = "educ_cces_chr", relationship = "many-to-one")
 
   # hispanic conversion
   if (wh_as_hisp && ("hispanic" %in% colnames(tbl_mod))) {

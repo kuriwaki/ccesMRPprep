@@ -6,6 +6,8 @@
 \alias{race_key}
 \alias{gender_key}
 \alias{educ_key}
+\alias{educ3_key}
+\alias{ed_ed3_cces}
 \alias{age5_key}
 \alias{age10_key}
 \alias{states_key}
@@ -37,12 +39,27 @@ same class as the CCES cumulative file.}
 
 \subsection{\code{educ_key}}{
 
-For mapping ACS data values for education e.g. in \link{get_acs_cces}:
+For mapping ACS data values for four-way education e.g. in \link{get_acs_cces}:
 \describe{
 \item{educ_cces_chr}{Character to recode from, in CCES}
 \item{educ_chr}{Character to recode from, in ACS.}
 \item{educ}{An labelled integer of class haven::labelled. Target variable}
 }
+}
+
+\subsection{\code{educ3_key}}{
+
+For mapping ACS data values for three-way education e.g. in \link{get_acs_cces}:
+\describe{
+\item{educ_cces_chr}{Character to recode from, in CCES}
+\item{educ_chr}{Character to recode from, in ACS.}
+\item{educ3}{An labelled integer of class haven::labelled. Target variable}
+}
+}
+
+\subsection{\code{ed_ed3_cces}}{
+
+A key to link educ (4-way) and educ3
 }
 
 \subsection{\code{age5_key}}{
@@ -84,6 +101,10 @@ gender_key
 
 educ_key
 
+educ3_key
+
+ed_ed3_cces
+
 age5_key
 
 age10_key
@@ -106,6 +127,7 @@ use the \code{dplyr::distinct} to reduce the key to two columns with unique rows
  library(ccesMRPprep)
  race_key
  educ_key
+ educ3_key
  gender_key
  age5_key
  age10_key
