@@ -32,7 +32,7 @@
 #'    2018 given by Daily Kos. Some edits are made for changing district. See
 #'    Source for full citation.}
 #'    \item{largest_place}{The largest place in the district code in 2018 given by Daily Kos. Multiple districts may
-#'    have the largest place.}
+#'    have the same largest place.}
 #'  }
 #'
 #'

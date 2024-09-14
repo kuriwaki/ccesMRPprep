@@ -31,7 +31,7 @@ The Trump value is for 2016 for \code{cd_info_2018} and ``cd_info_2020\verb{but 
 2018 given by Daily Kos. Some edits are made for changing district. See
 Source for full citation.}
 \item{largest_place}{The largest place in the district code in 2018 given by Daily Kos. Multiple districts may
-have the largest place.}
+have the same largest place.}
 }
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 435 rows and 7 columns.
