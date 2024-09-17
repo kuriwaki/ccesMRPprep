@@ -1,11 +1,12 @@
-#' Congressional District level information by Daily Kos
+#' Congressional District level information by The Downballot (formerly Daily Kos)
 #'
 #'
 #' Some of the most consequential variables to include in MRP are at the
 #' district-level. We include one such data for congressional districts. All data
-#' is collected by Daily Kos. `cd_info_2018` is data on 2018 boundaries, `cd_info_2016`
+#' is collected by The Downballot `cd_info_2018` is data on 2018 boundaries, `cd_info_2016`
 #' uses 2016 boundaries and `cd_info_2020` uses 2020 (but with place descriptions
-#' currently at 2016).
+#' currently at 2016).  `cd_info_2022` is data on 2022 boundaries; `cd_info_2024`
+#' uses 2024 boundaries.
 #'
 #' @format Each `cd_info_20**` is a dataframe with the `r nrow(cd_info_2018)` Congressional
 #'  Districts, one row per cd.
@@ -23,13 +24,13 @@
 #'     the office of President that year. Taken from Daily Kos estimates from precinct results.}
 #'    \item{pct_trump, pct_romney, pct_mccain}{The two-party voteshare of Republican
 #'    presidential candidates in that district for the given year. E.g. the
-#'    \code{pct_mccain} data when \code{cd_year == 2018} represents the percent
+#'    \code{pct_mccain} data for `cd_info_2018` represents the percent
 #'    of the vote by McCain in 2008 for that district _under 2018 lines._
 #'    The Trump value is for 2016 for `cd_info_2018` and ``cd_info_2020` but not
 #'    for 2020 where we use Trump's 2020 vote against Biden and denote as
 #'    `pct_trump16` the 2016 result.}
 #'    \item{dailykos_name}{The unique descriptive name for the district code in
-#'    2018 given by Daily Kos. Some edits are made for changing district. See
+#'    2018 given by Daily Kos (later renamed to The Downballot). Some edits are made for changing district. See
 #'    Source for full citation.}
 #'    \item{largest_place}{The largest place in the district code in 2018 given by Daily Kos. Multiple districts may
 #'    have the same largest place.}
@@ -37,14 +38,35 @@
 #'
 #'
 #' @source
+#'   The Downballot (formerly Daily Kos Elections), \url{https://www.the-downballot.com/p/data}
+#'
 #'   The Daily Kos Elections naming guide to the nation's congressional districts.
 #'   \url{https://bit.ly/2XsFI5W}
 #'
 #'   Daily Kos, "2008, 2012, & 2016 results for districts used in 2018."
 #'   \url{https://bit.ly/3DRhPcj}
 
-#'   DailyDaily Kos Elections 2012, 2016 & 2020 presidential election results for congressional districts in 2020"
+#'   Daily Kos Elections 2012, 2016 & 2020 presidential election results for congressional districts in 2020"
 #'   \url{https://bit.ly/3bXtAPB}
+#'
+#'   The Downballot, "Daily Kos Elections 2020 presidential election results for congressional districts used in 2022 elections"
+#'   \url{https://docs.google.com/spreadsheets/d/1CKngqOp8fzU22JOlypoxNsxL6KSAH920Whc-rd7ebuM/edit?usp=sharing}
+#'
+#'   The Downballot, "Daily Kos Elections 2020 presidential election results for congressional districts used in 2024 elections"
+#'   \url{https://docs.google.com/spreadsheets/d/1Sg4ZZz5FcX7lz-m2xqmYtndaO2uEMSaL7x99AbQOvv8/edit?usp=sharing}
+#'
+#'   The Downballot, "Daily Kos Elections 2020 presidential results by congressional district (old CDs used in 2020 vs. new CDs used in 2022)"
+#'   \url{https://docs.google.com/spreadsheets/d/1IfZ8OVWXVpdAvxZtTaDIA2HEN6DtN-H0I0J2KcdxRi4/edit?usp=sharing}
+#'
+#'   The Downballot, "Daily Kos Elections congressional district geographic descriptions & largest places (119th Congress)"
+#'   \url{https://docs.google.com/spreadsheets/d/12YaBonkqHAjkXhzyKlH2-1t-smZ6J5j76RCBSJEwQHo/edit?usp=sharing}
+#'
+#'   The Downballot, "Daily Kos Elections congressional district geographic descriptions & largest places (118th Congress)"
+#'   \url{https://docs.google.com/spreadsheets/d/1weoLFu2U5lmxQNcB8pFItGHj1Lb_M2E9Oi48sI4w1vY/edit?usp=sharing}
+#'
+#'   The Downballot, "Congressional district geographic descriptions and largest places (117th Congress)"
+#'   \url{https://docs.google.com/spreadsheets/d/16GoSYgRx5Mqfyfd355FMDRtr13tOAXFDOT94d9Dzwt0/edit?usp=sharing}
+#'
 #'
 #'   Pennsylvania 2016 CD names are named by Shiro Kuriwaki and Lara Putnam.
 #'
@@ -65,6 +87,12 @@
 
 #' @rdname cd_info_2018
 "cd_info_2020"
+
+#' @rdname cd_info_2018
+"cd_info_2022"
+
+#' @rdname cd_info_2018
+"cd_info_2024"
 
 #' @rdname cd_info_2018
 "elec_NY"
