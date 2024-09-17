@@ -37,8 +37,8 @@ cd_info_2024 <- read_sheet(url_2024, sheet = 1) |>
 
 voting_info_2024 <- read_sheet(url_2024, sheet = 2) |>
   select(cd = District,
-         presvotes_total = Total,
-         pct_trump = 'Trump %')
+         presvotes_total20 = Total,
+         pct_trump20 = 'Trump %')
 
 region_2024 <- read_sheet(url_geo_119, sheet = 1) |>
   select(cd = CD,
@@ -52,12 +52,14 @@ largest_place_2024 <- read_sheet(url_geo_119, sheet = 2) |>
 cd_info_2022 <- cd_info_2022 |>
   left_join(region_2022, by = "cd") |>
   left_join(largest_place_2022, by = "cd") |>
-  left_join(voting_info_2022, by = "cd")
+  left_join(voting_info_2022, by = "cd") |>
+  mutate(cd = str_replace(cd, "-AL$", "-01"))
 
 cd_info_2024 <- cd_info_2024 |>
   left_join(region_2024, by = "cd") |>
   left_join(largest_place_2024, by = "cd") |>
-  left_join(voting_info_2024, by = "cd")
+  left_join(voting_info_2024, by = "cd") |>
+  mutate(cd = str_replace(cd, "-AL$", "-01"))
 
 # Save the data
 usethis::use_data(cd_info_2022, overwrite = TRUE)
