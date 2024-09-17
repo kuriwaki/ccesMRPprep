@@ -13,7 +13,7 @@ url_geo_118 <- "https://docs.google.com/spreadsheets/d/1weoLFu2U5lmxQNcB8pFItGHj
 # Read data from Google Sheets
 
 # 2022
-cd_info_2022 <- read_sheet(url_2022, sheet = 1) |>
+cd_names_2022 <- read_sheet(url_2022, sheet = 1) |>
   mutate(year = 2022) |>
   select(year, cd = District)
 
@@ -31,7 +31,7 @@ largest_place_2022 <- read_sheet(url_geo_118, sheet = 2) |>
          largest_place = `Largest place`)
 
 # 2024
-cd_info_2024 <- read_sheet(url_2024, sheet = 1) |>
+cd_names_2024 <- read_sheet(url_2024, sheet = 1) |>
   mutate(year = 2024) |>
   select(year, cd = District)
 
@@ -49,13 +49,13 @@ largest_place_2024 <- read_sheet(url_geo_119, sheet = 2) |>
          largest_place = `Largest place`)
 
 # Join geographic descriptions to the main datasets
-cd_info_2022 <- cd_info_2022 |>
+cd_info_2022 <- cd_names_2022 |>
   left_join(region_2022, by = "cd") |>
   left_join(largest_place_2022, by = "cd") |>
   left_join(voting_info_2022, by = "cd") |>
   mutate(cd = str_replace(cd, "-AL$", "-01"))
 
-cd_info_2024 <- cd_info_2024 |>
+cd_info_2024 <- cd_names_2024 |>
   left_join(region_2024, by = "cd") |>
   left_join(largest_place_2024, by = "cd") |>
   left_join(voting_info_2024, by = "cd") |>
