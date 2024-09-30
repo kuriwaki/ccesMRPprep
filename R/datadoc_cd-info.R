@@ -25,10 +25,10 @@
 #'    \item{pct_trump, pct_romney, pct_mccain}{The two-party voteshare of Republican
 #'    presidential candidates in that district for the given year. E.g. the
 #'    \code{pct_mccain} data for `cd_info_2018` represents the percent
-#'    of the vote by McCain in 2008 for that district _under 2018 lines._
-#'    `pct_trump` denotes the 2016 election for `cd_info_2018` and ``cd_info_2016`, but it is not
-#'    for 2020 where we use Trump's 2020 vote against Biden for `pct_trump` and denote as
-#'    `pct_trump16` the 2016 result.}
+#'    of the vote by McCain in 2008 for that district _under 2018 lines._\cr
+#'    `pct_trump` denotes the 2016 election for `cd_info_2018` and `cd_info_2016`.\cr
+#'    `pct_trump` denotes the 2020 election for `cd_info_2020`, `cd_info_2022`, and `cd_info_2024`.\cr
+#'    `pct_trump16` denotes the 2016 result for `cd_info_2020`.}
 #'    \item{dailykos_name}{The unique descriptive name for the district code in
 #'    2018 given by Daily Kos (later renamed to The Downballot). Some edits are made for changing district. See
 #'    Source for full citation.}
@@ -36,15 +36,6 @@
 #'    have the same largest place.}
 #'  }
 #'
-#'  Congressional District Changes between 2022 and 2024:
-#'  Includes legal rationale for off-cycle redistricting.
-#'  \itemize{
-#'    \item{Alabama: state CD map altered such that AL-02 is a majority Black district.}
-#'    \item{Georgia: state CD map altered such that GA-06 is a majority Black district.}
-#'    \item{Louisiana: state CD map altered such that LA-06 is a majority Black district.}
-#'    \item{North Carolina: state Supreme Court's plan in 2022 expired.}
-#'    \item{New York: state Supreme Court stuck down original plan as partisan.}
-#'  }
 #'
 #' @source
 #'   The Downballot (formerly Daily Kos Elections), \url{https://www.the-downballot.com/p/data}
@@ -53,11 +44,6 @@
 #'   \url{https://bit.ly/2XsFI5W}
 #'
 #'   Daily Kos, "2008, 2012, & 2016 results for districts used in 2018."
-#'   \url{https://bit.ly/3DRhPcj}
-
-#'   Daily Kos Elections 2012, 2016 & 2020 presidential election results for congressional districts in 2020"
-#'   \url{https://bit.ly/3bXtAPB}
-#'
 #'   \url{https://bit.ly/3bXtAPB}
 #'
 #'   Daily Kos, "2012, 2016 & 2020 presidential election results for congressional districts in 2020"
@@ -65,14 +51,17 @@
 #'
 #'   Daily Kos, 2020 presidential election results by later congressional districts:\cr
 #'   2022 congressional districts: \url{https://bit.ly/4gLYnBK}\cr
-#'   2024 congressional districts: \url{https://bit.ly/47KTvZw}\cr
-#'   2020, 2022 congressional district comparison: \url{https://bit.ly/3XNWOKI}
+#'   2024 congressional districts: \url{https://bit.ly/47KTvZw}
 #'
-#'   The Daily Koss congressional district geography and most populous places: \cr
+#'   Daily Kos, congressional district geography and most populous places: \cr
 #'   119th Congress: \url{https://bit.ly/geography_119}\cr
-#'   118th Congress: \url{https://bit.ly/geography_118}\cr
-#'   117th Congress: \url{https://bit.ly/geography_117}
+#'   118th Congress: \url{https://bit.ly/geography_118}
 #'
+#'   Daily Kos, "2008 results for districts used in 2006, 2008, 2010"
+#'   \url{https://bit.ly/4entUrV}
+#'
+#'   Daily Kos, "2008, 2012 results for districts used in 2012, 2014"
+#'   \url{https://bit.ly/3N4PDZK}
 #'
 #'   Pennsylvania 2016 CD names are named by Shiro Kuriwaki and Lara Putnam.
 #'
@@ -86,6 +75,11 @@
 #' head(elec_NY)
 "cd_info_2018"
 
+#' @rdname cd_info_2018
+"cd_info_2006"
+
+#' @rdname cd_info_2018
+"cd_info_2012"
 
 #' @rdname cd_info_2018
 "cd_info_2016"

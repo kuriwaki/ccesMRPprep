@@ -27,9 +27,10 @@ the office of President that year. Taken from Daily Kos estimates from precinct 
 \item{pct_trump, pct_romney, pct_mccain}{The two-party voteshare of Republican
 presidential candidates in that district for the given year. E.g. the
 \code{pct_mccain} data for \code{cd_info_2018} represents the percent
-of the vote by McCain in 2008 for that district \emph{under 2018 lines.}
-\code{pct_trump} denotes the 2016 election for \code{cd_info_2018} and ``cd_info_2016\verb{, but it is not for 2020 where we use Trump's 2020 vote against Biden for }pct_trump` and denote as
-`pct_trump16` the 2016 result.}
+of the vote by McCain in 2008 for that district \emph{under 2018 lines.}\cr
+\code{pct_trump} denotes the 2016 election for \code{cd_info_2018} and \code{cd_info_2016}.\cr
+\code{pct_trump} denotes the 2020 election for \code{cd_info_2020}, \code{cd_info_2022}, and \code{cd_info_2024}.\cr
+\code{pct_trump16} denotes the 2016 result for \code{cd_info_2020}.}
 \item{dailykos_name}{The unique descriptive name for the district code in
 2018 given by Daily Kos (later renamed to The Downballot). Some edits are made for changing district. See
 Source for full citation.}
