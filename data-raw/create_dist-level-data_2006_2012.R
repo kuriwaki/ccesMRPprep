@@ -2,7 +2,7 @@ library(tidyverse)
 library(googlesheets4)
 
 # Authenticate with Google Sheets
-gs4_auth()
+# gs4_auth()
 
 # URLs for your Google Sheets
 url_2006 <- "https://docs.google.com/spreadsheets/d/1l7W130tPRF6dQ4JoqlQJSJexnEg4rZct-7kwDXqgoLE/edit?gid=429358610#gid=429358610"
@@ -17,7 +17,8 @@ cd_names_2006 <- read_sheet(url_2006, range = "A2:E", col_names = TRUE, sheet = 
 
 voting_info_2006 <- read_sheet(url_2006,range = "A2:I", col_names = TRUE, sheet = 2) |>
   select(cd = CD,
-         pct_mccain = 'McCain%')
+         pct_mccain = 'McCain%',
+         presvotes_total = "Total")
 
 # 2012
 cd_names_2012 <- read_sheet(url_2012, range = "A2:G", col_names = TRUE, sheet = 1) |>
@@ -40,5 +41,5 @@ cd_info_2012 <- cd_names_2012 |>
   mutate(cd = str_replace(cd, "-AL$", "-01"))
 
 # Save the data
-usethis::use_data(cd_info_2022, overwrite = TRUE)
-usethis::use_data(cd_info_2024, overwrite = TRUE)
+usethis::use_data(cd_info_2012, overwrite = TRUE)
+usethis::use_data(cd_info_2006, overwrite = TRUE)
