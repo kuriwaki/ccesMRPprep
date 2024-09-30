@@ -1,9 +1,11 @@
+# cccesMRPprep 0.1.13
+
+* Add 2022, 2024, 2006, and 2012 daily kos cd data
 
 # cccesMRPprep 0.1.12
 
 * Add 2021, 2022, and 2023 to cces_dv_ids
 * Add 2022 validated vote and 2023 cumulative name update to cces_dv_ids
-* Add 2022 and 2024 daily kos cd data
 
 # ccesMRPprep 0.1.11
 

@@ -3,12 +3,14 @@
 \docType{data}
 \name{cd_info_2018}
 \alias{cd_info_2018}
+\alias{cd_info_2006}
+\alias{cd_info_2012}
 \alias{cd_info_2016}
 \alias{cd_info_2020}
 \alias{cd_info_2022}
 \alias{cd_info_2024}
 \alias{elec_NY}
-\title{Congressional District level information by The Downballot (formerly Daily Kos)}
+\title{Congressional District level information by The Downballot}
 \format{
 Each \verb{cd_info_20**} is a dataframe with the 435 Congressional
 Districts, one row per cd.
@@ -21,7 +23,7 @@ However, this work relies on the hard work of assembling precinct results by Dai
 \item{cd}{District code. The formatting corresponds to the CCES cumulative
 coding of \code{cd}: a two-letter abbreviation for the state followed by
 a dash, and the district number padded with zeros to the left to be of length
-2. At-large districts like Delaware are given a "-01" for the district number.}
+2. At-large districts like Delaware are given a "-01" for the district number. See \code{to_cd()}}
 \item{presvotes_total}{In presidential years, the total number of votes cast for
 the office of President that year. Taken from Daily Kos estimates from precinct results.}
 \item{pct_trump, pct_romney, pct_mccain}{The two-party voteshare of Republican
@@ -38,21 +40,15 @@ Source for full citation.}
 have the same largest place.}
 }
 
-Congressional District Changes between 2022 and 2024:
-Includes legal rationale for off-cycle redistricting.
-\itemize{
-\item{Alabama: state CD map altered such that AL-02 is a majority Black district.}
-\item{Georgia: state CD map altered such that GA-06 is a majority Black district.}
-\item{Louisiana: state CD map altered such that LA-06 is a majority Black district.}
-\item{North Carolina: state Supreme Court's plan in 2022 expired.}
-\item{New York: state Supreme Court stuck down original plan as partisan.}
-}
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 435 rows and 4 columns.
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 435 rows and 5 columns.
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 435 rows and 7 columns.
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 435 rows and 8 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 435 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 435 rows and 5 columns.
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 435 rows and 6 columns.
 
@@ -64,25 +60,23 @@ The Downballot (formerly Daily Kos Elections), \url{https://www.the-downballot.c
 The Daily Kos Elections naming guide to the nation's congressional districts.
 \url{https://bit.ly/2XsFI5W}
 
-Daily Kos, "2008, 2012, & 2016 results for districts used in 2018."
-\url{https://bit.ly/3DRhPcj}
-Daily Kos Elections 2012, 2016 & 2020 presidential election results for congressional districts in 2020"
-\url{https://bit.ly/3bXtAPB}
+Daily Kos, "2008 results for districts used in \strong{2006, 2008, 2010}"
+\url{https://bit.ly/4entUrV}
 
-\url{https://bit.ly/3bXtAPB}
+Daily Kos, "2008, 2012 results for districts used in \strong{2012, 2014}"
+\url{https://bit.ly/3N4PDZK}
 
-Daily Kos, "2012, 2016 & 2020 presidential election results for congressional districts in 2020"
-\url{https://bit.ly/3DRhPcj}
+Daily Kos, "2008, 2012, & 2016 results for districts used in \strong{2018}." \url{https://bit.ly/3bXtAPB}
+
+Daily Kos, "2012, 2016 & 2020 presidential election results for congressional districts in \strong{2020}", \url{https://bit.ly/3DRhPcj}
 
 Daily Kos, 2020 presidential election results by later congressional districts:\cr
-2022 congressional districts: \url{https://bit.ly/4gLYnBK}\cr
-2024 congressional districts: \url{https://bit.ly/47KTvZw}\cr
-2020, 2022 congressional district comparison: \url{https://bit.ly/3XNWOKI}
+\strong{2022} congressional districts: \url{https://bit.ly/4gLYnBK}\cr
+\strong{2024} congressional districts: \url{https://bit.ly/47KTvZw}
 
-The Daily Koss congressional district geography and most populous places: \cr
+Daily Kos, congressional district geography and most populous places: \cr
 119th Congress: \url{https://bit.ly/geography_119}\cr
-118th Congress: \url{https://bit.ly/geography_118}\cr
-117th Congress: \url{https://bit.ly/geography_117}
+118th Congress: \url{https://bit.ly/geography_118}
 
 Pennsylvania 2016 CD names are named by Shiro Kuriwaki and Lara Putnam.
 
@@ -92,6 +86,10 @@ Harvard Dataverse.
 }
 \usage{
 cd_info_2018
+
+cd_info_2006
+
+cd_info_2012
 
 cd_info_2016
 
@@ -104,12 +102,16 @@ cd_info_2024
 elec_NY
 }
 \description{
-Some of the most consequential variables to include in MRP are at the
+Some of the most consequential variables to include in MRP are measured at the
 district-level. We include one such data for congressional districts. All data
-is collected by The Downballot \code{cd_info_2018} is data on 2018 boundaries, \code{cd_info_2016}
-uses 2016 boundaries and \code{cd_info_2020} uses 2020 (but with place descriptions
-currently at 2016).  \code{cd_info_2022} is data on 2022 boundaries; \code{cd_info_2024}
-uses 2024 boundaries.
+is collected by The Downballot.
+}
+\details{
+\code{cd_info_2006} is data on boundaries used in 2006, 2008, and 2010;
+\code{cd_info_2012} is data on boundaries used in 2012 and 2014; \code{cd_info_2016}
+uses 2016 boundaries; \code{cd_info_2018} is data on 2018 boundaries;
+\code{cd_info_2020} uses 2020 (but with place descriptions currently at 2016); \code{cd_info_2022} is
+data on 2022 boundaries; \code{cd_info_2024} uses 2024 boundaries.
 }
 \examples{
 head(cd_info_2018)
