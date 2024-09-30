@@ -36,6 +36,15 @@
 #'    have the same largest place.}
 #'  }
 #'
+#'  Congressional District Changes between 2022 and 2024:
+#'  Includes legal rationale for off-cycle redistricting.
+#'  \itemize{
+#'    \item{Alabama: state CD map altered such that AL-02 is a majority Black district.}
+#'    \item{Georgia: state CD map altered such that GA-06 is a majority Black district.}
+#'    \item{Louisiana: state CD map altered such that LA-06 is a majority Black district.}
+#'    \item{North Carolina: state Supreme Court's plan in 2022 expired.}
+#'    \item{New York: state Supreme Court stuck down original plan as partisan.}
+#'  }
 #'
 #' @source
 #'   The Downballot (formerly Daily Kos Elections), \url{https://www.the-downballot.com/p/data}
@@ -49,23 +58,20 @@
 #'   Daily Kos Elections 2012, 2016 & 2020 presidential election results for congressional districts in 2020"
 #'   \url{https://bit.ly/3bXtAPB}
 #'
-#'   The Downballot, "Daily Kos Elections 2020 presidential election results for congressional districts used in 2022 elections"
-#'   \url{https://docs.google.com/spreadsheets/d/1CKngqOp8fzU22JOlypoxNsxL6KSAH920Whc-rd7ebuM/edit?usp=sharing}
+#'   \url{https://bit.ly/3bXtAPB}
 #'
-#'   The Downballot, "Daily Kos Elections 2020 presidential election results for congressional districts used in 2024 elections"
-#'   \url{https://docs.google.com/spreadsheets/d/1Sg4ZZz5FcX7lz-m2xqmYtndaO2uEMSaL7x99AbQOvv8/edit?usp=sharing}
+#'   Daily Kos, "2012, 2016 & 2020 presidential election results for congressional districts in 2020"
+#'   \url{https://bit.ly/3DRhPcj}
 #'
-#'   The Downballot, "Daily Kos Elections 2020 presidential results by congressional district (old CDs used in 2020 vs. new CDs used in 2022)"
-#'   \url{https://docs.google.com/spreadsheets/d/1IfZ8OVWXVpdAvxZtTaDIA2HEN6DtN-H0I0J2KcdxRi4/edit?usp=sharing}
+#'   Daily Kos, 2020 presidential election results by later congressional districts:\cr
+#'   2022 congressional districts: \url{https://bit.ly/4gLYnBK}\cr
+#'   2024 congressional districts: \url{https://bit.ly/47KTvZw}\cr
+#'   2020, 2022 congressional district comparison: \url{https://bit.ly/3XNWOKI}
 #'
-#'   The Downballot, "Daily Kos Elections congressional district geographic descriptions & largest places (119th Congress)"
-#'   \url{https://docs.google.com/spreadsheets/d/12YaBonkqHAjkXhzyKlH2-1t-smZ6J5j76RCBSJEwQHo/edit?usp=sharing}
-#'
-#'   The Downballot, "Daily Kos Elections congressional district geographic descriptions & largest places (118th Congress)"
-#'   \url{https://docs.google.com/spreadsheets/d/1weoLFu2U5lmxQNcB8pFItGHj1Lb_M2E9Oi48sI4w1vY/edit?usp=sharing}
-#'
-#'   The Downballot, "Congressional district geographic descriptions and largest places (117th Congress)"
-#'   \url{https://docs.google.com/spreadsheets/d/16GoSYgRx5Mqfyfd355FMDRtr13tOAXFDOT94d9Dzwt0/edit?usp=sharing}
+#'   The Daily Koss congressional district geography and most populous places: \cr
+#'   119th Congress: \url{https://bit.ly/geography_119}\cr
+#'   118th Congress: \url{https://bit.ly/geography_118}\cr
+#'   117th Congress: \url{https://bit.ly/geography_117}
 #'
 #'
 #'   Pennsylvania 2016 CD names are named by Shiro Kuriwaki and Lara Putnam.
@@ -74,7 +80,6 @@
 #'    "Candidates in American General Elections", https://doi.org/10.7910/DVN/DGDRDT,
 #'    Harvard Dataverse.
 #'
-#' @importFrom tibble tibble
 #'
 #' @examples
 #' head(cd_info_2018)

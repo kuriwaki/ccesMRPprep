@@ -9,7 +9,10 @@ Authors@R:
              email = "shirokuriwaki@gmail.com",
              comment = c(ORCID = "0000-0002-5687-2647")),
      person(given = "Daily Kos Elections",
-             role = "dtc"))
+             role = "dtc"),
+     person(given = "Miranda",
+             family = "Selin",
+             role = "ctb"))
 Description: This provides data loading, processing, and formatting functions for
    a particular task: using CCES data for Multilevel Regression Post-stratification.
    Model fitting and visualization of MRP itself is handled elsewhere. This package
