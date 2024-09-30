@@ -35,6 +35,15 @@
 #'    have the largest place.}
 #'  }
 #'
+#'  Congressional District Changes between 2022 and 2024:
+#'  Includes legal rationale for off-cycle redistricting.
+#'  \itemize{
+#'    \item{Alabama: state CD map altered such that AL-02 is a majority Black district.}
+#'    \item{Georgia: state CD map altered such that GA-06 is a majority Black district.}
+#'    \item{Louisiana: state CD map altered such that LA-06 is a majority Black district.}
+#'    \item{North Carolina: state Supreme Court's plan in 2022 expired.}
+#'    \item{New York: state Supreme Court stuck down original plan as partisan.}
+#'  }
 #'
 #' @source
 #'   The Daily Kos Elections naming guide to the nation's congressional districts.
@@ -46,13 +55,28 @@
 #'   DailyDaily Kos Elections 2012, 2016 & 2020 presidential election results for congressional districts in 2020"
 #'   \url{https://bit.ly/3bXtAPB}
 #'
+#'   \url{https://bit.ly/3bXtAPB}
+#'
+#'   Daily Kos, "2012, 2016 & 2020 presidential election results for congressional districts in 2020"
+#'   \url{https://bit.ly/3DRhPcj}
+#'
+#'   Daily Kos, 2020 presidential election results by later congressional districts:\cr
+#'   2022 congressional districts: \url{https://bit.ly/4gLYnBK}\cr
+#'   2024 congressional districts: \url{https://bit.ly/47KTvZw}\cr
+#'   2020, 2022 congressional district comparison: \url{https://bit.ly/3XNWOKI}
+#'
+#'   The Daily Koss congressional district geography and most populous places: \cr
+#'   119th Congress: \url{https://bit.ly/geography_119}\cr
+#'   118th Congress: \url{https://bit.ly/geography_118}\cr
+#'   117th Congress: \url{https://bit.ly/geography_117}
+#'
+#'
 #'   Pennsylvania 2016 CD names are named by Shiro Kuriwaki and Lara Putnam.
 #'
 #'   Also see Cha, Jeremiah; Kuriwaki, Shiro; Snyder, James M. Jr., 2021,
 #'    "Candidates in American General Elections", https://doi.org/10.7910/DVN/DGDRDT,
 #'    Harvard Dataverse.
 #'
-#' @importFrom tibble tibble
 #'
 #' @examples
 #' head(cd_info_2018)
