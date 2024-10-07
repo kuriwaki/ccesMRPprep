@@ -53,6 +53,7 @@
 #'    have the same largest place.}
 #'  }
 #'
+#' @seealso cd_info_long
 #'
 #' @source
 #'   The Downballot (formerly Daily Kos Elections), \url{https://www.the-downballot.com/p/data}

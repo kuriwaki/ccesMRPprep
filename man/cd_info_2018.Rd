@@ -122,4 +122,7 @@ These can be seen by, for example, the following code:
 head(cd_info_2018)
 head(elec_NY)
 }
+\seealso{
+cd_info_long
+}
 \keyword{datasets}
