@@ -7,15 +7,17 @@
 \format{
 \code{cd_info_long} is a dataframe with 14578 rows,
 covering the maps of 9 election years
-for each of the 435 congressional districts.
+(2008, 2010, 2012, 2014, 2016, 2018, 2020, 2022, 2024) for each of the 435 congressional districts.
 \describe{
-\item{\code{lines}}{Is the year corresponding to the geography. For example, \code{lines = 2008} and \verb{cd = "AL-01}
+\item{\code{lines}}{Is the year corresponding to the geography (district line). For example, \code{lines = 2008} and \verb{cd = "AL-01}
 indicates that the row is representing AL-01's geography as used in the 2008 election.}
-\item{\code{cd}}{Is the CD corresponding to the year of the lines.}
+\item{\code{cd}}{Is the CD corresponding to the year of the geography (district line). Note that districts can change drastically
+by redistricting; a state's "first congressional district" from one \code{lines} can cover a different area
+than the same first congressional district for another.}
 \item{\code{elec}}{Is the year of the election for the presidential election data that follows}
 \item{\code{party}, \code{candidate}}{Define the presidential candidate that corresponds to the \code{elec}
 (which may not be the same as \code{lines}). For example, \verb{lines = 2012, cd = AL-01} combined with
-\code{elec = 2008} represents the 2008 election results in the AL-01 of the pre-redistricting 2008
+\code{elec = 2008} represents the 2008 election results in the newly redistricted (2012) AL-01 geography.
 lines.}
 \item{\code{pct}}{are the two party voteshares of the candidate}
 \item{\code{presvotes_total}}{Is the total number of votes for President in that CD}
