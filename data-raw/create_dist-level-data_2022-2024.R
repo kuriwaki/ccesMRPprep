@@ -19,7 +19,9 @@ cd_names_2022 <- read_sheet(url_2022, sheet = 1) |>
 
 voting_info_2022 <- read_sheet(url_2022, sheet = 2) |>
   select(cd = District,
-         pct_trump = 'Trump %')
+         pct_trump = 'Trump %',
+         presvotes_total = Total
+         )
 
 region_2022 <- read_sheet(url_geo_118, sheet = 1) |>
   select(cd = CD,
@@ -36,8 +38,8 @@ cd_names_2024 <- read_sheet(url_2024, sheet = 1) |>
 
 voting_info_2024 <- read_sheet(url_2024, sheet = 2) |>
   select(cd = District,
-         presvotes_total20 = Total,
-         pct_trump20 = 'Trump %')
+         pct_trump20 = 'Trump %',
+         presvotes_total20 = Total)
 
 region_2024 <- read_sheet(url_geo_119, sheet = 1) |>
   select(cd = CD,
