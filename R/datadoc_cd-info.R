@@ -5,7 +5,7 @@
 #' district-level. We include one such data for congressional districts. All data
 #' is collected by The Downballot.
 #'
-#' @details `cd_info_2006` is data on boundaries used in 2006, 2008, and 2010;
+#' @details `cd_info_2008` is data on boundaries used in 2006, 2008, and 2010;
 #' `cd_info_2012` is data on boundaries used in 2012 and 2014; `cd_info_2016`
 #' uses 2016 boundaries; `cd_info_2018` is data on 2018 boundaries;
 #' `cd_info_2020` uses 2020 boundaries; `cd_info_2022` is
@@ -94,7 +94,7 @@
 
 #' @rdname cd_info_2018
 #' @format NULL
-"cd_info_2006"
+"cd_info_2008"
 
 #' @rdname cd_info_2018
 #' @format NULL
