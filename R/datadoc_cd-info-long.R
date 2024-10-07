@@ -7,7 +7,7 @@
 #'  covering the maps of `r length(unique(cd_info_long$map))` election years
 #'  for each of the 435 congressional districts.
 #'   \describe{
-#'    \item{`map`}{Is the year corresponding to the geography. For example, `map = 2008` and `cd = "AL-01`
+#'    \item{`lines`}{Is the year corresponding to the geography. For example, `map = 2008` and `cd = "AL-01`
 #'     indicates that the row is representing AL-01's geography as used in the 2008 election.}
 #'    \item{`cd`}{Is the CD corresponding to the year of the map.}
 #'    \item{`elec`}{Is the year of the election for the presidential election data that follows}
@@ -20,16 +20,18 @@
 #'    }
 #'
 #' @examples
+#'  library(dplyr)
+#'
 #'  # get only data for proximate years
-#'  cd_info_long |> filter((map == elec) | (elec + 2 == map))
+#'  cd_info_long |> filter((map == lines) | (elec + 2 == lines))
 #'
 #'  # this subset returns exactly 2 * 435 districts per cycle:
-#'  cd_info_long |> filter((map == elec) | (elec + 2 == map)) |> count(map, party)
+#'  cd_info_long |> filter((map == lines) | (elec + 2 == lines)) |> count(lines, party)
 #'
 #' # this will show where the districts lines changed between 2022 and 2024
 #' # (same election, same candidate, different map)
 #' cd_info_long |>
-#'  filter(map %in% c(2022, 2024), elec == 2020, candidate == "biden") |>
-#'  arrange(cd, map)
+#'  filter(lines %in% c(2022, 2024), elec == 2020, candidate == "biden") |>
+#'  arrange(cd, lines)
 #'
 "cd_info_long"

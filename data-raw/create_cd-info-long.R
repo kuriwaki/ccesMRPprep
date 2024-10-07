@@ -48,7 +48,7 @@ cd_info_all <- bind_rows(
 # Republican vote percentages
 R_pct <-
   cd_info_all |>
-  select(map = year, cd, starts_with("pct_")) |>
+  select(lines = year, cd, starts_with("pct_")) |>
   pivot_longer(
     matches("pct_"),
     names_prefix = "pct_",
@@ -58,8 +58,8 @@ R_pct <-
     name == "romney" ~ 2012,
     name == "trump16" ~ 2016,
     name == "trump20" ~ 2020,
-    name == "trump" & map <= 2018 ~ 2016,
-    name == "trump" & map >= 2020 & map <= 2022 ~ 2020
+    name == "trump" & lines <= 2018 ~ 2016,
+    name == "trump" & lines >= 2020 & lines <= 2022 ~ 2020
   ),
   .after = cd
   ) |>
@@ -69,7 +69,7 @@ R_pct <-
 
 D_pct <- R_pct |>
   left_join(pres_names_wide, by = "elec") |>
-  transmute(map,
+  transmute(lines,
             cd,
             elec,
             party = "D",
@@ -79,26 +79,26 @@ D_pct <- R_pct |>
 # same for Ns
 Ns <-
   cd_info_all |>
-  select(map = year, cd, matches("total")) |>
+  select(lines = year, cd, matches("total")) |>
   pivot_longer(
     matches("presvotes_total"),
     names_prefix = "presvotes_",
     values_to = "presvotes_total", values_drop_na = TRUE) |>
   mutate(elec = case_when(
     name == "total20" ~ 2020,
-    map %in% c(2008, 2012, 2016, 2020) ~ map,
-    map == 2010 ~ 2008,
-    map == 2014 ~ 2012,
-    map == 2018 ~ 2016,
-    map == 2022 ~ 2020,
+    lines %in% c(2008, 2012, 2016, 2020) ~ lines,
+    lines == 2010 ~ 2008,
+    lines == 2014 ~ 2012,
+    lines == 2018 ~ 2016,
+    lines == 2022 ~ 2020,
   ),
   .after = cd
   ) |>
   select(-name)
 
 cd_info_long <- bind_rows(D_pct, R_pct) |>
-  tidylog::left_join(Ns, by = c("map", "cd", "elec")) |>
-  arrange(map, elec, cd, party) |>
+  tidylog::left_join(Ns, by = c("lines", "cd", "elec")) |>
+  arrange(lines, elec, cd, party) |>
   rename(candidate = name)
 
 usethis::use_data(cd_info_long, overwrite = TRUE)
