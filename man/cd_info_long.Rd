@@ -36,7 +36,9 @@ cd_info_long
 
 # this will show where the districts lines changed between 2022 and 2024
 # (same election, same candidate, different map)
-cd_info_long |> filter(map \%in\% c(2022, 2024), elec == 2020, candidate == "biden") |> arrange(cd, map)
+cd_info_long |>
+ filter(map \%in\% c(2022, 2024), elec == 2020, candidate == "biden") |>
+ arrange(cd, map)
 
 }
 \keyword{datasets}
