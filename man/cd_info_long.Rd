@@ -17,8 +17,7 @@ than the same first congressional district for another.}
 \item{\code{elec}}{Is the year of the election for the presidential election data that follows}
 \item{\code{party}, \code{candidate}}{Define the presidential candidate that corresponds to the \code{elec}
 (which may not be the same as \code{lines}). For example, \verb{lines = 2012, cd = AL-01} combined with
-\code{elec = 2008} represents the 2008 election results in the newly redistricted (2012) AL-01 geography.
-lines.}
+\code{elec = 2008} represents the 2008 election results in the newly redistricted (2012) AL-01 geography}
 \item{\code{pct}}{are the two party voteshares of the candidate}
 \item{\code{presvotes_total}}{Is the total number of votes for President in that CD}
 }
