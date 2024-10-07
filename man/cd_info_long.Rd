@@ -5,18 +5,18 @@
 \alias{cd_info_long}
 \title{Congressional District level information - long version}
 \format{
-Each \verb{cd_info_long*} is a dataframe with 14578rows,
+\code{cd_info_long} is a dataframe with 14578 rows,
 covering the maps of 9 election years
 for each of the 435 congressional districts.
 \describe{
-\item{\code{map}}{Is the year corresponding to the geography. For example, \code{map = 2008} and \verb{cd = "AL-01}
+\item{\code{lines}}{Is the year corresponding to the geography. For example, \code{lines = 2008} and \verb{cd = "AL-01}
 indicates that the row is representing AL-01's geography as used in the 2008 election.}
-\item{\code{cd}}{Is the CD corresponding to the year of the map.}
+\item{\code{cd}}{Is the CD corresponding to the year of the lines.}
 \item{\code{elec}}{Is the year of the election for the presidential election data that follows}
 \item{\code{party}, \code{candidate}}{Define the presidential candidate that corresponds to the \code{elec}
-(which may not be the same as \code{map}). For example, \verb{map = 2012, cd = AL-01} combined with
+(which may not be the same as \code{lines}). For example, \verb{lines = 2012, cd = AL-01} combined with
 \code{elec = 2008} represents the 2008 election results in the AL-01 of the pre-redistricting 2008
-map.}
+lines.}
 \item{\code{pct}}{are the two party voteshares of the candidate}
 \item{\code{presvotes_total}}{Is the total number of votes for President in that CD}
 }
@@ -28,17 +28,19 @@ cd_info_long
 \code{cd_info_long} provides a "long" version of the yearly \verb{cd_info_20**} datasets.
 }
 \examples{
+ library(dplyr)
+
  # get only data for proximate years
- cd_info_long |> filter((map == elec) | (elec + 2 == map))
+ cd_info_long |> filter((elec == lines) | (elec + 2 == lines))
 
  # this subset returns exactly 2 * 435 districts per cycle:
- cd_info_long |> filter((map == elec) | (elec + 2 == map)) |> count(map, party)
+ cd_info_long |> filter((elec == lines) | (elec + 2 == lines)) |> count(lines, party)
 
 # this will show where the districts lines changed between 2022 and 2024
 # (same election, same candidate, different map)
 cd_info_long |>
- filter(map \%in\% c(2022, 2024), elec == 2020, candidate == "biden") |>
- arrange(cd, map)
+ filter(lines \%in\% c(2022, 2024), elec == 2020, candidate == "biden") |>
+ arrange(cd, lines)
 
 }
 \keyword{datasets}
