@@ -1,3 +1,6 @@
+# cccesMRPprep 0.1.13
+
+* Add 2022, 2024, 2006, and 2012 daily kos cd data
 
 # cccesMRPprep 0.1.12
 
