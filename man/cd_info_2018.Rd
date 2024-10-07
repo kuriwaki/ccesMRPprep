@@ -3,7 +3,7 @@
 \docType{data}
 \name{cd_info_2018}
 \alias{cd_info_2018}
-\alias{cd_info_2006}
+\alias{cd_info_2008}
 \alias{cd_info_2012}
 \alias{cd_info_2016}
 \alias{cd_info_2020}
@@ -15,28 +15,28 @@
 Each \verb{cd_info_20**} is a dataframe with the 435 Congressional
 Districts, one row per cd.
 \describe{
-\item{year}{The year for the district line. A congressional district's
+\item{\code{year}}{The year for the district line. A congressional district's
 actual geography can change year to year, and significantly so in different
 redistricting cycles. Lines try to get the contemporaneous district map,
 so that cd_info_2016 uses 2016 maps and cd_info_2020 uses 2020 maps.
 However, this work relies on the hard work of assembling precinct results by Daily Kos.}
-\item{cd}{District code. The formatting corresponds to the CCES cumulative
+\item{\code{cd}}{District code. The formatting corresponds to the CCES cumulative
 coding of \code{cd}: a two-letter abbreviation for the state followed by
 a dash, and the district number padded with zeros to the left to be of length
 2. At-large districts like Delaware are given a "-01" for the district number. See \code{to_cd()}}
-\item{presvotes_total}{In presidential years, the total number of votes cast for
+\item{\code{presvotes_total}}{In presidential years, the total number of votes cast for
 the office of President that year. Taken from Daily Kos estimates from precinct results.}
-\item{pct_trump, pct_romney, pct_mccain}{The two-party voteshare of Republican
+\item{\code{pct_trump}, \code{pct_romney}, \code{pct_mccain}}{The two-party voteshare of Republican
 presidential candidates in that district for the given year. E.g. the
 \code{pct_mccain} data for \code{cd_info_2018} represents the percent
 of the vote by McCain in 2008 for that district \emph{under 2018 lines.}\cr
 \code{pct_trump} denotes the 2016 election for \code{cd_info_2018} and \code{cd_info_2016}.\cr
 \code{pct_trump} denotes the 2020 election for \code{cd_info_2020}, \code{cd_info_2022}, and \code{cd_info_2024}.\cr
 \code{pct_trump16} denotes the 2016 result for \code{cd_info_2020}.}
-\item{dailykos_name}{The unique descriptive name for the district code in
+\item{\code{dailykos_name}}{The unique descriptive name for the district code in
 2018 given by Daily Kos (later renamed to The Downballot). Some edits are made for changing district. See
 Source for full citation.}
-\item{largest_place}{The largest place in the district code in 2018 given by Daily Kos. Multiple districts may
+\item{\code{largest_place}}{The largest place in the district code in 2018 given by Daily Kos. Multiple districts may
 have the same largest place.}
 }
 }
@@ -77,7 +77,7 @@ Harvard Dataverse.
 \usage{
 cd_info_2018
 
-cd_info_2006
+cd_info_2008
 
 cd_info_2012
 
@@ -97,7 +97,7 @@ district-level. We include one such data for congressional districts. All data
 is collected by The Downballot.
 }
 \details{
-\code{cd_info_2006} is data on boundaries used in 2006, 2008, and 2010;
+\code{cd_info_2008} is data on boundaries used in 2006, 2008, and 2010;
 \code{cd_info_2012} is data on boundaries used in 2012 and 2014; \code{cd_info_2016}
 uses 2016 boundaries; \code{cd_info_2018} is data on 2018 boundaries;
 \code{cd_info_2020} uses 2020 boundaries; \code{cd_info_2022} is
