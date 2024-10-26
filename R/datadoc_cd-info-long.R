@@ -21,6 +21,8 @@
 #'    \item{`presvotes_DR`}{The total number of Democrat + Republican votes for President in that CD}
 #'    }
 #'
+#' @seealso \link{cd_info} for versions with one row per district, and documentation of sources
+#'
 #' @examples
 #'  library(dplyr)
 #'

@@ -45,4 +45,7 @@ cd_info_long |>
  arrange(cd, lines)
 
 }
+\seealso{
+\link{cd_info} for versions with one row per district, and documentation of sources
+}
 \keyword{datasets}

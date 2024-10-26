@@ -99,8 +99,8 @@ elec_NY
 }
 \description{
 Some of the most consequential variables to include in MRP are measured at the
-district-level. We include one such data for congressional districts. All data
-is collected by The Downballot.
+district-level. We include one such data for congressional districts. The data
+is collected by The Downballot and Kiernan Park-Egan.
 }
 \details{
 \code{cd_info_2008} is data on boundaries used in 2006, 2008, and 2010;
@@ -129,6 +129,6 @@ head(cd_info_2018)
 head(elec_NY)
 }
 \seealso{
-\code{cd_info_long}
+\link{cd_info_long} for a stacked version of this data
 }
 \keyword{datasets}

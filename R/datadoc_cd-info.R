@@ -2,8 +2,8 @@
 #'
 #'
 #' Some of the most consequential variables to include in MRP are measured at the
-#' district-level. We include one such data for congressional districts. All data
-#' is collected by The Downballot.
+#' district-level. We include one such data for congressional districts. The data
+#' is collected by The Downballot and Kiernan Park-Egan.
 #'
 #' @name cd_info
 #' @details `cd_info_2008` is data on boundaries used in 2006, 2008, and 2010;
@@ -56,7 +56,7 @@
 #'    have the same largest place.}
 #'  }
 #'
-#' @seealso `cd_info_long`
+#' @seealso \link{cd_info_long} for a stacked version of this data
 #'
 #' @source
 #'   The Downballot (formerly Daily Kos Elections), \url{https://www.the-downballot.com/p/data}
