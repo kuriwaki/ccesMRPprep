@@ -27,7 +27,7 @@ a dash, and the district number padded with zeros to the left to be of length
 2. At-large districts like Delaware are given a "-01" for the district number. See \code{to_cd()}}
 \item{\code{presvotes_total}}{In presidential years, the total number of votes cast for
 the office of President that year. }
-\item{\code{presvotes_total}}{Same as \code{presvotes_total} but only the sum of Democratic and Republican candidate's votes}
+\item{\code{presvotes_DR}}{Same as \code{presvotes_total} but only the sum of Democratic and Republican candidate's votes}
 \item{\code{pct_trump}, \code{pct_romney}, \code{pct_mccain}}{The two-party voteshare of Republican
 presidential candidates in that district for the given year. E.g. the
 \code{pct_mccain} data for \code{cd_info_2018} represents the percent
