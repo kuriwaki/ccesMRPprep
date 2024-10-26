@@ -5,6 +5,7 @@
 #' district-level. We include one such data for congressional districts. All data
 #' is collected by The Downballot.
 #'
+#' @name cd_info
 #' @details `cd_info_2008` is data on boundaries used in 2006, 2008, and 2010;
 #' `cd_info_2012` is data on boundaries used in 2012 and 2014; `cd_info_2016`
 #' uses 2016 boundaries; `cd_info_2018` is data on 2018 boundaries;
@@ -54,7 +55,7 @@
 #'    have the same largest place.}
 #'  }
 #'
-#' @seealso cd_info_long
+#' @seealso `cd_info_long`
 #'
 #' @source
 #'   The Downballot (formerly Daily Kos Elections), \url{https://www.the-downballot.com/p/data}
@@ -95,32 +96,36 @@
 #' @examples
 #' head(cd_info_2018)
 #' head(elec_NY)
-"cd_info_2018"
+NULL
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2008"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2012"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2016"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
+#' @format NULL
+"cd_info_2018"
+
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2020"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2022"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2024"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "elec_NY"
