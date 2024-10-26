@@ -16,8 +16,9 @@
 #'    \item{`party`, `candidate`}{Define the presidential candidate that corresponds to the `elec`
 #'     (which may not be the same as `lines`). For example, `lines = 2012, cd = AL-01` combined with
 #'      `elec = 2008` represents the 2008 election results in the newly redistricted (2012) AL-01 geography}
-#'    \item{`pct`}{are the two party voteshares of the candidate}
-#'    \item{`presvotes_total`}{Is the total number of votes for President in that CD}
+#'    \item{`pct`}{The two party voteshares of the candidate}
+#'    \item{`presvotes_total`}{The total number of votes for President in that CD}
+#'    \item{`presvotes_DR`}{The total number of Democrat + Republican votes for President in that CD}
 #'    }
 #'
 #' @examples

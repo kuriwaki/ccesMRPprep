@@ -5,6 +5,7 @@
 #' district-level. We include one such data for congressional districts. All data
 #' is collected by The Downballot.
 #'
+#' @name cd_info
 #' @details `cd_info_2008` is data on boundaries used in 2006, 2008, and 2010;
 #' `cd_info_2012` is data on boundaries used in 2012 and 2014; `cd_info_2016`
 #' uses 2016 boundaries; `cd_info_2018` is data on 2018 boundaries;
@@ -28,17 +29,19 @@
 #' @format Each `cd_info_20**` is a dataframe with the `r nrow(cd_info_2018)` Congressional
 #'  Districts, one row per cd.
 #'  \describe{
-#'    \item{`year`}{The year for the district line. A congressional district's
-#'    actual geography can change year to year, and significantly so in different
-#'    redistricting cycles. Lines try to get the contemporaneous district map,
-#'    so that cd_info_2016 uses 2016 maps and cd_info_2020 uses 2020 maps.
-#'    However, this work relies on the hard work of assembling precinct results by Daily Kos.}
+#'    \item{`year`}{The year for the district map. A congressional district's
+#'    actual geography can change year to year. Lines represent the contemporaneous
+#'    district geography,
+#'    so that `cd_info_2016` uses 2016 maps and `cd_info_2020` uses 2020 maps.
+#'    Corresponds to `line` in `cd_info_long`.
+#'    This work relies on the hard work of assembling precinct results by Daily Kos.}
 #'    \item{`cd`}{District code. The formatting corresponds to the CCES cumulative
 #'    coding of \code{cd}: a two-letter abbreviation for the state followed by
 #'    a dash, and the district number padded with zeros to the left to be of length
 #'    2. At-large districts like Delaware are given a "-01" for the district number. See `to_cd()`}
 #'    \item{`presvotes_total`}{In presidential years, the total number of votes cast for
-#'     the office of President that year. Taken from Daily Kos estimates from precinct results.}
+#'     the office of President that year. }
+#'    \item{`presvotes_DR`}{Same as `presvotes_total` but only the sum of Democratic and Republican candidate's votes}
 #'    \item{`pct_trump`, `pct_romney`, `pct_mccain`}{The two-party voteshare of Republican
 #'    presidential candidates in that district for the given year. E.g. the
 #'    \code{pct_mccain} data for `cd_info_2018` represents the percent
@@ -53,7 +56,7 @@
 #'    have the same largest place.}
 #'  }
 #'
-#' @seealso cd_info_long
+#' @seealso `cd_info_long`
 #'
 #' @source
 #'   The Downballot (formerly Daily Kos Elections), \url{https://www.the-downballot.com/p/data}
@@ -63,6 +66,9 @@
 #'
 #'   Daily Kos, "2008 results for districts used in **2006, 2008, 2010**"
 #'   \url{https://bit.ly/4entUrV}
+#'
+#'   Kiernan Park-Egan, "U.S. Presidential Election Results by Congressional District, 1952 to 2020"
+#'   \url{https://bit.ly/4fk6UKx} (used for 2008 values only when Daily Kos has missing data)
 #'
 #'   Daily Kos, "2008, 2012 results for districts used in **2012, 2014**"
 #'   \url{https://bit.ly/3N4PDZK}
@@ -83,40 +89,44 @@
 #'
 #'   Pennsylvania 2016 CD names are named by Shiro Kuriwaki and Lara Putnam.
 #'
-#'   Also see Cha, Kuriwaki, and Snyder, 2021,
-#'    "Candidates in American General Elections", https://doi.org/10.7910/DVN/DGDRDT,
-#'    Harvard Dataverse.
+#'   Also see Cha, Kuriwaki, and Snyder, 2024,
+#'    "Candidates in American General Elections", \url{https://doi.org/10.7910/DVN/DGDRDT},
+#'    Harvard Dataverse, for congressional candidate's (instead of President's) vote totals.
 #'
 #'
 #' @examples
 #' head(cd_info_2018)
 #' head(elec_NY)
-"cd_info_2018"
+NULL
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2008"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2012"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2016"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
+#' @format NULL
+"cd_info_2018"
+
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2020"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2022"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "cd_info_2024"
 
-#' @rdname cd_info_2018
+#' @rdname cd_info
 #' @format NULL
 "elec_NY"

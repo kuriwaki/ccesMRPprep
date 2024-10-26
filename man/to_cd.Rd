@@ -10,7 +10,7 @@ to_cd(state, num)
 \item{state}{A vector of state names, preferably abbreviations.
 If it is numeric, the function will assume they are FIPS codes
 and translate them accordingly. If they have full names like "California"
-instead of "CA", it will trnslate that too.}
+instead of "CA", it will translate that too. But you cannot mix different types.}
 
 \item{num}{A vector of district codes}
 }

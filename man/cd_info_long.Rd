@@ -5,7 +5,7 @@
 \alias{cd_info_long}
 \title{Congressional District level information - long version}
 \format{
-\code{cd_info_long} is a dataframe with 14578 rows,
+\code{cd_info_long} is a dataframe with 13050 rows,
 covering the maps of 9 election years
 (2008, 2010, 2012, 2014, 2016, 2018, 2020, 2022, 2024) for each of the 435 congressional districts.
 \describe{
@@ -18,8 +18,9 @@ than the same first congressional district for another.}
 \item{\code{party}, \code{candidate}}{Define the presidential candidate that corresponds to the \code{elec}
 (which may not be the same as \code{lines}). For example, \verb{lines = 2012, cd = AL-01} combined with
 \code{elec = 2008} represents the 2008 election results in the newly redistricted (2012) AL-01 geography}
-\item{\code{pct}}{are the two party voteshares of the candidate}
-\item{\code{presvotes_total}}{Is the total number of votes for President in that CD}
+\item{\code{pct}}{The two party voteshares of the candidate}
+\item{\code{presvotes_total}}{The total number of votes for President in that CD}
+\item{\code{presvotes_DR}}{The total number of Democrat + Republican votes for President in that CD}
 }
 }
 \usage{

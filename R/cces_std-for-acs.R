@@ -146,12 +146,12 @@ ccc_std_demographics <- function(tbl,
   # hispanic conversion
   if (wh_as_hisp && ("hispanic" %in% colnames(tbl_mod))) {
     tbl_mod <- tbl_mod %>%
-      mutate(race = replace(race, race_cces_chr == "White" & hispanic == 1, race_cces_to_acs$race[3]))
+      mutate(race = replace(race, race_cces_chr == "White" & .data$hispanic == 1, race_cces_to_acs$race[3]))
   }
 
   if (bh_as_hisp && ("hispanic" %in% colnames(tbl_mod))) {
     tbl_mod <- tbl_mod %>%
-      mutate(race = replace(race, race_cces_chr == "Black" & hispanic == 1, race_cces_to_acs$race[3]))
+      mutate(race = replace(race, race_cces_chr == "Black" & .data$hispanic == 1, race_cces_to_acs$race[3]))
   }
 
   if ((!is.null(wh_as_hisp) | !is.null(bh_as_hisp)) &
@@ -164,7 +164,7 @@ ccc_std_demographics <- function(tbl,
            matches("weight"),
            matches("(state|st|cd|dist)"),
            matches("gender"),
-           female,
+           matches("^female$"),
            matches("pid3$"),
            matches("age"),
            matches("educ"),

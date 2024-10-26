@@ -82,25 +82,21 @@ workflow.
 ## Data Sources
 
 Function-specific pages will detail the documentation used in each
-function. Here is a manual compilaiton:
+function. Here is a manual compilation:
 
-| Information                                 | Source                         | Citation and URL (if public)                                                                                                                                                                      |
-|:--------------------------------------------|:-------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CCES Covariates                             | Cumulative CCES                | Shiro Kuriwaki, “Cumulative CCES Common Content”. <https://doi.org/10.7910/DVN/II2DB6>                                                                                                            |
-| CCES Outcomes                               | Each Year’s CCES               | Stephen Ansolabehere, Sam Luks, and Brian Schaffner. “CCES Common Content” (varies by year). <https://cces.gov.harvard.edu/>                                                                      |
-| Poststratification                          | Census Bureau ACS              | American Community Survey. Extracted via [tidycensus package](https://github.com/walkerke/tidycensus). See [ACS vignette](https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html)            |
-| District-level Contestedness and Incumbency | Collected mainly by Jim Snyder |                                                                                                                                                                                                   |
-| CD-level Presidential Voteshare             | Daily Kos                      | Daily Kos, [The ultimate Daily Kos Elections guide to all of our data sets](https://www.dailykos.com/stories/2018/2/21/1742660/-The-ultimate-Daily-Kos-Elections-guide-to-all-of-our-data-sets#1) |
-| State-level Presidential Voteshare          | MEDSL                          | MIT Election Data and Science Lab, 2017, “U.S. President 1976–2016”. <https://doi.org/10.7910/DVN/42MVDX>                                                                                         |
+| Information                        | Source            | Citation and URL (if public)                                                                                                                                                                      |
+|:-----------------------------------|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CCES Covariates                    | Cumulative CCES   | Shiro Kuriwaki, “Cumulative CCES Common Content”. <https://doi.org/10.7910/DVN/II2DB6>                                                                                                            |
+| CCES Outcomes                      | Each Year’s CCES  | Stephen Ansolabehere, Sam Luks, and Brian Schaffner. “CCES Common Content” (varies by year). <https://cces.gov.harvard.edu/>                                                                      |
+| Poststratification                 | Census Bureau ACS | American Community Survey. Extracted via [tidycensus package](https://github.com/walkerke/tidycensus). See [ACS vignette](https://www.shirokuriwaki.com/ccesMRPprep/articles/acs.html)            |
+| CD-level Presidential Voteshare    | Daily Kos         | Daily Kos, [The ultimate Daily Kos Elections guide to all of our data sets](https://www.dailykos.com/stories/2018/2/21/1742660/-The-ultimate-Daily-Kos-Elections-guide-to-all-of-our-data-sets#1) |
+| State-level Presidential Voteshare | MEDSL             | MIT Election Data and Science Lab, 2017, “U.S. President 1976–2016”. <https://doi.org/10.7910/DVN/42MVDX>                                                                                         |
 
 ## Related Packages
 
 - [kuriwaki/rcces](https://github.com/kuriwaki/rcces) has another set of
   CCES related functions, but these are either my own personal functions
   in development (not for production), or specific to non-MRP projects.
-- [kuriwaki/CCES_district-opinion](https://github.com/kuriwaki/CCES_district-opinion)
-  is a private package that uses (among others) this package to process
-  large CCES data for MRP at scale.
 
 ## Support
 
