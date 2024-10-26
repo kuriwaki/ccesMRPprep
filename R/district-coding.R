@@ -4,7 +4,7 @@
 #'@param state A vector of state names, preferably abbreviations.
 #' If it is numeric, the function will assume they are FIPS codes
 #' and translate them accordingly. If they have full names like "California"
-#' instead of "CA", it will trnslate that too.
+#' instead of "CA", it will translate that too. But you cannot mix different types.
 #'@param num A vector of district codes
 #'
 #'@importFrom stringr str_pad
@@ -29,12 +29,12 @@ to_cd <- function(state, num) {
 
   # State
   if (inherits(state, "haven_labelled") | is.numeric(state)) {
-    fips_to_st <- deframe(select(states_key, st_fips, st))
+    fips_to_st <- deframe(select(states_key, .data$st_fips, .data$st))
     state <- recode(as.numeric(state), !!!fips_to_st)
   }
 
-  if (all(state %in% c(states_key$state))) {
-    state_to_st <- deframe(select(states_key, state, st))
+  if (all(state %in% c(ccesMRPprep::states_key$state))) {
+    state_to_st <- deframe(select(states_key, .data$state, .data$st))
     state <- recode(state, !!!state_to_st)
   }
 

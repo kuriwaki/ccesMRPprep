@@ -26,7 +26,6 @@ Imports:
     magrittr,
     fs,
     rlang,
-    Formula,
     dplyr (>= 1.1.0),
     tidyr,
     haven (>= 2.1.0),
