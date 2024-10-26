@@ -11,16 +11,18 @@ url_2012 <- "https://docs.google.com/spreadsheets/d/1xn6nCNM97oFDZ4M-HQgoUT3X4pa
 # Read data from Google Sheets
 
 # 2008
-cd_names_2008 <- read_sheet(url_2008, range = "A2:E", col_names = TRUE, sheet = 1) |>
+cd_names_2008 <- read_sheet(url_2008, range = "A2:A", col_names = TRUE, sheet = 1) |>
   mutate(year = 2008) |>
   select(year,
-         cd = CD,
-         mccain = McCain)
+         cd = CD)
 
-voting_info_2008 <- read_sheet(url_2008,range = "A2:I", col_names = TRUE, sheet = 2) |>
-  select(cd = CD,
-      #   pct_mccain = 'McCain%', # replaced by McCain sheet one
-         presvotes_total = "Total")
+# https://yalemaps.maps.arcgis.com/home/item.html?id=35e8e9aa89b34a3a8a036b1be7ad6607
+voting_info_2008 <- read_csv("data-raw/KPEcd2008.csv") |>
+  filter(STATENAME != "District Of Columbia") |>
+  transmute(cd = to_cd(STATENAME, DISTRICT),
+            pct_mccain = GOP_VOT / (GOP_VOT + DEM_VOT),
+            presvotes_total = TOT_VOT)
+
 
 # 2012
 cd_names_2012 <- read_sheet(url_2012, range = "A2:G", col_names = TRUE, sheet = 1) |>
@@ -35,10 +37,8 @@ voting_info_2012 <- read_sheet(url_2012, range = "A2:O", col_names = TRUE, sheet
 
 # Join data from page 1 and page 2 for each dataset
 cd_info_2008 <- cd_names_2008 |>
-  left_join(voting_info_2008, by = "cd") |>
   mutate(cd = str_replace(cd, "-AL$", "-01")) |>
-  mutate(pct_mccain = mccain * 0.01) |>
-  select(!mccain) |>
+  left_join(voting_info_2008, by = "cd") |>
   relocate(year, cd, pct_mccain, presvotes_total)
 
 cd_info_2012 <- cd_names_2012 |>

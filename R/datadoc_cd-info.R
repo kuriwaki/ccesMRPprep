@@ -64,6 +64,9 @@
 #'   Daily Kos, "2008 results for districts used in **2006, 2008, 2010**"
 #'   \url{https://bit.ly/4entUrV}
 #'
+#'   Kiernan Park-Egan, "U.S. Presidential Election Results by Congressional District, 1952 to 2020"
+#'   \url{https://bit.ly/4fk6UKx} (used for 2008 values only when Daily Kos has missing data)
+#'
 #'   Daily Kos, "2008, 2012 results for districts used in **2012, 2014**"
 #'   \url{https://bit.ly/3N4PDZK}
 #'
