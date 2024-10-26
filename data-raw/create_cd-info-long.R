@@ -79,22 +79,25 @@ D_pct <- R_pct |>
 # same for Ns
 Ns <-
   cd_info_all |>
-  select(lines = year, cd, matches("total")) |>
+  select(lines = year, cd, matches("presvotes_")) |>
   pivot_longer(
-    matches("presvotes_total"),
+    matches("presvotes_"),
     names_prefix = "presvotes_",
-    values_to = "presvotes_total", values_drop_na = TRUE) |>
+    values_drop_na = TRUE) |>
   mutate(elec = case_when(
-    name == "total20" ~ 2020,
-    lines %in% c(2008, 2012, 2016, 2020) ~ lines,
-    lines == 2010 ~ 2008,
-    lines == 2014 ~ 2012,
-    lines == 2018 ~ 2016,
-    lines == 2022 ~ 2020,
+    name %in% c("total_20", "DR_20") ~ 2020,
+    name %in% c("total_16", "DR_16") ~ 2016,
+    name %in% c("total", "DR") & lines %in% c(2008, 2010) ~ 2008,
+    name %in% c("total", "DR") & lines %in% c(2012, 2014) ~ 2012,
+    name %in% c("total", "DR") & lines == 2022 ~ 2020,
   ),
   .after = cd
   ) |>
-  select(-name)
+  mutate(name = str_remove(name, "_.*")) |>
+  pivot_wider(id_cols = c(elec, lines, cd),
+              names_from = name,
+              values_from = value,
+              names_prefix = "presvotes_")
 
 cd_info_long <- bind_rows(D_pct, R_pct) |>
   tidylog::left_join(Ns, by = c("lines", "cd", "elec")) |>

@@ -38,7 +38,8 @@
 #'    a dash, and the district number padded with zeros to the left to be of length
 #'    2. At-large districts like Delaware are given a "-01" for the district number. See `to_cd()`}
 #'    \item{`presvotes_total`}{In presidential years, the total number of votes cast for
-#'     the office of President that year. Taken from Daily Kos estimates from precinct results.}
+#'     the office of President that year. }
+#'    \item{`presvotes_total`}{Same as `presvotes_total` but only the sum of Democratic and Republican candidate's votes}
 #'    \item{`pct_trump`, `pct_romney`, `pct_mccain`}{The two-party voteshare of Republican
 #'    presidential candidates in that district for the given year. E.g. the
 #'    \code{pct_mccain} data for `cd_info_2018` represents the percent

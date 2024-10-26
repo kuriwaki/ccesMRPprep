@@ -21,6 +21,7 @@ voting_info_2008 <- read_csv("data-raw/KPEcd2008.csv") |>
   filter(STATENAME != "District Of Columbia") |>
   transmute(cd = to_cd(STATENAME, DISTRICT),
             pct_mccain = GOP_VOT / (GOP_VOT + DEM_VOT),
+            presvotes_DR = GOP_VOT + DEM_VOT,
             presvotes_total = TOT_VOT)
 
 
@@ -29,21 +30,24 @@ cd_names_2012 <- read_sheet(url_2012, range = "A2:G", col_names = TRUE, sheet = 
   mutate(year = 2012) |>
   select(year, cd = CD)
 
+# 2008 CA missing
 voting_info_2012 <- read_sheet(url_2012, range = "A2:O", col_names = TRUE, sheet = 2) |>
-  select(cd = CD,
-         presvotes_total = 7,
-         pct_romney = 'Romney%',
-         pct_mccain = 'McCain%')
+  transmute(
+    cd = CD,
+    pct_romney = `Obama...5` / (`Obama...5` + Romney),
+    presvotes_DR = `Obama...5` + Romney,
+    presvotes_total = `Total...7`)
 
 # Join data from page 1 and page 2 for each dataset
 cd_info_2008 <- cd_names_2008 |>
   mutate(cd = str_replace(cd, "-AL$", "-01")) |>
   left_join(voting_info_2008, by = "cd") |>
-  relocate(year, cd, pct_mccain, presvotes_total)
+  relocate(year, cd, pct_mccain)
 
 cd_info_2012 <- cd_names_2012 |>
   left_join(voting_info_2012, by = "cd") |>
   mutate(cd = str_replace(cd, "-AL$", "-01"))
+
 
 # Save the data
 usethis::use_data(cd_info_2012, overwrite = TRUE)
