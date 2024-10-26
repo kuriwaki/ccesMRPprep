@@ -29,11 +29,12 @@
 #' @format Each `cd_info_20**` is a dataframe with the `r nrow(cd_info_2018)` Congressional
 #'  Districts, one row per cd.
 #'  \describe{
-#'    \item{`year`}{The year for the district line. A congressional district's
-#'    actual geography can change year to year, and significantly so in different
-#'    redistricting cycles. Lines try to get the contemporaneous district map,
-#'    so that cd_info_2016 uses 2016 maps and cd_info_2020 uses 2020 maps.
-#'    However, this work relies on the hard work of assembling precinct results by Daily Kos.}
+#'    \item{`year`}{The year for the district map. A congressional district's
+#'    actual geography can change year to year. Lines represent the contemporaneous
+#'    district geography,
+#'    so that `cd_info_2016` uses 2016 maps and `cd_info_2020` uses 2020 maps.
+#'    Corresponds to `line` in `cd_info_long`.
+#'    This work relies on the hard work of assembling precinct results by Daily Kos.}
 #'    \item{`cd`}{District code. The formatting corresponds to the CCES cumulative
 #'    coding of \code{cd}: a two-letter abbreviation for the state followed by
 #'    a dash, and the district number padded with zeros to the left to be of length
@@ -88,9 +89,9 @@
 #'
 #'   Pennsylvania 2016 CD names are named by Shiro Kuriwaki and Lara Putnam.
 #'
-#'   Also see Cha, Kuriwaki, and Snyder, 2021,
-#'    "Candidates in American General Elections", https://doi.org/10.7910/DVN/DGDRDT,
-#'    Harvard Dataverse.
+#'   Also see Cha, Kuriwaki, and Snyder, 2024,
+#'    "Candidates in American General Elections", \url{https://doi.org/10.7910/DVN/DGDRDT},
+#'    Harvard Dataverse, for congressional candidate's (instead of President's) vote totals.
 #'
 #'
 #' @examples

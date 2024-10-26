@@ -39,7 +39,7 @@ cd_names_2024 <- read_sheet(url_2024, sheet = 1) |>
 
 voting_info_2024 <- read_sheet(url_2024, sheet = 2) |>
   transmute(cd = District,
-            pct_trump20 = Biden / (Biden + Trump),
+            pct_trump20 = Trump / (Biden + Trump),
             presvotes_DR_20 = Biden + Trump,
             presvotes_total_20 = Total)
 

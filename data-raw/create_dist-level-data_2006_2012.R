@@ -34,7 +34,7 @@ cd_names_2012 <- read_sheet(url_2012, range = "A2:G", col_names = TRUE, sheet = 
 voting_info_2012 <- read_sheet(url_2012, range = "A2:O", col_names = TRUE, sheet = 2) |>
   transmute(
     cd = CD,
-    pct_romney = `Obama...5` / (`Obama...5` + Romney),
+    pct_romney = Romney / (`Obama...5` + Romney),
     presvotes_DR = `Obama...5` + Romney,
     presvotes_total = `Total...7`)
 
