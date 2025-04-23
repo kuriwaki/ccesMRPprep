@@ -79,7 +79,7 @@ get_cces_dataverse <- function(name = "cumulative",
   if (filetype == ".tab" | filetype == ".dta")
     fun <- haven::read_dta
 
-  if (filetype == ".dta" & (yr %in% c(2009, 2022)))
+  if (filetype == ".dta" & (yr %in% c(2009, 2022, 2024)))
     fun <- function(x) haven::read_dta(x, encoding = "latin1")
 
   if (filetype == ".sav")
