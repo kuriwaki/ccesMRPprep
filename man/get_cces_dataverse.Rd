@@ -12,7 +12,7 @@ get_cces_dataverse(
 )
 }
 \arguments{
-\item{name}{The name of the dataset as defined in \code{data(cces_dv_ids)}.}
+\item{name}{The name of the dataset as defined in \code{data(cces_dv_ids)}. e.g. \code{"cumulative"} or \code{"2018"}.}
 
 \item{year_subset}{The year (or years, a vector) to subset too. If \code{name} is a year
 specific dataset, this argument is redundant, but if \code{name == "cumulative"}, then
@@ -30,17 +30,19 @@ CCES dataset. Built-in data \link{cces_dv_ids} is used as a default and should
 not be changed.}
 }
 \description{
-Get the data from dataverse into the current R environment. You must use
-the development version of \href{https://github.com/IQSS/dataverse-client-r}{IQSS/dataverse-client-r}.
-The function also does
+Wrapper function to get CCES/CES data from dataverse into the current R environment using the \code{dataverse} package.
 }
 \details{
-The current dataverse package downloads the raw data, so this function writes
-the raw binary into a tempfile and loads it into a tibble with the appropriate
-file data type. We find it convenient to loop over this function for all values in
-\link{cces_dv_ids} and populate the MRP directory with all datasets (about 2GB
-in total). Each dataset has slightly different formats; using \link{get_cces_question}
-will standardize, for example, the name of the case ID.
+This function is a simple wrapper around the \code{dataverse} pacakge on CRAN.
+It downloads the dataset from the dataverse, and loads it into a tibble with the appropriate
+file data type.  Using \link{get_cces_question} does some standardization across years, for example,
+the name of the case ID variable, so that it makes downstream.
+As of v0.3.15, \code{dataverse} accepts a cache by default if you specify a dataverse version.
+\code{get_cces_dataverse} does not specify a version and simplify re-downloads whatever
+is the latest version of the dataset on dataverse at the time, it does not support caching.
+You may be interested in customizing your download following  \url{https://cran.r-project.org/web/packages/dataverse/vignettes/C-download.html},
+or downloading the feather version of the CCES cumulative, which reads much
+faster than the default .dta file in this function.
 }
 \examples{
 
@@ -60,4 +62,7 @@ if (file_exists(glue("data/input/cces/cces_{d}.rds")))
 }
 }
 
+}
+\seealso{
+\code{\link[=ccc_std_demographics]{ccc_std_demographics()}} \link{cces_dv_ids}
 }
