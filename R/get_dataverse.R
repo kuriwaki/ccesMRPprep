@@ -1,11 +1,9 @@
 #' Download a specific CCES dataset from dataverse, with some indexing
 #'
-#' Get the data from dataverse into the current R environment. You must use
-#' the development version of [IQSS/dataverse-client-r](https://github.com/IQSS/dataverse-client-r).
-#' The function also does
+#' Wrapper function to get CCES/CES data from dataverse into the current R environment using the `dataverse` package.
 #'
 #'
-#' @param name The name of the dataset as defined in \code{data(cces_dv_ids)}.
+#' @param name The name of the dataset as defined in \code{data(cces_dv_ids)}. e.g. `"cumulative"` or `"2018"`.
 #' @param year_subset The year (or years, a vector) to subset too. If `name` is a year
 #' specific dataset, this argument is redundant, but if `name == "cumulative"`, then
 #' the output will be the cumulative dataset subsetted to that year. This is useful
@@ -19,12 +17,19 @@
 #' CCES dataset. Built-in data \link{cces_dv_ids} is used as a default and should
 #' not be changed.
 #'
-#' @details The current dataverse package downloads the raw data, so this function writes
-#' the raw binary into a tempfile and loads it into a tibble with the appropriate
-#' file data type. We find it convenient to loop over this function for all values in
-#' \link{cces_dv_ids} and populate the MRP directory with all datasets (about 2GB
-#' in total). Each dataset has slightly different formats; using \link{get_cces_question}
-#' will standardize, for example, the name of the case ID.
+#' @details This function is a simple wrapper around the `dataverse` pacakge on CRAN.
+#' It downloads the dataset from the dataverse, and loads it into a tibble with the appropriate
+#' file data type.  Using \link{get_cces_question} does some standardization across years, for example,
+#' the name of the case ID variable, so that it makes downstream.
+#' As of v0.3.15, `dataverse` accepts a cache by default if you specify a dataverse version.
+#' `get_cces_dataverse` does not specify a version and simplify re-downloads whatever
+#' is the latest version of the dataset on dataverse at the time, it does not support caching.
+
+#' You may be interested in customizing your download following  <https://cran.r-project.org/web/packages/dataverse/vignettes/C-download.html>,
+#' or downloading the feather version of the CCES cumulative, which reads much
+#' faster than the default .dta file in this function.
+#'
+#'
 #'
 #' @importFrom glue glue
 #' @importFrom stringr str_extract
@@ -35,6 +40,8 @@
 #' @importFrom magrittr `%>%`
 #' @importFrom rlang sym `!!` .data
 #' @importFrom dataverse get_file get_dataframe_by_name
+#'
+#' @seealso [ccc_std_demographics()] [cces_dv_ids]
 #'
 #' @examples
 #'
@@ -79,7 +86,7 @@ get_cces_dataverse <- function(name = "cumulative",
   if (filetype == ".tab" | filetype == ".dta")
     fun <- haven::read_dta
 
-  if (filetype == ".dta" & (yr %in% c(2009, 2022)))
+  if (filetype == ".dta" & (yr %in% c(2009, 2022, 2024)))
     fun <- function(x) haven::read_dta(x, encoding = "latin1")
 
   if (filetype == ".sav")
