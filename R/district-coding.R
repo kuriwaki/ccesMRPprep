@@ -33,9 +33,10 @@ to_cd <- function(state, num) {
     state <- recode(as.numeric(state), !!!fips_to_st)
   }
 
-  if (all(state %in% c(ccesMRPprep::states_key$state))) {
-    state_to_st <- deframe(select(states_key, .data$state, .data$st))
-    state <- recode(state, !!!state_to_st)
+  statenames = ccesMRPprep::states_key$state
+  if (all(state %in% c(statenames, toupper(statenames), tolower(statenames)))) {
+    state_to_st <- deframe(transmute(states_key, state = toupper(.data$state), st = .data$st))
+    state <- recode(toupper(state), !!!state_to_st)
   }
 
   if (is.character(num)) {
