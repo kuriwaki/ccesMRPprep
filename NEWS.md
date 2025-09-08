@@ -1,10 +1,14 @@
-# cccesMRPprep 0.1.13
+# ccesMRPprep 0.1.14
+
+* Update dataverse paths for cumulative and 2024
+
+# ccesMRPprep 0.1.13
 
 * Add 2022, 2024, 2006, and 2012 daily kos cd data
 * Fix minor error where pct values in cd_info from 2006-2012, 2022-2024 were not using two-party voteshare
 * cd_info now distinguishes between total votes including third party (`presvotes_total`) and D+R votes (`presvotes_DR`)
 
-# cccesMRPprep 0.1.12
+# ccesMRPprep 0.1.12
 
 * Add 2021, 2022, and 2023 to cces_dv_ids
 * Add 2022 validated vote and 2023 cumulative name update to cces_dv_ids
