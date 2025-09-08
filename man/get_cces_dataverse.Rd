@@ -8,6 +8,7 @@ get_cces_dataverse(
   name = "cumulative",
   year_subset = NULL,
   std_index = TRUE,
+  ver = ":latest",
   dataverse_paths = ccesMRPprep::cces_dv_ids
 )
 }
@@ -24,6 +25,10 @@ have different column names in different datasets, but setting this to \code{TRU
 (the default) will all rename them \code{"case_id"} and also add the year of the dataset.
 This way, every dataset that gets downloaded will have the unique identifier
 defined by the variables \code{c("year", "case_id")}.}
+
+\item{ver}{Version of the Dataverse dataset to extract. If not the default, setting
+"9" for example will extract V9 of the Dataverse. As of dataverse 0.3.15,
+datasets with the version specified will be cached.}
 
 \item{dataverse_paths}{A dataframe where one row represents metadata for one
 CCES dataset. Built-in data \link{cces_dv_ids} is used as a default and should

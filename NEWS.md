@@ -1,6 +1,7 @@
 # ccesMRPprep 0.1.14
 
 * Update dataverse paths for cumulative and 2024
+* Add versions argument for get_cces_dataverse
 
 # ccesMRPprep 0.1.13
 

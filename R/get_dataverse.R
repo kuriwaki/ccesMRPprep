@@ -13,6 +13,9 @@
 #' (the default) will all rename them \code{"case_id"} and also add the year of the dataset.
 #' This way, every dataset that gets downloaded will have the unique identifier
 #' defined by the variables \code{c("year", "case_id")}.
+#' @param ver Version of the Dataverse dataset to extract. If not the default, setting
+#'  "9" for example will extract V9 of the Dataverse. As of dataverse 0.3.15,
+#'  datasets with the version specified will be cached.
 #' @param dataverse_paths A dataframe where one row represents metadata for one
 #' CCES dataset. Built-in data \link{cces_dv_ids} is used as a default and should
 #' not be changed.
@@ -67,6 +70,7 @@
 get_cces_dataverse <- function(name = "cumulative",
                         year_subset = NULL,
                         std_index = TRUE,
+                        ver = ":latest",
                         dataverse_paths = ccesMRPprep::cces_dv_ids) {
 
   y_info <- filter(dataverse_paths, .data$cces_name == as.character(name))
@@ -100,6 +104,7 @@ get_cces_dataverse <- function(name = "cumulative",
                                     dataset = glue("doi:{doi}"),
                                     server = svr,
                                     original = TRUE,
+                                    version = ver,
                                     .f = fun)
 
   # subset ---
