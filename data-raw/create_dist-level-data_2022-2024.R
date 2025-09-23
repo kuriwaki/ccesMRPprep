@@ -1,12 +1,13 @@
 library(tidyverse)
 library(googlesheets4)
+library(janitor)
 
 # Authenticate with Google Sheets
 # gs4_auth()
 
 # URLs for your Google Sheets
 url_2022 <- "https://docs.google.com/spreadsheets/d/1CKngqOp8fzU22JOlypoxNsxL6KSAH920Whc-rd7ebuM/edit?usp=sharing"
-url_2024 <- "https://docs.google.com/spreadsheets/d/1Sg4ZZz5FcX7lz-m2xqmYtndaO2uEMSaL7x99AbQOvv8/edit?usp=sharing"
+url_2024 <- "https://docs.google.com/spreadsheets/d/1ng1i_Dm_RMDnEvauH44pgE6JCUsapcuu8F2pCfeLWFo/edit?gid=1491069057#gid=1491069057"
 url_geo_119 <- "https://docs.google.com/spreadsheets/d/12YaBonkqHAjkXhzyKlH2-1t-smZ6J5j76RCBSJEwQHo/edit?usp=sharing"
 url_geo_118 <- "https://docs.google.com/spreadsheets/d/1weoLFu2U5lmxQNcB8pFItGHj1Lb_M2E9Oi48sI4w1vY/edit?usp=sharing"
 
@@ -33,15 +34,25 @@ largest_place_2022 <- read_sheet(url_geo_118, sheet = 2) |>
          largest_place = `Largest place`)
 
 # 2024
-cd_names_2024 <- read_sheet(url_2024, sheet = 1) |>
-  mutate(year = 2024) |>
-  select(year, cd = District)
+# clean sheet
+sheet_2024 <- read_sheet(url_2024, sheet = 2) |>
+  select(1:9) |>
+  select(-2, -3) |>
+  row_to_names(row_number = 2, remove_row = TRUE) |>
+  rename(cd = 1)
 
-voting_info_2024 <- read_sheet(url_2024, sheet = 2) |>
-  transmute(cd = District,
-            pct_trump20 = Trump / (Biden + Trump),
-            presvotes_DR_20 = Biden + Trump,
-            presvotes_total_20 = Total)
+cd_names_2024 <- sheet_2024 |>
+  mutate(year = 2024) |>
+  select(year, cd)
+
+voting_info_2024 <- sheet_2024 |>
+  select(1:4) |>
+  mutate(across(where(is.list) & !matches("^cd$"),
+                ~ map_dbl(.x, ~ as.numeric(.x[1])))) |>
+  transmute(cd,
+            pct_trump24 = Trump / (Harris + Trump),
+            presvotes_DR_24 = Harris + Trump,
+            presvotes_total_24 = Total)
 
 region_2024 <- read_sheet(url_geo_119, sheet = 1) |>
   select(cd = CD,
