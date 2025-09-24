@@ -1,14 +1,15 @@
 library(tidyverse)
 library(googlesheets4)
+library(janitor)
 
 # Authenticate with Google Sheets
 # gs4_auth()
 
 # URLs for your Google Sheets
 url_2022 <- "https://docs.google.com/spreadsheets/d/1CKngqOp8fzU22JOlypoxNsxL6KSAH920Whc-rd7ebuM/edit?usp=sharing"
-url_2024 <- "https://docs.google.com/spreadsheets/d/1Sg4ZZz5FcX7lz-m2xqmYtndaO2uEMSaL7x99AbQOvv8/edit?usp=sharing"
-url_geo_119 <- "https://docs.google.com/spreadsheets/d/12YaBonkqHAjkXhzyKlH2-1t-smZ6J5j76RCBSJEwQHo/edit?usp=sharing"
+url_2024 <- "https://docs.google.com/spreadsheets/d/1ng1i_Dm_RMDnEvauH44pgE6JCUsapcuu8F2pCfeLWFo/edit?gid=1491069057#gid=1491069057"
 url_geo_118 <- "https://docs.google.com/spreadsheets/d/1weoLFu2U5lmxQNcB8pFItGHj1Lb_M2E9Oi48sI4w1vY/edit?usp=sharing"
+url_geo_119 <- "https://docs.google.com/spreadsheets/d/12YaBonkqHAjkXhzyKlH2-1t-smZ6J5j76RCBSJEwQHo/edit?usp=sharing"
 
 # Read data from Google Sheets
 
@@ -24,30 +25,37 @@ voting_info_2022 <- read_sheet(url_2022, sheet = 2) |>
             presvotes_total = Total
   )
 
-region_2022 <- read_sheet(url_geo_118, sheet = 1) |>
+region_2022 <- read_sheet(url_geo_118, sheet = "Descriptive name") |>
   select(cd = CD,
          dailykos_name = `Geographic Description`)
 
-largest_place_2022 <- read_sheet(url_geo_118, sheet = 2) |>
+largest_place_2022 <- read_sheet(url_geo_118, sheet = "By places") |>
   select(cd = CD,
          largest_place = `Largest place`)
 
 # 2024
-cd_names_2024 <- read_sheet(url_2024, sheet = 1) |>
-  mutate(year = 2024) |>
-  select(year, cd = District)
+# clean sheet
+sheet_2024 <- read_sheet(url_2024, sheet = "Vote totals") |>
+  select(1:9) |>
+  row_to_names(row_number = 2, remove_row = TRUE) |>
+  select(cd = 1, Harris, Trump, Total)
 
-voting_info_2024 <- read_sheet(url_2024, sheet = 2) |>
-  transmute(cd = District,
-            pct_trump20 = Trump / (Biden + Trump),
-            presvotes_DR_20 = Biden + Trump,
-            presvotes_total_20 = Total)
+cd_names_2024 <- sheet_2024 |>
+  transmute(year = 2024, cd)
 
-region_2024 <- read_sheet(url_geo_119, sheet = 1) |>
+voting_info_2024 <- sheet_2024 |>
+  mutate(across(where(is.list) & !matches("^cd$"),
+                ~ map_dbl(.x, ~ as.numeric(.x[1])))) |>
+  transmute(cd,
+            pct_trump = Trump / (Harris + Trump),
+            presvotes_DR = Harris + Trump,
+            presvotes_total = Total)
+
+region_2024 <- read_sheet(url_geo_119, sheet = "Descriptive name") |>
   select(cd = CD,
          dailykos_name = `Geographic Description`)
 
-largest_place_2024 <- read_sheet(url_geo_119, sheet = 2) |>
+largest_place_2024 <- read_sheet(url_geo_119, sheet = "By places") |>
   select(cd = CD,
          largest_place = `Largest place`)
 

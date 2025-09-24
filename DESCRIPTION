@@ -20,7 +20,7 @@ Description: This provides data loading, processing, and formatting functions fo
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    R (>= 2.10),
+    R (>= 3.5)
 Imports:
     tibble,
     magrittr,

@@ -1,5 +1,6 @@
 # ccesMRPprep 0.1.14
 
+* Add 2024 election data to cd_info_2024
 * Update dataverse paths for cumulative and 2024
 * Add versions argument for get_cces_dataverse
 
