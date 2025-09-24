@@ -58,10 +58,12 @@
 #' "CCES Common Content, 2018", <doi:https://doi.org/10.7910>, Harvard Dataverse V6.
 #'
 #' @examples
-#'
+#' \dontrun{
 #' # use questionr::lookfor to search the label and labels
-#' questionr::lookfor(cc18_samp, "Trump")
+#'  questionr::lookfor(cc18_samp, "Trump")
+#' }
 #'
+#' library(tibble)
 #' # all data
 #' cc18_samp
 #'

@@ -28,10 +28,12 @@ common content, of which 2018 is a subset. A sample of the cumulative is contain
 in this package as \code{?ccc_samp}.
 }
 \examples{
-
+\dontrun{
 # use questionr::lookfor to search the label and labels
-questionr::lookfor(cc18_samp, "Trump")
+ questionr::lookfor(cc18_samp, "Trump")
+}
 
+library(tibble)
 # all data
 cc18_samp
 
