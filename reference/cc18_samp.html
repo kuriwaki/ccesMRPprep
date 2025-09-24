@@ -106,47 +106,12 @@ in this package as <code><a href="ccc_samp.html">?ccc_samp</a></code>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># use questionr::lookfor to search the label and labels</span></span></span>
-<span class="r-in"><span><span class="fu">questionr</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/labelled/reference/look_for.html" class="external-link">lookfor</a></span><span class="op">(</span><span class="va">cc18_samp</span>, <span class="st">"Trump"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  pos variable            label             col_type missing values           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  91  CC18_308a           Job approval -- ~ dbl+lbl  0       [1] Strongly app~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [2] Somewhat app~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [3] Somewhat dis~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [4] Strongly dis~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [5] Not sure     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [8] skipped      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [9] not asked    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  108 CC18_317            President 2016    dbl+lbl  226     [1] Donald Trump </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [2] Hillary Clin~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [3] Someone else </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [4] I did not ca~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [5] I don't reca~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [8] skipped      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [9] not asked    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  149 CC18_334C           Ideological Plac~ dbl+lbl  0       [1] Very Liberal </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [2] Liberal      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [3] Somewhat Lib~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [4] Middle of th~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [5] Somewhat Con~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [6] Conservative </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [7] Very Conserv~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [8] Not sure     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [98] skipped     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [99] not asked   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  162 CC18_335            Trump Russia col~ dbl+lbl  0       [1] Yes          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [2] No           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [3] Not sure     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [8] skipped      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [9] not asked    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  430 CC18_app_dtrmp_post President Trump ~ dbl+lbl  132     [1] Strongly app~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [2] Somewhat app~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [3] Somewhat dis~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [4] Strongly dis~</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [5] Not sure     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [8] skipped      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             [9] not asked    </span>
+<span class="r-in"><span> <span class="fu">questionr</span><span class="fu">::</span><span class="fu"><a href="https://larmarange.github.io/labelled/reference/look_for.html" class="external-link">lookfor</a></span><span class="op">(</span><span class="va">cc18_samp</span>, <span class="st">"Trump"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># all data</span></span></span>
 <span class="r-in"><span><span class="va">cc18_samp</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,000 × 526</span></span>
