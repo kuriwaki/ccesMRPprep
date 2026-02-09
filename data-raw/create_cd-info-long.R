@@ -59,7 +59,8 @@ R_pct <-
     name == "trump16" ~ 2016,
     name == "trump20" ~ 2020,
     name == "trump" & lines <= 2018 ~ 2016,
-    name == "trump" & lines >= 2020 & lines <= 2022 ~ 2020
+    name == "trump" & lines >= 2020 & lines <= 2022 ~ 2020,
+    name == "trump" & lines == 2024 ~ 2024
   ),
   .after = cd
   ) |>
@@ -90,6 +91,7 @@ Ns <-
     name %in% c("total", "DR") & lines %in% c(2008, 2010) ~ 2008,
     name %in% c("total", "DR") & lines %in% c(2012, 2014) ~ 2012,
     name %in% c("total", "DR") & lines == 2022 ~ 2020,
+    name %in% c("total", "DR") & lines == 2024 ~ 2024,
   ),
   .after = cd
   ) |>
