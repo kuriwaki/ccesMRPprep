@@ -22,6 +22,7 @@ cces_dv_ids <- tribble(
   "2022",       2022, "10.7910/DVN/PR4L8P", "CCES22_Common_OUTPUT_vv_topost.dta", "caseid",  "dataverse.harvard.edu",
   "2023",       2023, "10.7910/DVN/JQJTCC", "CCES23_Common_OUTPUT.tab", "caseid",  "dataverse.harvard.edu",
   "2024",       2024, "10.7910/DVN/X11EP6", "CCES24_Common_OUTPUT_vv_topost_final.dta", "caseid",  "dataverse.harvard.edu",
+  "2025",       2025, "10.7910/DVN/DFUGJR", "CES25_Common.tab", "caseid",  "dataverse.harvard.edu",
 )
 
 
