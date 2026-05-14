@@ -191,8 +191,8 @@ get_poststrat <- function(cleaned_acs, dist_data = NULL, formula) {
     cleaned_acs <- left_join(dist_data, cleaned_acs)
 
   cleaned_acs %>%
-    filter(across(matches(xvar_regex), ~!is.na(.x))) %>%
-    group_by(!!!syms(xvars), .add = TRUE) %>%
+    filter(if_all(matches(xvar_regex), ~!is.na(.x))) %>%
+    group_by(!!!syms(xvars), .add = TRUE) %>% # .add respects pre-existing groups
     summarize(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
     filter(count > 0)
 }
