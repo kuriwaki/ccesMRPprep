@@ -9,6 +9,7 @@ get_cces_dataverse(
   year_subset = NULL,
   std_index = TRUE,
   ver = ":latest",
+  cache = TRUE,
   dataverse_paths = ccesMRPprep::cces_dv_ids
 )
 }
@@ -26,9 +27,14 @@ have different column names in different datasets, but setting this to \code{TRU
 This way, every dataset that gets downloaded will have the unique identifier
 defined by the variables \code{c("year", "case_id")}.}
 
-\item{ver}{Version of the Dataverse dataset to extract. If not the default, setting
-"9" for example will extract V9 of the Dataverse. As of dataverse 0.3.15,
-datasets with the version specified will be cached.}
+\item{ver}{Version of the Dataverse dataset to extract. Use \code{":latest"}
+for the latest released version, or a concrete version such as \code{"9.0"}
+for reproducibility. \code{":draft"} is not supported.}
+
+\item{cache}{Logical, whether to cache downloaded files on disk. The default,
+\code{TRUE}, resolves \code{":latest"} to the current released version number
+before downloading, which allows the \code{dataverse} package to use its disk
+cache. Set to \code{FALSE} to re-download.}
 
 \item{dataverse_paths}{A dataframe where one row represents metadata for one
 CCES dataset. Built-in data \link{cces_dv_ids} is used as a default and should
@@ -42,21 +48,37 @@ This function is a simple wrapper around the \code{dataverse} pacakge on CRAN.
 It downloads the dataset from the dataverse, and loads it into a tibble with the appropriate
 file data type.  Using \link{get_cces_question} does some standardization across years, for example,
 the name of the case ID variable, so that it makes downstream.
-As of v0.3.15, \code{dataverse} accepts a cache by default if you specify a dataverse version.
-\code{get_cces_dataverse} does not specify a version and simplify re-downloads whatever
-is the latest version of the dataset on dataverse at the time, it does not support caching.
 You may be interested in customizing your download following  \url{https://cran.r-project.org/web/packages/dataverse/vignettes/C-download.html},
 or downloading the feather version of the CCES cumulative, which reads much
 faster than the default .dta file in this function.
 }
 \examples{
 
-# read in cumulative common content, subsetted to 2018, into environemt
+# Read cumulative common content, subsetted to 2018. By default, this uses
+# the latest released Dataverse version and keeps a local copy for next time.
 \dontrun{
  ccc <- get_cces_dataverse("cumulative", year_subset = 2018)
  }
 
-# Example code to read _and_ write a series of common content datasets
+# The default resolves to the latest released Dataverse version. As of
+# June 24, 2026, that is version 5.0 for the 2006 dataset.
+\dontrun{
+ cc06 <- get_cces_dataverse("2006")
+ #> i Using version "5.0" of "10.7910/DVN/Q8HC9N" (no existing cache on disk).
+ #> Downloading and reading large dataset, can take about 3-5 minutes to complete.
+
+ # The same call uses the same versioned cache entry.
+ cc06_again <- get_cces_dataverse("2006")
+ #> i Using version "5.0" of "10.7910/DVN/Q8HC9N" (using existing disk cache).
+
+ # A different version is a different request; if version 4.0 is not already
+ # cached, it downloads and keeps a separate local copy.
+ cc06_v4 <- get_cces_dataverse("2006", ver = "4.0")
+ #> i Using version "4.0" of "10.7910/DVN/Q8HC9N" (no existing cache on disk).
+ #> Downloading and reading large dataset, can take about 3-5 minutes to complete.
+ }
+
+# Example code to read and write a series of common content datasets
 # in a directory "data/input/cces/
 \dontrun{
 dir_create("data/cces")
