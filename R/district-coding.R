@@ -41,7 +41,7 @@ to_cd <- function(state, num) {
   }
 
   if (is.character(num)) {
-    num <- replace(num, num %in% c("AL", "DC"), "01")
+    num <- replace(num, num == "AL", "01")
     num <- as.numeric(num)
   }
 
