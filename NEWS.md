@@ -1,4 +1,5 @@
 * Update dataverse paths for cumulative
+* `get_cces_dataverse()` gains a `cache` argument (default `TRUE`) that resolves `:latest` to the concrete latest released version so the download is cached on disk, and reports the version being used via a CLI message (#28)
 
 # ccesMRPprep 0.1.15
 * Update dataverse paths for 2025 
