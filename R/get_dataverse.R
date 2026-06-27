@@ -30,7 +30,8 @@
 #' the name of the case ID variable, so that it makes downstream.
 #' You may be interested in customizing your download following  <https://cran.r-project.org/web/packages/dataverse/vignettes/C-download.html>,
 #' or downloading the feather version of the CCES cumulative, which reads much
-#' faster than the default .dta file in this function.
+#' faster than the default .dta file in this function. To clear the Dataverse
+#' disk cache, use \code{dataverse::cache_reset()}.
 #'
 #'
 #'
@@ -42,7 +43,7 @@
 #' @importFrom tibble add_column
 #' @importFrom magrittr `%>%`
 #' @importFrom rlang sym `!!` .data
-#' @importFrom dataverse get_dataframe_by_name get_file_by_name dataset_versions
+#' @importFrom dataverse dataset_files dataset_versions
 #' @importFrom cli cli_alert_info
 #' @importFrom memoise has_cache
 #'
@@ -56,22 +57,21 @@
 #'  ccc <- get_cces_dataverse("cumulative", year_subset = 2018)
 #'  }
 #'
-#' # The default resolves to the latest released Dataverse version. As of
-#' # June 24, 2026, that is version 5.0 for the 2006 dataset.
+#' # The default resolves to the latest released Dataverse version. For 2018,
+#' # version 6.0 and version 4.0 are different raw files on Dataverse.
 #' \dontrun{
-#'  cc06 <- get_cces_dataverse("2006")
-#'  #> i Using version "5.0" of "10.7910/DVN/Q8HC9N" (no existing cache on disk).
-#'  #> Downloading and reading large dataset, can take about 3-5 minutes to complete.
+#'  cc18 <- get_cces_dataverse("2018")
+#'  #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).
+#'  #> Downloading large dataset, can take a few minutes to complete.
 #'
 #'  # The same call uses the same versioned cache entry.
-#'  cc06_again <- get_cces_dataverse("2006")
-#'  #> i Using version "5.0" of "10.7910/DVN/Q8HC9N" (using existing disk cache).
+#'  cc18_again <- get_cces_dataverse("2018")
+#'  #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (using existing disk cache).
 #'
-#'  # A different version is a different request; if version 4.0 is not already
-#'  # cached, it downloads and keeps a separate local copy.
-#'  cc06_v4 <- get_cces_dataverse("2006", ver = "4.0")
-#'  #> i Using version "4.0" of "10.7910/DVN/Q8HC9N" (no existing cache on disk).
-#'  #> Downloading and reading large dataset, can take about 3-5 minutes to complete.
+#'  # Version 4.0 resolves to a different file, so it is cached separately.
+#'  cc18_v4 <- get_cces_dataverse("2018", ver = "4.0")
+#'  #> i Using version "4.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).
+#'  #> Downloading large dataset, can take a few minutes to complete.
 #'  }
 #'
 #' # Example code to read and write a series of common content datasets
@@ -133,7 +133,6 @@ get_cces_dataverse <- function(name = "cumulative",
     fun <- readr::read_rds
 
   # read tempfile -----
-  large_dataset <- isTRUE(yr %% 2 == 0) || identical(doi, "10.7910/DVN/II2DB6")
   file_cached <- dataverse_file_cached(filename = y_info$filename,
                                        dataset = glue("doi:{doi}"),
                                        server = svr,
@@ -147,16 +146,16 @@ get_cces_dataverse <- function(name = "cumulative",
     "no existing cache on disk"
   }
   cli_alert_info("Using version {.val {ver}} of {.val {doi}} ({cache_status}).")
-  if (large_dataset && !file_cached)
-    cat("Downloading and reading large dataset, can take about 3-5 minutes to complete.", "\n")
+  if (!file_cached)
+    cat("Downloading large dataset, can take a few minutes to complete.", "\n")
 
-  cces_raw <- get_dataframe_by_name(filename = glue("{y_info$filename}"),
-                                    dataset = glue("doi:{doi}"),
-                                    server = svr,
-                                    original = TRUE,
-                                    version = ver,
-                                    use_cache = use_cache,
-                                    .f = fun)
+  cces_raw <- read_dataverse_file(filename = y_info$filename,
+                                  dataset = glue("doi:{doi}"),
+                                  server = svr,
+                                  version = ver,
+                                  use_cache = use_cache,
+                                  filetype = filetype,
+                                  .f = fun)
 
   # subset ---
   if (name == "cumulative" & !is.null(year_subset)) {
@@ -216,34 +215,26 @@ latest_dataverse_version <- function(doi, server) {
 
 #' Check whether a Dataverse raw file request is already in the disk cache
 #'
+#' The version is used to resolve the file by name, but the raw-file cache
+#' follows the \code{dataverse} package and is keyed by the resolved file URL.
+#'
 #' @examples
 #' \dontrun{
 #' dataverse_file_cached(
-#'   filename = "nlsw88_rds-export.rds",
-#'   dataset = "doi:10.70122/FK2/PPIAXE",
-#'   server = "demo.dataverse.org",
-#'   version = "3.0",
+#'   filename = "cces18_common_vv.dta",
+#'   dataset = "doi:10.7910/DVN/ZSBZ7K",
+#'   server = "dataverse.harvard.edu",
+#'   version = "6.0",
 #'   use_cache = "disk"
-#' )
-#'
-#' nlsw88 <- dataverse::get_dataframe_by_name(
-#'   filename = "nlsw88_rds-export.rds",
-#'   dataset = "doi:10.70122/FK2/PPIAXE",
-#'   server = "demo.dataverse.org",
-#'   version = "3.0",
-#'   use_cache = "disk",
-#'   original = TRUE,
-#'   .f = readr::read_rds
 #' )
 #'
 #' dataverse_file_cached(
-#'   filename = "nlsw88_rds-export.rds",
-#'   dataset = "doi:10.70122/FK2/PPIAXE",
-#'   server = "demo.dataverse.org",
-#'   version = "3.0",
+#'   filename = "cces18_common_vv.dta",
+#'   dataset = "doi:10.7910/DVN/ZSBZ7K",
+#'   server = "dataverse.harvard.edu",
+#'   version = "4.0",
 #'   use_cache = "disk"
 #' )
-#' #> [1] TRUE
 #' }
 #' @keywords internal
 #' @noRd
@@ -260,26 +251,87 @@ dataverse_file_cached <- function(filename, dataset, server, version, use_cache)
   has_cache(getFromNamespace("api_get_disk_cache", "dataverse"))(
     request$url,
     query = request$query,
-    version = version,
+    NULL,
     key = Sys.getenv("DATAVERSE_KEY"),
     as = "raw"
   )
 }
 
 
-#' Build the raw Dataverse file request used for reading and cache checks
+#' Read a Dataverse file using the same request shape as the cache check
+#'
+#' This deliberately does not use \code{dataverse::get_dataframe_by_name()}.
+#' That helper resolves the versioned file id, then calls an ingest-status lookup
+#' that can fail for historical file ids even when the raw file is downloadable.
+#' Reading the raw file request directly keeps historical version downloads and
+#' cache checks on the same path.
 #'
 #' @examples
 #' \dontrun{
-#' dataverse_file_request(
+#' x <- read_dataverse_file(
 #'   filename = "nlsw88_rds-export.rds",
 #'   dataset = "doi:10.70122/FK2/PPIAXE",
 #'   server = "demo.dataverse.org",
 #'   version = "3.0",
+#'   use_cache = "disk",
+#'   filetype = ".rds",
+#'   .f = readr::read_rds
+#' )
+#' dim(x)
+#' #> [1] 2246   17
+#' }
+#' @keywords internal
+#' @noRd
+read_dataverse_file <- function(filename, dataset, server, version, use_cache, filetype, .f) {
+  request <- dataverse_file_request(filename = filename,
+                                    dataset = dataset,
+                                    server = server,
+                                    version = version,
+                                    use_cache = use_cache)
+  raw_file <- getFromNamespace("api_get", "dataverse")(
+    request$url,
+    query = request$query,
+    NULL,
+    key = Sys.getenv("DATAVERSE_KEY"),
+    as = "raw",
+    use_cache = use_cache
+  )
+  tmp <- tempfile(fileext = filetype)
+  on.exit(unlink(tmp), add = TRUE)
+  writeBin(raw_file, tmp)
+  .f(tmp)
+}
+
+
+#' Build the raw Dataverse file request used for reading and cache checks
+#'
+#' The version is used to resolve the file by name, but the returned raw-file
+#' request is the same shape that \code{dataverse} uses for its disk cache.
+#'
+#' @examples
+#' \dontrun{
+#' dataverse_file_request(
+#'   filename = "cces18_common_vv.dta",
+#'   dataset = "doi:10.7910/DVN/ZSBZ7K",
+#'   server = "dataverse.harvard.edu",
+#'   version = "6.0",
 #'   use_cache = "disk"
 #' )
 #' #> $url
-#' #> [1] "https://demo.dataverse.org/api/access/datafile/1734016"
+#' #> [1] "https://dataverse.harvard.edu/api/access/datafile/3596258"
+#' #>
+#' #> $query
+#' #> list()
+#'
+#' dataverse_file_request(
+#'   filename = "cces18_common_vv.dta",
+#'   dataset = "doi:10.7910/DVN/ZSBZ7K",
+#'   server = "dataverse.harvard.edu",
+#'   version = "4.0",
+#'   use_cache = "disk"
+#' )
+#' #> $url
+#' #> [1] "https://dataverse.harvard.edu/api/access/datafile/3593239"
 #' #>
 #' #> $query
 #' #> list()
@@ -287,26 +339,23 @@ dataverse_file_cached <- function(filename, dataset, server, version, use_cache)
 #' @keywords internal
 #' @noRd
 dataverse_file_request <- function(filename, dataset, server, version, use_cache) {
-  file_url <- get_file_by_name(filename = filename,
-                               dataset = dataset,
-                               server = server,
-                               original = TRUE,
-                               version = version,
-                               use_cache = use_cache,
-                               return_url = TRUE)
-  url_parts <- strsplit(file_url, "?", fixed = TRUE)[[1]]
-  url <- url_parts[[1]]
+  files <- dataset_files(dataset = dataset,
+                         server = server,
+                         version = version,
+                         use_cache = use_cache)
+  file_labels <- vapply(files, `[[`, character(1), "label")
+  file_ids <- vapply(files, function(x) x[["dataFile"]][["id"]], integer(1))
+  file_match <- which(file_labels %in% filename)
+
+  if (!length(file_match))
+    stop("File not found")
+
+  file_info <- files[[file_match[[1]]]]
+  url <- paste0(getFromNamespace("api_url", "dataverse")(server), "access/datafile/", file_ids[[file_match[[1]]]])
   query <- list()
 
-  if (length(url_parts) > 1) {
-    query_parts <- strsplit(url_parts[[2]], "&", fixed = TRUE)[[1]]
-    query <- lapply(query_parts, function(x) {
-      utils::URLdecode(strsplit(x, "=", fixed = TRUE)[[1]][[2]])
-    })
-    names(query) <- vapply(query_parts, function(x) {
-      utils::URLdecode(strsplit(x, "=", fixed = TRUE)[[1]][[1]])
-    }, character(1))
-  }
+  if (isTRUE(file_info$dataFile$tabularData))
+    query$format <- "original"
 
   list(url = url, query = query)
 }

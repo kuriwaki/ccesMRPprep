@@ -50,7 +50,8 @@ file data type.  Using \link{get_cces_question} does some standardization across
 the name of the case ID variable, so that it makes downstream.
 You may be interested in customizing your download following  \url{https://cran.r-project.org/web/packages/dataverse/vignettes/C-download.html},
 or downloading the feather version of the CCES cumulative, which reads much
-faster than the default .dta file in this function.
+faster than the default .dta file in this function. To clear the Dataverse
+disk cache, use \code{dataverse::cache_reset()}.
 }
 \examples{
 
@@ -60,23 +61,22 @@ faster than the default .dta file in this function.
  ccc <- get_cces_dataverse("cumulative", year_subset = 2018)
  }
 
-# The default resolves to the latest released Dataverse version. As of
-# June 24, 2026, that is version 5.0 for the 2006 dataset.
+# The default resolves to the latest released Dataverse version. For 2018,
+# version 6.0 and version 4.0 are different raw files on Dataverse.
 \dontrun{
- cc06 <- get_cces_dataverse("2006")
- #> i Using version "5.0" of "10.7910/DVN/Q8HC9N" (no existing cache on disk).
- #> Downloading and reading large dataset, can take about 3-5 minutes to complete.
+ cc18 <- get_cces_dataverse("2018")
+ #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).
+ #> Downloading large dataset, can take a few minutes to complete.
 
  # The same call uses the same versioned cache entry.
- cc06_again <- get_cces_dataverse("2006")
- #> i Using version "5.0" of "10.7910/DVN/Q8HC9N" (using existing disk cache).
+ cc18_again <- get_cces_dataverse("2018")
+ #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (using existing disk cache).
 
- # A different version is a different request; if version 4.0 is not already
- # cached, it downloads and keeps a separate local copy.
- cc06_v4 <- get_cces_dataverse("2006", ver = "4.0")
- #> i Using version "4.0" of "10.7910/DVN/Q8HC9N" (no existing cache on disk).
- #> Downloading and reading large dataset, can take about 3-5 minutes to complete.
- }
+ # Version 4.0 resolves to a different file, so it is cached separately.
+ cc18_v4 <- get_cces_dataverse("2018", ver = "4.0")
+ #> i Using version "4.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).
+ #> Downloading large dataset, can take a few minutes to complete.
+}
 
 # Example code to read and write a series of common content datasets
 # in a directory "data/input/cces/
