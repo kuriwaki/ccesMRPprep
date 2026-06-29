@@ -45,7 +45,6 @@
 #' @importFrom rlang sym `!!` .data
 #' @importFrom dataverse dataset_files dataset_versions
 #' @importFrom cli cli_alert_info
-#' @importFrom memoise has_cache
 #'
 #' @seealso [ccc_std_demographics()] [cces_dv_ids]
 #'
@@ -61,17 +60,11 @@
 #' # version 6.0 and version 4.0 are different raw files on Dataverse.
 #' \dontrun{
 #'  cc18 <- get_cces_dataverse("2018")
-#'  #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).
-#'  #> Downloading large dataset, can take a few minutes to complete.
-#'
-#'  # The same call uses the same versioned cache entry.
-#'  cc18_again <- get_cces_dataverse("2018")
-#'  #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (using existing disk cache).
+#'  #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K".
 #'
 #'  # Version 4.0 resolves to a different file, so it is cached separately.
 #'  cc18_v4 <- get_cces_dataverse("2018", ver = "4.0")
-#'  #> i Using version "4.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).
-#'  #> Downloading large dataset, can take a few minutes to complete.
+#'  #> i Using version "4.0" of "10.7910/DVN/ZSBZ7K".
 #'  }
 #'
 #' # Example code to read and write a series of common content datasets
@@ -133,21 +126,7 @@ get_cces_dataverse <- function(name = "cumulative",
     fun <- readr::read_rds
 
   # read tempfile -----
-  file_cached <- dataverse_file_cached(filename = y_info$filename,
-                                       dataset = glue("doi:{doi}"),
-                                       server = svr,
-                                       version = ver,
-                                       use_cache = use_cache)
-  cache_status <- if (!cache) {
-    "disk cache disabled"
-  } else if (file_cached) {
-    "using existing disk cache"
-  } else {
-    "no existing cache on disk"
-  }
-  cli_alert_info("Using version {.val {ver}} of {.val {doi}} ({cache_status}).")
-  if (!file_cached)
-    cat("Downloading large dataset, can take a few minutes to complete.", "\n")
+  cli_alert_info("Using version {.val {ver}} of {.val {doi}}.")
 
   cces_raw <- read_dataverse_file(filename = y_info$filename,
                                   dataset = glue("doi:{doi}"),
@@ -210,51 +189,6 @@ latest_dataverse_version <- function(doi, server) {
   latest <- released[[tail(order(versions$versionNumber, versions$versionMinorNumber), 1)]]
 
   as.character(glue("{latest$versionNumber}.{latest$versionMinorNumber}"))
-}
-
-
-#' Check whether a Dataverse raw file request is already in the disk cache
-#'
-#' The version is used to resolve the file by name, but the raw-file cache
-#' follows the \code{dataverse} package and is keyed by the resolved file URL.
-#'
-#' @examples
-#' \dontrun{
-#' dataverse_file_cached(
-#'   filename = "cces18_common_vv.dta",
-#'   dataset = "doi:10.7910/DVN/ZSBZ7K",
-#'   server = "dataverse.harvard.edu",
-#'   version = "6.0",
-#'   use_cache = "disk"
-#' )
-#'
-#' dataverse_file_cached(
-#'   filename = "cces18_common_vv.dta",
-#'   dataset = "doi:10.7910/DVN/ZSBZ7K",
-#'   server = "dataverse.harvard.edu",
-#'   version = "4.0",
-#'   use_cache = "disk"
-#' )
-#' }
-#' @keywords internal
-#' @noRd
-dataverse_file_cached <- function(filename, dataset, server, version, use_cache) {
-  if (!identical(use_cache, "disk"))
-    return(FALSE)
-
-  request <- dataverse_file_request(filename = filename,
-                                    dataset = dataset,
-                                    server = server,
-                                    version = version,
-                                    use_cache = use_cache)
-
-  has_cache(getFromNamespace("api_get_disk_cache", "dataverse"))(
-    request$url,
-    query = request$query,
-    NULL,
-    key = Sys.getenv("DATAVERSE_KEY"),
-    as = "raw"
-  )
 }
 
 
