@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.15</span>
       </span>
     </div>
 
@@ -199,49 +199,18 @@ must be supplied here as well.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># only do this once, replacing the input with your census key</span></span>
 <span><span class="fu">tidycensus</span><span class="fu">::</span><span class="fu"><a href="https://walker-data.com/tidycensus/reference/census_api_key.html" class="external-link">census_api_key</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CENSUS_API_KEY"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; To install your API key for use in future sessions, run this function with `install = TRUE`.</span></span>
 <span></span>
 <span><span class="va">acs_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_acs_cces.html">get_acs_cces</a></span><span class="op">(</span></span>
 <span>  varlist <span class="op">=</span> <span class="va">acscodes_age_sex_educ</span>,</span>
 <span>  varlab_df <span class="op">=</span> <span class="va">acscodes_df</span>,</span>
 <span>  year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Getting data from the 2018 1-year ACS</span></span>
-<span><span class="co">#&gt; The 1-year ACS provides data for geographies with populations of 65,000 and greater.</span></span>
-<span><span class="co">#&gt; Warning: <span style="color: #00BBBB;">•</span> You have not set a Census API key. Users without a key are limited to 500</span></span>
-<span><span class="co">#&gt; queries per day and may experience performance limitations.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> For best results, get a Census API key at</span></span>
-<span><span class="co">#&gt; http://api.census.gov/data/key_signup.html and then supply the key to the</span></span>
-<span><span class="co">#&gt; `census_api_key()` function to use it throughout your tidycensus session.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once per session.</span></span></span>
 <span></span>
 <span><span class="va">poststrat</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/get_poststrat.html">get_poststrat</a></span><span class="op">(</span></span>
 <span>  cleaned_acs <span class="op">=</span> <span class="va">acs_tab</span>, </span>
 <span>  dist_data <span class="op">=</span> <span class="va">cd_info_2018</span>, </span>
 <span>  formula <span class="op">=</span> <span class="va">fm_brm</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Joining with `by = join_by(year, cd)`</span></span>
-<span><span class="co">#&gt; Warning: Using `across()` in `filter()` was deprecated in dplyr 1.0.8.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use `if_any()` or `if_all()` instead.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">ccesMRPprep</span> package.</span></span>
-<span><span class="co">#&gt;   Please report the issue to the authors.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
 <span></span>
-<span> <span class="va">poststrat</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17,318 × 6</span></span></span>
-<span><span class="co">#&gt;    age            gender educ       pct_trump cd    count</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 18 to 24 years Male   HS or Less    0.049<span style="text-decoration: underline;">6</span> NY-15 <span style="text-decoration: underline;">21</span>859</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 18 to 24 years Male   HS or Less    0.055<span style="text-decoration: underline;">3</span> NY-13 <span style="text-decoration: underline;">15</span>491</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 18 to 24 years Male   HS or Less    0.071<span style="text-decoration: underline;">5</span> PA-03 <span style="text-decoration: underline;">14</span>171</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 18 to 24 years Male   HS or Less    0.072<span style="text-decoration: underline;">2</span> CA-13 <span style="text-decoration: underline;">13</span>738</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 18 to 24 years Male   HS or Less    0.091<span style="text-decoration: underline;">7</span> CA-12  <span style="text-decoration: underline;">4</span>893</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 18 to 24 years Male   HS or Less    0.095<span style="text-decoration: underline;">2</span> IL-07 <span style="text-decoration: underline;">15</span>820</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 18 to 24 years Male   HS or Less    0.101  CA-37 <span style="text-decoration: underline;">13</span>440</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 18 to 24 years Male   HS or Less    0.107  NY-07 <span style="text-decoration: underline;">12</span>768</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 18 to 24 years Male   HS or Less    0.113  CA-34 <span style="text-decoration: underline;">19</span>439</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 18 to 24 years Male   HS or Less    0.123  GA-05 <span style="text-decoration: underline;">16</span>741</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17,308 more rows</span></span></span></code></pre></div>
+<span> <span class="va">poststrat</span></span></code></pre></div>
 <p>You need to get a API key from the census website to run this
 command. See <code><a href="../articles/acs.html">vignette("acs")</a></code>.</p>
 </div>
@@ -290,7 +259,7 @@ covariates.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>

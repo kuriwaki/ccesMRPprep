@@ -20,7 +20,7 @@ is the fraction."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.15</span>
       </span>
     </div>
 
@@ -135,26 +135,10 @@ Use <code>"acs5"</code> for 5-year.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="fu">get_acs_cvap</span><span class="op">(</span><span class="st">"white"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Getting data from the 2018 1-year ACS</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The 1-year ACS provides data for geographies with populations of 65,000 and greater.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span><span style="color: #00BBBB;">•</span> You have not set a Census API key. Users without a key are limited to 500</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> queries per day and may experience performance limitations.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> For best results, get a Census API key at</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> http://api.census.gov/data/key_signup.html and then supply the key to the</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> `census_api_key()` function to use it throughout your tidycensus session.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">This warning is displayed once per session.</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 436 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year cd    cvap_total race  cvap_race cvap_frac</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>018 AK-01     <span style="text-decoration: underline;">532</span>244 white    <span style="text-decoration: underline;">349</span>058     0.656</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>018 AL-01     <span style="text-decoration: underline;">544</span>464 white    <span style="text-decoration: underline;">370</span>443     0.680</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>018 AL-02     <span style="text-decoration: underline;">516</span>295 white    <span style="text-decoration: underline;">331</span>192     0.641</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>018 AL-03     <span style="text-decoration: underline;">543</span>854 white    <span style="text-decoration: underline;">381</span>547     0.702</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>018 AL-04     <span style="text-decoration: underline;">515</span>701 white    <span style="text-decoration: underline;">451</span>856     0.876</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>018 AL-05     <span style="text-decoration: underline;">551</span>968 white    <span style="text-decoration: underline;">420</span>181     0.761</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>018 AL-06     <span style="text-decoration: underline;">535</span>753 white    <span style="text-decoration: underline;">423</span>727     0.791</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>018 AL-07     <span style="text-decoration: underline;">504</span>177 white    <span style="text-decoration: underline;">175</span>060     0.347</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>018 AR-01     <span style="text-decoration: underline;">548</span>710 white    <span style="text-decoration: underline;">431</span>129     0.786</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>018 AR-02     <span style="text-decoration: underline;">570</span>220 white    <span style="text-decoration: underline;">413</span>714     0.726</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 426 more rows</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_census_api_key(key):</span> A Census API key is required for tidycensus requests.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> Get a Census API key at https://api.census.gov/data/key_signup.html, then pass</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> it to a tidycensus function with the `key` argument or store it for future</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> sessions with `census_api_key("YOUR KEY", install = TRUE)`.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -170,7 +154,7 @@ Use <code>"acs5"</code> for 5-year.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>
