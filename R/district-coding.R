@@ -33,9 +33,10 @@ to_cd <- function(state, num) {
     state <- recode(as.numeric(state), !!!fips_to_st)
   }
 
-  statenames = ccesMRPprep::states_key$state
+  statenames = c(ccesMRPprep::states_key$state, "District of Columbia", "DC")
   if (all(state %in% c(statenames, toupper(statenames), tolower(statenames)))) {
     state_to_st <- deframe(transmute(states_key, state = toupper(.data$state), st = .data$st))
+    state_to_st["DISTRICT OF COLUMBIA"] <- "DC"
     state <- recode(toupper(state), !!!state_to_st)
   }
 
@@ -48,5 +49,5 @@ to_cd <- function(state, num) {
   num <- replace(num, num == 0, "01") # at large becomes one
   numchr  <- str_pad(num, width = 2, pad = "0")
 
-  as.character(glue("{state}-{numchr}"))
+  replace(as.character(glue("{state}-{numchr}")), state == "DC", NA_character_)
 }
