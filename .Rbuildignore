@@ -13,3 +13,5 @@
 ^\.ccache$
 ^tic\.R$
 ^LICENSE\.md$
+^\.positai$
+^\.claude$
