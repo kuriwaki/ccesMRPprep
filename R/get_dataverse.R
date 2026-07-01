@@ -39,12 +39,14 @@
 #' @importFrom stringr str_extract
 #' @importFrom haven read_dta read_sav
 #' @importFrom readr read_rds
+#' @importFrom arrow read_feather
 #' @importFrom dplyr select rename everything filter
 #' @importFrom tibble add_column
 #' @importFrom magrittr `%>%`
 #' @importFrom rlang sym `!!` .data
 #' @importFrom dataverse dataset_files dataset_versions
 #' @importFrom cli cli_alert_info
+#' @importFrom memoise has_cache
 #'
 #' @seealso [ccc_std_demographics()] [cces_dv_ids]
 #'
@@ -125,8 +127,25 @@ get_cces_dataverse <- function(name = "cumulative",
   if (filetype == ".Rds")
     fun <- readr::read_rds
 
+  if (filetype == ".feather")
+    fun <- arrow::read_feather
+
   # read tempfile -----
-  cli_alert_info("Using version {.val {ver}} of {.val {doi}}.")
+  file_cached <- dataverse_file_cached(filename = y_info$filename,
+                                       dataset = glue("doi:{doi}"),
+                                       server = svr,
+                                       version = ver,
+                                       use_cache = use_cache)
+  cache_status <- if (!cache) {
+    "disk cache disabled"
+  } else if (file_cached) {
+    "using existing disk cache"
+  } else {
+    "no existing cache on disk"
+  }
+  cli_alert_info("Using version {.val {ver}} of {.val {doi}} ({cache_status}).")
+  if (!file_cached)
+    cat("Downloading large dataset, can take a few minutes to complete.", "\n")
 
   cces_raw <- read_dataverse_file(filename = y_info$filename,
                                   dataset = glue("doi:{doi}"),
@@ -237,10 +256,57 @@ read_dataverse_file <- function(filename, dataset, server, version, use_cache, f
 }
 
 
+#' Check whether a Dataverse raw file request is already in the disk cache
+#'
+#' The version is used to resolve the file by name, but the raw-file cache
+#' follows the \code{dataverse} package and is keyed by the resolved file URL.
+#'
+#' @examples
+#' \dontrun{
+#' dataverse_file_cached(
+#'   filename = "cces18_common_vv.dta",
+#'   dataset = "doi:10.7910/DVN/ZSBZ7K",
+#'   server = "dataverse.harvard.edu",
+#'   version = "6.0",
+#'   use_cache = "disk"
+#' )
+#'
+#' dataverse_file_cached(
+#'   filename = "cces18_common_vv.dta",
+#'   dataset = "doi:10.7910/DVN/ZSBZ7K",
+#'   server = "dataverse.harvard.edu",
+#'   version = "4.0",
+#'   use_cache = "disk"
+#' )
+#' }
+#' @keywords internal
+#' @noRd
+dataverse_file_cached <- function(filename, dataset, server, version, use_cache) {
+  if (!identical(use_cache, "disk"))
+    return(FALSE)
+
+  request <- dataverse_file_request(filename = filename,
+                                    dataset = dataset,
+                                    server = server,
+                                    version = version,
+                                    use_cache = use_cache)
+
+  has_cache(getFromNamespace("api_get_disk_cache", "dataverse"))(
+    request$url,
+    query = request$query,
+    NULL,
+    key = Sys.getenv("DATAVERSE_KEY"),
+    as = "raw"
+  )
+}
+
+
 #' Build the raw Dataverse file request used for reading and cache checks
 #'
 #' The version is used to resolve the file by name, but the returned raw-file
 #' request is the same shape that \code{dataverse} uses for its disk cache.
+#' If the requested cumulative feather filename is stale, this accepts a single
+#' \code{(cces_)cumulative_*.feather} file in the resolved Dataverse version.
 #'
 #' @examples
 #' \dontrun{
@@ -280,6 +346,15 @@ dataverse_file_request <- function(filename, dataset, server, version, use_cache
   file_labels <- vapply(files, `[[`, character(1), "label")
   file_ids <- vapply(files, function(x) x[["dataFile"]][["id"]], integer(1))
   file_match <- which(file_labels %in% filename)
+
+  if (!length(file_match) && grepl("^(cces_)?cumulative_.*\\.feather$", filename)) {
+    file_match <- grep("^(cces_)?cumulative_.*\\.feather$", file_labels)
+    if (length(file_match) != 1) {
+      stop(glue(
+        "File not found: {filename}. Expected exactly one cumulative feather file, found {length(file_match)}."
+      ))
+    }
+  }
 
   if (!length(file_match))
     stop("File not found")
