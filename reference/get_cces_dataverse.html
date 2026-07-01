@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ccesMRPprep</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.16</span>
       </span>
     </div>
 
@@ -82,6 +82,7 @@
 <span>  year_subset <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  std_index <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ver <span class="op">=</span> <span class="st">":latest"</span>,</span>
+<span>  cache <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  dataverse_paths <span class="op">=</span> <span class="fu">ccesMRPprep</span><span class="fu">::</span><span class="va"><a href="cces_dv_ids.html">cces_dv_ids</a></span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -110,9 +111,16 @@ defined by the variables <code>c("year", "case_id")</code>.</p></dd>
 
 
 <dt id="arg-ver">ver<a class="anchor" aria-label="anchor" href="#arg-ver"></a></dt>
-<dd><p>Version of the Dataverse dataset to extract. If not the default, setting
-"9" for example will extract V9 of the Dataverse. As of dataverse 0.3.15,
-datasets with the version specified will be cached.</p></dd>
+<dd><p>Version of the Dataverse dataset to extract. Use <code>":latest"</code>
+for the latest released version, or a concrete version such as <code>"9.0"</code>
+for reproducibility. <code>":draft"</code> is not supported.</p></dd>
+
+
+<dt id="arg-cache">cache<a class="anchor" aria-label="anchor" href="#arg-cache"></a></dt>
+<dd><p>Logical, whether to cache downloaded files on disk. The default,
+<code>TRUE</code>, resolves <code>":latest"</code> to the current released version number
+before downloading, which allows the <code>dataverse</code> package to use its disk
+cache. Set to <code>FALSE</code> to re-download.</p></dd>
 
 
 <dt id="arg-dataverse-paths">dataverse_paths<a class="anchor" aria-label="anchor" href="#arg-dataverse-paths"></a></dt>
@@ -127,12 +135,10 @@ not be changed.</p></dd>
 It downloads the dataset from the dataverse, and loads it into a tibble with the appropriate
 file data type.  Using <a href="get_cces_question.html">get_cces_question</a> does some standardization across years, for example,
 the name of the case ID variable, so that it makes downstream.
-As of v0.3.15, <code>dataverse</code> accepts a cache by default if you specify a dataverse version.
-<code>get_cces_dataverse</code> does not specify a version and simplify re-downloads whatever
-is the latest version of the dataset on dataverse at the time, it does not support caching.
 You may be interested in customizing your download following  <a href="https://cran.r-project.org/web/packages/dataverse/vignettes/C-download.html" class="external-link">https://cran.r-project.org/web/packages/dataverse/vignettes/C-download.html</a>,
 or downloading the feather version of the CCES cumulative, which reads much
-faster than the default .dta file in this function.</p>
+faster than the default .dta file in this function. To clear the Dataverse
+disk cache, use <code><a href="https://iqss.github.io/dataverse-client-r/reference/cache.html" class="external-link">dataverse::cache_reset()</a></code>.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -142,12 +148,30 @@ faster than the default .dta file in this function.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># read in cumulative common content, subsetted to 2018, into environemt</span></span></span>
+<span class="r-in"><span><span class="co"># Read cumulative common content, subsetted to 2018. By default, this uses</span></span></span>
+<span class="r-in"><span><span class="co"># the latest released Dataverse version and keeps a local copy for next time.</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span> <span class="va">ccc</span> <span class="op">&lt;-</span> <span class="fu">get_cces_dataverse</span><span class="op">(</span><span class="st">"cumulative"</span>, year_subset <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Example code to read _and_ write a series of common content datasets</span></span></span>
+<span class="r-in"><span><span class="co"># The default resolves to the latest released Dataverse version. For 2018,</span></span></span>
+<span class="r-in"><span><span class="co"># version 6.0 and version 4.0 are different raw files on Dataverse.</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span> <span class="va">cc18</span> <span class="op">&lt;-</span> <span class="fu">get_cces_dataverse</span><span class="op">(</span><span class="st">"2018"</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="co">#&gt; i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).</span></span></span>
+<span class="r-in"><span> <span class="co">#&gt; Downloading large dataset, can take a few minutes to complete.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="co"># The same call uses the same versioned cache entry.</span></span></span>
+<span class="r-in"><span> <span class="va">cc18_again</span> <span class="op">&lt;-</span> <span class="fu">get_cces_dataverse</span><span class="op">(</span><span class="st">"2018"</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="co">#&gt; i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (using existing disk cache).</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="co"># Version 4.0 resolves to a different file, so it is cached separately.</span></span></span>
+<span class="r-in"><span> <span class="va">cc18_v4</span> <span class="op">&lt;-</span> <span class="fu">get_cces_dataverse</span><span class="op">(</span><span class="st">"2018"</span>, ver <span class="op">=</span> <span class="st">"4.0"</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="co">#&gt; i Using version "4.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).</span></span></span>
+<span class="r-in"><span> <span class="co">#&gt; Downloading large dataset, can take a few minutes to complete.</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example code to read and write a series of common content datasets</span></span></span>
 <span class="r-in"><span><span class="co"># in a directory "data/input/cces/</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"data/cces"</span><span class="op">)</span></span></span>
