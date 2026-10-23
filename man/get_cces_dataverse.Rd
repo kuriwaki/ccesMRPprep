@@ -10,7 +10,8 @@ get_cces_dataverse(
   std_index = TRUE,
   ver = ":latest",
   cache = TRUE,
-  dataverse_paths = ccesMRPprep::cces_dv_ids
+  dataverse_paths = ccesMRPprep::cces_dv_ids,
+  filetype = "dta"
 )
 }
 \arguments{
@@ -39,6 +40,11 @@ cache. Set to \code{FALSE} to re-download.}
 \item{dataverse_paths}{A dataframe where one row represents metadata for one
 CCES dataset. Built-in data \link{cces_dv_ids} is used as a default and should
 not be changed.}
+
+\item{filetype}{File format to download: \code{"dta"} (default) or
+\code{"feather"}. The default uses the configured file for each dataset,
+including older year-specific datasets in other formats. Feather requires
+the \code{arrow} package and a matching file in the requested version.}
 }
 \description{
 Wrapper function to get CCES/CES data from dataverse into the current R environment using the \code{dataverse} package.
@@ -48,10 +54,9 @@ This function is a simple wrapper around the \code{dataverse} pacakge on CRAN.
 It downloads the dataset from the dataverse, and loads it into a tibble with the appropriate
 file data type.  Using \link{get_cces_question} does some standardization across years, for example,
 the name of the case ID variable, so that it makes downstream.
-You may be interested in customizing your download following  \url{https://cran.r-project.org/web/packages/dataverse/vignettes/C-download.html},
-or downloading the feather version of the CCES cumulative, which reads much
-faster than the default .dta file in this function. To clear the Dataverse
-disk cache, use \code{dataverse::cache_reset()}.
+Cumulative filenames may have different year ranges across Dataverse versions.
+The requested version must contain exactly one cumulative file of the requested
+format. To clear the Dataverse disk cache, use \code{dataverse::cache_reset()}.
 }
 \examples{
 
@@ -59,6 +64,9 @@ disk cache, use \code{dataverse::cache_reset()}.
 # the latest released Dataverse version and keeps a local copy for next time.
 \dontrun{
  ccc <- get_cces_dataverse("cumulative", year_subset = 2018)
+
+ ccc_feather <- get_cces_dataverse("cumulative", filetype = "feather",
+                                  year_subset = 2018)
  }
 
 # The default resolves to the latest released Dataverse version. For 2018,
@@ -76,7 +84,7 @@ disk cache, use \code{dataverse::cache_reset()}.
  cc18_v4 <- get_cces_dataverse("2018", ver = "4.0")
  #> i Using version "4.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).
  #> Downloading large dataset, can take a few minutes to complete.
-}
+ }
 
 # Example code to read and write a series of common content datasets
 # in a directory "data/input/cces/

@@ -23,15 +23,18 @@
 #' @param dataverse_paths A dataframe where one row represents metadata for one
 #' CCES dataset. Built-in data \link{cces_dv_ids} is used as a default and should
 #' not be changed.
+#' @param filetype File format to download: \code{"dta"} (default) or
+#' \code{"feather"}. The default uses the configured file for each dataset,
+#' including older year-specific datasets in other formats. Feather requires
+#' the \code{arrow} package and a matching file in the requested version.
 #'
 #' @details This function is a simple wrapper around the `dataverse` pacakge on CRAN.
 #' It downloads the dataset from the dataverse, and loads it into a tibble with the appropriate
 #' file data type.  Using \link{get_cces_question} does some standardization across years, for example,
 #' the name of the case ID variable, so that it makes downstream.
-#' You may be interested in customizing your download following  <https://cran.r-project.org/web/packages/dataverse/vignettes/C-download.html>,
-#' or downloading the feather version of the CCES cumulative, which reads much
-#' faster than the default .dta file in this function. To clear the Dataverse
-#' disk cache, use \code{dataverse::cache_reset()}.
+#' Cumulative filenames may have different year ranges across Dataverse versions.
+#' The requested version must contain exactly one cumulative file of the requested
+#' format. To clear the Dataverse disk cache, use \code{dataverse::cache_reset()}.
 #'
 #'
 #'
@@ -39,7 +42,6 @@
 #' @importFrom stringr str_extract
 #' @importFrom haven read_dta read_sav
 #' @importFrom readr read_rds
-#' @importFrom arrow read_feather
 #' @importFrom dplyr select rename everything filter
 #' @importFrom tibble add_column
 #' @importFrom magrittr `%>%`
@@ -56,17 +58,26 @@
 #' # the latest released Dataverse version and keeps a local copy for next time.
 #' \dontrun{
 #'  ccc <- get_cces_dataverse("cumulative", year_subset = 2018)
+#'
+#'  ccc_feather <- get_cces_dataverse("cumulative", filetype = "feather",
+#'                                   year_subset = 2018)
 #'  }
 #'
 #' # The default resolves to the latest released Dataverse version. For 2018,
 #' # version 6.0 and version 4.0 are different raw files on Dataverse.
 #' \dontrun{
 #'  cc18 <- get_cces_dataverse("2018")
-#'  #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K".
+#'  #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).
+#'  #> Downloading large dataset, can take a few minutes to complete.
+#'
+#'  # The same call uses the same versioned cache entry.
+#'  cc18_again <- get_cces_dataverse("2018")
+#'  #> i Using version "6.0" of "10.7910/DVN/ZSBZ7K" (using existing disk cache).
 #'
 #'  # Version 4.0 resolves to a different file, so it is cached separately.
 #'  cc18_v4 <- get_cces_dataverse("2018", ver = "4.0")
-#'  #> i Using version "4.0" of "10.7910/DVN/ZSBZ7K".
+#'  #> i Using version "4.0" of "10.7910/DVN/ZSBZ7K" (no existing cache on disk).
+#'  #> Downloading large dataset, can take a few minutes to complete.
 #'  }
 #'
 #' # Example code to read and write a series of common content datasets
@@ -88,10 +99,15 @@ get_cces_dataverse <- function(name = "cumulative",
                         std_index = TRUE,
                         ver = ":latest",
                         cache = TRUE,
-                        dataverse_paths = ccesMRPprep::cces_dv_ids) {
+                        dataverse_paths = ccesMRPprep::cces_dv_ids,
+                        filetype = "dta") {
 
+  filetype <- match.arg(filetype, c("dta", "feather"))
   y_info <- filter(dataverse_paths, .data$cces_name == as.character(name))
-  filetype <- str_extract(y_info$filename, "\\.[A-z]+$")
+  filename <- y_info$filename
+  if (name == "cumulative" || filetype == "feather")
+    filename <- sub("\\.[^.]+$", glue(".{filetype}"), filename)
+  file_extension <- str_extract(filename, "\\.[A-z]+$")
   svr <- y_info$server
   caseid_var <- y_info$caseid_var
   yr <- y_info$year
@@ -115,23 +131,26 @@ get_cces_dataverse <- function(name = "cumulative",
   use_cache <- if (cache) "disk" else "none"
 
   # set function ---
-  if (filetype == ".tab" | filetype == ".dta")
+  if (file_extension == ".tab" | file_extension == ".dta")
     fun <- haven::read_dta
 
-  if (filetype == ".dta" & (yr %in% c(2009, 2022, 2024)))
+  if (file_extension == ".dta" & (yr %in% c(2009, 2022, 2024)))
     fun <- function(x) haven::read_dta(x, encoding = "latin1")
 
-  if (filetype == ".sav")
+  if (file_extension == ".sav")
     fun <- function(x) haven::read_sav(x, encoding = "latin1")
 
-  if (filetype == ".Rds")
+  if (file_extension == ".Rds")
     fun <- readr::read_rds
 
-  if (filetype == ".feather")
+  if (file_extension == ".feather") {
+    if (!requireNamespace("arrow", quietly = TRUE))
+      stop("Install the arrow package to use filetype = \"feather\".", call. = FALSE)
     fun <- arrow::read_feather
+  }
 
   # read tempfile -----
-  file_cached <- dataverse_file_cached(filename = y_info$filename,
+  file_cached <- dataverse_file_cached(filename = filename,
                                        dataset = glue("doi:{doi}"),
                                        server = svr,
                                        version = ver,
@@ -144,15 +163,15 @@ get_cces_dataverse <- function(name = "cumulative",
     "no existing cache on disk"
   }
   cli_alert_info("Using version {.val {ver}} of {.val {doi}} ({cache_status}).")
-  if (!file_cached)
+  if (!file_cached && file_extension != ".feather")
     cat("Downloading large dataset, can take a few minutes to complete.", "\n")
 
-  cces_raw <- read_dataverse_file(filename = y_info$filename,
+  cces_raw <- read_dataverse_file(filename = filename,
                                   dataset = glue("doi:{doi}"),
                                   server = svr,
                                   version = ver,
                                   use_cache = use_cache,
-                                  filetype = filetype,
+                                  filetype = file_extension,
                                   .f = fun)
 
   # subset ---
@@ -305,8 +324,8 @@ dataverse_file_cached <- function(filename, dataset, server, version, use_cache)
 #'
 #' The version is used to resolve the file by name, but the returned raw-file
 #' request is the same shape that \code{dataverse} uses for its disk cache.
-#' If the requested cumulative feather filename is stale, this accepts a single
-#' \code{(cces_)cumulative_*.feather} file in the resolved Dataverse version.
+#' Cumulative files are matched by format and year-range naming pattern, requiring
+#' exactly one match in the requested version.
 #'
 #' @examples
 #' \dontrun{
@@ -347,17 +366,22 @@ dataverse_file_request <- function(filename, dataset, server, version, use_cache
   file_ids <- vapply(files, function(x) x[["dataFile"]][["id"]], integer(1))
   file_match <- which(file_labels %in% filename)
 
-  if (!length(file_match) && grepl("^(cces_)?cumulative_.*\\.feather$", filename)) {
-    file_match <- grep("^(cces_)?cumulative_.*\\.feather$", file_labels)
+  if (grepl("^(cces_)?cumulative_[0-9]{4}-[0-9]{4}\\.(dta|feather)$", filename)) {
+    extension <- tools::file_ext(filename)
+    file_match <- grep(
+      glue("^(cces_)?cumulative_[0-9]{{4}}-[0-9]{{4}}\\.{extension}$"),
+      file_labels
+    )
     if (length(file_match) != 1) {
+      matches <- if (length(file_match)) paste(file_labels[file_match], collapse = ", ") else "none"
       stop(glue(
-        "File not found: {filename}. Expected exactly one cumulative feather file, found {length(file_match)}."
-      ))
+        "Expected exactly one cumulative .{extension} file in Dataverse version {version}; found {length(file_match)}. Matching files: {matches}."
+      ), call. = FALSE)
     }
   }
 
   if (!length(file_match))
-    stop("File not found")
+    stop(glue("File not found in Dataverse version {version}: {filename}."), call. = FALSE)
 
   file_info <- files[[file_match[[1]]]]
   url <- paste0(getFromNamespace("api_url", "dataverse")(server), "access/datafile/", file_ids[[file_match[[1]]]])

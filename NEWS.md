@@ -1,3 +1,6 @@
+# ccesMRPprep 0.1.16
+* `get_cces_dataverse()` gains `filetype = "feather"` to read Feather files when available, using the optional `arrow` package. The default is `filetype = "dta"`.
+* Cumulative downloads accept changing year ranges in filenames, requiring exactly one file of the requested format in the selected Dataverse version.
 * Update dataverse paths for cumulative
 * `get_cces_dataverse()` gains a `cache` argument (default `TRUE`) that resolves `:latest` to the concrete latest released version so the download is cached on disk, and reports the version being used via a CLI message (#28)
 

@@ -44,10 +44,12 @@ URL: https://www.github.com/kuriwaki/ccesMRPprep,
     https://www.shirokuriwaki.com/ccesMRPprep/
 BugReports: http://github.com/kuriwaki/ccesMRPprep/issues
 Suggests: 
+    arrow,
     knitr,
     rmarkdown,
     tidyverse,
     questionr,
-    testthat
+    testthat (>= 3.2.0)
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.0.0
+RoxygenNote: 7.3.3
