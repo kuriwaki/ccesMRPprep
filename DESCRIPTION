@@ -31,7 +31,6 @@ Imports:
     haven (>= 2.1.0),
     stringr,
     readr,
-    arrow,
     glue,
     cli,
     memoise,
