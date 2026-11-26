@@ -2,12 +2,14 @@
 
 # Allocate the observed Black–Hispanic overlap over age and sex ----
 
-allocate_black_hispanic <- function(black, hispanic, population, district_overlap) {
+allocate_black_hispanic <- function(black, hispanic, population, district_overlap,
+                                    log_odds_seed = 0) {
   # Within each age-sex cell the non-White population is a 2 x 2 table:
   # Black alone / other, crossed with Hispanic / non-Hispanic. The race and
   # origin margins are observed. B03002 supplies the Black-Hispanic overlap
   # for the district across ALL ages, including the children in this function.
-  stopifnot(all(is.finite(c(black, hispanic, population))),
+  log_odds_seed <- rep_len(log_odds_seed, length(black))
+  stopifnot(all(is.finite(c(black, hispanic, population, log_odds_seed))),
             all(black >= 0 & black <= population),
             all(hispanic >= 0 & hispanic <= population))
   lower <- pmax(0, black + hispanic - population)
@@ -17,15 +19,16 @@ allocate_black_hispanic <- function(black, hispanic, population, district_overla
   if (target == sum(lower)) return(lower)
   if (target == sum(upper)) return(upper)
 
-  # Fit the homogeneous-association log-linear model: one race/origin odds
-  # ratio per district, shared across age and sex. Given that odds ratio,
-  # the observed margins determine the four cells of each 2 x 2 table.
+  # Rake a seed table to the observed margins. Raking keeps each cell's seed
+  # odds ratio up to one factor per district, so the seed enters only through
+  # `log_odds_seed`. A flat seed (0) gives one odds ratio across age and sex.
+  # Given each cell's odds ratio, the margins determine its 2 x 2 table.
   free <- upper > lower
   black_left <- black[free] - lower[free]
   hispanic_left <- hispanic[free] - lower[free]
   opposite <- abs(population[free] - black[free] - hispanic[free])
   overlap <- function(log_odds_ratio) {
-    odds <- exp(log_odds_ratio)
+    odds <- exp(log_odds_ratio + log_odds_seed[free])
     # Solve odds * (black_left - x) * (hispanic_left - x) = x * (opposite + x)
     # for x, the overlap in excess of the lower bound.
     linear <- opposite + odds * (black_left + hispanic_left)
@@ -42,6 +45,17 @@ allocate_black_hispanic <- function(black, hispanic, population, district_overla
   stopifnot(abs(sum(result) - target) < 1e-5)
   result
 }
+
+# 2020 Census, United States, DHC tables P12, P12A, P12B, P12H, P12I and P12J:
+# log odds ratio of Black alone by Hispanic origin among people other than White
+# alone, by age and sex. data-raw/create_black-hispanic-seed.R computes it.
+seed_ages <- c("Under 5 years", "5 to 9 years", "10 to 14 years", "15 to 17 years", "18 to 24 years",
+               "25 to 34 years", "35 to 44 years", "45 to 64 years", "65 years and over")
+black_hispanic_seed <- tibble(
+  age = rep(seed_ages, 2), female = rep(0:1, each = 9),
+  log_odds_seed = c(-3.13, -3.28, -3.41, -3.55, -3.64, -3.77, -4.14, -4.50, -4.45,
+                    -3.15, -3.29, -3.40, -3.53, -3.56, -3.59, -3.92, -4.33, -4.47)
+)
 
 # ACS five-year district race cells ----
 
@@ -62,10 +76,12 @@ allocate_black_hispanic <- function(black, hispanic, population, district_overla
 #'   tables give Hispanic, non-Hispanic White alone, White alone and Black
 #'   alone counts. Table B03002 gives the Black-alone Hispanic overlap for
 #'   each district across all ages. To allocate that overlap across age and
-#'   sex, the function assumes a common Black-by-Hispanic odds ratio among
-#'   people other than White alone within a district. Children contribute to
-#'   this allocation before the adult cells are selected. The four counts
-#'   sum to the ACS population in each age-sex cell.
+#'   sex among people other than White alone, the function rakes a 2020 Census
+#'   national seed to these margins. Each age-sex cell keeps the national
+#'   Black-by-Hispanic odds ratio for its age and sex, times one factor per
+#'   district that matches B03002. Children contribute to this allocation
+#'   before the adult cells are selected. The four counts sum to the ACS
+#'   population in each age-sex cell.
 #'
 #'   [ACS sex by age (Black alone)](https://api.census.gov/data/2024/acs/acs5/groups/B01001B.html)
 #'   and [ACS Hispanic origin by race](https://api.census.gov/data/2024/acs/acs5/groups/B03002.html)
@@ -95,7 +111,8 @@ get_acs_race_cells <- function(year = 2018, states = NULL) {
            (.data$acs_table == "B01001" & .data$child) |
            (.data$acs_table == "B15001" & !is.na(.data$age_5) & is.na(.data$educ))) |>
     transmute(variable = .data$variable, female = .data$female,
-              age = if_else(is.na(.data$adult_age), as.character(.data$child_bin), as.character(.data$adult_age)),
+              age = if_else(is.na(.data$adult_age), seed_ages[match(.data$child_bin, 1:4)],
+                            as.character(.data$adult_age)),
               measure = coalesce(unname(race_tables[.data$acs_table]), "total"))
 
   variables <- c(lookup$variable, "B15001_001", "B03002_004", "B03002_014")
@@ -124,9 +141,10 @@ get_acs_race_cells <- function(year = 2018, states = NULL) {
     summarize(count = sum(.data$estimate), .by = c("cd", "age", "female", "measure")) |>
     tidyr::pivot_wider(names_from = "measure", values_from = "count") |>
     left_join(district_totals, by = "cd", relationship = "many-to-one") |>
+    left_join(black_hispanic_seed, by = c("age", "female"), relationship = "many-to-one") |>
     mutate(black_hispanic = allocate_black_hispanic(
              .data$black_alone, .data$Hispanic - (.data$white_alone - .data$White),
-             .data$total - .data$white_alone, .data$B03002_014
+             .data$total - .data$white_alone, .data$B03002_014, .data$log_odds_seed
            ),
            Black = .data$black_alone - .data$black_hispanic,
            Other = .data$total - .data$White - .data$Hispanic - .data$Black, .by = "cd")

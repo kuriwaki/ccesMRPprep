@@ -30,10 +30,12 @@ The ACS publishes Hispanic origin across races. Its sex-by-age
 tables give Hispanic, non-Hispanic White alone, White alone and Black
 alone counts. Table B03002 gives the Black-alone Hispanic overlap for
 each district across all ages. To allocate that overlap across age and
-sex, the function assumes a common Black-by-Hispanic odds ratio among
-people other than White alone within a district. Children contribute to
-this allocation before the adult cells are selected. The four counts
-sum to the ACS population in each age-sex cell.
+sex among people other than White alone, the function rakes a 2020 Census
+national seed to these margins. Each age-sex cell keeps the national
+Black-by-Hispanic odds ratio for its age and sex, times one factor per
+district that matches B03002. Children contribute to this allocation
+before the adult cells are selected. The four counts sum to the ACS
+population in each age-sex cell.
 
 \href{https://api.census.gov/data/2024/acs/acs5/groups/B01001B.html}{ACS sex by age (Black alone)}
 and \href{https://api.census.gov/data/2024/acs/acs5/groups/B03002.html}{ACS Hispanic origin by race}
