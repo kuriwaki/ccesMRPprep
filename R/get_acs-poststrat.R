@@ -5,16 +5,21 @@
 #'
 #' @param varlist a vector of variable codes to pull
 #' @param varlab_df a dataframe that appends the categories based on the varcode
-#' @param year The year of the ACS to get. Because of data availability limitations, this is
-#'  capped to 2010-2018.
-#' @param dataset Which type of ACS to get. Defaults to `"acs1"` for ACS-5 year.
-#'  Use `"acs5"` for 5-year.
+#' @param year ACS release year. Requests are limited to 2010 through the current year.
+#' @param dataset ACS product. The default `"acs1"` requests one-year estimates.
+#'   Use `"acs5"` for five-year estimates.
 #' @param states A vector of states to subset to. Gets passed onto the new `state`
 #'  argument in `tidycensus::get_acs()`, which defaults to NULL.
 #' @param geography the type of geography to pull. Currently only supports
 #'  \code{"congressional district"}.
 #'
-#' @details To run this, you need to have a API token to run \link[tidycensus]{get_acs}.
+#' @details The raw counts from `acscodes_age_sex_race` and
+#'   `acscodes_sex_educ_race` include Hispanic respondents both in the Hispanic
+#'   table and in each applicable race table other than White alone. Adding
+#'   the tables double-counts those respondents. Use [get_acs_race_cells()]
+#'   for mutually exclusive adult voting-district counts by age, sex and race.
+#'
+#'  To run this, you need to have a API token to run \link[tidycensus]{get_acs}.
 #'  See \link[tidycensus]{census_api_key} for details.
 #'
 #' @seealso  \link{get_acs_cces}
@@ -57,6 +62,11 @@ get_acs_cces <- function(varlist,
                          dataset = "acs1",
                          geography =  "congressional district") {
 
+  if (all(ccesMRPprep::acscodes_age_sex_race %in% varlist)) {
+    warning("Raw ACS race tables overlap for Hispanic respondents. ",
+            "Use get_acs_race_cells() for mutually exclusive adult district counts.",
+            call. = FALSE)
+  }
   acs_df <- get_acs(geography = geography,
                     year = min(max(year, 2010), as.numeric(str_sub(Sys.time(), 1, 4))),
                     survey = dataset,

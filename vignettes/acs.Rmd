@@ -30,7 +30,7 @@ The ACS is the main dataset used for post-stratification in MRP because of its w
    * There are three are three-way interactions of some demographic variables but not more than that. 
    * The ACS provides thousands of cell counts, but only a subset of them are useful for MRP because cells for MRP must form a partition of the population (i.e., exclusive and exhaustive categories). I describe several important combinations below.
    * See the synthetic imputation page  (`vignette("synth", package = "synthjoint")`) in this package to see how this restriction could be relaxed.
-6. Some of the partition counts are __not perfect partitions__. For example, some of the variable codes I define below _exclude_ people aged 18-24, include non-citizens, or double-count African Americans who also identify as Hispanic/Latino. These introduce some error into the post-stratification.
+6. The age-by-sex-by-race and sex-by-education-by-race code vectors combine a Hispanic-origin table with race tables covering Black, Asian, Native American, Pacific Islander, some other race, or multiple races. A Hispanic respondent in any of those race groups contributes to two counts when the tables are added. The White table counts non-Hispanic White respondents only. The sex-by-education-by-race tables cover ages 25 and older.
 
 This package and vignette goes into more detail about these limitations and the nature of the data that is available.
 
@@ -44,6 +44,16 @@ If you are in a hurry or want something to start with, here are three partitions
 3. __Sex x Education x Race __. These variable codes are encoded in `?acscodes_sex_educ_race`
 
 See their help pages for more information and their limitations.
+
+
+### Changes in version 0.1.17 (November 26, 2026)
+
+Adding up the race tables in `acscodes_age_sex_race` or `acscodes_sex_educ_race` counts some Hispanic respondents twice (point 6 above). Version 0.1.17 makes two changes.
+
+* `get_acs_race_cells(year = 2024, states = "PA")` returns adult voting-district populations by age and sex in four mutually exclusive groups. Hispanic includes people of any race. White and Black refer to non-Hispanic people who identify with that race alone, and Other contains the remaining non-Hispanic adults. The ACS gives the Black–Hispanic overlap for each district only across all ages. The function splits it across age and sex by raking to the 2020 Census national age-sex pattern, then returns the adult cells. The resulting counts can be fractional.
+* `get_acs_cces()` warns when a request includes the complete `acscodes_age_sex_race` vector, because those raw counts overlap.
+
+Mutually exclusive cells for sex by education by race are not yet available.
 
 
 ### Collapsing variable codes

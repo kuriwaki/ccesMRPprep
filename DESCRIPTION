@@ -1,7 +1,7 @@
 Package: ccesMRPprep
 Type: Package
 Title: Functions and Data to Prepare CCES data for MRP
-Version: 0.1.16
+Version: 0.1.17
 Authors@R: 
    c(person(given = "Shiro",
              family = "Kuriwaki",
@@ -26,7 +26,7 @@ Imports:
     magrittr,
     fs,
     rlang,
-    dplyr (>= 1.1.0),
+    dplyr (>= 1.1.1),
     tidyr,
     haven (>= 2.1.0),
     stringr,
@@ -49,6 +49,6 @@ Suggests:
     rmarkdown,
     tidyverse,
     questionr,
-    testthat
+    testthat (>= 3.2.0)
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.0.0

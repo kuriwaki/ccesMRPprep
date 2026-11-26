@@ -1,3 +1,10 @@
+# ccesMRPprep 0.1.17
+
+* `get_acs_race_cells()` estimates adult voting-district populations by age and sex in four mutually exclusive race and Hispanic-origin groups (#32). It splits each district's Black–Hispanic overlap across age and sex by raking to the 2020 Census national pattern.
+* `get_acs_cces()` warns when the request includes the complete `acscodes_age_sex_race` vector. Its raw Census counts overlap for Hispanic respondents who identify with a race other than White alone.
+
+# ccesMRPprep 0.1.16
+
 * Update dataverse paths for cumulative
 * `get_cces_dataverse()` gains a `cache` argument (default `TRUE`) that resolves `:latest` to the concrete latest released version so the download is cached on disk, and reports the version being used via a CLI message (#28)
 
