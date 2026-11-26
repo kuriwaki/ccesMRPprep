@@ -12,6 +12,9 @@
 
 There are 160 codes in \code{acscodes_age_sex_race} because they specify cells
 interacting age (10 bins, later coarsened to 5), sex (2 bins), and race/ethnicity (8 bins).
+The Hispanic table includes people in each applicable non-White race table.
+Use \code{\link[=get_acs_race_cells]{get_acs_race_cells()}} for four mutually exclusive adult race and origin
+groups by district, age and sex.
 }
 
 \subsection{acscodes_age_sex_educ}{
@@ -24,7 +27,9 @@ interacting age (5 bins), sex (2 bins), and education (7 bins).
 
 There are 64 codes in \code{acscodes_sex_educ_race} because they specify cells
 interacting sex (2 bins), education (4 bins, later recoded to 3), and race (8 bins).
-The entire partition is not actually exhaustive; it appears to only limit to 25 years and above.
+The universe is adults aged 25 and older. The Hispanic table overlaps the
+non-White race tables, so summing across all eight tables double-counts
+Hispanic respondents who identify with a race other than White alone.
 Cross-check with \link{acscodes_df} to verify.
 }
 }

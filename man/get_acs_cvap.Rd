@@ -19,14 +19,13 @@ Indians and Alaskan Natives), \code{"asian"}.}
 
 \item{varlab_df}{a dataframe that appends the categories based on the varcode}
 
-\item{year}{The year of the ACS to get. Because of data availability limitations, this is
-capped to 2010-2018.}
+\item{year}{ACS release year. Requests are limited to 2010 through the current year.}
 
 \item{states}{A vector of states to subset to. Gets passed onto the new \code{state}
 argument in \code{tidycensus::get_acs()}, which defaults to NULL.}
 
-\item{dataset}{Which type of ACS to get. Defaults to \code{"acs1"} for ACS-5 year.
-Use \code{"acs5"} for 5-year.}
+\item{dataset}{ACS product. The default \code{"acs1"} requests one-year estimates.
+Use \code{"acs5"} for five-year estimates.}
 }
 \description{
 Returns the Citizen Voting Age Population by Congressional District. A custom
