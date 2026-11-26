@@ -43,9 +43,17 @@ If you are in a hurry or want something to start with, here are three partitions
 2. __Age x Sex x Race__. These variable codes are encoded in `?acscodes_age_sex_race`.
 3. __Sex x Education x Race __. These variable codes are encoded in `?acscodes_sex_educ_race`
 
-For adult voting-district populations by age and sex, `get_acs_race_cells(year = 2024, states = "PA")` returns four mutually exclusive groups. Hispanic includes people of any race. White and Black refer to non-Hispanic people who identify with that race alone, and Other contains the remaining non-Hispanic adults. The ACS gives the Black–Hispanic overlap for each district across all ages. The function allocates it across age and sex using the 2020 Census national age-sex pattern, then returns the adult cells. The resulting counts can be fractional.
-
 See their help pages for more information and their limitations.
+
+
+### Changes in version 0.1.17 (November 26, 2026)
+
+Adding up the race tables in `acscodes_age_sex_race` or `acscodes_sex_educ_race` counts some Hispanic respondents twice (point 6 above). Version 0.1.17 makes two changes.
+
+* `get_acs_race_cells(year = 2024, states = "PA")` returns adult voting-district populations by age and sex in four mutually exclusive groups. Hispanic includes people of any race. White and Black refer to non-Hispanic people who identify with that race alone, and Other contains the remaining non-Hispanic adults. The ACS gives the Black–Hispanic overlap for each district only across all ages. The function splits it across age and sex by raking to the 2020 Census national age-sex pattern, then returns the adult cells. The resulting counts can be fractional.
+* `get_acs_cces()` warns when a request includes the complete `acscodes_age_sex_race` vector, because those raw counts overlap.
+
+Mutually exclusive cells for sex by education by race are not yet available.
 
 
 ### Collapsing variable codes
